@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	pdump		# portable dumper
 %bcond_with	postgresql	# enable PostgreSQL support
-%bcond_with	gtk		# gtk enabled version
+%bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.4
 %define		basepkgver	1.86
