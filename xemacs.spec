@@ -96,20 +96,6 @@ XEmacs binary compiled with TTY support only, without X11 support.
 XEmacs skompilowany bez wsparcia dla X11 (pracuje tylko na konsoli lub
 w okienku xterma).
 
-%package el
-Summary:	.el source files for XEmacs
-Summary(pl):	Pliki ¼ród³owe procedur w eLispie do XEmacsa
-Group:		Applications/Editors/Emacs
-Group(de):	Applikationen/Editors/Emacs
-Group(pl):	Aplikacje/Edytory/Emacs
-Requires:	%{name}-common = %{version}
-
-%description el
-.el source files -- not necessary to run XEmacs.
-
-%description el -l pl
-Pliki ¼ród³owe procedur w eLispie do XEmacsa.
-
 %package extras
 Summary:	files which conflict with GNU Emacs
 Summary(pl):	wspólne pliki XEmacsa i GNU Emacsa
@@ -223,16 +209,15 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,/var/lock/xemacs} \
 	$RPM_BUILD_ROOT%{_libdir}/%{name} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
 
-%{__make} install-arch-dep install-arch-indep gzip-el \
+%{__make} install-arch-dep install-arch-indep \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	datadir=$RPM_BUILD_ROOT%{_datadir} \
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Development/Editors/xemacs.desktop
-install %{SOURCE4} $RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 
-( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
+( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - )
 
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/default.el
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/kbd_pl
@@ -243,8 +228,11 @@ mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.value
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 
-mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
+install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
 	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
+install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
+	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
+cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
@@ -252,12 +240,20 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
-gzip -9nf README GETTING.GNU.SOFTWARE PROBLEMS \
-	etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
-
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 install -s src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
+
+# remove .el file if corresponding .elc file exists
+find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
+rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
+# hmm, maybe xemacs-devel is necessary?
+rm -fr $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include
+rm -f $RPM_BUILD_ROOT%{_infodir}/dir.gz 
+rm -f $RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*.gz
+
+gzip -9nf README GETTING.GNU.SOFTWARE PROBLEMS \
+	etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -275,112 +271,61 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 %attr(755,root,root) %{_bindir}/gnu*
 %attr(755,root,root) %{_bindir}/xemacs
+%attr(755,root,root) %{_bindir}/ootags
+%attr(755,root,root) %{_bindir}/ellcc
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/gnuserv
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
 %{_mandir}/man1/gnudoit.1*
 %{_mandir}/man1/gnuserv.1*
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/custom
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/eos
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/toolbar
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.png
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xbm
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xpm
 
 %files common
 %defattr(644,root,root,755)
 %doc *.gz etc/*.gz
-%doc %{_datadir}/*%{_sysconfdir}/TUTORIAL
-%doc %lang(de) %{_datadir}/*%{_sysconfdir}/TUTORIAL.de
-%doc %lang(fr) %{_datadir}/*%{_sysconfdir}/TUTORIAL.fr
-%doc %lang(hr) %{_datadir}/*%{_sysconfdir}/TUTORIAL.hr
-%doc %lang(ja) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ja
-%doc %lang(ko) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ko
-%doc %lang(no) %{_datadir}/*%{_sysconfdir}/TUTORIAL.no
-%doc %lang(pl) %{_datadir}/*%{_sysconfdir}/TUTORIAL.pl
-%doc %lang(ro) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ro
-%doc %lang(ru) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ru
-%doc %lang(th) %{_datadir}/*%{_sysconfdir}/TUTORIAL.th
-%doc %{_libdir}/%{name}-%{version}/*/DOC
-%doc %{_datadir}/*%{_sysconfdir}/*README*
-%doc %{_datadir}/*%{_sysconfdir}/refcard.ps.gz
-%doc %{_datadir}/*%{_sysconfdir}/refcard.tex
-%doc %{_datadir}/*%{_sysconfdir}/sample.Xdefaults
-%doc %{_datadir}/*%{_sysconfdir}/sample.emacs
-%doc %{_datadir}/*%{_sysconfdir}/aliases.ksh
-%doc %{_datadir}/*%{_sysconfdir}/editclient.sh
-%doc %{_datadir}/*/lisp/ChangeLog*
-%doc %{_datadir}/*/lisp/README
-%doc %{_datadir}/*/lisp/term/README
+%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL
+%doc %lang(de) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.de
+%doc %lang(fr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.fr
+%doc %lang(hr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.hr
+%doc %lang(ja) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ja
+%doc %lang(ko) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ko
+%doc %lang(no) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.no
+%doc %lang(pl) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.pl
+%doc %lang(ro) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ro
+%doc %lang(ru) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ru
+%doc %lang(th) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.th
+%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/[A-SU-Z]*
 
 %{_libdir}/%{name}
 %dir %{_libdir}/%{name}-%{version}
-%dir %{_libdir}/%{name}-%{version}/%{_target_platform}
+%attr(755,root,root)  %{_libdir}/%{name}-%{version}/%{_target_platform}
 
 %{_datadir}/%{name}
-%dir %{_datadir}/%{name}-%{version}
-%dir %{_datadir}/%{name}-%{version}%{_sysconfdir}
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/custom
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/eos
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/idd
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/photos
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/toolbar
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xbm
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xpm
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.png
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/ms-kermit*
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/package-index.LATEST.pgp
 
-%dir %{_datadir}/%{name}-%{version}/lisp
-%{_datadir}/%{name}-%{version}/lisp/*.elc
-%dir %{_datadir}/%{name}-%{version}/lisp/term
-%{_datadir}/%{name}-%{version}/lisp/term/*.elc
+%dir %{_datadir}/%{name}-%{version}
+# do not know it is necessary
+%{_datadir}/%{name}-%{version}/%{_target_platform}
+
+%{_datadir}/%{name}-%{version}/lisp/
 
 %dir %{_datadir}/%{name}-packages
-%dir %{_datadir}/%{name}-packages%{_sysconfdir}
-%dir %{_datadir}/%{name}-packages/lib-src
-%dir %{_datadir}/%{name}-packages/lisp
-%dir %{_datadir}/%{name}-packages/lisp/xemacs-base
-%{_datadir}/%{name}-packages/lisp/xemacs-base/*.elc
-%{_datadir}/%{name}-packages/lisp/default.el
-%{_datadir}/%{name}-packages/lisp/kbd_pl
-
-%attr(2755,root,mail) %{_libdir}/%{name}-%{version}/*/movemail
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/cvtmail
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/digest-doc
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/fakemail
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/hexl
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/make-docfile
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/make-path
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/mmencode
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/profile
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/sorted-doc
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/yow
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/add-big-package.sh
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/gzip-el.sh
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/rcs2log
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/vcdiff
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/wakeup
+%{_datadir}/%{name}-packages/lisp
 
 %{_mandir}/man1/xemacs.1*
 %lang(ja) %{_mandir}/ja/man1/*
 
-%{_infodir}/custom.info*gz
-%{_infodir}/external-widget.info*gz
-%{_infodir}/internals.info*gz
-%{_infodir}/lispref.info*gz
-%{_infodir}/new-users-guide.info*gz
-%{_infodir}/term.info*gz
-%{_infodir}/widget.info*gz
-%{_infodir}/xemacs-faq.info*gz
-%{_infodir}/xemacs.info*gz
+%{_infodir}/*
 
 /var/lock/xemacs
 
 %files nox
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xemacs-nox
-
-%files el 
-%defattr(644,root,root,755)
-
-%{_datadir}/%{name}-%{version}/lisp/*.el.gz
-%{_datadir}/%{name}-%{version}/lisp/term/*.el.gz
-%{_datadir}/%{name}-packages/lisp/xemacs-base/*.el.gz
 
 %files extras
 %defattr(644,root,root,755)
