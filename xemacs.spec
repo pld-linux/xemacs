@@ -18,6 +18,15 @@ Patch2:		xemacs-perl.patch
 Patch3:		xemacs-sitelisp.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	nas-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	zlib-devel
+BuildRequires:	xpm-devel
+BuildRequires:	openldap-devel
+BuildRequires:	libtiff-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel
+BuildRequires:	gpm-devel
+BuildRequires:	ncurces-devel
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
