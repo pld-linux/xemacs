@@ -1,0 +1,12 @@
+diff -Nru xemacs-21.1.8/lib-src/Makefile.in.in xemacs-21.1.8.new/lib-src/Makefile.in.in
+--- xemacs-21.1.8/lib-src/Makefile.in.in	Mon Jun 14 08:32:00 1999
++++ xemacs-21.1.8.new/lib-src/Makefile.in.in	Thu Dec  9 05:20:16 1999
+@@ -140,7 +140,7 @@
+ 
+ cppflags = -Demacs -I../src $(CPPFLAGS)
+ cflags   = $(CFLAGS) $(cppflags) $(c_switch_general)
+-ldflags  = $(LDFLAGS) $(ld_switch_general) $(ld_libs_general)
++ldflags  = $(LDFLAGS) $(ld_switch_general)
+ 
+ ## This is the default compilation command.
+ ## But we should never rely on it, because some make version
