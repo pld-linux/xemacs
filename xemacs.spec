@@ -44,13 +44,13 @@ Other are optional.
 %description -l pl 
 XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z 
 GNU Emacsem tworzonym przez Richard Stallman z Free Software Foundation. 
-Wywodzi siê z wczesnych odmian GNU Emacs 19, dodaje wiele mi³ych 
-udogodnieñ  nie trac±c jednak wiêzi z oryginaln± wersj±. 
+Wywodzi siê z wczesnych odmian GNU Emacs 19, wprowadza wiele mi³ych 
+ulepszeñ nie trac±c jednak wiêzi z oryginaln± wersj±. 
 
 Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych. 
 Do pracy niezbêdne s± dwa z nich:
 - xemacs:        g³ówny pakiet
-- xemacs-extras: pliki chodz±ce w sk³ad dystrybucji GNU Emacs
+- xemacs-extras: pliki wchodz±ce w sk³ad dystrybucji GNU Emacs
   (zainstaluj go je¶li nie posiadasz GNU Emacsa), 
 oraz innych pakietów (opcjonalnych)
 
@@ -265,8 +265,8 @@ have GNU Emacs installed, be sure to install this package as well
 when you install XEmacs.
 
 %description extras -l pl
-S± to wpólne pliki GNU Emacs and XEmacs. Je¶li nie zainstalowa³e¶ GNU EMacsa
-zainstaluj koniecznie ten pakiet.
+S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU Emacsa,
+to koniecznie zainstaluj ten pakiet.
 
 %package psgml
 Summary:	pSGML mode for XEmacs 
