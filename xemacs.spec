@@ -4,7 +4,7 @@ Name:		xemacs
 Version:	21.1.11
 %define		ver		21.1
 %define		basepkgver	1.42
-Release:	1
+Release: 2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -27,7 +27,7 @@ BuildRequires:	xpm-devel
 BuildRequires:	openldap-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	libpng-devel
+BuildRequires:	libpng >= 1.0.8
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	ctags
