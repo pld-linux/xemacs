@@ -558,7 +558,7 @@ fi
 	"* SC: (sc).             Supercite lets you cite parts of messages you're replying to, in flexible ways."
 /sbin/install-info /usr/info/rmail.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
-	* rmail: (rmail).        Rmail mail reader"
+	"* rmail: (rmail).       Rmail mail reader"
 /sbin/install-info /usr/info/tm-edit-en.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* tm-en: (tm-en).       tm-edit 7.100 Reference Manual"
