@@ -88,7 +88,7 @@ GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
 Foundation. Wywodzi siê z wczesnych odmian GNU Emacs 19, wprowadza
 wiele mi³ych ulepszeñ nie trac±c jednak wiêzi z oryginaln± wersj±.
 
-Ta dystrubucja XEmacsa zosta³a podzielona na wiele pakietów binarnych:
+Ta dystrybucja XEmacsa zosta³a podzielona na wiele pakietów binarnych:
 
 xemacs-common - pakiet zawieraj±cy pliki wspó³dzielone przez pakiety
 xemacs i xemacs-nox xemacs - XEmacs skompilowany ze wsparciem dla X11
