@@ -1,0 +1,2 @@
+- added %%{_datadir}/%%{name}-%%{version}%%{_sysconfdir} dir to the
+  common subpackage contents.
