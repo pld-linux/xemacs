@@ -341,7 +341,7 @@ chmod u+wXr * -R
 CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s -lc" \
 ./configure %{_target} \
 	--prefix=/usr \
-	--infodir=/usr/info \
+	--infodir=%{_infodir} \
 	--with-dialogs=athena \
 	--with-sound=nas \
 	--cflags="$RPM_OPT_FLAGS" \
@@ -366,9 +366,9 @@ install -d $RPM_BUILD_ROOT/{etc/X11/wmconfig,var/lock/xemacs} \
 
 make install-arch-dep install-arch-indep gzip-el \
 	prefix=$RPM_BUILD_ROOT/usr \
-	infodir=$RPM_BUILD_ROOT/usr/info
+	infodir=$RPM_BUILD_ROOT%{_infodir}
 
-gzip -9nf $RPM_BUILD_ROOT/usr/info/*info*
+gzip -9nf $RPM_BUILD_ROOT%{_infodir}/*info*
 find $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/auctex/style/ -name \*.el | xargs gzip -9
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
@@ -381,222 +381,222 @@ mv $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/Emacs.ad \
 mv $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/app-defaults/ja/Emacs \
 	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/ja/app-defaults/Emacs
 mv $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/xemacs-ja.1 \
-	$RPM_BUILD_ROOT/usr/man/ja/man1/xemacs.1
+	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
 mv -f $RPM_BUILD_ROOT/usr/bin/xemacs-%{version} \
 	$RPM_BUILD_ROOT/usr/bin/xemacs
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/{ja/man1/*,man1/*}
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{ja/man1/*,man1/*}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/install-info /usr/info/cc-mode.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/cc-mode.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* CC mode: (ccmode).    The GNU Emacs mode for editing C, C++, Objective-C and Java code."
-/sbin/install-info /usr/info/cl.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/cl.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* CL: (cl).             Partial Common Lisp support for Emacs Lisp."
-/sbin/install-info /usr/info/forms.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/forms.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* Forms: (forms).       Emacs package for editing data bases by filling in forms."
-/sbin/install-info /usr/info/xemacs.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/xemacs.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* Emacs: (emacs).       The extensible self-documenting text editor."
-/sbin/install-info /usr/info/ilisp.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/ilisp.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* ilisp: (ilisp).       ILISP manual"
-/sbin/install-info /usr/info/lispref.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/lispref.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* lispref: (lispref).   GNU Emacs Lisp Reference Manual"
-/sbin/install-info /usr/info/custom.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/custom.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* custom: (custom).     The Customization Library"
-/sbin/install-info /usr/info/efs.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/efs.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* efs: (efs).           Transparent remote file access via FTP"
-/sbin/install-info /usr/info/external-widget.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/external-widget.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* external-widget: (external-widget).External Client Widget"
-/sbin/install-info /usr/info/internals.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/internals.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* internals: (internals).internals"
-/sbin/install-info /usr/info/new-users-guide.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/new-users-guide.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* new-users-guide: (new-users-guide). introduction to the XEmacs editor"
-/sbin/install-info /usr/info/ph.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/ph.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* ph: (ph).             E-Lisp client interface to the CCSO white pages directory system also known as PH/QI"
-/sbin/install-info /usr/info/send-pr.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/send-pr.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* send-pr: (send-pr).   Reporting problems--using send-pr"
-/sbin/install-info /usr/info/term.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/term.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* term: (term).         Terminal emulator mode"
-/sbin/install-info /usr/info/vhdl-mode.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/vhdl-mode.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* vhdl-mode: (vhdl-mode). vhdl-mode"
-/sbin/install-info /usr/info/widget.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/widget.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* widget: (widget).     The Emacs Widget Library"
-/sbin/install-info /usr/info/xemacs-faq.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/xemacs-faq.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* xemacs-faq: (xemacs-faq). The Xemacs FAQ"
 
 %preun
 if [ "$1" = 0 ]; then
-	/sbin/install-info --delete /usr/info/cc-mode.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/cl.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/forms.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/xemacs.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/ilisp.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/lispref.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/pcl-cvs.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/custom.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/efs.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/external-widget.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/internals.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/new-users-guide.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/ph.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/send-pr.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/term.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/vhdl-mode.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/widget.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/xemacs-faq.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/cc-mode.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/cl.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/forms.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/xemacs.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/ilisp.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/lispref.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/pcl-cvs.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/custom.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/efs.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/external-widget.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/internals.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/new-users-guide.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/ph.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/send-pr.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/term.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/vhdl-mode.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/widget.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/xemacs-faq.info.gz /etc/info-dir
 fi
 
 %post gnats
-/sbin/install-info /usr/info/gnats.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/gnats.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* gnats: (gnats).       GNU Problem Report Management System"
 
 %preun gnats
 if [ "$1" = $1 ]; then
-	/sbin/install-info --delete /usr/info/gnats.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/gnats.info.gz /etc/info-dir
 fi
 
 %post viper
-/sbin/install-info /usr/info/viper.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/viper.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* VIPER: (viper).       The new VI-emulation mode in Emacs-19.29."
 
 %preun viper
 if [ "$1" = $1 ]; then
-	/sbin/install-info --delete /usr/info/viper.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/viper.info.gz /etc/info-dir
 fi
 
 %post auctex
-/sbin/install-info /usr/info/auctex.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/auctex.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* auctex: (auctex).     TeX mode"
-/sbin/install-info /usr/info/reftex.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/reftex.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* reftex: (reftex).     RefTeX, a package to do labels, references and citations for LaTeX documents with Emacs"
 
 %preun auctex
 if [ "$1" = $1 ]; then
-	/sbin/install-info --delete /usr/info/auctex.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/reftex.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/auctex.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/reftex.info.gz /etc/info-dir
 fi
 
 
 %post w3
-/sbin/install-info /usr/info/w3-faq.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/w3-faq.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* w3-faq: (w3-faq).     FAQ for Emacs/W3 World Wide Web browser"
-/sbin/install-info /usr/info/w3.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/w3.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* w3: (w3).             Emacs/W3 World Wide Web browser"
 
 %preun w3
 if [ "$1" = $1 ]; then
-	/sbin/install-info --delete /usr/info/w3-faq.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/w3.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/w3-faq.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/w3.info.gz /etc/info-dir
 fi
 
 %preun modes
 if [ "$1" = $1 ]; then
-	/sbin/install-info /usr/info/pcl-cvs.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/pcl-cvs.info.gz /etc/info-dir
 fi
 
 %post modes
-/sbin/install-info /usr/info/pcl-cvs.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/pcl-cvs.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* pcl-cvs: (pcl-cvs).   front-end to CVS"
 
 %post psgml
-/sbin/install-info /usr/info/psgml-api.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/psgml-api.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* psgml-api: (psgml-api). PSGML, the API documentation"
-/sbin/install-info /usr/info/psgml.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/psgml.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* psgml: (psgml).       PSGML, a major mode for SGML"
-/sbin/install-info /usr/info/hm--html-mode.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/hm--html-mode.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* hm--html-mode-xemacs: (hm--html-mode). hm--html-menus"
 
 %preun psgml
 if [ "$1" = $1 ]; then
-	/sbin/install-info --delete /usr/info/psgml-api.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/psgml.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/hm--html-mode.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/psgml-api.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/psgml.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/hm--html-mode.info.gz /etc/info-dir
 fi
 
 %post mail 
-/sbin/install-info /usr/info/mh-e.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/mh-e.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* MH-E: (mh-e).         Emacs interface to the MH mail system."
-/sbin/install-info /usr/info/supercite.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/supercite.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* SC: (sc).             Supercite lets you cite parts of messages you're replying to, in flexible ways."
-/sbin/install-info /usr/info/rmail.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/rmail.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* rmail: (rmail).       Rmail mail reader"
-/sbin/install-info /usr/info/tm-edit-en.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/tm-edit-en.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* tm-en: (tm-en).       tm-edit 7.100 Reference Manual"
-/sbin/install-info /usr/info/tm-mh-e-en.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/tm-mh-e-en.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* tm-mh-e-en: (tm-mh-e-en). tm-mh-e 7.71 Reference Manual"
-/sbin/install-info /usr/info/tm-view-en.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/tm-view-en.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* tm-view-en: (tm-view-en). tm-view, a MIME Viewer for GNU Emacs"
-/sbin/install-info /usr/info/tm-vm-en.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/tm-vm-en.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* tm-vm-en: (tm-vm-en). tm-vm is an interface between tm and the VM mail user agent"
-/sbin/install-info /usr/info/vm.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/vm.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* vm: (vm).             VM mail reader"
 
 %preun mail 
 if [ "$1" = $1 ]; then
-	/sbin/install-info --delete /usr/info/mh-e.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/supercite.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/rmail.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/tm-edit-en.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/tm-mh-e-en.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/tm-view-en.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/tm-vm-en.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/vm.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/mh-e.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/supercite.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/rmail.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/tm-edit-en.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/tm-mh-e-en.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/tm-view-en.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/tm-vm-en.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/vm.info.gz /etc/info-dir
 fi
 
 %post gnus 
-/sbin/install-info /usr/info/message.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/message.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* Message: (message).   Mail and news composition mode that goes with Gnus."
-/sbin/install-info /usr/info/gnus.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/gnus.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* Gnus: (gnus).         The news reader Gnus."
-/sbin/install-info /usr/info/gnus-mime-en.info.gz /etc/info-dir \
+/sbin/install-info %{_infodir}/gnus-mime-en.info.gz /etc/info-dir \
 	--section "XEmacs:" --entry \
 	"* gnus-mime-en: (gnus-mime-en) gnus-mime 0.10 reference manual"
 
 %preun gnus 
 if [ "$1" = $1 ]; then
-	/sbin/install-info --delete /usr/info/message.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/gnus.info.gz /etc/info-dir
-	/sbin/install-info --delete /usr/info/gnus-mime-en.info.gz
+	/sbin/install-info --delete %{_infodir}/message.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/gnus.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/gnus-mime-en.info.gz
 fi
 
 %files
@@ -660,32 +660,32 @@ fi
 %doc /usr/lib/*/lisp/eterm/TODO.term
 %doc /usr/lib/*/lisp/mel/ChangeLog
 %doc /usr/lib/*/lisp/term/README
-/usr/man/man1/gnuattach.1.gz
-/usr/man/man1/gnuclient.1.gz
-/usr/man/man1/gnudoit.1.gz
-/usr/man/man1/gnuserv.1.gz
-/usr/man/man1/xemacs.1.gz
-%lang(ja) /usr/man/ja/man1/xemacs.1.gz
+%{_mandir}/man1/gnuattach.1.gz
+%{_mandir}/man1/gnuclient.1.gz
+%{_mandir}/man1/gnudoit.1.gz
+%{_mandir}/man1/gnuserv.1.gz
+%{_mandir}/man1/xemacs.1.gz
+%lang(ja) %{_mandir}/ja/man1/xemacs.1.gz
 %doc README GETTING.GNU.SOFTWARE PROBLEMS 
 %doc etc/NEWS etc/MAILINGLISTS BUGS 
 /usr/lib/*/*/config.values
 /usr/lib/*/etc/*.xbm
-/usr/info/cc-mode.info*gz
-/usr/info/custom.info*gz
-/usr/info/efs.info*gz
-/usr/info/external-widget.info*gz
-/usr/info/forms.info*gz
-/usr/info/internals.info*gz
-/usr/info/message.info*gz
-/usr/info/new-users-guide.info*gz
-/usr/info/ph.info*gz
-/usr/info/reftex.info*gz
-/usr/info/send-pr.info*gz
-/usr/info/term.info*gz
-/usr/info/vhdl-mode.info*gz
-/usr/info/widget.info*gz
-/usr/info/xemacs-faq.info*gz
-/usr/info/xemacs.info*gz
+%{_infodir}/cc-mode.info*gz
+%{_infodir}/custom.info*gz
+%{_infodir}/efs.info*gz
+%{_infodir}/external-widget.info*gz
+%{_infodir}/forms.info*gz
+%{_infodir}/internals.info*gz
+%{_infodir}/message.info*gz
+%{_infodir}/new-users-guide.info*gz
+%{_infodir}/ph.info*gz
+%{_infodir}/reftex.info*gz
+%{_infodir}/send-pr.info*gz
+%{_infodir}/term.info*gz
+%{_infodir}/vhdl-mode.info*gz
+%{_infodir}/widget.info*gz
+%{_infodir}/xemacs-faq.info*gz
+%{_infodir}/xemacs.info*gz
 /usr/lib/*/etc/*.xpm
 /usr/lib/*/etc/*.xpm.Z
 /usr/lib/*/etc/categories
@@ -778,7 +778,7 @@ fi
 
 %files gnats
 %defattr(644,root,root,755)
-/usr/info/gnats.info*gz
+%{_infodir}/gnats.info*gz
 /usr/lib/*/etc/gnats/*
 /usr/lib/*/lisp/gnats/*.elc
 /usr/lib/*/lisp/gnats/*.el.gz
@@ -790,7 +790,7 @@ fi
 %files viper 
 %defattr(644,root,root,755)
 %doc /usr/lib/*/etc/viperCard.tex
-/usr/info/viper.info*gz
+%{_infodir}/viper.info*gz
 /usr/lib/*/lisp/viper/*.elc
 %doc /usr/lib/*/lisp/viper/README
 
@@ -801,9 +801,9 @@ fi
 
 %files lisp-programming
 %defattr(644,root,root,755)
-/usr/info/cl.info*gz
-/usr/info/ilisp.info*gz
-/usr/info/lispref.info*gz
+%{_infodir}/cl.info*gz
+%{_infodir}/ilisp.info*gz
+%{_infodir}/lispref.info*gz
 %doc /usr/lib/*/lisp/edebug/README
 %doc /usr/lib/*/lisp/ilisp/ACKNOWLEDGMENTS
 %doc /usr/lib/*/lisp/ilisp/COPYING
@@ -835,7 +835,7 @@ fi
 
 %files auctex
 %defattr(644,root,root,755)
-/usr/info/auctex.info*gz
+%{_infodir}/auctex.info*gz
 %doc /usr/lib/*/lisp/auctex/CHANGES
 %doc /usr/lib/*/lisp/auctex/ChangeLog
 %doc /usr/lib/*/lisp/auctex/README
@@ -853,8 +853,8 @@ fi
 
 %files w3 
 %defattr(644,root,root,755)
-/usr/info/w3-faq.info*gz
-/usr/info/w3.info*gz
+%{_infodir}/w3-faq.info*gz
+%{_infodir}/w3.info*gz
 /usr/lib/*/lisp/w3/*.el
 /usr/lib/*/lisp/w3/*.elc
 %doc /usr/lib/*/lisp/w3/ChangeLog
@@ -868,9 +868,9 @@ fi
 
 %files psgml 
 %defattr(644,root,root,755)
-/usr/info/hm--html-mode.info*gz
-/usr/info/psgml-api.info*gz
-/usr/info/psgml.info*gz
+%{_infodir}/hm--html-mode.info*gz
+%{_infodir}/psgml-api.info*gz
+%{_infodir}/psgml.info*gz
 %doc /usr/lib/*/lisp/hm--html-menus/ANNOUNCEMENT
 %doc /usr/lib/*/lisp/hm--html-menus/NEWS
 %doc /usr/lib/*/lisp/hm--html-menus/README
@@ -891,7 +891,7 @@ fi
 
 %files modes 
 %defattr(644,root,root,755)
-/usr/info/pcl-cvs.info*gz
+%{_infodir}/pcl-cvs.info*gz
 %doc /usr/lib/*/lisp/pcl-cvs/ChangeLog
 %doc /usr/lib/*/lisp/pcl-cvs/README
 /usr/lib/*/lisp/modes/*.elc
@@ -911,16 +911,16 @@ fi
 %files mail
 %defattr(644,root,root,755)
 %doc /usr/lib/*/etc/MH-E-NEWS
-/usr/info/mailcrypt.info*gz
-/usr/info/mh-e.info*gz
-/usr/info/rmail.info*gz
-/usr/info/supercite.info*gz
-/usr/info/tm-edit-en.info*gz
-/usr/info/tm-en.info*gz
-/usr/info/tm-mh-e-en.info*gz
-/usr/info/tm-view-en.info*gz
-/usr/info/tm-vm-en.info*gz
-/usr/info/vm.info*gz
+%{_infodir}/mailcrypt.info*gz
+%{_infodir}/mh-e.info*gz
+%{_infodir}/rmail.info*gz
+%{_infodir}/supercite.info*gz
+%{_infodir}/tm-edit-en.info*gz
+%{_infodir}/tm-en.info*gz
+%{_infodir}/tm-mh-e-en.info*gz
+%{_infodir}/tm-view-en.info*gz
+%{_infodir}/tm-vm-en.info*gz
+%{_infodir}/vm.info*gz
 %doc /usr/lib/*/lisp/mailcrypt/ChangeLog
 %doc /usr/lib/*/lisp/mailcrypt/NEWS
 %doc /usr/lib/*/lisp/mailcrypt/ONEWS
@@ -951,8 +951,8 @@ fi
 %defattr(644,root,root,755)
 /usr/lib/*/lisp/gnus/*.elc
 %doc /usr/lib/*/etc/gnusrefcard/*
-%doc /usr/info/gnus-mime-en.info*gz
-%doc /usr/info/gnus.info*gz
+%doc %{_infodir}/gnus-mime-en.info*gz
+%doc %{_infodir}/gnus.info*gz
 
 %files gnus-el
 %defattr(644,root,root,755)
@@ -979,9 +979,9 @@ fi
 - removed /usr/lib/xemacs-20.4/etc/XKeysymDB,
 - removed /usr/lib/xemacs-20.4/etc/tests
 - added full url to Source{0,1},
-- all info pages moved to /usr/info/,
+- all info pages moved to %{_infodir}/,
 - /usr/lib/xemacs-20.4/etc/xemacs-ja.1.gz moved to
-  /usr/man/ja/man1/xemacs.1.gz
+  %{_mandir}/ja/man1/xemacs.1.gz
 - added Group(pl),
 - simplifications in all %files,
 - added /var/lock/xemacs direcrory to main.
