@@ -4,22 +4,22 @@ Name:		xemacs
 Version:	21.1.11
 %define		ver		21.1
 %define		basepkgver	1.42
-Release: 2
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
 Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-Source3:	xemacs.desktop
-Source4:	xemacs.ad-pl
-Source5:	xemacs-default.el
-Source6:	xemacs-kbd_pl
-Patch0:		xemacs-info.patch
-Patch1:		xemacs-sitelisp.patch
-Patch2:		xemacs-fix_ldflafs.patch
-Patch3:		xemacs-EMACSLOADPATH_fix.patch
-Patch4:		xemacs-no-antoloads.patch
+Source3:	%{name}.desktop
+Source4:	%{name}.ad-pl
+Source5:	%{name}-default.el
+Source6:	%{name}-kbd_pl
+Patch0:		%{name}-info.patch
+Patch1:		%{name}-sitelisp.patch
+Patch2:		%{name}-fix_ldflafs.patch
+Patch3:		%{name}-EMACSLOADPATH_fix.patch
+Patch4:		%{name}-no-antoloads.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	zlib-devel
@@ -37,29 +37,29 @@ Provides:	xemacs-base-pkg
 %description
 XEmacs is a version of Emacs, compatible with and containing many
 improvements over GNU Emacs, written by Richard Stallman of the Free
-Software Foundation. It was originally based on an early release of GNU
-Emacs version 19, and has tracked subsequent releases of GNU Emacs as they
-have become available.
-This XEmacs distribution has been splitted in some rpm :
+Software Foundation. It was originally based on an early release of
+GNU Emacs version 19, and has tracked subsequent releases of GNU Emacs
+as they have become available. This XEmacs distribution has been
+splitted in some rpm :
 
-- xemacs:        the main part
-- xemacs-extras: files in conflict with emacs
+- xemacs        - the main part
+- xemacs-extras - files in conflict with emacs
 
 Install xemacs-extras if you do not have emacs installed.
 
 %description -l pl 
-XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z 
-GNU Emacsem tworzonym przez Richarda Stallmana z Free Software Foundation. 
-Wywodzi siê z wczesnych odmian GNU Emacs 19, wprowadza wiele mi³ych 
-ulepszeñ nie trac±c jednak wiêzi z oryginaln± wersj±. 
+XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z
+GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
+Foundation. Wywodzi siê z wczesnych odmian GNU Emacs 19, wprowadza
+wiele mi³ych ulepszeñ nie trac±c jednak wiêzi z oryginaln± wersj±.
 
-Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych. 
+Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych.
 Do pracy niezbêdne s± dwa z nich:
 
-- xemacs:        g³ówny pakiet
+- xemacs: g³ówny pakiet
 - xemacs-extras: pliki wchodz±ce w sk³ad dystrybucji GNU Emacs
 
-Zainstaluj xemacs-extras je¶li nie posiadasz GNU Emacsa. 
+Zainstaluj xemacs-extras je¶li nie posiadasz GNU Emacsa.
 
 %package el
 Summary:	.el source files for XEmacs
@@ -83,13 +83,13 @@ Requires:	%{name} = %{version}
 Conflicts:	emacs
 
 %description extras
-These files are common between GNU Emacs and XEmacs. If you do not  have
-GNU Emacs installed, be sure to install this package as well  when you
-install XEmacs.
+These files are common between GNU Emacs and XEmacs. If you do not
+have GNU Emacs installed, be sure to install this package as well when
+you install XEmacs.
 
 %description extras -l pl
-S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU Emacsa,
-to koniecznie zainstaluj ten pakiet.
+S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU
+Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
 %setup0 -q -b1 -a2
