@@ -1,15 +1,15 @@
-%define		ver		21.1
+%define		ver		21.4
 %define		basepkgver 	1.53
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
-Version:	%{ver}.14
-Release:	2
+Version:	%{ver}.2
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
-Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
 Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 Source3:	%{name}.desktop
@@ -17,19 +17,21 @@ Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
 Source6:	%{name}-kbd_pl
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-sitelisp.patch
+Patch1:		%{name}-archlibdir.patch
 Patch2:		%{name}-fix_ldflafs.patch
-Patch3:		%{name}-EMACSLOADPATH_fix.patch
-Patch4:		%{name}-no-antoloads.patch
-Patch5:		%{name}-mmencode.patch
+Patch3:		%{name}-event.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	zlib-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng >= 1.0.8
+BuildRequires:	postgresql-devel >= 7.1
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	gpm-devel
+BuildRequires:	gtk+-devel >= 1.2.10
+BuildRequires:	glib-devel
 Requires:	ctags
 Requires:	%{name}-common = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -128,18 +130,18 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
 %setup0 -q -b1 -a2
-%patch0 -p1
+#FIXME
+#%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %build
+aclocal
 autoconf
-CFLAGS="%{rpmcflags}"
-CPPFLAGS="%{rpmcflags}"
-LDFLAGS="%{!?debug:-s} -lc"
+CFLAGS="-I%{rpmcflags}"
+CPPFLAGS="-I%{rpmcflags}"
+LDFLAGS="%{rpmldflags} -lc"
 sitelispdir=%{_libdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 
@@ -149,9 +151,10 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--infodir=%{_infodir} \
 	--mandir=%{_mandir}/man1 \
 	--datadir=%{_datadir} \
-	--lockdir=/var/lock/xemacs/ \
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
+	--with-mule \
 	--with-site-lisp \
+	--without-postgresql \
 	--without-sound \
 	--without-x11 \
 	--without-jpeg \
@@ -164,7 +167,7 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--without-dnet \
 	--without-ldap \
 	--without-dragndrop \
-	--without-mule \
+	--without-msw
 
 sitelispdir=%{_libdir}/%{name}/site-lisp \
 %{__make}
@@ -172,29 +175,31 @@ cp src/xemacs src/xemacs-nox
 %{__make} distclean
 
 # X
+aclocal
 autoconf
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
 	--mandir=%{_mandir}/man1 \
 	--datadir=%{_datadir} \
-	--lockdir=/var/lock/xemacs/ \
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
+	--with-mule \
 	--with-site-lisp \
+	--with-postgresql \
 	--without-sound \
-	--with-x11 \
 	--with-jpeg \
 	--with-png \
 	--with-xpm \
 	--with-gpm \
 	--with-ncurses \
-	--with-dialogs=athena \
+	--with-gtk \
 	--with-database=no \
+	--with-gnome=no \
 	--without-tiff \
 	--without-dnet \
 	--without-ldap \
 	--without-dragndrop \
-	--without-mule 
+	--without-msw
 
 # if you want to xemacs sings and plays sounds add option 
 #	--with-sound=native 
