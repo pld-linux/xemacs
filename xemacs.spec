@@ -244,6 +244,9 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
+mv -f $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/%{_target_platform}/gnuserv \
+	$RPM_BUILD_ROOT%{_bindir}/gnuserv
+
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
@@ -252,7 +255,7 @@ install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
 # hmm, maybe xemacs-devel is necessary?
-rm -fr $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 rm -f $RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
@@ -278,7 +281,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xemacs
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
-%attr(755,root,root) %{_bindir}/gnuserv
 %{_applnkdir}/Development/Editors/xemacs.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
@@ -309,19 +311,23 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/[A-SU-Z]*
 
 %{_libdir}/%{name}
-%dir %{_datadidir}/%{name}-%{version}
-%attr(755,root,root)  %{_datadir}/%{name}-%{version}/%{_target_platform}
 
 %{_datadir}/%{name}
 
 %dir %{_datadir}/%{name}-%{version}
 # do not know it is necessary
-%{_datadir}/%{name}-%{version}/%{_target_platform}
+%{_datadir}/%{name}-%{version}/%{_target_platform}/include
+%{_datadir}/%{name}-%{version}/%{_target_platform}/modules
+%attr(755,root,root) %{_datadir}/%{name}-%{version}/%{_target_platform}/[Dacdfghprsvwy]*
+%attr(755,root,root) %{_datadir}/%{name}-%{version}/%{_target_platform}/m[am]*
+%attr(755,root,root) %{_datadir}/%{name}-%{version}/%{_target_platform}/mov*
 
 %{_datadir}/%{name}-%{version}/lisp/
 
 %dir %{_datadir}/%{name}-packages
+%{_datadir}/%{name}-packages/etc
 %{_datadir}/%{name}-packages/lisp
+%{_datadir}/%{name}-packages/lib-src
 
 %{_mandir}/man1/xemacs.1*
 %lang(ja) %{_mandir}/ja/man1/*
