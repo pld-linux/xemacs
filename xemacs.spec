@@ -47,6 +47,7 @@ BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel >= 5.0
 %{?with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
 BuildRequires:	sed >= 4.0
+BuildRequires:	texinfo
 BuildRequires:	zlib-devel
 Requires:	ctags
 Requires:	%{name}-common = %{version}-%{release}
