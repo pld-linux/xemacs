@@ -155,8 +155,8 @@ XEmacs skompilowany bez wsparcia dla X11 (pracuje tylko na konsoli lub
 w okienku xterma).
 
 %package extras
-Summary:	files which conflict with GNU Emacs
-Summary(pl):	wspólne pliki XEmacsa i GNU Emacsa
+Summary:	Files which conflict with GNU Emacs
+Summary(pl):	Wspólne pliki XEmacsa i GNU Emacsa
 Group:		Applications/Editors/Emacs
 Provides:	emacscommon
 Obsoletes:	emacscommon
