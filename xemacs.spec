@@ -11,7 +11,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.9
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -251,7 +251,7 @@ sitelispdir=%{_libdir}/%{name}/site-lisp \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,%{_pixmapsdir},/var/lock/xemacs} \
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,%{_pixmapsdir},/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/app-defaults/pl} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
 	$RPM_BUILD_ROOT%{_libdir}/%{name} \
@@ -263,7 +263,7 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,%{_pixmapsdir},/var
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	datadir=$RPM_BUILD_ROOT%{_datadir} \
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Development/Editors/xemacs.desktop
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
 
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - )
 
@@ -328,7 +328,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xemacs
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
-%{_applnkdir}/Development/Editors/xemacs.desktop
+%{_applnkdir}/Editors/xemacs.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
