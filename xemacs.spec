@@ -1,5 +1,8 @@
-# _with_postgresql	- postgresql support
-# _with_gtk		- gtk enabled version
+
+%bcond_with pdump 	# enable portable dumper
+%bcond_with postgresql	# enable postgresql support
+%bcond_with gtk		# gtk enabled version 
+
 %define		ver		21.4
 %define		basepkgver	1.81
 Summary:	The XEmacs -- Emacs: The Next Generation
@@ -11,7 +14,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.14
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -37,11 +40,13 @@ BuildRequires:	zlib-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng >= 1.0.8
-%{?_with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
+%if %{with postgresql}
+BuildRequires:	postgresql-devel >= 7.1
+%endif
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gpm-devel
-%if %{?_with_gtk:1}%{!?_with_gtk:0}
+%if %{with gtk}
 BuildRequires:	gtk+-devel >= 1.2.10
 BuildRequires:	glib-devel
 %endif
@@ -198,7 +203,11 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--with-mule \
 	--with-site-lisp \
+%if %{with postgreql}
+	--with-postgresql \
+%else
 	--without-postgresql \
+%endif
 	--without-sound \
 	--without-x11 \
 	--without-jpeg \
@@ -211,12 +220,18 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--without-dnet \
 	--without-ldap \
 	--without-dragndrop \
-	--without-msw
+	--without-msw \
+%if %{without pdump}
+	--pdump=no
+%endif 
 
 sitelispdir=%{_libdir}/%{name}/site-lisp \
 %{__make} \
 	CC="%{__cc}"
 cp src/xemacs src/xemacs-nox
+%if %{with pdump}
+cp src/xemacs.dmp src/xemacs-nox.dmp
+%endif
 cp lib-src/gnuserv lib-src/gnuserv-nox
 %{__make} distclean
 
@@ -229,23 +244,37 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--with-mule \
 	--with-site-lisp \
-	--with%{?!_with_postgresql:out}-postgresql \
+%if %{with postgresql}
+	--with-postgresql \
+%else
+	--without-postgresql \
+%endif
 	--without-sound \
 	--with-jpeg \
 	--with-png \
 	--with-xpm \
 	--with-gpm \
 	--with-ncurses \
-	--with%{?!_with_gtk:out}-gtk \
-	%{?!_with_gtk:--with-x11 --with-menubars=lucid --with-scrollbars=motif} \
-	%{?!_with_gtk:--with-dialogs=motif --with-widgets=motif} \
+%if %{with gtk}
+	--with-gtk \
+%else
+	--without-gtk \
+%endif
+%if %{undefined gtk} 
+	--with-x11 --with-menubars=lucid --with-scrollbars=motif \
+	--with-dialogs=motif --with-widgets=motif \
+%endif
 	--with-database=no \
 	--with-gnome=no \
 	--without-tiff \
 	--without-dnet \
 	--without-ldap \
 	--without-dragndrop \
-	--without-msw
+	--without-msw \
+%if %{without pdump}
+        --pdump=no 
+%endif  
+
 
 # if you want to xemacs sings and plays sounds add option
 #	--with-sound=native
@@ -303,9 +332,16 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
+%if %{with pdump}
+install src/xemacs.dmp $RPM_BUILD_ROOT/%{_bindir}
+%endif 
+
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
+%if %{with pdump}
+install src/xemacs-nox.dmp $RPM_BUILD_ROOT%{_bindir}
+%endif 
 
 # hack...
 install lib-src/gnuserv-nox $RPM_BUILD_ROOT%{_bindir}
@@ -339,6 +375,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnudoit
 %attr(755,root,root) %{_bindir}/gnuserv
 %attr(755,root,root) %{_bindir}/xemacs
+%if %{with pdump}
+%attr(644,root,root) %{_bindir}/xemacs.dmp
+%endif
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
 %{_applnkdir}/Editors/xemacs.desktop
@@ -402,6 +441,9 @@ rm -rf $RPM_BUILD_ROOT
 %files nox
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xemacs-nox
+%if %{with pdump}
+%attr(644,root,root) %{_bindir}/xemacs-nox.dmp
+%endif 
 %attr(755,root,root) %{_bindir}/gnuserv-nox
 
 %files extras
