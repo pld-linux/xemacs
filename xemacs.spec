@@ -39,7 +39,7 @@ URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
 BuildRequires:	libjpeg-devel
-BuildRequires:	libpng >= 1.0.8
+BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libtiff-devel
 BuildRequires:	gpm-devel
 %{?with_gtk:BuildRequires:	gtk+-devel >= 1.2.10}
