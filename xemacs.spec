@@ -1,5 +1,5 @@
 
-%bcond_with pdump 	# enable portable dumper
+%bcond_without pdump 	# portable dumper
 %bcond_with postgresql	# enable postgresql support
 %bcond_with gtk		# gtk enabled version 
 
@@ -14,7 +14,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.14
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
