@@ -19,7 +19,6 @@ Patch2:		xemacs-fix_ldflafs.patch
 Patch3:		xemacs-EMACSLOADPATH_fix.patch
 Patch4:		xemacs-no-antoloads.patch
 URL:		http://www.xemacs.org/
-BuildRequires:	nas-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	zlib-devel
 BuildRequires:	xpm-devel
