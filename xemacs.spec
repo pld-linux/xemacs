@@ -3,7 +3,10 @@
 %define		ver		21.4
 %define		basepkgver	1.55
 Summary:	The XEmacs -- Emacs: The Next Generation
+Summary(ja):	XEmacs ╔╗╔г╔ё╔©
 Summary(pl):	XEmacs -- Emacs nastЙpnej generacji
+Summary(ru):	Версия GNU Emacs для X Window System
+Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.7
 Release:	1
@@ -55,6 +58,12 @@ with emacs
 
 Install xemacs-extras if you haven't emacs installed.
 
+%description -l ja
+XEmacs ╓о Free Software Foundation ╓н Richard Stallman ╓к╓Х╓ц╓ф
+╫Я╓╚╓Л╓© GNU Emacs ╓х╓н╦ъ╢╧ю╜╓Р╟щ╩Щ╓╥╓д╓д©Тб©╓╞╓н╡Чни╓╛╩э╓╣╓Л╓©
+гию╦╔п║╪╔╦╔Г╔С╓г╓╧║╔ ╦╣║╧ Emacs 19 ╓Р╦╣╓кЁ╚х╞╓╣╓Л║╓Emacs
+╓н╦ЕбЁ╔Й╔Й║╪╔╧╓кди╡ц╓╣╓Л╓© ╣║г╫╓хф╠╢Э╓╛╪Х╓И╓Л╓ф╓╓╓ч╓╧║╔
+
 %description -l pl
 XEmacs jest odmian╠ Emacsa, zgodn╠ (i zawieraj╠c╠ wiele udogodnieЯ) z
 GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
@@ -71,6 +80,33 @@ skЁad dystrybucji GNU Emacs
 
 Do pracy niezbЙdne s╠ xemacs-common oraz xemacs b╠d╪ xemacs-nox.
 Zainstaluj tak©e xemacs-extras je╤li nie posiadasz GNU Emacsa.
+
+%description -l ru
+XEmacs (равно как и оригинальный GNU Emacs) - это
+самодокументированный, настраиваемый, расширяемый редактор с
+отображением в реальном времени. XEmacs самодокументирован потому что
+в любое время вы можете нажать control-h для подсказки о возможных
+опциях или о том, что делает команда. XEmacs настраиваем потому что вы
+можете изменить определения его команд на все, что вам угодно. XEmacs
+расширяем потому что вы можете написать совершенно новые
+команды-программы на языке Lisp, которые будут исполняться встроенным
+интерпретатором Lisp. XEmacs включает отображение в реальном времени,
+что значит что редактируемый текст видим на экране и обновляется очень
+часто (обычно после каждого символа или пары символов) по мере набора
+текста.
+
+%description -l uk
+XEmacs (так само як ╕ ориг╕нальний GNU Emacs) - це самодокументований,
+настроюваний, розширюваний редактор з в╕дображенням у реальному час╕.
+XEmacs самодокументований тому що у любий час ви можете натиснути
+control-h для п╕дказки про можлив╕ опц╕╖ або про те, що робить
+команда. XEmacs настроюваний тому що ви можете зм╕нити визначення його
+команд на все, що вам завгодно. XEmacs розширюваний тому що ви можете
+написати абсолютно нов╕ команди-програми на мов╕ Lisp, як╕ будуть
+виконуватися вбудованим ╕нтерпретатором Lisp. XEmacs включа╓
+в╕дображення у реальному час╕, що означа╓ що редагований текст видно
+на екран╕ ╕ в╕н поновлю╓ться дуже часто (зазвичай п╕сля кожного
+символу або пари символ╕в) по м╕р╕ набору тексту.
 
 %package common
 Summary:	Common part of XEmacs distribution
