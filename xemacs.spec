@@ -1,7 +1,7 @@
 # _with_postgresql	- postgresql support
 # _with_gtk		- gtk enabled version
 %define		ver		21.4
-%define		basepkgver	1.55
+%define		basepkgver	1.61
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(ja):	XEmacs ¥¨¥Ç¥£¥¿
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
