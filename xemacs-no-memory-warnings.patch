@@ -1,0 +1,20 @@
+--- xemacs-21.4.14/src/emacs.c.orig	Wed Jan 15 13:18:00 2003
++++ xemacs-21.4.14/src/emacs.c	Mon Oct 27 21:45:41 2003
+@@ -1033,7 +1033,7 @@
+ #ifndef SYSTEM_MALLOC
+   if (!initialized)
+     /* Arrange to get warning messages as memory fills up.  */
+-    memory_warnings (0, malloc_warning);
++    ; /*memory_warnings (0, malloc_warning);  -- doesn't support memory model on alpha */
+ #endif	/* not SYSTEM_MALLOC */
+ 
+ #ifdef SET_EMACS_PRIORITY
+@@ -3195,7 +3195,7 @@
+   /* Tell malloc where start of impure now is */
+   /* Also arrange for warnings when nearly out of space.  */
+ #ifndef SYSTEM_MALLOC
+-  memory_warnings (my_edata, malloc_warning);
++  /* memory_warnings (my_edata, malloc_warning);  -- doesn't support memory model on alpha */
+ #endif
+ 
+   UNGCPRO;
