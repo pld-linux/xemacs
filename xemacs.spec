@@ -293,6 +293,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_infodir}/custom.info*gz
 %{_infodir}/external-widget.info*gz
 %{_infodir}/internals.info*gz
+%{_infodir}/lispref.info*gz
 %{_infodir}/new-users-guide.info*gz
 %{_infodir}/term.info*gz
 %{_infodir}/widget.info*gz
