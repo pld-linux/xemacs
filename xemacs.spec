@@ -12,7 +12,7 @@ Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.g
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
 Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-base-%{basepkgver}-pkg.tar.gz
 Source3:	xemacs.desktop
-Source4:	xemacs-xdefaults-pl
+Source4:	xemacs.ad-pl
 Patch0:		xemacs-info.patch
 Patch1:		xemacs-sitelisp.patch
 Patch2:		xemacs-fix_ldflafs.patch
