@@ -1,7 +1,7 @@
 # _with_postgresql	- postgresql support
 # _with_gtk		- gtk enabled version
 %define		ver		21.4
-%define		basepkgver	1.77
+%define		basepkgver	1.81
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs ╔╗╔г╔ё╔©
@@ -10,16 +10,16 @@ Summary(pt_BR):	Editor XEmacs
 Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
-Version:	%{ver}.12
-Release:	7
+Version:	%{ver}.14
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	699f4e9c05181d3d71cbd733cd5b16fc
+# Source0-md5:	d3f0b4e26810de179e31100a83ee2e1d
 Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-# Source1-md5:	6e0931158967f433e46546595bf72904
+# Source1-md5:	05408e9bb2c0a199528fa463c766a890
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	b25c2c30ba719d7152ab24210fa27045
+# Source2-md5:	da5dd98ad1163954f26abb8ce6d3b6fa
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -207,7 +207,8 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--without-msw
 
 sitelispdir=%{_libdir}/%{name}/site-lisp \
-%{__make}
+%{__make} \
+	CC="%{__cc}"
 cp src/xemacs src/xemacs-nox
 cp lib-src/gnuserv lib-src/gnuserv-nox
 %{__make} distclean
@@ -251,7 +252,8 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 #	--with-session=yes \
 
 sitelispdir=%{_libdir}/%{name}/site-lisp \
-%{__make}
+%{__make} \
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
