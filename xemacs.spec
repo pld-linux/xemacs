@@ -3,7 +3,7 @@ Summary(pl):	XEmacs -- Edytor
 Name:		xemacs
 Version:	21.1.2
 %define		realversion	21.1-p2
-%define		pkgdate		1999-05-13
+%define		pkgdate		1999-07-13
 Release:	1
 Copyright:	GPL
 Group:		Applications/Editors/Emacs
