@@ -15,7 +15,9 @@ Release:	7
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
+# Source0-md5:	699f4e9c05181d3d71cbd733cd5b16fc
 Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
+# Source1-md5:	6e0931158967f433e46546595bf72904
 Source2:	ftp://ftp.xemacs.org//xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
