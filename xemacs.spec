@@ -5,8 +5,8 @@
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
-Version:	%{ver}.6
-Release:	2
+Version:	%{ver}.7
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -318,7 +318,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/lisp/
 
 %dir %{_datadir}/%{name}-packages
-%{_datadir}/%{name}-packages/etc
+%{_datadir}/%{name}-packages%{_sysconfdir}
 %{_datadir}/%{name}-packages/lisp
 %{_datadir}/%{name}-packages/lib-src
 
