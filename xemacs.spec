@@ -131,8 +131,8 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %build
 autoconf
-CFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
-CPPFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
+CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
+CPPFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
 LDFLAGS="%{!?debug:-s} -lc"
 sitelispdir=%{_libdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
