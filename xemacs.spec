@@ -1,20 +1,20 @@
 # _with_postgresql	- postgresql support
 # _with_gtk		- gtk enabled version
 %define		ver		21.4
-%define		basepkgver	1.61
+%define		basepkgver	1.67
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(ja):	XEmacs ¥¨¥Ç¥£¥¿
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Summary(ru):	÷ÅÒÓÉÑ GNU Emacs ÄÌÑ X Window System
 Summary(uk):	÷ÅÒÓ¦Ñ GNU Emacs ÄÌÑ X Window System
 Name:		xemacs
-Version:	%{ver}.8
-Release:	4
+Version:	%{ver}.9
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
-Source0:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-Source2:	ftp://ftp.xemacs.org/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
+Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
+Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
+Source2:	ftp://ftp.xemacs.org//xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
