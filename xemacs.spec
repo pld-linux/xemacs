@@ -11,7 +11,7 @@ Summary(ru):	÷ÅÒÓÉÑ GNU Emacs ÄÌÑ X Window System
 Summary(uk):	÷ÅÒÓ¦Ñ GNU Emacs ÄÌÑ X Window System
 Name:		xemacs
 Version:	%{ver}.10
-Release:	4
+Release:	5
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -125,6 +125,7 @@ Summary:	Common part of XEmacs distribution
 Summary(pl):	Wspólne czê¶ci XEmacsa
 Group:		Applications/Editors/Emacs
 Provides:	xemacs-base-pkg
+Requires:	emacscommon
 
 %description common
 Common files of XEmacs distribution. This package does not contain
@@ -154,8 +155,8 @@ w okienku xterma).
 Summary:	files which conflict with GNU Emacs
 Summary(pl):	wspólne pliki XEmacsa i GNU Emacsa
 Group:		Applications/Editors/Emacs
-Requires:	%{name} = %{version}
-Conflicts:	emacs
+Provides:	emacscommon
+Obsoletes:	emacscommon
 
 %description extras
 These files are common between GNU Emacs and XEmacs. If you do not
