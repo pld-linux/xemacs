@@ -11,7 +11,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.10
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
