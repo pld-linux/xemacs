@@ -131,9 +131,9 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %build
 autoconf
-CFLAGS="$RPM_OPT_FLAGS"
-CPPFLAGS="$RPM_OPT_FLAGS"
-LDFLAGS="-s -lc"
+CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
+CPPFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
+LDFLAGS="%{!?debug:-s} -lc"
 sitelispdir=%{_libdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 
@@ -241,8 +241,7 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/xemacs-ja.1 \
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
-gzip -9nf $RPM_BUILD_ROOT{%{_mandir}/{man1/*,ja/man1/*},%{_infodir}/*info*} \
-	README GETTING.GNU.SOFTWARE PROBLEMS \
+gzip -9nf README GETTING.GNU.SOFTWARE PROBLEMS \
 	etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
 
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
