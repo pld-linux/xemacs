@@ -1,5 +1,5 @@
-# with_postgresql	- postgresql support
-# with_gtk		- gtk enabled version
+# _with_postgresql	- postgresql support
+# _with_gtk		- gtk enabled version
 %define		ver		21.4
 %define		basepkgver 	1.53
 Summary:	The XEmacs -- Emacs: The Next Generation
@@ -177,7 +177,7 @@ autoconf
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--with-mule \
 	--with-site-lisp \
-	--with%{?!with_postgresql:out}-postgresql \
+	--with%{?!_with_postgresql:out}-postgresql \
 	--without-sound \
 	--with-jpeg \
 	--with-png \
