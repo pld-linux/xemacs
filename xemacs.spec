@@ -4,13 +4,13 @@ Name:		xemacs
 Version:	21.1.8
 %define		ver		21.1
 %define		basepkgver	1.32
-Release:	6
-Copyright:	GPL
+Release:	7
+License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-base-%{basepkgver}-pkg.tar.gz
+Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 Source3:	xemacs.desktop
 Source4:	xemacs.ad-pl
 Source5:	xemacs-default.el
@@ -86,9 +86,9 @@ Requires:	%{name} = %{version}
 Conflicts:	emacs
 
 %description extras
-These files are common between GNU Emacs and XEmacs. If you do not 
-have GNU Emacs installed, be sure to install this package as well 
-when you install XEmacs.
+These files are common between GNU Emacs and XEmacs. If you do not  have
+GNU Emacs installed, be sure to install this package as well  when you
+install XEmacs.
 
 %description extras -l pl
 S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU Emacsa,
@@ -146,47 +146,33 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,/var/lock/xemacs} \
-	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/{,pl}/app-defaults}
-
-install -d $RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults
+	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/{,pl}/app-defaults} \
+	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
+	$RPM_BUILD_ROOT%{_libdir}/%{name} \
+	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
 
 make install-arch-dep install-arch-indep gzip-el \
-	prefix=$RPM_BUILD_ROOT/usr \
+	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	datadir=$RPM_BUILD_ROOT%{_datadir} \
 
-#	package_path=$RPM_BUILD_ROOT%{_datadir}/%{name} \
-#	lispdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
-#	pkgdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
-#	sitelispdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp \
-#	etcdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/etc
-
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
+install %{SOURCE4} $RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/etc
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lib-src
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
 
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/default.el
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/kbd_pl
 
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp
-install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 
-cp $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/Emacs.ad \
-	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
-
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/Emacs.ad \
-	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults/Emacs
-cat %{SOURCE4} >>$RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults/Emacs
-
+	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
@@ -203,10 +189,10 @@ find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" 
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
+%{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
 
 %postun
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
+%{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
 
 
 %files
@@ -237,8 +223,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/*/lisp/term/README
 %{_applnkdir}/Editors/xemacs.desktop
 
-%lang(en) /usr/X11R6/lib/X11/app-defaults/Emacs
-%lang(pl) /usr/X11R6/lib/X11/pl/app-defaults/Emacs
+%lang(en) %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
+%lang(pl) %{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 
 %{_libdir}/%{name}
 %dir %{_libdir}/%{name}-%{version}
