@@ -5,7 +5,7 @@
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
-Version:	%{ver}.4
+Version:	%{ver}.5
 Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
@@ -21,8 +21,7 @@ Source6:	%{name}-ogony-mule.el
 Source7:	%{name}-ogony-nomule.el
 Source8:	%{name}.png
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-archlibdir.patch
-Patch2:		%{name}-fix_ldflafs.patch
+Patch1:		%{name}-fix_ldflafs.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
@@ -124,7 +123,6 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %setup0 -q -b1 -a2
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 CFLAGS="-I%{rpmcflags}"
@@ -244,9 +242,6 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
-mv -f $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/%{_target_platform}/gnuserv \
-	$RPM_BUILD_ROOT%{_bindir}/gnuserv
-
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
@@ -255,9 +250,9 @@ install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
 # hmm, maybe xemacs-devel is necessary?
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include
-rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
-rm -f $RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
+rm -rf	$RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include \
+	$RPM_BUILD_ROOT%{_infodir}/dir* \
+	$RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
 find $RPM_BUILD_ROOT -regex '.*~$' -exec rm -f {} \;
 
@@ -286,7 +281,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
 %{_mandir}/man1/gnudoit.1*
-%{_mandir}/man1/gnuserv.1*
 %{_datadir}/%{name}-%{version}%{_sysconfdir}/custom
 %{_datadir}/%{name}-%{version}%{_sysconfdir}/eos
 %{_datadir}/%{name}-%{version}%{_sysconfdir}/toolbar
@@ -316,11 +310,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_datadir}/%{name}-%{version}
 # do not know it is necessary
-%{_datadir}/%{name}-%{version}/%{_target_platform}/include
-%{_datadir}/%{name}-%{version}/%{_target_platform}/modules
-%attr(755,root,root) %{_datadir}/%{name}-%{version}/%{_target_platform}/[Dacdfghprsvwy]*
-%attr(755,root,root) %{_datadir}/%{name}-%{version}/%{_target_platform}/m[am]*
-%attr(755,root,root) %{_datadir}/%{name}-%{version}/%{_target_platform}/mov*
+%{_libdir}/%{name}-%{version}/%{_target_platform}/modules
+%attr(755,root,root) %{_libdir}/%{name}-%{version}/%{_target_platform}/[Dacdfghprsvwy]*
+%attr(755,root,root) %{_libdir}/%{name}-%{version}/%{_target_platform}/m[am]*
+%attr(755,root,root) %{_libdir}/%{name}-%{version}/%{_target_platform}/mov*
 
 %{_datadir}/%{name}-%{version}/lisp/
 
