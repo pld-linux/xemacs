@@ -4,7 +4,7 @@
 %bcond_with gtk		# gtk enabled version
 
 %define		ver		21.4
-%define		basepkgver	1.81
+%define		basepkgver	1.86
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs ╔╗╔г╔ё╔©
@@ -13,16 +13,16 @@ Summary(pt_BR):	Editor XEmacs
 Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
-Version:	%{ver}.14
-Release:	5
+Version:	%{ver}.15
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	d3f0b4e26810de179e31100a83ee2e1d
+# Source0-md5:	b80e040d9cb85c9210999554dc210fa6
 Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-# Source1-md5:	05408e9bb2c0a199528fa463c766a890
+# Source1-md5:	0fcacb62b115dd34d2d59fbe8be36166
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	da5dd98ad1163954f26abb8ce6d3b6fa
+# Source2-md5:	ab5151789560a085f901dea51f22fbfd
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -230,14 +230,14 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 %endif
 
 sitelispdir=%{_ulibdir}/%{name}/site-lisp \
-%{__make} \
+%{__make} -j1 \
 	CC="%{__cc}"
 cp src/xemacs src/xemacs-nox
 %if %{with pdump}
 cp src/xemacs.dmp src/xemacs-nox.dmp
 %endif
 cp lib-src/gnuserv lib-src/gnuserv-nox
-%{__make} distclean
+%{__make} -j1 distclean
 
 # X
 ./configure %{_target_platform} \
@@ -292,7 +292,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 #	--with-session=yes \
 
 sitelispdir=%{_ulibdir}/%{name}/site-lisp \
-%{__make} \
+%{__make} -j1 \
 	CC="%{__cc}"
 
 %install
@@ -400,7 +400,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README GETTING.GNU.SOFTWARE PROBLEMS BUGS etc/{NEWS,MAILINGLISTS,TERMS,SERVICE}
 %dir %{_datadir}/%{name}-%{version}%{_sysconfdir}
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/package-index.LATEST.pgp
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/package-index.LATEST.gpg
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL
 %doc %lang(de) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.de
 %doc %lang(fr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.fr
