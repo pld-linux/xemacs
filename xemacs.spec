@@ -438,7 +438,7 @@ Requires:	%{name} = %{version}
 %prep
 %setup -q -a1 -a2 -T -b 0 -n xemacs-%{version}
 %patch0 -p1
-%patch2 -p1
+#%patch2 -p1
 %patch3 -p1
 chmod u+wXr * -R
 
@@ -682,13 +682,13 @@ if [ "$1" = "0" ]; then
 	/sbin/install-info %{_infodir}/elib.info.gz /etc/info-dir
 fi
 
-%post bbdb
-/sbin/install-info %{_infodir}/bbdb.info.gz /etc/info-dir
+#%post bbdb
+#/sbin/install-info %{_infodir}/bbdb.info.gz /etc/info-dir
 
-%preun bbdb
-if [ "$1" = "0" ]; then
-	/sbin/install-info %{_infodir}/bbdb.info.gz /etc/info-dir
-fi
+#%preun bbdb
+#if [ "$1" = "0" ]; then
+#	/sbin/install-info %{_infodir}/bbdb.info.gz /etc/info-dir
+#fi
 
 %post calc
 /sbin/install-info %{_infodir}/calc.info.gz /etc/info-dir
@@ -1323,14 +1323,14 @@ fi
 
 %files bbdb
 %defattr(644,root,root,755)
-%{_infodir}/bbdb.info*gz
+#%{_infodir}/bbdb.info*gz
 %doc %{_datadir}/*/lisp/bbdb/ChangeLog*
 %doc %{_datadir}/*/lisp/bbdb/README
-%doc %{_datadir}/*/etc/bbdb/tex
-%attr(755,root,root) %{_datadir}/*/etc/bbdb/*.pl
-%dir %{_datadir}/*/etc/bbdb
+#%doc %{_datadir}/*/etc/bbdb/tex
+#%attr(755,root,root) %{_datadir}/*/etc/bbdb/*.pl
+#%dir %{_datadir}/*/etc/bbdb
 %dir %{_datadir}/*/lisp/bbdb
-%{_datadir}/*/etc/bbdb/*.el
+#%{_datadir}/*/etc/bbdb/*.el
 %{_datadir}/*/lisp/bbdb/*.elc
 
 %files bbdb-el
