@@ -4,7 +4,7 @@ Name:		xemacs
 Version:	21.1.8
 %define		ver		21.1
 %define		basepkgver	1.32
-Release:	5
+Release:	6
 Copyright:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -164,11 +164,11 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
 install %{SOURCE4} $RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults/Emacs
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/etc
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lib-src
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lib-src
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/etc
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
 
