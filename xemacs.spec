@@ -1,14 +1,14 @@
 Summary:	The XEmacs editor
 Summary(pl):	XEmacs -- Edytor
 Name:		xemacs
-Version:	21.1.8
+Version:	21.1.10
 %define		ver		21.1
-%define		basepkgver	1.32
-Release:	8
+%define		basepkgver	1.39
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
-Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
 Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 Source3:	xemacs.desktop
@@ -69,7 +69,7 @@ Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name} = %{version}
 
 %description el
-.el source files -- not necessary to run XEmacs
+.el source files -- not necessary to run XEmacs.
 
 %description el -l pl
 Pliki ¼ród³owe procedur w eLispie do XEmacsa.
@@ -177,8 +177,9 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/xemacs-ja.1 \
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{man1/*,ja/man1/*} \
-	$RPM_BUILD_ROOT%{_infodir}/*info*
+gzip -9nf $RPM_BUILD_ROOT{%{_mandir}/{man1/*,ja/man1/*},%{_infodir}/*info*} \
+	README GETTING.GNU.SOFTWARE PROBLEMS \
+	etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
 
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
@@ -193,8 +194,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README GETTING.GNU.SOFTWARE PROBLEMS 
-%doc etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
+%doc *.gz etc/*.gz
 %doc %{_datadir}/*/etc/TUTORIAL
 %doc %lang(de) %{_datadir}/*/etc/TUTORIAL.de
 %doc %lang(fr) %{_datadir}/*/etc/TUTORIAL.fr
@@ -255,7 +255,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-packages/lisp/kbd_pl
 
 %attr(755,root,root) %{_bindir}/gnu*
-%attr(755,root,root) %{_bindir}/pstogif
 %attr(755,root,root) %{_bindir}/xemacs
 
 %attr(2755,root,mail) %{_libdir}/%{name}-%{version}/*/movemail
