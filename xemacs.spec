@@ -1,7 +1,7 @@
 
 %bcond_without pdump 	# portable dumper
 %bcond_with postgresql	# enable postgresql support
-%bcond_with gtk		# gtk enabled version 
+%bcond_with gtk		# gtk enabled version
 
 %define		ver		21.4
 %define		basepkgver	1.81
@@ -227,7 +227,7 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--without-msw \
 %if %{without pdump}
 	--pdump=no
-%endif 
+%endif
 
 sitelispdir=%{_ulibdir}/%{name}/site-lisp \
 %{__make} \
@@ -264,7 +264,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 %else
 	--without-gtk \
 %endif
-%if %{undefined gtk} 
+%if %{undefined gtk}
 	--with-x11 --with-menubars=lucid --with-scrollbars=motif \
 	--with-dialogs=motif --with-widgets=motif \
 %endif
@@ -276,8 +276,8 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--without-dragndrop \
 	--without-msw \
 %if %{without pdump}
-        --pdump=no 
-%endif  
+        --pdump=no
+%endif
 
 
 # if you want to xemacs sings and plays sounds add option
@@ -338,14 +338,14 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 
 %if %{with pdump}
 install src/xemacs.dmp $RPM_BUILD_ROOT/%{_bindir}
-%endif 
+%endif
 
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
 %if %{with pdump}
 install src/xemacs-nox.dmp $RPM_BUILD_ROOT%{_bindir}
-%endif 
+%endif
 
 # hack...
 install lib-src/gnuserv-nox $RPM_BUILD_ROOT%{_bindir}
@@ -447,7 +447,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xemacs-nox
 %if %{with pdump}
 %attr(644,root,root) %{_bindir}/xemacs-nox.dmp
-%endif 
+%endif
 %attr(755,root,root) %{_bindir}/gnuserv-nox
 
 %files extras
