@@ -9,7 +9,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.8
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -193,6 +193,7 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 sitelispdir=%{_libdir}/%{name}/site-lisp \
 %{__make}
 cp src/xemacs src/xemacs-nox
+cp lib-src/gnuserv lib-src/gnuserv-nox
 %{__make} distclean
 
 # X
@@ -281,6 +282,10 @@ find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" 
 
 install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
 
+# hack...
+install lib-src/gnuserv-nox $RPM_BUILD_ROOT%{_bindir}
+mv -f $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/gnuserv $RPM_BUILD_ROOT%{_bindir}
+
 # remove .el file if corresponding .elc file exists
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
@@ -304,7 +309,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
 %lang(pl) %{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
-%attr(755,root,root) %{_bindir}/gnu*
+%attr(755,root,root) %{_bindir}/gnuattach
+%attr(755,root,root) %{_bindir}/gnuclient
+%attr(755,root,root) %{_bindir}/gnudoit
+%attr(755,root,root) %{_bindir}/gnuserv
 %attr(755,root,root) %{_bindir}/xemacs
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
@@ -365,6 +373,7 @@ rm -rf $RPM_BUILD_ROOT
 %files nox
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xemacs-nox
+%attr(755,root,root) %{_bindir}/gnuserv-nox
 
 %files extras
 %defattr(644,root,root,755)
