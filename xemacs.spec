@@ -162,7 +162,6 @@ install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
-ln -s %{_datadir}/%{name}-packages $RPM_BUILD_ROOT%{_libdir}/%{name}/%{name}-packages
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
