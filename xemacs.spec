@@ -9,8 +9,6 @@ Version:	%{ver}.6
 Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
-Group(de):	Applikationen/Editors/Emacs
-Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
 Source2:	ftp://ftp.xemacs.org/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
@@ -78,8 +76,6 @@ Zainstaluj tak¿e xemacs-extras je¶li nie posiadasz GNU Emacsa.
 Summary:	Common part of XEmacs distribution
 Summary(pl):	Wspólne czê¶ci XEmacsa
 Group:		Applications/Editors/Emacs
-Group(de):	Applikationen/Editors/Emacs
-Group(pl):	Aplikacje/Edytory/Emacs
 Provides:	xemacs-base-pkg
 
 %description common
@@ -96,8 +92,6 @@ b±d¼ Emacsa: edytor Nastêpnej Generacji.
 Summary:	XEmacs binary compiled without X11 support
 Summary(pl):	XEmacs skompilowany bez wsparcia dla X11
 Group:		Applications/Editors/Emacs
-Group(de):	Applikationen/Editors/Emacs
-Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}
 
@@ -112,8 +106,6 @@ w okienku xterma).
 Summary:	files which conflict with GNU Emacs
 Summary(pl):	wspólne pliki XEmacsa i GNU Emacsa
 Group:		Applications/Editors/Emacs
-Group(de):	Applikationen/Editors/Emacs
-Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name} = %{version}
 Conflicts:	emacs
 
