@@ -38,21 +38,16 @@ Patch4:		%{name}-dump-paths-lispdir.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
-BuildRequires:	motif-devel
-BuildRequires:	zlib-devel
-BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng >= 1.0.8
-%if %{with postgresql}
-BuildRequires:	postgresql-devel >= 7.1
-%endif
+BuildRequires:	libtiff-devel
 BuildRequires:	gpm-devel
+%{?with_gtk:BuildRequires:	gtk+-devel >= 1.2.10}
+BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	gpm-devel
-%if %{with gtk}
-BuildRequires:	gtk+-devel >= 1.2.10
-BuildRequires:	glib-devel
-%endif
+%{?with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
+BuildRequires:	sed >= 4.0
+BuildRequires:	zlib-devel
 Requires:	ctags
 Requires:	%{name}-common = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
