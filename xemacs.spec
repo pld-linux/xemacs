@@ -1,12 +1,13 @@
 %define		ver		21.1
-%define		basepkgver 	1.46
+%define		basepkgver 	1.53
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
 Version:	%{ver}.14
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
+Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.bz2
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
@@ -35,34 +36,33 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 XEmacs is a highly customizable open source text editor and
-application development system.  XEmacs is a version of Emacs,
+application development system. XEmacs is a version of Emacs,
 compatible with and containing many improvements over GNU Emacs,
 written by Richard Stallman of the Free Software Foundation. It was
 originally based on an early release of GNU Emacs version 19, and has
 tracked subsequent releases of GNU Emacs as they have become
 available. This XEmacs distribution has been splitted in some rpm:
 
-xemacs-common - common files needed by xemacs and xemacs-nox packages 
-xemacs        - XEmacs binary with both X11 and TTY support
-xemacs-nox    - XEmacs binary with TTY support only
-xemacs-extras - files in conflict with emacs
+xemacs-common - common files needed by xemacs and xemacs-nox packages
+xemacs - XEmacs binary with both X11 and TTY support xemacs-nox -
+XEmacs binary with TTY support only xemacs-extras - files in conflict
+with emacs
 
 Install xemacs-extras if you haven't emacs installed.
 
 %description -l pl 
-XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) 
-z GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
+XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z
+GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
 Foundation. Wywodzi siê z wczesnych odmian GNU Emacs 19, wprowadza
 wiele mi³ych ulepszeñ nie trac±c jednak wiêzi z oryginaln± wersj±.
 
 Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych:
 
-xemacs-common - pakiet zawieraj±cy pliki wspó³dzielone przez pakiety 
-		  xemacs i xemacs-nox 
-xemacs        - XEmacs skompilowany ze wsparciem dla X11 i konsoli
-xemacs-nox    - XEmacs skompilowany bez wsparcia dla X11 (pracuje 
-		tylko na konsoli tekstowej)
-xemacs-extras - pliki wchodz±ce w sk³ad dystrybucji GNU Emacs
+xemacs-common - pakiet zawieraj±cy pliki wspó³dzielone przez pakiety
+xemacs i xemacs-nox xemacs - XEmacs skompilowany ze wsparciem dla X11
+i konsoli xemacs-nox - XEmacs skompilowany bez wsparcia dla X11
+(pracuje tylko na konsoli tekstowej) xemacs-extras - pliki wchodz±ce w
+sk³ad dystrybucji GNU Emacs
 
 Do pracy niezbêdne s± xemacs-common oraz xemacs b±d¼ xemacs-nox.
 Zainstaluj tak¿e xemacs-extras je¶li nie posiadasz GNU Emacsa.
@@ -70,17 +70,19 @@ Zainstaluj tak¿e xemacs-extras je¶li nie posiadasz GNU Emacsa.
 %package common
 Summary:	Common part of XEmacs distribution
 Group:		Applications/Editors/Emacs
+Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Provides:	xemacs-base-pkg
 
 %description common
-Common files of XEmacs distribution. This package does not contain 
-XEmacs editor binary, you must install xemacs or xemacs-nox package
-to use XEmacs -- Emacs: The Next Generation editor.
+Common files of XEmacs distribution. This package does not contain
+XEmacs editor binary, you must install xemacs or xemacs-nox package to
+use XEmacs -- Emacs: The Next Generation editor.
 
 %package nox
 Summary:	XEmacs binary compiled without X11 support
 Group:		Applications/Editors/Emacs
+Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name}-common = %{version}
 Provides:	%{name} = %{version}
@@ -89,13 +91,14 @@ Provides:	%{name} = %{version}
 XEmacs binary compiled with TTY support only, without X11 support.
 
 %description nox -l pl
-XEmacs skompilowany bez wsparcia dla X11 (pracuje tylko na konsoli
-lub w okienku xterma).
+XEmacs skompilowany bez wsparcia dla X11 (pracuje tylko na konsoli lub
+w okienku xterma).
 
 %package el
 Summary:	.el source files for XEmacs
 Summary(pl):	Pliki ¼ród³owe procedur w eLispie do XEmacsa
 Group:		Applications/Editors/Emacs
+Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name}-common = %{version}
 
@@ -109,6 +112,7 @@ Pliki ¼ród³owe procedur w eLispie do XEmacsa.
 Summary:	files which conflict with GNU Emacs
 Summary(pl):	wspólne pliki XEmacsa i GNU Emacsa
 Group:		Applications/Editors/Emacs
+Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name} = %{version}
 Conflicts:	emacs
@@ -234,10 +238,10 @@ mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.value
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 
-mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/Emacs.ad \
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
 	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
 
-mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/xemacs-ja.1 \
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
@@ -275,25 +279,25 @@ rm -rf $RPM_BUILD_ROOT
 %files common
 %defattr(644,root,root,755)
 %doc *.gz etc/*.gz
-%doc %{_datadir}/*/etc/TUTORIAL
-%doc %lang(de) %{_datadir}/*/etc/TUTORIAL.de
-%doc %lang(fr) %{_datadir}/*/etc/TUTORIAL.fr
-%doc %lang(hr) %{_datadir}/*/etc/TUTORIAL.hr
-%doc %lang(ja) %{_datadir}/*/etc/TUTORIAL.ja
-%doc %lang(ko) %{_datadir}/*/etc/TUTORIAL.ko
-%doc %lang(no) %{_datadir}/*/etc/TUTORIAL.no
-%doc %lang(pl) %{_datadir}/*/etc/TUTORIAL.pl
-%doc %lang(ro) %{_datadir}/*/etc/TUTORIAL.ro
-%doc %lang(ru) %{_datadir}/*/etc/TUTORIAL.ru
-%doc %lang(th) %{_datadir}/*/etc/TUTORIAL.th
+%doc %{_datadir}/*%{_sysconfdir}/TUTORIAL
+%doc %lang(de) %{_datadir}/*%{_sysconfdir}/TUTORIAL.de
+%doc %lang(fr) %{_datadir}/*%{_sysconfdir}/TUTORIAL.fr
+%doc %lang(hr) %{_datadir}/*%{_sysconfdir}/TUTORIAL.hr
+%doc %lang(ja) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ja
+%doc %lang(ko) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ko
+%doc %lang(no) %{_datadir}/*%{_sysconfdir}/TUTORIAL.no
+%doc %lang(pl) %{_datadir}/*%{_sysconfdir}/TUTORIAL.pl
+%doc %lang(ro) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ro
+%doc %lang(ru) %{_datadir}/*%{_sysconfdir}/TUTORIAL.ru
+%doc %lang(th) %{_datadir}/*%{_sysconfdir}/TUTORIAL.th
 %doc %{_libdir}/%{name}-%{version}/*/DOC
-%doc %{_datadir}/*/etc/*README*
-%doc %{_datadir}/*/etc/refcard.ps.gz
-%doc %{_datadir}/*/etc/refcard.tex
-%doc %{_datadir}/*/etc/sample.Xdefaults
-%doc %{_datadir}/*/etc/sample.emacs
-%doc %{_datadir}/*/etc/aliases.ksh
-%doc %{_datadir}/*/etc/editclient.sh
+%doc %{_datadir}/*%{_sysconfdir}/*README*
+%doc %{_datadir}/*%{_sysconfdir}/refcard.ps.gz
+%doc %{_datadir}/*%{_sysconfdir}/refcard.tex
+%doc %{_datadir}/*%{_sysconfdir}/sample.Xdefaults
+%doc %{_datadir}/*%{_sysconfdir}/sample.emacs
+%doc %{_datadir}/*%{_sysconfdir}/aliases.ksh
+%doc %{_datadir}/*%{_sysconfdir}/editclient.sh
 %doc %{_datadir}/*/lisp/ChangeLog*
 %doc %{_datadir}/*/lisp/README
 %doc %{_datadir}/*/lisp/term/README
@@ -304,17 +308,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/%{name}
 %dir %{_datadir}/%{name}-%{version}
-%dir %{_datadir}/%{name}-%{version}/etc
-%{_datadir}/%{name}-%{version}/etc/custom
-%{_datadir}/%{name}-%{version}/etc/eos
-%{_datadir}/%{name}-%{version}/etc/idd
-%{_datadir}/%{name}-%{version}/etc/photos
-%{_datadir}/%{name}-%{version}/etc/toolbar
-%{_datadir}/%{name}-%{version}/etc/*.xbm
-%{_datadir}/%{name}-%{version}/etc/*.xpm
-%{_datadir}/%{name}-%{version}/etc/*.png
-%{_datadir}/%{name}-%{version}/etc/ms-kermit*
-%{_datadir}/%{name}-%{version}/etc/package-index.LATEST.pgp
+%dir %{_datadir}/%{name}-%{version}%{_sysconfdir}
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/custom
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/eos
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/idd
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/photos
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/toolbar
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xbm
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xpm
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.png
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/ms-kermit*
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/package-index.LATEST.pgp
 
 %dir %{_datadir}/%{name}-%{version}/lisp
 %{_datadir}/%{name}-%{version}/lisp/*.elc
@@ -322,7 +326,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/lisp/term/*.elc
 
 %dir %{_datadir}/%{name}-packages
-%dir %{_datadir}/%{name}-packages/etc
+%dir %{_datadir}/%{name}-packages%{_sysconfdir}
 %dir %{_datadir}/%{name}-packages/lib-src
 %dir %{_datadir}/%{name}-packages/lisp
 %dir %{_datadir}/%{name}-packages/lisp/xemacs-base
