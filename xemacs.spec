@@ -1,7 +1,7 @@
 # _with_postgresql	- postgresql support
 # _with_gtk		- gtk enabled version
 %define		ver		21.4
-%define		basepkgver	1.70
+%define		basepkgver	1.75
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs ╔╗╔г╔ё╔©
@@ -10,8 +10,8 @@ Summary(pt_BR):	Editor XEmacs
 Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
-Version:	%{ver}.10
-Release:	5
+Version:	%{ver}.12
+Release:	7
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
