@@ -1,19 +1,19 @@
-Summary:     The XEmacs editor
-Summary(pl): XEmacs -- Edytor
-Name:        xemacs
-version:     20.4
-Release:     8
-Copyright:   GPL
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Source0:     ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}.tar.gz
-Source1:     ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}-info.tar.gz
-Source4:     xemacs.wmconfig
-Patch0:      xemacs-static.patch
-Patch1:      xemacs-perl.patch
-Patch2:      xemacs-alpha.patch
-URL:         http://www.xemacs.org/
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:	The XEmacs editor
+Summary(pl):	XEmacs -- Edytor
+Name:		xemacs
+version:	20.4
+Release:	8
+Copyright:	GPL
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}-info.tar.gz
+Source4:	xemacs.wmconfig
+Patch0:		xemacs-static.patch
+Patch1:		xemacs-perl.patch
+Patch2:		xemacs-alpha.patch
+URL:		http://www.xemacs.org/
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 XEmacs is a version of Emacs, compatible with and containing many 
@@ -41,11 +41,11 @@ Do pracy niezbêdne s± dwa z nich:
 oraz innych pakietów (opcjonalnych)
 
 %package el
-Summary:     .el source files for XEmacs
-Summary(pl): Pliki ¼ród³owe procedur w eLispie do XEmacsa
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for XEmacs
+Summary(pl):	Pliki ¼ród³owe procedur w eLispie do XEmacsa
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description el
 .el source files -- not necessary to run XEmacs
@@ -54,11 +54,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe procedur w eLispie do XEmacsa.
 
 %package gnats
-Summary:     GNU Problem Report Management
-Summary(pl): GNU Problem Report Management
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	GNU Problem Report Management
+Summary(pl):	GNU Problem Report Management
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description gnats
 GNU Problem Report Management is a bug-tracking tool designed for use
@@ -72,11 +72,11 @@ GNU Problem Report Managenment jest systemem informowania o b³êdach opartym o
 centralne repozytorium. 
 
 %package emulators
-Summary:     other editors emulators files for XEmacs
-Summary(pl): emulatory innych edytorów dla XEmacsa
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	other editors emulators files for XEmacs
+Summary(pl):	emulatory innych edytorów dla XEmacsa
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description emulators
 XEmacs-emulators -- other editors emulators files for XEmacs.
@@ -85,11 +85,11 @@ XEmacs-emulators -- other editors emulators files for XEmacs.
 Emulatory innych edytorów dla XEmacsa.
 
 %package emulators-el
-Summary:     .el source files xemacs-emulators
-Summary(pl): Pliki ¼ród³owe dla xemacs-emulators
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files xemacs-emulators
+Summary(pl):	Pliki ¼ród³owe dla xemacs-emulators
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description emulators-el
 .el source files -- not necessary to run XEmacs.
@@ -98,11 +98,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-emulators.
 
 %package viper
-Summary:     Vi emulator for XEmacs
-Summary(pl): emulator Vi dla XEmacsa
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	Vi emulator for XEmacs
+Summary(pl):	emulator Vi dla XEmacsa
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description viper
 XEmacs-viper - Vi emulator for XEmacs.
@@ -111,11 +111,11 @@ XEmacs-viper - Vi emulator for XEmacs.
 emulator Vi dla XEmacs.
 
 %package viper-el
-Summary:     .el source files for xemacs-viper
-Summary(pl): Pliki ¼ród³owe dla xemacs-viper
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for xemacs-viper
+Summary(pl):	Pliki ¼ród³owe dla xemacs-viper
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description viper-el
 .el source files -- not necessary to run XEmacs.
@@ -124,11 +124,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-viper.
 
 %package lisp-programming
-Summary:     .el source files for XEmacs
-Summary(pl): Pakiety do programowania w eLisp
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for XEmacs
+Summary(pl):	Pakiety do programowania w eLisp
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description lisp-programming
 Lisp programming XEmacs packages.
@@ -137,11 +137,11 @@ Lisp programming XEmacs packages.
 Pakiety do programowania w eLisp.
 
 %package lisp-programming-el
-Summary:     .el source files for xemacs-lisp-programming
-Summary(pl): Pliki ¼ród³owe dla xemacs-programming
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for xemacs-lisp-programming
+Summary(pl):	Pliki ¼ród³owe dla xemacs-programming
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description lisp-programming-el  
 .el source files for xemacs-lisp-programming.
@@ -150,11 +150,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-programming.
 
 %package auctex
-Summary:     TeX mode for XEmacs
-Summary(pl): tryb TeXowy dla XEmacsa 
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	TeX mode for XEmacs
+Summary(pl):	tryb TeXowy dla XEmacsa 
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description auctex
 XEmacs-auctex - TeX mode for XEmacs.
@@ -163,11 +163,11 @@ XEmacs-auctex - TeX mode for XEmacs.
 XEmacs-auctex - tryb TeXowy dla XEmacsa.
 
 %package auctex-el
-Summary:     .el source files for xemacs-auctex
-Summary(pl): Pliki ¼ród³owe dla xemacs-auctex
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for xemacs-auctex
+Summary(pl):	Pliki ¼ród³owe dla xemacs-auctex
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description auctex-el
 .el source files -- not necessary to run XEmacs.
@@ -176,11 +176,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-auctex.
 
 %package w3
-Summary:     w3 browser for XEmacs
-Summary(pl): przegl±darka W3 dla XEmacsa
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	w3 browser for XEmacs
+Summary(pl):	przegl±darka W3 dla XEmacsa
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description w3
 XEmacs-w3 - w3 browser for XEmacs.
@@ -189,11 +189,11 @@ XEmacs-w3 - w3 browser for XEmacs.
 XEmacs-w3 - przegl±darka W3 dla XEmacsa.
 
 %package w3-el
-Summary:     .el source files for xemacs-w3
-Summary(pl): Pliki ¼ród³owe dla xemacs-w3
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for xemacs-w3
+Summary(pl):	Pliki ¼ród³owe dla xemacs-w3
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description w3-el
 .el source files -- not necessary to run XEmacs.
@@ -202,11 +202,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-w3.
 
 %package modes
-Summary:     misc modes for XEmacs
-Summary(pl): inne tryby XEmacsa
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	misc modes for XEmacs
+Summary(pl):	inne tryby XEmacsa
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description modes
 XEmacs-modes - misc modes for XEmacs.
@@ -215,11 +215,11 @@ XEmacs-modes - misc modes for XEmacs.
 Ró¿ne tryby XEmacsa.
 
 %package modes-el
-Summary:     .el source files for xemacs-modes
-Summary(pl): Pliki ¼ród³owe dla xemacs-modes
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for xemacs-modes
+Summary(pl):	Pliki ¼ród³owe dla xemacs-modes
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description modes-el
 .el source files -- not necessary to run XEmacs.
@@ -228,11 +228,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-modes.
 
 %package extras
-Summary:     files which conflict with GNU Emacs
-Summary(pl): wspólne pliki XEmacsa i GNU Emacsa
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	files which conflict with GNU Emacs
+Summary(pl):	wspólne pliki XEmacsa i GNU Emacsa
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 Conflicts:   emacs
 
 %description extras
@@ -245,11 +245,11 @@ S± to wpólne pliki GNU Emacs and XEmacs. Je¶li nie zainstalowa³e¶ GNU EMacsa
 zainstaluj koniecznie ten pakiet.
 
 %package psgml
-Summary:     pSGML mode for XEmacs 
-Summary(pl): Tryb pSGML dla XEmacsa 
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	pSGML mode for XEmacs 
+Summary(pl):	Tryb pSGML dla XEmacsa 
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description psgml
 XEmacs-psgml - SGML mode for XEmacs.
@@ -258,11 +258,11 @@ XEmacs-psgml - SGML mode for XEmacs.
 XEmacs-psgml - Tryb SGML dla XEmacsa.
 
 %package psgml-el
-Summary:     .el source files for xemacs-psgml
-Summary(pl): Pliki ¼ród³owe dla xemacs-psgml
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for xemacs-psgml
+Summary(pl):	Pliki ¼ród³owe dla xemacs-psgml
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description psgml-el
 .el source files -- not necessary to run XEmacs.
@@ -271,11 +271,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-psgml.
 
 %package mail
-Summary:     mail & news modes for XEmacs
-Summary(pl): The XEmacs editor
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	mail & news modes for XEmacs
+Summary(pl):	The XEmacs editor
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description mail
 XEmacs-mail - mail & news modes for XEmacs: 
@@ -290,11 +290,11 @@ XEmacs-mail - poczta i UseNet News w XEmacsie:
 * rmail 
 
 %package mail-el
-Summary:     .el source files for xemacs-mail
-Summary(pl): Pliki ¼ród³owe dla xemacs-mail
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}
+Summary:	.el source files for xemacs-mail
+Summary(pl):	Pliki ¼ród³owe dla xemacs-mail
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
 
 %description mail-el
 .el mail source files -- not necessary to run XEmacs.
@@ -303,11 +303,11 @@ Requires:    %{name} = %{version}
 Pliki ¼ród³owe dla xemacs-mail.
 
 %package gnus
-Summary:     gnus mode for XEmacs
-Summary(pl): The XEmacs editor
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}, %{name}-mail
+Summary:	gnus mode for XEmacs
+Summary(pl):	The XEmacs editor
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}, %{name}-mail
 
 %description gnus
 Xemacs -- gnus mode for XEmacs.
@@ -316,11 +316,11 @@ Xemacs -- gnus mode for XEmacs.
 Xemacs -- poczta i UseNet News w XEmacsie.
 
 %package gnus-el
-Summary:     .el source files for xemacs-mail
-Summary(pl): Pliki ¼ród³owe dla xemacs-gnus
-Group:       Applications/Editors/Emacs
-Group(pl):   Aplikacje/Edytory/Emacs
-Requires:    %{name} = %{version}, 
+Summary:	.el source files for xemacs-mail
+Summary(pl):	Pliki ¼ród³owe dla xemacs-gnus
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}, 
 
 %description gnus-el
 .el gnus source files -- not necessary to run XEmacs.
