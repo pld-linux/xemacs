@@ -1,0 +1,27 @@
+diff -ur xemacs-21.1.2/xemacs-packages/etc/bbdb/bbdb-cid.pl xemacs/xemacs-packages/etc/bbdb/bbdb-cid.pl
+--- xemacs-21.1.2/xemacs-packages/etc/bbdb/bbdb-cid.pl	Mon Oct 12 17:36:10 1998
++++ xemacs/xemacs-packages/etc/bbdb/bbdb-cid.pl	Sun Aug 22 19:40:38 1999
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl5 -w
++#!/usr/bin/perl -w
+ #
+ # Caller-ID-logger, by jwz (19-Jan-97)
+ # Modified: 24-Apr-97
+diff -ur xemacs-21.1.2/xemacs-packages/etc/bbdb/bbdb-srv.pl xemacs/xemacs-packages/etc/bbdb/bbdb-srv.pl
+--- xemacs-21.1.2/xemacs-packages/etc/bbdb/bbdb-srv.pl	Mon Oct 12 17:36:10 1998
++++ xemacs/xemacs-packages/etc/bbdb/bbdb-srv.pl	Sun Aug 22 19:40:47 1999
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl
++#!/usr/bin/perl
+ 
+ # This script reads a block of message headers on stdin, and converts them
+ # to an emacs-lisp string (quoting  all dangerous characters) and then 
+diff -ur xemacs-21.1.2/xemacs-packages/etc/bbdb/bbdb-unlazy-lock.pl xemacs/xemacs-packages/etc/bbdb/bbdb-unlazy-lock.pl
+--- xemacs-21.1.2/xemacs-packages/etc/bbdb/bbdb-unlazy-lock.pl	Mon Oct 12 17:36:10 1998
++++ xemacs/xemacs-packages/etc/bbdb/bbdb-unlazy-lock.pl	Sun Aug 22 19:40:57 1999
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl
++#!/usr/bin/perl
+ #
+ # Author: Christopher Kline <ckline@media.mit.edu>
+ #
