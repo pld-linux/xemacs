@@ -4,7 +4,7 @@ Name:		xemacs
 Version:	21.1.10
 %define		ver		21.1
 %define		basepkgver	1.39
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
