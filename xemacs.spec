@@ -246,7 +246,7 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
-install -s src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
+install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
 
 # remove .el file if corresponding .elc file exists
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
