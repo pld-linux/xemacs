@@ -10,14 +10,11 @@ Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-Source2:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-info.tar.gz
-Source3:	ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-base-%{basepkgver}-pkg.tar.gz
-#Source4:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-sumo.tar.gz
-#Source5:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-mule-sumo.tar.gz
-Source6:	xemacs.wmconfig
-#Patch0:		xemacs-static.patch
-#Patch1:		xemacs-alpha.patch
-#Patch2:		xemacs-perl.patch
+Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-base-%{basepkgver}-pkg.tar.gz
+Source3:	xemacs.desktop
+Patch0:		xemacs-info.patch
+Patch1:		xemacs-sitelisp.patch
+Patch2:		xemacs-fix_ldflafs.patch
 Patch3:		xemacs-sitelisp.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	nas-devel
@@ -30,23 +27,27 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel
+Prereq:		/usr/sbin/fix-info-dir
 # BuildConflicts: xemacs 
 # Yes! I need tu uninstall xemacs-21.1.8-4 to be able to build it!!!!!!!
 # I don't understand it 
 Buildroot:	/tmp/%{name}-%{version}-root
 Provides:	xemacs-base-pkg
 
+%define		_applnkdir	/usr/X11R6/share/applnk
+
 %description
-XEmacs is a version of Emacs, compatible with and containing many 
-improvements over GNU Emacs, written by Richard Stallman of the 
-Free Software Foundation. It was originally based on an early release 
-of GNU Emacs version 19, and has tracked subsequent releases of GNU 
-Emacs as they have become available.
+XEmacs is a version of Emacs, compatible with and containing many
+improvements over GNU Emacs, written by Richard Stallman of the Free
+Software Foundation. It was originally based on an early release of GNU
+Emacs version 19, and has tracked subsequent releases of GNU Emacs as they
+have become available.
 This XEmacs distribution has been splitted in some rpm :
+
 - xemacs:        the main part
 - xemacs-extras: files in conflict with emacs
-(Install xemacs-extras if you do not have emacs installed.)
-Other are optional. 
+
+Install xemacs-extras if you do not have emacs installed.
 
 %description -l pl 
 XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z 
@@ -56,10 +57,11 @@ ulepszeñ nie trac±c jednak wiêzi z oryginaln± wersj±.
 
 Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych. 
 Do pracy niezbêdne s± dwa z nich:
+
 - xemacs:        g³ówny pakiet
 - xemacs-extras: pliki wchodz±ce w sk³ad dystrybucji GNU Emacs
-  (zainstaluj go je¶li nie posiadasz GNU Emacsa), 
-oraz innych pakietów (opcjonalnych)
+
+Zainstaluj xemacs-extras je¶li nie posiadasz GNU Emacsa. 
 
 %package el
 Summary:	.el source files for XEmacs
@@ -74,14 +76,13 @@ Requires:	%{name} = %{version}
 %description el -l pl
 Pliki ¼ród³owe procedur w eLispie do XEmacsa.
 
-
 %package extras
 Summary:	files which conflict with GNU Emacs
 Summary(pl):	wspólne pliki XEmacsa i GNU Emacsa
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name} = %{version}
-Conflicts:   emacs
+Conflicts:	emacs
 
 %description extras
 These files are common between GNU Emacs and XEmacs. If you do not 
@@ -93,10 +94,10 @@ S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU Emacsa,
 to koniecznie zainstaluj ten pakiet.
 
 %prep
-%setup0 -q -b1 -b2
-#%patch0 -p1
-#%patch2 -p1
-%patch3 -p1
+%setup0 -q -b1 -a2
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 chmod u+wXr * -R
 
 %ifarch alpha
@@ -106,8 +107,11 @@ chmod u+wXr * -R
 
 %build
 autoconf
-CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s -lc" \
-sitelispdir=%{_libdir}/%{name}/site-lisp \
+CFLAGS="$RPM_OPT_FLAGS"
+CPPFLAGS="$RPM_OPT_FLAGS"
+LDFLAGS="-s -lc"
+sitelispdir=%{_libdir}/%{name}/site-lisp
+export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
@@ -115,12 +119,11 @@ sitelispdir=%{_libdir}/%{name}/site-lisp \
 	--datadir=%{_datadir} \
 	--lockdir=/var/lock/xemacs/ \
 	--package_path=~/.xemacs::%{_datadir}/%{name}-packages \
-
+	--with-sound=both \
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
 #	--etcdir=%{_datadir}/%{name}/etc \
 #	--with-dialogs=athena \
-#	--with-sound=nas \
 #	--cflags="$RPM_OPT_FLAGS" \
 #	--error-checking=none \
 #	--debug=no \
@@ -130,7 +133,6 @@ sitelispdir=%{_libdir}/%{name}/site-lisp \
 #	--with-gpm=yes \
 #	--with-png=yes \
 
-
 #	--with-mule
 
 sitelispdir=%{_libdir}/%{name}/site-lisp \
@@ -138,8 +140,8 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/X11/wmconfig,var/lock/xemacs} \
-	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/{{ja,de,fr,ro}/app-defaults,app-defaults}}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,/var/lock/xemacs} \
+	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/app-defaults}
 
 make install-arch-dep install-arch-indep gzip-el \
 	prefix=$RPM_BUILD_ROOT/usr \
@@ -153,8 +155,7 @@ make install-arch-dep install-arch-indep gzip-el \
 #	sitelispdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp \
 #	etcdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/etc
 
-
-install %{SOURCE6} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE3} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
@@ -167,29 +168,18 @@ mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.value
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/app-defaults/Emacs \
+	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
 
-
-
-gzip -9nf $RPM_BUILD_ROOT%{_infodir}/*info*
-
-find $RPM_BUILD_ROOT%{_bindir} -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
-find $RPM_BUILD_ROOT%{_libdir}/*/* -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
-
-#mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/Emacs.ad \
-#	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
-
-#for i in de fr ja ro ; do
-#	mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/app-defaults/$i/Emacs \
-#		$RPM_BUILD_ROOT/usr/X11R6/lib/X11/$i/app-defaults/Emacs
-#done
-
-#mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/xemacs-ja.1 \
-#	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/xemacs-ja.1 \
+	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{man1/*,ja/man1/*} \
+	$RPM_BUILD_ROOT%{_infodir}/*info*
+
 find $RPM_BUILD_ROOT%{_datadir}/%{name}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 %clean
@@ -200,7 +190,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun
 /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
-
 
 
 %files
@@ -229,7 +218,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/*/lisp/ChangeLog*
 %doc %{_datadir}/*/lisp/README
 %doc %{_datadir}/*/lisp/term/README
-%config /etc/X11/wmconfig/xemacs
+%{_applnkdir}/Editors/xemacs.desktop
 
 %{_libdir}/%{name}
 %dir %{_libdir}/%{name}-%{version}
@@ -284,6 +273,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/wakeup
 
 %{_mandir}/man1/*
+%langja) %{_mandir}/ja/man1/*
 
 %{_infodir}/custom.info*gz
 %{_infodir}/external-widget.info*gz
