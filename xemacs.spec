@@ -2,7 +2,7 @@ Summary:     The XEmacs editor
 Summary(pl): XEmacs -- Edytor
 Name:        xemacs
 version:     20.4
-Release:     7
+Release:     8
 Copyright:   GPL
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
@@ -37,12 +37,12 @@ Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych.
 Do pracy niezbêdne s± dwa z nich:
 - xemacs:        g³ówny pakiet
 - xemacs-extras: pliki chodz±ce w sk³ad dystrybucji GNU Emacs
- (zainstaluj go je¶li nie posiadasz GNU Emacsa), 
+  (zainstaluj go je¶li nie posiadasz GNU Emacsa), 
 oraz innych pakietów (opcjonalnych)
 
 %package el
 Summary:     .el source files for XEmacs
-Summary(pl): ¼ród³a procedur eLisp dla XEmacsa
+Summary(pl): Pliki ¼ród³owe procedur w eLispie do XEmacsa
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
@@ -51,13 +51,13 @@ Requires:    %{name} = %{version}
 .el source files -- not necessary to run XEmacs
 
 %description el -l pl
-¼ród³a procedur dla XEmacsa 
+Pliki ¼ród³owe procedur w eLispie do XEmacsa.
 
 %package gnats
 Summary:     GNU Problem Report Management
 Summary(pl): GNU Problem Report Management
-Group(pl):   Aplikacje/Edytory/Emacs
 Group:       Applications/Editors/Emacs
+Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description gnats
@@ -86,7 +86,7 @@ Emulatory innych edytorów dla XEmacsa.
 
 %package emulators-el
 Summary:     .el source files xemacs-emulators
-Summary(pl): ¼ród³a eLisp dla xemacs-emulators 
+Summary(pl): Pliki ¼ród³owe dla xemacs-emulators
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
@@ -95,7 +95,7 @@ Requires:    %{name} = %{version}
 .el source files -- not necessary to run XEmacs.
 
 %description emulators-el -l pl
-¼ród³a eLisp dla xemacs-emulators.
+Pliki ¼ród³owe dla xemacs-emulators.
 
 %package viper
 Summary:     Vi emulator for XEmacs
@@ -112,7 +112,7 @@ emulator Vi dla XEmacs.
 
 %package viper-el
 Summary:     .el source files for xemacs-viper
-Summary(pl): ¼ród³a eLisp dla xemacs-viper
+Summary(pl): Pliki ¼ród³owe dla xemacs-viper
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
@@ -121,33 +121,33 @@ Requires:    %{name} = %{version}
 .el source files -- not necessary to run XEmacs.
 
 %description viper-el -l pl
-¼ród³a eLisp.
+Pliki ¼ród³owe dla xemacs-viper.
 
 %package lisp-programming
 Summary:     .el source files for XEmacs
-Summary(pl): pakiety do programowania w eLisp
+Summary(pl): Pakiety do programowania w eLisp
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description lisp-programming
-lisp programming XEmacs packages
+Lisp programming XEmacs packages.
 
 %description lisp-programming -l pl 
-pakiety do programowania w eLisp
+Pakiety do programowania w eLisp.
 
 %package lisp-programming-el
 Summary:     .el source files for xemacs-lisp-programming
-Summary(pl): pakiety do programowania w eLisp -- ¼ród³a
+Summary(pl): Pliki ¼ród³owe dla xemacs-programming
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description lisp-programming-el  
-pakiety do programowania w eLisp -- ¼ród³a
+.el source files for xemacs-lisp-programming.
 
 %description lisp-programming-el -l pl 
-pakiety do programowania w eLisp -- ¼ród³a
+Pliki ¼ród³owe dla xemacs-programming.
 
 %package auctex
 Summary:     TeX mode for XEmacs
@@ -157,23 +157,23 @@ Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description auctex
-XEmacs-auctex - TeX mode for XEmacs 
+XEmacs-auctex - TeX mode for XEmacs.
 
 %description auctex -l pl 
-XEmacs-auctex - tryb TeXowy dla XEmacsa 
+XEmacs-auctex - tryb TeXowy dla XEmacsa.
 
 %package auctex-el
 Summary:     .el source files for xemacs-auctex
-Summary(pl): ¼ród³a procedur dla xemacs-auctex
+Summary(pl): Pliki ¼ród³owe dla xemacs-auctex
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description auctex-el
-.el source files -- not necessary to run XEmacs
+.el source files -- not necessary to run XEmacs.
 
 %description auctex-el -l pl
-¼ród³a procedur dla xemacs-auctex 
+Pliki ¼ród³owe dla xemacs-auctex.
 
 %package w3
 Summary:     w3 browser for XEmacs
@@ -183,23 +183,23 @@ Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description w3
-XEmacs-w3 - w3 browser for XEmacs
+XEmacs-w3 - w3 browser for XEmacs.
 
 %description w3 -l pl  
-XEmacs-w3 - przegl±darka W3 dla XEmacsa
+XEmacs-w3 - przegl±darka W3 dla XEmacsa.
 
 %package w3-el
 Summary:     .el source files for xemacs-w3
-Summary(pl): ¼ród³a procedur dla xemacs-w3
+Summary(pl): Pliki ¼ród³owe dla xemacs-w3
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description w3-el
-.el source files -- not necessary to run XEmacs
+.el source files -- not necessary to run XEmacs.
 
 %description w3-el -l pl 
-¼ród³a procedur dla xemacs-w3
+Pliki ¼ród³owe dla xemacs-w3.
 
 %package modes
 Summary:     misc modes for XEmacs
@@ -209,23 +209,23 @@ Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description modes
-XEmacs-modes - misc modes for XEmacs
+XEmacs-modes - misc modes for XEmacs.
 
 %description modes -l pl 
 Ró¿ne tryby XEmacsa.
 
 %package modes-el
 Summary:     .el source files for xemacs-modes
-Summary(pl): ¼ród³a
+Summary(pl): Pliki ¼ród³owe dla xemacs-modes
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description modes-el
-.el source files -- not necessary to run XEmacs
+.el source files -- not necessary to run XEmacs.
 
 %description modes-el -l pl 
-¼ród³a
+Pliki ¼ród³owe dla xemacs-modes.
 
 %package extras
 Summary:     files which conflict with GNU Emacs
@@ -252,57 +252,81 @@ Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description psgml
-XEmacs-psgml - SGML mode for XEmacs 
+XEmacs-psgml - SGML mode for XEmacs.
 
 %description psgml -l pl
-XEmacs-psgml - Tryb SGML dla XEmacsa
+XEmacs-psgml - Tryb SGML dla XEmacsa.
 
 %package psgml-el
 Summary:     .el source files for xemacs-psgml
-Summary(pl): pliki ¼ród³owe dla xemacs-psgml
+Summary(pl): Pliki ¼ród³owe dla xemacs-psgml
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
 %description psgml-el
-.el source files -- not necessary to run XEmacs
+.el source files -- not necessary to run XEmacs.
 
 %description psgml-el -l pl
-pliki ¼ród³owe dla xemacs-psgml
+Pliki ¼ród³owe dla xemacs-psgml.
 
-%package mailnews
+%package mail
 Summary:     mail & news modes for XEmacs
 Summary(pl): The XEmacs editor
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
-%description mailnews
-XEmacs-mailnews - mail & news modes for XEmacs: 
-* gnus 
+%description mail
+XEmacs-mail - mail & news modes for XEmacs: 
 * vm 
 * Tools for MIME 
 * rmail 
 
-%description mailnews -l pl 
-XEmacs-mailnews - poczta i UseNet News w XEmacsie:
-* gnus 
+%description mail -l pl 
+XEmacs-mail - poczta i UseNet News w XEmacsie:
 * vm 
 * Tools for MIME 
 * rmail 
 
-%package mailnews-el
-Summary:     .el source files for xemacs-mailnews
-Summary(pl): ¼ród³a dla xemacs-mailnews
+%package mail-el
+Summary:     .el source files for xemacs-mail
+Summary(pl): Pliki ¼ród³owe dla xemacs-mail
 Group:       Applications/Editors/Emacs
 Group(pl):   Aplikacje/Edytory/Emacs
 Requires:    %{name} = %{version}
 
-%description mailnews-el
-.el source files -- not necessary to run XEmacs
+%description mail-el
+.el mail source files -- not necessary to run XEmacs.
 
-%description mailnews-el -l pl 
-¼ród³a dla xemacs-mailnews
+%description mail-el -l pl 
+Pliki ¼ród³owe dla xemacs-mail.
+
+%package gnus
+Summary:     gnus mode for XEmacs
+Summary(pl): The XEmacs editor
+Group:       Applications/Editors/Emacs
+Group(pl):   Aplikacje/Edytory/Emacs
+Requires:    %{name} = %{version}, %{name}-mail
+
+%description gnus
+Xemacs -- gnus mode for XEmacs.
+
+%description gnus -l pl 
+Xemacs -- poczta i UseNet News w XEmacsie.
+
+%package gnus-el
+Summary:     .el source files for xemacs-mail
+Summary(pl): Pliki ¼ród³owe dla xemacs-gnus
+Group:       Applications/Editors/Emacs
+Group(pl):   Aplikacje/Edytory/Emacs
+Requires:    %{name} = %{version}, 
+
+%description gnus-el
+.el gnus source files -- not necessary to run XEmacs.
+
+%description gnus-el -l pl 
+Pliki ¼ród³owe dla xemacs-gnus.
 
 %prep
 %setup -q -T -b 0 -n xemacs-%{version}
@@ -331,10 +355,11 @@ CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 	--cflags="$RPM_OPT_FLAGS" \
 	--error-checking=none \
 	--debug=no \
+	--with-xpm \
 	--lockdir=/var/lock/xemacs \
 	--with-session=yes \
-	--with-gpm=no \
-
+	--with-gpm=yes \
+	--with-png=yes
 make dist
 
 # xemacs generation
@@ -371,6 +396,214 @@ gzip -9nf $RPM_BUILD_ROOT/usr/man/{ja/man1/*,man1/*}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+/sbin/install-info /usr/info/cc-mode.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* CC mode: (ccmode).    The GNU Emacs mode for editing C, C++, Objective-C and Java code."
+/sbin/install-info /usr/info/cl.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* CL: (cl).             Partial Common Lisp support for Emacs Lisp."
+/sbin/install-info /usr/info/forms.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* Forms: (forms).       Emacs package for editing data bases by filling in forms."
+/sbin/install-info /usr/info/xemacs.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* Emacs: (emacs).       The extensible self-documenting text editor."
+/sbin/install-info /usr/info/ilisp.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* ilisp: (ilisp).       ILISP manual"
+/sbin/install-info /usr/info/lispref.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* lispref: (lispref).   GNU Emacs Lisp Reference Manual"
+/sbin/install-info /usr/info/custom.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* custom: (custom).     The Customization Library"
+/sbin/install-info /usr/info/efs.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* efs: (efs).           Transparent remote file access via FTP"
+/sbin/install-info /usr/info/external-widget.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* external-widget: (external-widget).External Client Widget"
+/sbin/install-info /usr/info/internals.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* internals: (internals).internals"
+/sbin/install-info /usr/info/new-users-guide.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* new-users-guide: (new-users-guide). introduction to the XEmacs editor"
+/sbin/install-info /usr/info/ph.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* ph: (ph).             E-Lisp client interface to the CCSO white pages directory system also known as PH/QI"
+/sbin/install-info /usr/info/send-pr.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* send-pr: (send-pr).   Reporting problems--using send-pr"
+/sbin/install-info /usr/info/term.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* term: (term).         Terminal emulator mode"
+/sbin/install-info /usr/info/vhdl-mode.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* vhdl-mode: (vhdl-mode). vhdl-mode"
+/sbin/install-info /usr/info/widget.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* widget: (widget).     The Emacs Widget Library"
+/sbin/install-info /usr/info/xemacs-faq.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* xemacs-faq: (xemacs-faq). The Xemacs FAQ"
+
+%preun
+if [ "$1" = 0 ]; then
+	/sbin/install-info --delete /usr/info/cc-mode.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/cl.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/forms.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/xemacs.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/ilisp.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/lispref.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/pcl-cvs.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/custom.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/efs.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/external-widget.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/internals.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/new-users-guide.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/ph.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/send-pr.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/term.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/vhdl-mode.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/widget.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/xemacs-faq.info.gz /etc/info-dir
+fi
+
+%post gnats
+/sbin/install-info /usr/info/gnats.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* gnats: (gnats).       GNU Problem Report Management System"
+
+%preun gnats
+if [ "$1" = $1 ]; then
+	/sbin/install-info --delete /usr/info/gnats.info.gz /etc/info-dir
+fi
+
+%post viper
+/sbin/install-info /usr/info/viper.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* VIPER: (viper).       The new VI-emulation mode in Emacs-19.29."
+
+%preun viper
+if [ "$1" = $1 ]; then
+	/sbin/install-info --delete /usr/info/viper.info.gz /etc/info-dir
+fi
+
+%post auctex
+/sbin/install-info /usr/info/auctex.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* auctex: (auctex).     TeX mode"
+/sbin/install-info /usr/info/reftex.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* reftex: (reftex).     RefTeX, a package to do labels, references and citations for LaTeX documents with Emacs"
+
+%preun auctex
+if [ "$1" = $1 ]; then
+	/sbin/install-info --delete /usr/info/auctex.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/reftex.info.gz /etc/info-dir
+fi
+
+
+%post w3
+/sbin/install-info /usr/info/w3-faq.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* w3-faq: (w3-faq).     FAQ for Emacs/W3 World Wide Web browser"
+/sbin/install-info /usr/info/w3.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* w3: (w3).             Emacs/W3 World Wide Web browser"
+
+%preun w3
+if [ "$1" = $1 ]; then
+	/sbin/install-info --delete /usr/info/w3-faq.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/w3.info.gz /etc/info-dir
+fi
+
+%preun modes
+if [ "$1" = $1 ]; then
+	/sbin/install-info /usr/info/pcl-cvs.info.gz /etc/info-dir
+fi
+
+%post modes
+/sbin/install-info /usr/info/pcl-cvs.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* pcl-cvs: (pcl-cvs).   front-end to CVS"
+
+%post psgml
+/sbin/install-info /usr/info/psgml-api.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* psgml-api: (psgml-api). PSGML, the API documentation"
+/sbin/install-info /usr/info/psgml.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* psgml: (psgml).       PSGML, a major mode for SGML"
+/sbin/install-info /usr/info/hm--html-mode.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* hm--html-mode-xemacs: (hm--html-mode). hm--html-menus"
+
+%preun psgml
+if [ "$1" = $1 ]; then
+	/sbin/install-info --delete /usr/info/psgml-api.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/psgml.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/hm--html-mode.info.gz /etc/info-dir
+fi
+
+%post mail 
+/sbin/install-info /usr/info/mh-e.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* MH-E: (mh-e).         Emacs interface to the MH mail system."
+/sbin/install-info /usr/info/supercite.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* SC: (sc).             Supercite lets you cite parts of messages you're replying to, in flexible ways."
+/sbin/install-info /usr/info/rmail.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	* rmail: (rmail).        Rmail mail reader"
+/sbin/install-info /usr/info/tm-edit-en.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* tm-en: (tm-en).       tm-edit 7.100 Reference Manual"
+/sbin/install-info /usr/info/tm-mh-e-en.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* tm-mh-e-en: (tm-mh-e-en). tm-mh-e 7.71 Reference Manual"
+/sbin/install-info /usr/info/tm-view-en.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* tm-view-en: (tm-view-en). tm-view, a MIME Viewer for GNU Emacs"
+/sbin/install-info /usr/info/tm-vm-en.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* tm-vm-en: (tm-vm-en). tm-vm is an interface between tm and the VM mail user agent"
+/sbin/install-info /usr/info/vm.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* vm: (vm).             VM mail reader"
+
+%preun mail 
+if [ "$1" = $1 ]; then
+	/sbin/install-info --delete /usr/info/mh-e.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/supercite.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/rmail.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/tm-edit-en.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/tm-mh-e-en.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/tm-view-en.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/tm-vm-en.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/vm.info.gz /etc/info-dir
+fi
+
+%post gnus 
+/sbin/install-info /usr/info/message.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* Message: (message).   Mail and news composition mode that goes with Gnus."
+/sbin/install-info /usr/info/gnus.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* Gnus: (gnus).         The news reader Gnus."
+/sbin/install-info /usr/info/gnus-mime-en.info.gz /etc/info-dir \
+	--section "XEmacs:" --entry \
+	"* gnus-mime-en: (gnus-mime-en) gnus-mime 0.10 reference manual"
+
+%preun gnus 
+if [ "$1" = $1 ]; then
+	/sbin/install-info --delete /usr/info/message.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/gnus.info.gz /etc/info-dir
+	/sbin/install-info --delete /usr/info/gnus-mime-en.info.gz
+fi
 
 %files
 %defattr(644, root, root, 755)
@@ -518,73 +751,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/X11R6/lib/X11/app-defaults/Emacs
 /var/lock/xemacs
 
-%files emulators 
-%defattr(644, root, root, 755)
-/usr/lib/*/lisp/emulators/*.elc
-/usr/lib/*/lisp/emulators/tpu-edt.xmodmap
-
-%files emulators-el
-%defattr(644, root, root, 755)
-/usr/lib/*/lisp/emulators/*.el.gz
-
-%files viper 
-%defattr(644, root, root, 755)
-%doc /usr/lib/*/etc/viperCard.tex
-/usr/info/viper.info*gz
-/usr/lib/*/lisp/viper/*.elc
-%doc /usr/lib/*/lisp/viper/README
-
-%files viper-el
-%defattr(644, root, root, 755)
-/usr/lib/*/lisp/viper/*.el.gz
-/usr/lib/*/lisp/viper/Makefile
-
-%files mailnews
-%defattr(644, root, root, 755)
-%doc /usr/lib/*/etc/MH-E-NEWS
-%doc /usr/lib/*/etc/gnusrefcard/*
-/usr/info/gnus-mime-en.info*gz
-/usr/info/gnus.info*gz
-/usr/info/mailcrypt.info*gz
-/usr/info/mh-e.info*gz
-/usr/info/rmail.info*gz
-/usr/info/supercite.info*gz
-/usr/info/tm-edit-en.info*gz
-/usr/info/tm-en.info*gz
-/usr/info/tm-mh-e-en.info*gz
-/usr/info/tm-view-en.info*gz
-/usr/info/tm-vm-en.info*gz
-/usr/info/vm.info*gz
-%doc /usr/lib/*/lisp/mailcrypt/ChangeLog
-%doc /usr/lib/*/lisp/mailcrypt/NEWS
-%doc /usr/lib/*/lisp/mailcrypt/ONEWS
-%doc /usr/lib/*/lisp/mailcrypt/README
-%doc /usr/lib/*/lisp/rmail/README
-%doc /usr/lib/*/lisp/vm/README
-%attr(755, root, root) /usr/lib/*/%{buildarch}*/tm*
-/usr/lib/*/etc/gnus/*
-/usr/lib/*/etc/vm/*
-/usr/lib/*/lisp/gnus/*.elc
-/usr/lib/*/lisp/mailcrypt/*.elc
-/usr/lib/*/lisp/mh-e/*.elc
-/usr/lib/*/lisp/rmail/*.elc
-/usr/lib/*/lisp/tm/*.elc
-/usr/lib/*/lisp/vm/*.el
-/usr/lib/*/lisp/vm/*.elc
-/usr/lib/*/lisp/vm/.autoload
-/usr/lib/*/lisp/vm/Makefile
-/usr/lib/*/lisp/vm/make-autoloads
-
-%files mailnews-el
-%defattr(644, root, root, 755)
-/usr/lib/*/lisp/tm/*.el.gz
-/usr/lib/*/lisp/vm/*.el.gz
-/usr/lib/*/lisp/mh-e/*.el.gz
-/usr/lib/*/lisp/gnus/*.el.gz
-/usr/lib/*/lisp/gnus/Makefile
-/usr/lib/*/lisp/mailcrypt/*.el.gz
-/usr/lib/*/lisp/rmail/*.el.gz
-
 %files el 
 %defattr(644, root, root, 755)
 /usr/lib/*/lisp/apel/*.el.gz
@@ -610,6 +776,34 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/*/lisp/utils/*.el.gz
 /usr/lib/*/lisp/vc/*.el.gz
 /usr/lib/*/lisp/x11/*.el.gz
+
+%files emulators 
+%defattr(644, root, root, 755)
+/usr/lib/*/lisp/emulators/*.elc
+/usr/lib/*/lisp/emulators/tpu-edt.xmodmap
+
+%files gnats
+%defattr(644, root, root, 755)
+/usr/info/gnats.info*gz
+/usr/lib/*/etc/gnats/*
+/usr/lib/*/lisp/gnats/*.elc
+/usr/lib/*/lisp/gnats/*.el.gz
+
+%files emulators-el
+%defattr(644, root, root, 755)
+/usr/lib/*/lisp/emulators/*.el.gz
+
+%files viper 
+%defattr(644, root, root, 755)
+%doc /usr/lib/*/etc/viperCard.tex
+/usr/info/viper.info*gz
+/usr/lib/*/lisp/viper/*.elc
+%doc /usr/lib/*/lisp/viper/README
+
+%files viper-el
+%defattr(644, root, root, 755)
+/usr/lib/*/lisp/viper/*.el.gz
+/usr/lib/*/lisp/viper/Makefile
 
 %files lisp-programming
 %defattr(644, root, root, 755)
@@ -720,14 +914,69 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755, root, root) /usr/bin/b2m
 %attr(755, root, root) /usr/bin/rcs-checkin
 
-%files gnats
+%files mail
 %defattr(644, root, root, 755)
-/usr/info/gnats.info*gz
-/usr/lib/*/etc/gnats/*
-/usr/lib/*/lisp/gnats/*.elc
-/usr/lib/*/lisp/gnats/*.el.gz
+%doc /usr/lib/*/etc/MH-E-NEWS
+/usr/info/mailcrypt.info*gz
+/usr/info/mh-e.info*gz
+/usr/info/rmail.info*gz
+/usr/info/supercite.info*gz
+/usr/info/tm-edit-en.info*gz
+/usr/info/tm-en.info*gz
+/usr/info/tm-mh-e-en.info*gz
+/usr/info/tm-view-en.info*gz
+/usr/info/tm-vm-en.info*gz
+/usr/info/vm.info*gz
+%doc /usr/lib/*/lisp/mailcrypt/ChangeLog
+%doc /usr/lib/*/lisp/mailcrypt/NEWS
+%doc /usr/lib/*/lisp/mailcrypt/ONEWS
+%doc /usr/lib/*/lisp/mailcrypt/README
+%doc /usr/lib/*/lisp/rmail/README
+%doc /usr/lib/*/lisp/vm/README
+%attr(755, root, root) /usr/lib/*/%{buildarch}*/tm*
+/usr/lib/*/etc/vm/*
+/usr/lib/*/lisp/mailcrypt/*.elc
+/usr/lib/*/lisp/mh-e/*.elc
+/usr/lib/*/lisp/rmail/*.elc
+/usr/lib/*/lisp/tm/*.elc
+/usr/lib/*/lisp/vm/*.el
+/usr/lib/*/lisp/vm/*.elc
+/usr/lib/*/lisp/vm/.autoload
+/usr/lib/*/lisp/vm/Makefile
+/usr/lib/*/lisp/vm/make-autoloads
+
+%files mail-el
+%defattr(644, root, root, 755)
+/usr/lib/*/lisp/tm/*.el.gz
+/usr/lib/*/lisp/vm/*.el.gz
+/usr/lib/*/lisp/mh-e/*.el.gz
+/usr/lib/*/lisp/mailcrypt/*.el.gz
+/usr/lib/*/lisp/rmail/*.el.gz
+
+%files gnus
+%defattr(644, root, root, 755)
+/usr/lib/*/lisp/gnus/*.elc
+%doc /usr/lib/*/etc/gnusrefcard/*
+%doc /usr/info/gnus-mime-en.info*gz
+%doc /usr/info/gnus.info*gz
+
+%files gnus-el
+%defattr(644, root, root, 755)
+/usr/lib/*/lisp/gnus/*.el.gz
+/usr/lib/*/lisp/gnus/Makefile
 
 %changelog
+* Sat Dec 19 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [20.4-8]
+- removed {un}registering info.info.gz,
+- many modyfications in %description and Summary,
+- changed --with-gpm to yes.
+
+* Thu Dec 10 1998 Ziemek Borowski <ziembor@faq-bot.ziembor.waw.pl>
+- added --with-xpm and --with-png=yes for ./configure parameters,
+- replaced mailnews subpackage by two separated mail and gnus,
+- added directory /usr/lib/xemacs/site-lisp (for local xemacs macros)
+
 * Fri Dec  6 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [20.4-7]
 - added gziping man pages,
@@ -742,11 +991,6 @@ rm -rf $RPM_BUILD_ROOT
 - added Group(pl),
 - simplifications in all %files,
 - added /var/lock/xemacs direcrory to main.
-
-* Fri Sep 15 1998 Ziemek Borowski <ziembor@faq-bot.ziembor.waw.pl> 
-  [20.4-6.TODO]
-- correct SGML Catalog 
-- test (especially psgmls & auctex) 
 
 * Fri Sep 14 1998 Ziemek Borowski <ziembor@faq-bot.ziembor.waw.pl> 
   [20.4-5]
