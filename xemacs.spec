@@ -4,7 +4,7 @@ Name:		xemacs
 Version:	21.1.10
 %define		ver		21.1
 %define		basepkgver	1.39
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -239,6 +239,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/etc/*.xpm
 %{_datadir}/%{name}-%{version}/etc/*.png
 %{_datadir}/%{name}-%{version}/etc/ms-kermit*
+%{_datadir}/%{name}-%{version}/etc/package-index.LATEST.pgp
 
 %dir %{_datadir}/%{name}-%{version}/lisp
 %{_datadir}/%{name}-%{version}/lisp/*.elc
