@@ -3,7 +3,7 @@
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
-Version:	%{ver}.2
+Version:	%{ver}.3
 Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
