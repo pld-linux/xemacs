@@ -1,15 +1,20 @@
 Summary:	The XEmacs editor
 Summary(pl):	XEmacs -- Edytor
 Name:		xemacs
-version:	21.1.2
+Version:	21.1.2
+%define		realversion	21.1-p2
 Release:	1
 Copyright:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}.tar.gz
-Source1:	xemacs.wmconfig
+Source1:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-sumo.tar.gz
+Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-mule-sumo.tar.gz
+Source3:	xemacs.wmconfig
 Patch0:		xemacs-static.patch
 Patch1:		xemacs-alpha.patch
+Patch2:		xemacs-perl.patch
+Patch3:		xemacs-sitelisp.patch
 URL:		http://www.xemacs.org/
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -68,6 +73,16 @@ Reports" ("PR"s).
 %description gnats -l pl
 GNU Problem Report Managenment jest systemem informowania o b³êdach opartym o 
 centralne repozytorium. 
+
+%package gnats-el
+Summary:	.el source files for xemacs-gnats
+Summary(pl):	Pliki ¼ród³owe procedur w eLispie do xemacs-gnats
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description gnats-el
+.el gnats source files -- not necessary to run XEmacs
 
 %package emulators
 Summary:	other editors emulators files for XEmacs
@@ -136,7 +151,7 @@ Pakiety do programowania w eLisp.
 
 %package lisp-programming-el
 Summary:	.el source files for xemacs-lisp-programming
-Summary(pl):	Pliki ¼ród³owe dla xemacs-programming
+Summary(pl):	Pliki ¼ród³owe dla xemacs-lisp-programming
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name} = %{version}
@@ -145,7 +160,7 @@ Requires:	%{name} = %{version}
 .el source files for xemacs-lisp-programming.
 
 %description lisp-programming-el -l pl 
-Pliki ¼ród³owe dla xemacs-programming.
+Pliki ¼ród³owe dla xemacs-lisp-programming.
 
 %package auctex
 Summary:	TeX mode for XEmacs
@@ -270,7 +285,6 @@ Pliki ¼ród³owe dla xemacs-psgml.
 
 %package mail
 Summary:	mail & news modes for XEmacs
-Summary(pl):	The XEmacs editor
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name} = %{version}
@@ -302,7 +316,6 @@ Pliki ¼ród³owe dla xemacs-mail.
 
 %package gnus
 Summary:	gnus mode for XEmacs
-Summary(pl):	The XEmacs editor
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name} = %{version}, %{name}-mail
@@ -314,11 +327,11 @@ Xemacs -- gnus mode for XEmacs.
 Xemacs -- poczta i UseNet News w XEmacsie.
 
 %package gnus-el
-Summary:	.el source files for xemacs-mail
+Summary:	.el source files for xemacs-gnus
 Summary(pl):	Pliki ¼ród³owe dla xemacs-gnus
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
-Requires:	%{name} = %{version}, 
+Requires:	%{name} = %{version}
 
 %description gnus-el
 .el gnus source files -- not necessary to run XEmacs.
@@ -326,20 +339,128 @@ Requires:	%{name} = %{version},
 %description gnus-el -l pl 
 Pliki ¼ród³owe dla xemacs-gnus.
 
+%package zenirc
+Summary:	ZenIRC for XEmacs
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description zenirc
+Xemacs -- ZenIRC.
+
+%package zenirc-el
+Summary:	.el source files for xemacs-zenirc
+Summary(pl):	Pliki ¼ród³owe dla xemacs-zenirc
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version} 
+
+%description zenirc-el
+.el zenirc source files -- not necessary to run XEmacs.
+
+%package bbdb
+Summary:	Insidious Big Brother Database for XEmacs
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description bbdb
+Xemacs -- Insidious Big Brother Database.
+
+%package bbdb-el
+Summary:	.el source files for xemacs-bbdb
+Summary(pl):	Pliki ¼ród³owe dla xemacs-bbdb
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description bbdb-el
+.el Insidious Big Brother Database source files -- not necessary to run XEmacs.
+
+%package calc
+Summary:	Calculator for XEmacs
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description calc
+Xemacs -- Calculator for XEmacs.
+
+%package calc-el
+Summary:	.el source files for xemacs-calc
+Summary(pl):	Pliki ¼ród³owe dla xemacs-calc
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}, 
+
+%description calc-el
+.el calc source files -- not necessary to run XEmacs.
+
+%package mule
+Summary:	Multi-lingual support for XEmacs
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description mule
+Xemacs -- Multi-lingual support for XEmacs.
+
+%package mule-el
+Summary:	.el source files for xemacs-mule
+Summary(pl):	Pliki ¼ród³owe dla xemacs-mule
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description mule-el
+.el mule source files -- not necessary to run XEmacs.
+
+%package jde
+Summary:	Java Development Environment for XEmacs
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description jde
+Xemacs -- Calculator for XEmacs.
+
+%package jde-el
+Summary:	.el source files for xemacs-jde
+Summary(pl):	Pliki ¼ród³owe dla xemacs-jde
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name} = %{version}
+
+%description jde-el
+.el jde source files -- not necessary to run XEmacs.
+
 %prep
-%setup -q -T -b 0 -n xemacs-%{version}
+%setup -q -a1 -a2 -T -b 0 -n xemacs-%{version}
 %patch0 -p1
-chmod u+wXr * -R || :
+%patch2 -p1
+%patch3 -p1
+chmod u+wXr * -R
 
 %ifarch alpha
 %patch1 -p1
 %endif
 
+cp -a mule-packages/* ./ && rm -rf mule-packages
+cp -a xemacs-packages/* ./ && rm -rf xemacs-packages
+
 %build
+autoconf
 CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s -lc" \
+sitelispdir=%{_datadir}/%{name}/site-lisp \
 ./configure %{_target_platform} \
-	--prefix=/usr \
+	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
+	--mandir=%{_mandir}/man1 \
+	--datadir=%{_datadir} \
+	--package_path=%{_datadir}/%{name} \
+	--lispdir=%{_datadir}/%{name}/lisp \
+	--pkgdir=%{_datadir}/%{name}/lisp \
+	--etcdir=%{_datadir}/%{name}/etc \
 	--with-dialogs=athena \
 	--with-sound=nas \
 	--cflags="$RPM_OPT_FLAGS" \
@@ -347,559 +468,764 @@ CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s -lc" \
 	--debug=no \
 	--with-xpm \
 	--with-ncurses \
-	--lockdir=/var/lock/xemacs \
+	--lockdir=/var/lock/xemacs/ \
 	--with-session=yes \
 	--with-gpm=yes \
-	--with-png=yes
+	--with-png=yes \
+	--with-mule
 
+sitelispdir=%{_datadir}/%{name}/site-lisp \
 make dist
 # xemacs generation
+sitelispdir=%{_datadir}/%{name}/site-lisp \
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/X11/wmconfig,var/lock/xemacs} \
-	$RPM_BUILD_ROOT/usr/{man/{ja/man1,man1},X11R6/lib/X11/{ja/app-defaults,app-defaults}}
+	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/{{ja,de,fr,ro}/app-defaults,app-defaults}}
 
 make install-arch-dep install-arch-indep gzip-el \
 	prefix=$RPM_BUILD_ROOT/usr \
-	infodir=$RPM_BUILD_ROOT%{_infodir}
+	infodir=$RPM_BUILD_ROOT%{_infodir} \
+	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
+	datadir=$RPM_BUILD_ROOT%{_datadir} \
+	package_path=$RPM_BUILD_ROOT%{_datadir}/%{name} \
+	lispdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
+	pkgdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
+	sitelispdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp \
+	etcdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/etc
 
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/*info*
-find $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/auctex/style/ -name \*.el | xargs gzip -9
+find $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/auctex/style/ -name \*.el | xargs gzip -9
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
+
+install lib-src/{install-sid,send-pr} $RPM_BUILD_ROOT%{_libdir}/%{name}-%{realversion}/*/
+install lib-src/tm* $RPM_BUILD_ROOT%{_libdir}/%{name}-%{realversion}/*/
+
+[ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
+
+ln -s %{name}-%{realversion} $RPM_BUILD_ROOT%{_libdir}/%{name}
 
 find $RPM_BUILD_ROOT%{_bindir} -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
 find $RPM_BUILD_ROOT%{_libdir}/*/* -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
 
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/Emacs.ad \
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/Emacs.ad \
 	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/app-defaults/ja/Emacs \
-	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/ja/app-defaults/Emacs
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/xemacs-ja.1 \
+
+for i in de fr ja ro ; do
+	mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/app-defaults/$i/Emacs \
+		$RPM_BUILD_ROOT/usr/X11R6/lib/X11/$i/app-defaults/Emacs
+done
+
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
-mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
+mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{realversion} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{ja/man1/*,man1/*}
+find $RPM_BUILD_ROOT%{_datadir}/*/* -type f -name ChangeLog* | xargs gzip -9nf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/install-info %{_infodir}/cc-mode.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* CC mode: (ccmode).    The GNU Emacs mode for editing C, C++, Objective-C and Java code."
-/sbin/install-info %{_infodir}/cl.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* CL: (cl).             Partial Common Lisp support for Emacs Lisp."
-/sbin/install-info %{_infodir}/forms.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* Forms: (forms).       Emacs package for editing data bases by filling in forms."
-/sbin/install-info %{_infodir}/xemacs.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* Emacs: (emacs).       The extensible self-documenting text editor."
-/sbin/install-info %{_infodir}/ilisp.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* ilisp: (ilisp).       ILISP manual"
-/sbin/install-info %{_infodir}/lispref.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* lispref: (lispref).   GNU Emacs Lisp Reference Manual"
-/sbin/install-info %{_infodir}/custom.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* custom: (custom).     The Customization Library"
-/sbin/install-info %{_infodir}/efs.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* efs: (efs).           Transparent remote file access via FTP"
-/sbin/install-info %{_infodir}/external-widget.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* external-widget: (external-widget).External Client Widget"
-/sbin/install-info %{_infodir}/internals.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* internals: (internals).internals"
-/sbin/install-info %{_infodir}/new-users-guide.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* new-users-guide: (new-users-guide). introduction to the XEmacs editor"
-/sbin/install-info %{_infodir}/ph.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* ph: (ph).             E-Lisp client interface to the CCSO white pages directory system also known as PH/QI"
-/sbin/install-info %{_infodir}/send-pr.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* send-pr: (send-pr).   Reporting problems--using send-pr"
-/sbin/install-info %{_infodir}/term.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* term: (term).         Terminal emulator mode"
-/sbin/install-info %{_infodir}/vhdl-mode.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* vhdl-mode: (vhdl-mode). vhdl-mode"
-/sbin/install-info %{_infodir}/widget.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* widget: (widget).     The Emacs Widget Library"
-/sbin/install-info %{_infodir}/xemacs-faq.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* xemacs-faq: (xemacs-faq). The Xemacs FAQ"
+/sbin/install-info %{_infodir}/cc-mode.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/forms.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/xemacs.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/custom.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/efs.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/external-widget.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/internals.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/new-users-guide.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/send-pr.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/term.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/vhdl-mode.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/widget.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/xemacs-faq.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/ediff.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/eudc.info.gz /etc/info-dir
 
 %preun
-if [ "$1" = 0 ]; then
-	/sbin/install-info --delete %{_infodir}/cc-mode.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/cl.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/forms.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/xemacs.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/ilisp.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/lispref.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/pcl-cvs.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/custom.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/efs.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/external-widget.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/internals.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/new-users-guide.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/ph.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/send-pr.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/term.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/vhdl-mode.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/widget.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/xemacs-faq.info.gz /etc/info-dir
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/cc-mode.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/forms.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/xemacs.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/custom.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/efs.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/external-widget.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/internals.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/new-users-guide.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/send-pr.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/term.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/vhdl-mode.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/widget.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/xemacs-faq.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/ediff.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/eudc.info.gz /etc/info-dir
 fi
 
 %post gnats
-/sbin/install-info %{_infodir}/gnats.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* gnats: (gnats).       GNU Problem Report Management System"
+/sbin/install-info %{_infodir}/gnats.info.gz /etc/info-dir
 
 %preun gnats
-if [ "$1" = $1 ]; then
-	/sbin/install-info --delete %{_infodir}/gnats.info.gz /etc/info-dir
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/gnats.info.gz /etc/info-dir
 fi
 
 %post viper
-/sbin/install-info %{_infodir}/viper.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* VIPER: (viper).       The new VI-emulation mode in Emacs-19.29."
+/sbin/install-info %{_infodir}/viper.info.gz /etc/info-dir
 
 %preun viper
-if [ "$1" = $1 ]; then
-	/sbin/install-info --delete %{_infodir}/viper.info.gz /etc/info-dir
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/viper.info.gz /etc/info-dir
 fi
 
 %post auctex
-/sbin/install-info %{_infodir}/auctex.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* auctex: (auctex).     TeX mode"
-/sbin/install-info %{_infodir}/reftex.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* reftex: (reftex).     RefTeX, a package to do labels, references and citations for LaTeX documents with Emacs"
+/sbin/install-info %{_infodir}/auctex.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/reftex.info.gz /etc/info-dir
 
 %preun auctex
-if [ "$1" = $1 ]; then
-	/sbin/install-info --delete %{_infodir}/auctex.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/reftex.info.gz /etc/info-dir
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/auctex.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/reftex.info.gz /etc/info-dir
 fi
 
 
 %post w3
-/sbin/install-info %{_infodir}/w3-faq.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* w3-faq: (w3-faq).     FAQ for Emacs/W3 World Wide Web browser"
-/sbin/install-info %{_infodir}/w3.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* w3: (w3).             Emacs/W3 World Wide Web browser"
+/sbin/install-info %{_infodir}/w3-faq.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/w3.info.gz /etc/info-dir
 
 %preun w3
-if [ "$1" = $1 ]; then
-	/sbin/install-info --delete %{_infodir}/w3-faq.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/w3.info.gz /etc/info-dir
-fi
-
-%preun modes
-if [ "$1" = $1 ]; then
-	/sbin/install-info %{_infodir}/pcl-cvs.info.gz /etc/info-dir
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/w3-faq.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/w3.info.gz /etc/info-dir
 fi
 
 %post modes
-/sbin/install-info %{_infodir}/pcl-cvs.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* pcl-cvs: (pcl-cvs).   front-end to CVS"
+/sbin/install-info %{_infodir}/pcl-cvs.info.gz /etc/info-dir
+
+%preun modes
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/pcl-cvs.info.gz /etc/info-dir
+fi
 
 %post psgml
-/sbin/install-info %{_infodir}/psgml-api.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* psgml-api: (psgml-api). PSGML, the API documentation"
-/sbin/install-info %{_infodir}/psgml.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* psgml: (psgml).       PSGML, a major mode for SGML"
-/sbin/install-info %{_infodir}/hm--html-mode.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* hm--html-mode-xemacs: (hm--html-mode). hm--html-menus"
+/sbin/install-info %{_infodir}/psgml-api.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/psgml.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/hm--html-mode.info.gz /etc/info-dir
 
 %preun psgml
-if [ "$1" = $1 ]; then
-	/sbin/install-info --delete %{_infodir}/psgml-api.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/psgml.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/hm--html-mode.info.gz /etc/info-dir
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/psgml-api.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/psgml.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/hm--html-mode.info.gz /etc/info-dir
 fi
 
 %post mail 
-/sbin/install-info %{_infodir}/mh-e.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* MH-E: (mh-e).         Emacs interface to the MH mail system."
-/sbin/install-info %{_infodir}/supercite.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* SC: (sc).             Supercite lets you cite parts of messages you're replying to, in flexible ways."
-/sbin/install-info %{_infodir}/rmail.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* rmail: (rmail).       Rmail mail reader"
-/sbin/install-info %{_infodir}/tm-edit-en.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* tm-en: (tm-en).       tm-edit 7.100 Reference Manual"
-/sbin/install-info %{_infodir}/tm-mh-e-en.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* tm-mh-e-en: (tm-mh-e-en). tm-mh-e 7.71 Reference Manual"
-/sbin/install-info %{_infodir}/tm-view-en.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* tm-view-en: (tm-view-en). tm-view, a MIME Viewer for GNU Emacs"
-/sbin/install-info %{_infodir}/tm-vm-en.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* tm-vm-en: (tm-vm-en). tm-vm is an interface between tm and the VM mail user agent"
-/sbin/install-info %{_infodir}/vm.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* vm: (vm).             VM mail reader"
+/sbin/install-info %{_infodir}/mh-e.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/supercite.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/rmail.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/tm-edit-en.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/tm-mh-e-en.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/tm-view-en.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/tm-vm-en.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/vm.info.gz /etc/info-dir
 
 %preun mail 
-if [ "$1" = $1 ]; then
-	/sbin/install-info --delete %{_infodir}/mh-e.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/supercite.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/rmail.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/tm-edit-en.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/tm-mh-e-en.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/tm-view-en.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/tm-vm-en.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/vm.info.gz /etc/info-dir
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/mh-e.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/supercite.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/rmail.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/tm-edit-en.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/tm-mh-e-en.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/tm-view-en.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/tm-vm-en.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/vm.info.gz /etc/info-dir
 fi
 
 %post gnus 
-/sbin/install-info %{_infodir}/message.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* Message: (message).   Mail and news composition mode that goes with Gnus."
-/sbin/install-info %{_infodir}/gnus.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* Gnus: (gnus).         The news reader Gnus."
-/sbin/install-info %{_infodir}/gnus-mime-en.info.gz /etc/info-dir \
-	--section "XEmacs:" --entry \
-	"* gnus-mime-en: (gnus-mime-en) gnus-mime 0.10 reference manual"
+/sbin/install-info %{_infodir}/message.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/gnus.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/gnus-mime-en.info.gz /etc/info-dir
 
 %preun gnus 
-if [ "$1" = $1 ]; then
-	/sbin/install-info --delete %{_infodir}/message.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/gnus.info.gz /etc/info-dir
-	/sbin/install-info --delete %{_infodir}/gnus-mime-en.info.gz
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/message.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/gnus.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/gnus-mime-en.info.gz /etc/info-dir
+fi
+
+%post zenirc
+/sbin/install-info %{_infodir}/zenirc.info.gz /etc/info-dir
+
+%preun zenirc
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/zenirc.info.gz /etc/info-dir
+fi
+
+%post lisp-programming
+/sbin/install-info %{_infodir}/ilisp.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/cl.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/lispref.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/elib.info.gz /etc/info-dir
+
+%preun lisp-programming
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/ilisp.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/cl.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/lispref.info.gz /etc/info-dir
+	/sbin/install-info %{_infodir}/elib.info.gz /etc/info-dir
+fi
+
+%post bbdb
+/sbin/install-info %{_infodir}/bbdb.info.gz /etc/info-dir
+
+%preun bbdb
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/bbdb.info.gz /etc/info-dir
+fi
+
+%post calc
+/sbin/install-info %{_infodir}/calc.info.gz /etc/info-dir
+
+%preun calc
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/calc.info.gz /etc/info-dir
+fi
+
+%post mule
+/sbin/install-info %{_infodir}/skk.info.gz /etc/info-dir
+
+%preun mule
+if [ "$1" = "0" ]; then
+	/sbin/install-info %{_infodir}/skk.info.gz /etc/info-dir
 fi
 
 %files
 %defattr(644,root,root,755)
+%doc README GETTING.GNU.SOFTWARE PROBLEMS 
+%doc etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
+%doc %{_datadir}/*/etc/TUTORIAL
+%doc %lang(de) %{_datadir}/*/etc/TUTORIAL.de
+%doc %lang(fr) %{_datadir}/*/etc/TUTORIAL.fr
+%doc %lang(hr) %{_datadir}/*/etc/TUTORIAL.hr
+%doc %lang(ja) %{_datadir}/*/etc/TUTORIAL.ja
+%doc %lang(ko) %{_datadir}/*/etc/TUTORIAL.ko
+%doc %lang(no) %{_datadir}/*/etc/TUTORIAL.no
+%doc %lang(pl) %{_datadir}/*/etc/TUTORIAL.pl
+%doc %lang(ro) %{_datadir}/*/etc/TUTORIAL.ro
+%doc %lang(ru) %{_datadir}/*/etc/TUTORIAL.ru
+%doc %lang(th) %{_datadir}/*/etc/TUTORIAL.th
+%doc %{_libdir}/%{name}-%{realversion}/*/DOC
+%doc %{_datadir}/*/etc/*.doc
+%doc %{_datadir}/*/etc/README.HYPERBOLE
+%doc %{_datadir}/*/etc/README.OO-BROWSER
+%doc %{_datadir}/*/etc/e/README
+%doc %{_datadir}/*/etc/gnuserv.README
+%doc %{_datadir}/*/etc/refcard.ps.gz
+%doc %{_datadir}/*/etc/refcard.tex
+%doc %{_datadir}/*/etc/sample.Xdefaults
+%doc %{_datadir}/*/etc/sample.emacs
+%doc %{_datadir}/*/etc/aliases.ksh
+%doc %{_datadir}/*/etc/editclient.sh
+%doc %{_datadir}/*/etc/emerge.txt
+%doc %{_datadir}/*/etc/photos
+%doc %{_datadir}/*/lisp/ChangeLog*
+%doc %{_datadir}/*/lisp/README
+%doc %{_datadir}/*/lisp/apel/ChangeLog*
+%doc %{_datadir}/*/lisp/apel/README.en
+%doc %lang(jp) %{_datadir}/*/lisp/apel/README.ja
+%doc %{_datadir}/*/lisp/ediff/README
+%doc %{_datadir}/*/lisp/ediff/ChangeLog*
+%doc %{_datadir}/*/lisp/eterm/ChangeLog*
+%doc %{_datadir}/*/lisp/eterm/QUESTIONS
+%doc %{_datadir}/*/lisp/eterm/README.term
+%doc %{_datadir}/*/lisp/eterm/TODO.term
+%doc %{_datadir}/*/lisp/term/README
+%doc %{_datadir}/*/lisp/Sun/ChangeLog*
+%doc %{_datadir}/*/lisp/efs/ChangeLog*
+%doc %{_datadir}/*/lisp/forms/ChangeLog*
+%doc %{_datadir}/*/lisp/slider/ChangeLog*
+%doc %{_datadir}/*/lisp/games/ChangeLog*
+%doc %{_datadir}/*/lisp/misc-games/ChangeLog*
+%doc %{_datadir}/*/lisp/mine/ChangeLog*
+%doc %{_datadir}/*/lisp/calendar/ChangeLog*
+%doc %{_datadir}/*/lisp/cc-mode/ChangeLog*
+%doc %{_datadir}/*/lisp/tooltalk/ChangeLog*
+%doc %{_datadir}/*/lisp/vc/ChangeLog*
+%doc %{_datadir}/*/lisp/cookie/ChangeLog*
+%doc %{_datadir}/*/lisp/dired/ChangeLog*
+%doc %{_datadir}/*/lisp/edit-utils/ChangeLog*
+%doc %{_datadir}/*/lisp/emerge/ChangeLog*
+%doc %{_datadir}/*/lisp/eudc/ChangeLog*
+%doc %{_datadir}/*/lisp/frame-icon/ChangeLog*
+%doc %{_datadir}/*/lisp/fsf-compat/ChangeLog*
+%doc %{_datadir}/*/lisp/fsf-compat/README
+%doc %{_datadir}/*/lisp/igrep/ChangeLog*
+%doc %{_datadir}/*/lisp/ispell/ChangeLog*
+%doc %{_datadir}/*/lisp/net-utils/ChangeLog*
+%doc %{_datadir}/*/lisp/os-utils/ChangeLog*
+%doc %{_datadir}/*/lisp/sounds-au/ChangeLog*
+%doc %{_datadir}/*/lisp/sounds-wav/ChangeLog*
+%doc %{_datadir}/*/lisp/speedbar/ChangeLog*
+%doc %{_datadir}/*/lisp/strokes/ChangeLog*
+%doc %{_datadir}/*/lisp/textools/ChangeLog*
+%doc %{_datadir}/*/lisp/time/ChangeLog*
+%doc %{_datadir}/*/lisp/view-process/ChangeLog*
+%doc %{_datadir}/*/lisp/xemacs-base/ChangeLog*
 %config /etc/X11/wmconfig/xemacs
-%attr(2755,root,mail) %{_libdir}/*/*/movemail
+%{_libdir}/%{name}
+%dir %{_libdir}/%{name}-%{realversion}
+%dir %{_libdir}/%{name}-%{realversion}/%{_target_platform}
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/etc
+%dir %{_datadir}/%{name}/lisp
+%dir %{_datadir}/%{name}/site-lisp
+%dir %{_datadir}/%{name}/etc/e
+%dir %{_datadir}/%{name}/lisp/Sun
+%dir %{_datadir}/%{name}/lisp/apel
+%dir %{_datadir}/%{name}/lisp/calendar
+%dir %{_datadir}/%{name}/lisp/cc-mode
+%dir %{_datadir}/%{name}/lisp/cookie
+%dir %{_datadir}/%{name}/lisp/dired
+%dir %{_datadir}/%{name}/lisp/ediff
+%dir %{_datadir}/%{name}/lisp/edit-utils
+%dir %{_datadir}/%{name}/lisp/efs
+%dir %{_datadir}/%{name}/lisp/emerge
+%dir %{_datadir}/%{name}/lisp/eterm
+%dir %{_datadir}/%{name}/lisp/eudc
+%dir %{_datadir}/%{name}/lisp/forms
+%dir %{_datadir}/%{name}/lisp/frame-icon
+%dir %{_datadir}/%{name}/lisp/fsf-compat
+%dir %{_datadir}/%{name}/lisp/games
+%dir %{_datadir}/%{name}/lisp/igrep
+%dir %{_datadir}/%{name}/lisp/ispell
+%dir %{_datadir}/%{name}/lisp/mine
+%dir %{_datadir}/%{name}/lisp/misc-games
+%dir %{_datadir}/%{name}/lisp/net-utils
+%dir %{_datadir}/%{name}/lisp/os-utils
+%dir %{_datadir}/%{name}/lisp/slider
+%dir %{_datadir}/%{name}/lisp/sounds-au
+%dir %{_datadir}/%{name}/lisp/sounds-wav
+%dir %{_datadir}/%{name}/lisp/speedbar
+%dir %{_datadir}/%{name}/lisp/strokes
+%dir %{_datadir}/%{name}/lisp/term
+%dir %{_datadir}/%{name}/lisp/textools
+%dir %{_datadir}/%{name}/lisp/time
+%dir %{_datadir}/%{name}/lisp/tooltalk
+%dir %{_datadir}/%{name}/lisp/vc
+%dir %{_datadir}/%{name}/lisp/view-process
+%dir %{_datadir}/%{name}/lisp/xemacs-base
 %attr(755,root,root) %{_bindir}/xemacs
 %attr(755,root,root) %{_bindir}/gnuclient
-%attr(755,root,root) %{_libdir}/*/*/cvtmail
-%attr(755,root,root) %{_libdir}/*/*/digest-doc
-%attr(755,root,root) %{_libdir}/*/*/fakemail
-%attr(755,root,root) %{_libdir}/*/*/gnuserv
-%attr(755,root,root) %{_libdir}/*/*/hexl
-%attr(755,root,root) %{_libdir}/*/*/make-docfile
-%attr(755,root,root) %{_libdir}/*/*/make-path
-%attr(755,root,root) %{_libdir}/*/*/mmencode
-%attr(755,root,root) %{_libdir}/*/*/profile
-%attr(755,root,root) %{_libdir}/*/*/sorted-doc
-%attr(755,root,root) %{_libdir}/*/*/yow
 %attr(755,root,root) %{_bindir}/gnuattach
 %attr(755,root,root) %{_bindir}/gnudoit
-%attr(755,root,root) %{_bindir}/install-sid
 %attr(755,root,root) %{_bindir}/pstogif
-%attr(755,root,root) %{_bindir}/send-pr
-%attr(755,root,root) %{_libdir}/*/*/add-big-package.sh
-%attr(755,root,root) %{_libdir}/*/*/add-little-package.sh
-%attr(755,root,root) %{_libdir}/*/*/gzip-el.sh
-%attr(755,root,root) %{_libdir}/*/*/install-sid
-%attr(755,root,root) %{_libdir}/*/*/rcs2log
-%attr(755,root,root) %{_libdir}/*/*/send-pr
-%attr(755,root,root) %{_libdir}/*/*/vcdiff
-%attr(755,root,root) %{_libdir}/*/*/wakeup
-%doc %lang(de) %{_libdir}/*/etc/TUTORIAL.de
-%doc %lang(fr) %{_libdir}/*/etc/TUTORIAL.fr
-%doc %lang(hr) %{_libdir}/*/etc/TUTORIAL.hr
-%doc %lang(ja) %{_libdir}/*/etc/TUTORIAL.ja
-%doc %lang(ko) %{_libdir}/*/etc/TUTORIAL.ko
-%doc %lang(no) %{_libdir}/*/etc/TUTORIAL.no
-%doc %lang(pl) %{_libdir}/*/etc/TUTORIAL.pl
-%doc %lang(th) %{_libdir}/*/etc/TUTORIAL.th
-%doc %{_libdir}/*/*/DOC
-%doc %{_libdir}/*/etc/*.doc
-%doc %{_libdir}/*/etc/README.HYPERBOLE
-%doc %{_libdir}/*/etc/README.OO-BROWSER
-%doc %{_libdir}/*/etc/e/README
-%doc %{_libdir}/*/etc/gnuserv.README
-%doc %{_libdir}/*/etc/hypb-mouse.txt
-%doc %{_libdir}/*/etc/refcard.ps
-%doc %{_libdir}/*/etc/refcard.tex
-%doc %{_libdir}/*/etc/refcard3.ps
-%doc %{_libdir}/*/etc/sample.Xdefaults
-%doc %{_libdir}/*/etc/sample.emacs
-%doc %{_libdir}/*/lisp/ChangeLog
-%doc %{_libdir}/*/lisp/README
-%doc %{_libdir}/*/lisp/apel/ChangeLog*
-%doc %{_libdir}/*/lisp/ediff/README
-%doc %{_libdir}/*/lisp/efs/README
-%doc %{_libdir}/*/lisp/eterm/ChangeLog
-%doc %{_libdir}/*/lisp/eterm/QUESTIONS
-%doc %{_libdir}/*/lisp/eterm/README.term
-%doc %{_libdir}/*/lisp/eterm/TODO.term
-%doc %{_libdir}/*/lisp/mel/ChangeLog
-%doc %{_libdir}/*/lisp/term/README
+%attr(2755,root,mail) %{_libdir}/%{name}-%{realversion}/*/movemail
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/cvtmail
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/digest-doc
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/fakemail
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/gnuserv
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/hexl
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/make-docfile
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/make-path
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/mmencode
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/profile
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/sorted-doc
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/yow
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/add-big-package.sh
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/gzip-el.sh
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/install-sid
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/rcs2log
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/send-pr
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/vcdiff
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/wakeup
+%{_libdir}/%{name}-%{realversion}/*/config.values
 %{_mandir}/man1/gnuattach.1.gz
 %{_mandir}/man1/gnuclient.1.gz
 %{_mandir}/man1/gnudoit.1.gz
 %{_mandir}/man1/gnuserv.1.gz
 %{_mandir}/man1/xemacs.1.gz
 %lang(ja) %{_mandir}/ja/man1/xemacs.1.gz
-%doc README GETTING.GNU.SOFTWARE PROBLEMS 
-%doc etc/NEWS etc/MAILINGLISTS BUGS 
-%{_libdir}/*/*/config.values
-%{_libdir}/*/etc/*.xbm
 %{_infodir}/cc-mode.info*gz
 %{_infodir}/custom.info*gz
 %{_infodir}/efs.info*gz
 %{_infodir}/external-widget.info*gz
+%{_infodir}/eudc.info*gz
+%{_infodir}/ediff.info*gz
 %{_infodir}/forms.info*gz
 %{_infodir}/internals.info*gz
 %{_infodir}/message.info*gz
 %{_infodir}/new-users-guide.info*gz
-%{_infodir}/ph.info*gz
-%{_infodir}/reftex.info*gz
 %{_infodir}/send-pr.info*gz
 %{_infodir}/term.info*gz
 %{_infodir}/vhdl-mode.info*gz
 %{_infodir}/widget.info*gz
 %{_infodir}/xemacs-faq.info*gz
 %{_infodir}/xemacs.info*gz
-%{_libdir}/*/etc/*.xpm
-%{_libdir}/*/etc/*.xpm.Z
-%{_libdir}/*/etc/categories
-%{_libdir}/*/etc/cbx.gif
-%{_libdir}/*/etc/custom/*
-%{_libdir}/*/etc/eos/*
-%{_libdir}/*/etc/frame-icon/*
-%{_libdir}/*/etc/idd/*
-%{_libdir}/*/etc/message/*
-%{_libdir}/*/etc/mine/*
-%{_libdir}/*/etc/ms-kermit
-%{_libdir}/*/etc/ms-kermit-7bit
-%{_libdir}/*/etc/smilies/*
-%{_libdir}/*/etc/sounds/*
-%{_libdir}/*/etc/sparcworks/*
-%{_libdir}/*/etc/spook.lines
-%{_libdir}/*/etc/time/*
-%{_libdir}/*/etc/toolbar/*
-%{_libdir}/*/etc/xemacs-fe.sh
-%{_libdir}/*/etc/yow.lines
-%{_libdir}/*/lisp/*.el
-%{_libdir}/*/lisp/apel/*.el
-%{_libdir}/*/lisp/apel/*.elc
-%{_libdir}/*/lisp/calendar/*.elc
-%{_libdir}/*/lisp/cc-mode/*.elc
-%{_libdir}/*/lisp/comint/*.elc
-%{_libdir}/*/lisp/custom/*.elc
-%{_libdir}/*/lisp/ediff/*.elc
-%{_libdir}/*/lisp/ediff/Makefile
-%{_libdir}/*/lisp/efs/*.el
-%{_libdir}/*/lisp/efs/*.elc
-%{_libdir}/*/lisp/efs/Makefile
-%{_libdir}/*/lisp/electric/*.elc
-%{_libdir}/*/lisp/eos/*.el
-%{_libdir}/*/lisp/eos/*.elc
-%{_libdir}/*/lisp/eos/Makefile
-%{_libdir}/*/lisp/eterm/*.elc
-%{_libdir}/*/lisp/games/*.elc
-%{_libdir}/*/lisp/iso/*.elc
-%{_libdir}/*/lisp/mel/*.elc
-%{_libdir}/*/lisp/mu/*.el
-%{_libdir}/*/lisp/mu/*.elc
-%{_libdir}/*/lisp/packages/*.elc
-%{_libdir}/*/lisp/prim/*.el
-%{_libdir}/*/lisp/prim/*.elc
-%{_libdir}/*/lisp/sunpro/*.elc
-%{_libdir}/*/lisp/term/*.elc
-%{_libdir}/*/lisp/tl/*.el
-%{_libdir}/*/lisp/tl/*.elc
-%{_libdir}/*/lisp/tooltalk/*.elc
-%{_libdir}/*/lisp/tooltalk/Makefile
-%{_libdir}/*/lisp/utils/*.elc
-%{_libdir}/*/lisp/utils/forms-d2.dat
-%{_libdir}/*/lisp/vc/*.elc
-%{_libdir}/*/lisp/x11/*.elc
-/usr/X11R6/lib/X11/ja/app-defaults/Emacs
+%{_datadir}/*/etc/*.xbm
+%{_datadir}/*/etc/*.xpm
+%{_datadir}/*/etc/cbx.png
+%{_datadir}/*/etc/custom
+%{_datadir}/*/etc/e/e*
+%{_datadir}/*/etc/ediff
+%{_datadir}/*/etc/eos
+%{_datadir}/*/etc/frame-icon
+%{_datadir}/*/etc/idd
+%{_datadir}/*/etc/message
+%{_datadir}/*/etc/mine
+%{_datadir}/*/etc/ms-kermit
+%{_datadir}/*/etc/ms-kermit-7bit
+%{_datadir}/*/etc/smilies
+%{_datadir}/*/etc/sounds
+%{_datadir}/*/etc/sparcworks
+%{_datadir}/*/etc/spook.lines
+%{_datadir}/*/etc/time
+%{_datadir}/*/etc/toolbar
+%{_datadir}/*/etc/slider
+%{_datadir}/*/etc/xemacs-fe.sh
+%{_datadir}/*/etc/yow.lines
+%{_datadir}/*/etc/xemacs-enhanced.png
+%{_datadir}/*/etc/sokoban.levels
+%{_datadir}/*/etc/forms-d2.dat
+%{_datadir}/*/lisp/*.el
+%{_datadir}/*/lisp/apel/*.elc
+%{_datadir}/*/lisp/calendar/*.elc
+%{_datadir}/*/lisp/cc-mode/*.elc
+%{_datadir}/*/lisp/cus*.elc
+%{_datadir}/*/lisp/ediff/*.elc
+%{_datadir}/*/lisp/efs/*.elc
+%{_datadir}/*/lisp/eterm/*.elc
+%{_datadir}/*/lisp/games/*.elc
+%{_datadir}/*/lisp/misc-games/*.elc
+%{_datadir}/*/lisp/mine/*.elc
+%{_datadir}/*/lisp/blessmail*.elc
+%{_datadir}/*/lisp/Sun/*.elc
+%{_datadir}/*/lisp/term/*.elc
+%{_datadir}/*/lisp/tooltalk/*.elc
+%{_datadir}/*/lisp/forms/*.elc
+%{_datadir}/*/lisp/slider/*.elc
+%{_datadir}/*/lisp/vc/*.elc
+%{_datadir}/*/lisp/cookie/*.elc
+%{_datadir}/*/lisp/dired/*.elc
+%{_datadir}/*/lisp/edit-utils/*.elc
+%{_datadir}/*/lisp/emerge/*.elc
+%{_datadir}/*/lisp/eudc/*.elc
+%{_datadir}/*/lisp/frame-icon/*.elc
+%{_datadir}/*/lisp/fsf-compat/*.elc
+%{_datadir}/*/lisp/igrep/*.elc
+%{_datadir}/*/lisp/ispell/*.elc
+%{_datadir}/*/lisp/net-utils/*.elc
+%{_datadir}/*/lisp/os-utils/*.elc
+%{_datadir}/*/lisp/sounds-au/*.elc
+%{_datadir}/*/lisp/sounds-wav/*.elc
+%{_datadir}/*/lisp/speedbar/*.elc
+%{_datadir}/*/lisp/strokes/*.elc
+%{_datadir}/*/lisp/textools/*.elc
+%{_datadir}/*/lisp/time/*.elc
+%{_datadir}/*/lisp/view-process/*.elc
+%{_datadir}/*/lisp/xemacs-base/*.elc
+%{_datadir}/*/lisp/a*.elc
+%{_datadir}/*/lisp/ba*.elc
+%{_datadir}/*/lisp/bu*.elc
+%{_datadir}/*/lisp/ca*.elc
+%{_datadir}/*/lisp/ch*.elc
+%{_datadir}/*/lisp/cm*.elc
+%{_datadir}/*/lisp/co*.elc
+%{_datadir}/*/lisp/d*.elc
+%{_datadir}/*/lisp/e*.elc
+%{_datadir}/*/lisp/f*.elc
+%{_datadir}/*/lisp/g*.elc
+%{_datadir}/*/lisp/h*.elc
+%{_datadir}/*/lisp/i*.elc
+%{_datadir}/*/lisp/k*.elc
+%{_datadir}/*/lisp/l*.elc
+%{_datadir}/*/lisp/m*.elc
+%{_datadir}/*/lisp/o*.elc
+%{_datadir}/*/lisp/p*.elc
+%{_datadir}/*/lisp/r*.elc
+%{_datadir}/*/lisp/s*.elc
+%{_datadir}/*/lisp/t*.elc
+%{_datadir}/*/lisp/u*.elc
+%{_datadir}/*/lisp/v*.elc
+%{_datadir}/*/lisp/wid*.elc
+%{_datadir}/*/lisp/window*.elc
+%{_datadir}/*/lisp/x-*.elc
+%lang(de) /usr/X11R6/lib/X11/de/app-defaults/Emacs
+%lang(fr) /usr/X11R6/lib/X11/fr/app-defaults/Emacs
+%lang(ja) /usr/X11R6/lib/X11/ja/app-defaults/Emacs
+%lang(ro) /usr/X11R6/lib/X11/ro/app-defaults/Emacs
 /usr/X11R6/lib/X11/app-defaults/Emacs
 /var/lock/xemacs
 
 %files el 
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/apel/*.el.gz
-%{_libdir}/*/lisp/calendar/*.el.gz
-%{_libdir}/*/lisp/cc-mode/*.el.gz
-%{_libdir}/*/lisp/comint/*.el.gz
-%{_libdir}/*/lisp/custom/*.el.gz
-%{_libdir}/*/lisp/ediff/*.el.gz
-%{_libdir}/*/lisp/efs/*.el.gz
-%{_libdir}/*/lisp/electric/*.el.gz
-%{_libdir}/*/lisp/eos/*.el.gz
-%{_libdir}/*/lisp/eterm/*.el.gz
-%{_libdir}/*/lisp/games/*.el.gz
-%{_libdir}/*/lisp/iso/*.el.gz
-%{_libdir}/*/lisp/mel/*.el.gz
-%{_libdir}/*/lisp/mu/*.el.gz
-%{_libdir}/*/lisp/packages/*.el.gz
-%{_libdir}/*/lisp/prim/*.el.gz
-%{_libdir}/*/lisp/sunpro/*.el.gz
-%{_libdir}/*/lisp/term/*.el.gz
-%{_libdir}/*/lisp/tl/*.el.gz
-%{_libdir}/*/lisp/tooltalk/*.el.gz
-%{_libdir}/*/lisp/utils/*.el.gz
-%{_libdir}/*/lisp/vc/*.el.gz
-%{_libdir}/*/lisp/x11/*.el.gz
+%{_datadir}/*/lisp/apel/*.el.gz
+%{_datadir}/*/lisp/calendar/*.el.gz
+%{_datadir}/*/lisp/cc-mode/*.el.gz
+%{_datadir}/*/lisp/cus*.el.gz
+%{_datadir}/*/lisp/ediff/*.el.gz
+%{_datadir}/*/lisp/efs/*.el.gz
+%{_datadir}/*/lisp/eterm/*.el.gz
+%{_datadir}/*/lisp/games/*.el.gz
+%{_datadir}/*/lisp/misc-games/*.el.gz
+%{_datadir}/*/lisp/mine/*.el.gz
+%{_datadir}/*/lisp/blessmail*.el.gz
+%{_datadir}/*/lisp/Sun/*.el.gz
+%{_datadir}/*/lisp/term/*.el.gz
+%{_datadir}/*/lisp/tooltalk/*.el.gz
+%{_datadir}/*/lisp/forms/*.el.gz
+%{_datadir}/*/lisp/slider/*.el.gz
+%{_datadir}/*/lisp/vc/*.el.gz
+%{_datadir}/*/lisp/cookie/*.el.gz
+%{_datadir}/*/lisp/dired/*.el.gz
+%{_datadir}/*/lisp/edit-utils/*.el.gz
+%{_datadir}/*/lisp/emerge/*.el.gz
+%{_datadir}/*/lisp/eudc/*.el.gz
+%{_datadir}/*/lisp/frame-icon/*.el.gz
+%{_datadir}/*/lisp/fsf-compat/*.el.gz
+%{_datadir}/*/lisp/igrep/*.el.gz
+%{_datadir}/*/lisp/ispell/*.el.gz
+%{_datadir}/*/lisp/net-utils/*.el.gz
+%{_datadir}/*/lisp/os-utils/*.el.gz
+%{_datadir}/*/lisp/sounds-au/*.el.gz
+%{_datadir}/*/lisp/sounds-wav/*.el.gz
+%{_datadir}/*/lisp/speedbar/*.el.gz
+%{_datadir}/*/lisp/strokes/*.el.gz
+%{_datadir}/*/lisp/textools/*.el.gz
+%{_datadir}/*/lisp/time/*.el.gz
+%{_datadir}/*/lisp/view-process/*.el.gz
+%{_datadir}/*/lisp/xemacs-base/*.el.gz
+%{_datadir}/*/lisp/a*.el.gz
+%{_datadir}/*/lisp/ba*.el.gz
+%{_datadir}/*/lisp/bu*.el.gz
+%{_datadir}/*/lisp/ca*.el.gz
+%{_datadir}/*/lisp/ch*.el.gz
+%{_datadir}/*/lisp/cm*.el.gz
+%{_datadir}/*/lisp/co*.el.gz
+%{_datadir}/*/lisp/d*.el.gz
+%{_datadir}/*/lisp/e*.el.gz
+%{_datadir}/*/lisp/f*.el.gz
+%{_datadir}/*/lisp/g*.el.gz
+%{_datadir}/*/lisp/h*.el.gz
+%{_datadir}/*/lisp/i*.el.gz
+%{_datadir}/*/lisp/k*.el.gz
+%{_datadir}/*/lisp/l*.el.gz
+%{_datadir}/*/lisp/m*.el.gz
+%{_datadir}/*/lisp/o*.el.gz
+%{_datadir}/*/lisp/p*.el.gz
+%{_datadir}/*/lisp/r*.el.gz
+%{_datadir}/*/lisp/s*.el.gz
+%{_datadir}/*/lisp/t*.el.gz
+%{_datadir}/*/lisp/u*.el.gz
+%{_datadir}/*/lisp/v*.el.gz
+%{_datadir}/*/lisp/wid*.el.gz
+%{_datadir}/*/lisp/window*.el.gz
+%{_datadir}/*/lisp/x-*.el.gz
 
 %files emulators 
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/emulators/*.elc
-%{_libdir}/*/lisp/emulators/tpu-edt.xmodmap
+%doc %{_datadir}/*/lisp/crisp/ChangeLog*
+%doc %{_datadir}/*/lisp/edt/ChangeLog*
+%doc %{_datadir}/*/lisp/tpu/ChangeLog*
+%dir %{_datadir}/*/lisp/crisp
+%dir %{_datadir}/*/lisp/edt
+%dir %{_datadir}/*/lisp/tpu
+%{_datadir}/*/lisp/crisp/*.elc
+%{_datadir}/*/lisp/edt/*.elc
+%{_datadir}/*/lisp/tpu/*.elc
+%{_datadir}/*/etc/tpu-edt.xmodmap
+
+%files emulators-el
+%defattr(644,root,root,755)
+%{_datadir}/*/lisp/crisp/*.el.gz
+%{_datadir}/*/lisp/edt/*.el.gz
+%{_datadir}/*/lisp/tpu/*.el.gz
 
 %files gnats
 %defattr(644,root,root,755)
 %{_infodir}/gnats.info*gz
-%{_libdir}/*/etc/gnats/*
-%{_libdir}/*/lisp/gnats/*.elc
-%{_libdir}/*/lisp/gnats/*.el.gz
+%doc %{_datadir}/*/lisp/gnats/ChangeLog*
+%dir %{_datadir}/*/lisp/gnats
+%{_datadir}/*/etc/gnats
+%{_datadir}/*/lisp/gnats/*.elc
 
-%files emulators-el
+%files gnats-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/emulators/*.el.gz
+%{_datadir}/*/lisp/gnats/*.el.gz
 
 %files viper 
 %defattr(644,root,root,755)
-%doc %{_libdir}/*/etc/viperCard.tex
+%doc %{_datadir}/*/etc/viperCard.tex
 %{_infodir}/viper.info*gz
-%{_libdir}/*/lisp/viper/*.elc
-%doc %{_libdir}/*/lisp/viper/README
+%doc %{_datadir}/*/lisp/viper/README
+%doc %{_datadir}/*/lisp/viper/ChangeLog*
+%dir %{_datadir}/*/lisp/viper
+%{_datadir}/*/lisp/viper/*.elc
 
 %files viper-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/viper/*.el.gz
-%{_libdir}/*/lisp/viper/Makefile
+%{_datadir}/*/lisp/viper/*.el.gz
 
 %files lisp-programming
 %defattr(644,root,root,755)
 %{_infodir}/cl.info*gz
 %{_infodir}/ilisp.info*gz
 %{_infodir}/lispref.info*gz
-%doc %{_libdir}/*/lisp/edebug/README
-%doc %{_libdir}/*/lisp/ilisp/ACKNOWLEDGMENTS
-%doc %{_libdir}/*/lisp/ilisp/COPYING
-%doc %{_libdir}/*/lisp/ilisp/GETTING-ILISP
-%doc %{_libdir}/*/lisp/ilisp/HISTORY
-#%doc %{_libdir}/*/lisp/ilisp/INSTALLATION
-%doc %{_libdir}/*/lisp/ilisp/README
-%doc %{_libdir}/*/lisp/ilisp/Welcome
-%{_libdir}/*/lisp/bytecomp/*.elc
-%{_libdir}/*/lisp/cl/*.elc
-%{_libdir}/*/lisp/edebug/*.el
-%{_libdir}/*/lisp/edebug/*.elc
-%{_libdir}/*/lisp/edebug/Makefile
-%{_libdir}/*/lisp/edebug/edebug-history
-%{_libdir}/*/lisp/ilisp/*.el
-%{_libdir}/*/lisp/ilisp/*.elc
-%{_libdir}/*/lisp/ilisp/*.lisp
-%{_libdir}/*/lisp/ilisp/ild.mail
-%{_libdir}/*/lisp/ilisp/ilisp.emacs
-%{_libdir}/*/lisp/ilisp/scheme2c.mail
+%{_infodir}/elib.info*gz
+%doc %{_datadir}/*/lisp/edebug/README
+%doc %{_datadir}/*/lisp/edebug/ChangeLog*
+%doc %{_datadir}/*/lisp/ilisp/ACKNOWLEDGMENTS
+%doc %{_datadir}/*/lisp/ilisp/ChangeLog*
+%doc %{_datadir}/*/lisp/ilisp/GETTING-ILISP
+%doc %{_datadir}/*/lisp/ilisp/HISTORY
+%doc %{_datadir}/*/lisp/ilisp/README
+%doc %{_datadir}/*/lisp/ilisp/Welcome
+%doc %{_datadir}/*/lisp/elib/ChangeLog*
+%doc %{_datadir}/*/lisp/elib/README
+%doc %{_datadir}/*/lisp/elib/NEWS
+%doc %{_datadir}/*/lisp/xemacs-devel/ChangeLog*
+%dir %{_datadir}/*/lisp/edebug
+%dir %{_datadir}/*/lisp/elib
+%dir %{_datadir}/*/lisp/ilisp
+%dir %{_datadir}/*/lisp/xemacs-devel
+%{_datadir}/*/lisp/byte*.elc
+%{_datadir}/*/lisp/cl*.elc
+%{_datadir}/*/lisp/edebug/*.elc
+%{_datadir}/*/lisp/elib/*.elc
+%{_datadir}/*/lisp/ilisp/*.elc
+%{_datadir}/*/lisp/ilisp/*.lisp
+%{_datadir}/*/lisp/ilisp/ild.mail
+%{_datadir}/*/lisp/ilisp/ilisp.emacs
+%{_datadir}/*/lisp/ilisp/scheme2c.mail
+%{_datadir}/*/lisp/xemacs-devel/*.elc
 
 %files lisp-programming-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/ilisp/*.el.gz
-%{_libdir}/*/lisp/edebug/*.el.gz
-%{_libdir}/*/lisp/bytecomp/*.el.gz
-%{_libdir}/*/lisp/cl/*.el.gz
-%{_libdir}/*/lisp/ilisp/Makefile
+%{_datadir}/*/lisp/elib/*.el.gz
+%{_datadir}/*/lisp/ilisp/*.el.gz
+%{_datadir}/*/lisp/edebug/*.el.gz
+%{_datadir}/*/lisp/xemacs-devel/*.el.gz
+%{_datadir}/*/lisp/byte*.el.gz
+%{_datadir}/*/lisp/cl*.el.gz
 
 %files auctex
 %defattr(644,root,root,755)
 %{_infodir}/auctex.info*gz
-%doc %{_libdir}/*/lisp/auctex/CHANGES
-%doc %{_libdir}/*/lisp/auctex/ChangeLog
-%doc %{_libdir}/*/lisp/auctex/README
-%{_libdir}/*/etc/auctex/style/*.elc
-%{_libdir}/*/lisp/auctex/*.el
-%{_libdir}/*/lisp/auctex/*.elc
-#%{_libdir}/*/lisp/auctex/INSTALLATION
-%doc %{_libdir}/*/lisp/auctex/PROBLEMS
+%{_infodir}/reftex.info*gz
+%doc %{_datadir}/*/lisp/auctex/CHANGES
+%doc %{_datadir}/*/lisp/auctex/ChangeLog*
+%doc %{_datadir}/*/lisp/auctex/README
+%doc %{_datadir}/*/lisp/reftex/ChangeLog*
+%dir %{_datadir}/*/etc/auctex
+%dir %{_datadir}/*/etc/auctex/style
+%dir %{_datadir}/*/lisp/auctex
+%dir %{_datadir}/*/lisp/reftex
+%{_datadir}/*/lisp/reftex/*.elc
+%{_datadir}/*/etc/auctex/style/*.elc
+%{_datadir}/*/lisp/auctex/*.elc
+%doc %{_datadir}/*/lisp/auctex/PROBLEMS
 
 %files auctex-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/auctex/Makefile
-%{_libdir}/*/lisp/auctex/*.el.gz
-%{_libdir}/*/etc/auctex/style/*.el.gz
+%{_datadir}/*/lisp/auctex/*.el.gz
+%{_datadir}/*/etc/auctex/style/*.el.gz
+%{_datadir}/*/lisp/reftex/*.el.gz
 
 %files w3 
 %defattr(644,root,root,755)
 %{_infodir}/w3-faq.info*gz
 %{_infodir}/w3.info*gz
-%{_libdir}/*/lisp/w3/*.el
-%{_libdir}/*/lisp/w3/*.elc
-%doc %{_libdir}/*/lisp/w3/ChangeLog
-%{_libdir}/*/lisp/w3/descrip.mms
-%{_libdir}/*/etc/w3/*
+%doc %{_datadir}/*/lisp/w3/ChangeLog*
+%doc %{_datadir}/*/lisp/w3/BUGS
+%doc %{_datadir}/*/lisp/w3/HOWTO
+%doc %{_datadir}/*/lisp/w3/README
+%doc %{_datadir}/*/lisp/w3/TODO
+%dir %{_datadir}/*/lisp/w3
+%{_datadir}/*/etc/w3
+%{_datadir}/*/lisp/w3/*.elc
 
 %files w3-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/w3/*.el.gz
-%{_libdir}/*/lisp/w3/Makefile
+%{_datadir}/*/lisp/w3/*.el.gz
 
 %files psgml 
 %defattr(644,root,root,755)
 %{_infodir}/hm--html-mode.info*gz
 %{_infodir}/psgml-api.info*gz
 %{_infodir}/psgml.info*gz
-%doc %{_libdir}/*/lisp/hm--html-menus/ANNOUNCEMENT
-%doc %{_libdir}/*/lisp/hm--html-menus/NEWS
-%doc %{_libdir}/*/lisp/hm--html-menus/README
-%doc %{_libdir}/*/lisp/psgml/ChangeLog
-%doc %{_libdir}/*/lisp/psgml/README.psgml
-%{_libdir}/*/etc/sgml/*
-%{_libdir}/*/lisp/hm--html-menus/*.elc
-%{_libdir}/*/lisp/hm--html-menus/command-description.html.tmpl
-%{_libdir}/*/lisp/hm--html-menus/frame.html.tmpl
-%{_libdir}/*/lisp/hm--html-menus/templates.doc
-%{_libdir}/*/lisp/psgml/*.elc
-%{_libdir}/*/lisp/psgml/psgml-style.fs
+%doc %{_datadir}/*/lisp/psgml/ChangeLog*
+%doc %{_datadir}/*/lisp/sgml/ChangeLog*
+%doc %{_datadir}/*/lisp/hm--html-menus/ChangeLog*
+%dir %{_datadir}/*/lisp/hm--html-menus
+%dir %{_datadir}/*/lisp/psgml
+%dir %{_datadir}/*/lisp/sgml
+%{_datadir}/*/etc/hm--html-menus
+%{_datadir}/*/etc/psgml
+%{_datadir}/*/lisp/hm--html-menus/*.elc
+%{_datadir}/*/lisp/psgml/*.elc
+%{_datadir}/*/lisp/sgml/*.elc
 
 %files psgml-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/psgml/*.el.gz
-%{_libdir}/*/lisp/hm--html-menus/*.el.gz
+%{_datadir}/*/lisp/psgml/*.el.gz
+%{_datadir}/*/lisp/sgml/*.el.gz
+%{_datadir}/*/lisp/hm--html-menus/*.el.gz
 
 %files modes 
 %defattr(644,root,root,755)
 %{_infodir}/pcl-cvs.info*gz
-%doc %{_libdir}/*/lisp/pcl-cvs/ChangeLog
-%doc %{_libdir}/*/lisp/pcl-cvs/README
-%{_libdir}/*/lisp/modes/*.elc
-%{_libdir}/*/lisp/pcl-cvs/*.elc
-#%{_libdir}/*/lisp/pcl-cvs/INSTALL
-%doc %{_libdir}/*/lisp/pcl-cvs/NEWS
+%doc %{_datadir}/*/lisp/pcl-cvs/ChangeLog*
+%doc %{_datadir}/*/lisp/ada/ChangeLog*
+%doc %{_datadir}/*/lisp/c-support/ChangeLog*
+%doc %{_datadir}/*/lisp/debug/ChangeLog*
+%doc %{_datadir}/*/lisp/pc/ChangeLog*
+%doc %{_datadir}/*/lisp/prog-modes/ChangeLog*
+%doc %{_datadir}/*/lisp/scheme/ChangeLog*
+%doc %{_datadir}/*/lisp/sh-script/ChangeLog*
+%doc %{_datadir}/*/lisp/texinfo/ChangeLog*
+%doc %{_datadir}/*/lisp/text-modes/ChangeLog*
+%doc %{_datadir}/*/lisp/vhdl/ChangeLog*
+%dir %{_datadir}/*/lisp/pcl-cvs
+%dir %{_datadir}/*/lisp/ada
+%dir %{_datadir}/*/lisp/c-support
+%dir %{_datadir}/*/lisp/debug
+%dir %{_datadir}/*/lisp/pc
+%dir %{_datadir}/*/lisp/prog-modes
+%dir %{_datadir}/*/lisp/scheme
+%dir %{_datadir}/*/lisp/sh-script
+%dir %{_datadir}/*/lisp/texinfo
+%dir %{_datadir}/*/lisp/text-modes
+%dir %{_datadir}/*/lisp/vhdl
+%{_datadir}/*/lisp/pcl-cvs/*.elc
+%{_datadir}/*/lisp/ada/*.elc
+%{_datadir}/*/lisp/c-support/*.elc
+%{_datadir}/*/lisp/debug/*.elc
+%{_datadir}/*/lisp/pc/*.elc
+%{_datadir}/*/lisp/prog-modes/*.elc
+%{_datadir}/*/lisp/scheme/*.elc
+%{_datadir}/*/lisp/sh-script/*.elc
+%{_datadir}/*/lisp/texinfo/*.elc
+%{_datadir}/*/lisp/text-modes/*.elc
+%{_datadir}/*/lisp/vhdl/*.elc
 
 %files modes-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/pcl-cvs/*.el.gz
-%{_libdir}/*/lisp/modes/*.el.gz
+%{_datadir}/*/lisp/pcl-cvs/*.el.gz
+%{_datadir}/*/lisp/ada/*.el.gz
+%{_datadir}/*/lisp/c-support/*.el.gz
+%{_datadir}/*/lisp/debug/*.el.gz
+%{_datadir}/*/lisp/pc/*.el.gz
+%{_datadir}/*/lisp/prog-modes/*.el.gz
+%{_datadir}/*/lisp/scheme/*.el.gz
+%{_datadir}/*/lisp/sh-script/*.el.gz
+%{_datadir}/*/lisp/texinfo/*.el.gz
+%{_datadir}/*/lisp/text-modes/*.el.gz
+%{_datadir}/*/lisp/vhdl/*.el.gz
 
 %files extras
 %attr(755,root,root) %{_bindir}/b2m
@@ -907,8 +1233,9 @@ fi
 
 %files mail
 %defattr(644,root,root,755)
-%doc %{_libdir}/*/etc/MH-E-NEWS
 %{_infodir}/mailcrypt.info*gz
+%{_infodir}/mew.info*gz
+%lang(ja) %{_infodir}/mew.jis.info*gz
 %{_infodir}/mh-e.info*gz
 %{_infodir}/rmail.info*gz
 %{_infodir}/supercite.info*gz
@@ -917,41 +1244,184 @@ fi
 %{_infodir}/tm-mh-e-en.info*gz
 %{_infodir}/tm-view-en.info*gz
 %{_infodir}/tm-vm-en.info*gz
+%lang(ja) %{_infodir}/tm*ja*.info.gz
 %{_infodir}/vm.info*gz
-%doc %{_libdir}/*/lisp/mailcrypt/ChangeLog
-%doc %{_libdir}/*/lisp/mailcrypt/NEWS
-%doc %{_libdir}/*/lisp/mailcrypt/ONEWS
-%doc %{_libdir}/*/lisp/mailcrypt/README
-%doc %{_libdir}/*/lisp/rmail/README
-%doc %{_libdir}/*/lisp/vm/README
-%attr(755,root,root) %{_libdir}/*/%{buildarch}*/tm*
-%{_libdir}/*/etc/vm/*
-%{_libdir}/*/lisp/mailcrypt/*.elc
-%{_libdir}/*/lisp/mh-e/*.elc
-%{_libdir}/*/lisp/rmail/*.elc
-%{_libdir}/*/lisp/tm/*.elc
-%{_libdir}/*/lisp/vm/*.el
-%{_libdir}/*/lisp/vm/*.elc
-%{_libdir}/*/lisp/vm/.autoload
-%{_libdir}/*/lisp/vm/Makefile
-%{_libdir}/*/lisp/vm/make-autoloads
+%doc %{_datadir}/*/lisp/mailcrypt/ChangeLog*
+%doc %{_datadir}/*/lisp/mail-lib/ChangeLog*
+%doc %{_datadir}/*/lisp/mew/ChangeLog*
+%doc %{_datadir}/*/lisp/mh-e/ChangeLog*
+%doc %{_datadir}/*/lisp/rmail/ChangeLog*
+%doc %{_datadir}/*/lisp/tm/ChangeLog*
+%doc %{_datadir}/*/lisp/vm/ChangeLog*
+%doc %{_datadir}/*/lisp/footnote/ChangeLog*
+%doc %{_datadir}/*/lisp/supercite/ChangeLog*
+%attr(755,root,root) %{_libdir}/%{name}-%{realversion}/*/tm*
+%dir %{_datadir}/*/lisp/mailcrypt
+%dir %{_datadir}/*/lisp/mail-lib
+%dir %{_datadir}/*/lisp/mew
+%dir %{_datadir}/*/lisp/mh-e
+%dir %{_datadir}/*/lisp/rmail
+%dir %{_datadir}/*/lisp/tm
+%dir %{_datadir}/*/lisp/vm
+%dir %{_datadir}/*/lisp/footnote
+%dir %{_datadir}/*/lisp/supercite
+%{_datadir}/*/etc/vm
+%{_datadir}/*/etc/mew
+%{_datadir}/*/lisp/mailcrypt/*.elc
+%{_datadir}/*/lisp/mail-lib/*.elc
+%{_datadir}/*/lisp/mew/*.elc
+%{_datadir}/*/lisp/mh-e/*.elc
+%{_datadir}/*/lisp/rmail/*.elc
+%{_datadir}/*/lisp/tm/*.elc
+%{_datadir}/*/lisp/vm/*.elc
+%{_datadir}/*/lisp/footnote/*.elc
+%{_datadir}/*/lisp/supercite/*.elc
 
 %files mail-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/tm/*.el.gz
-%{_libdir}/*/lisp/vm/*.el.gz
-%{_libdir}/*/lisp/mh-e/*.el.gz
-%{_libdir}/*/lisp/mailcrypt/*.el.gz
-%{_libdir}/*/lisp/rmail/*.el.gz
+%{_datadir}/*/lisp/tm/*.el.gz
+%{_datadir}/*/lisp/mew/*.el.gz
+%{_datadir}/*/lisp/mail-lib/*.el.gz
+%{_datadir}/*/lisp/vm/*.el.gz
+%{_datadir}/*/lisp/mh-e/*.el.gz
+%{_datadir}/*/lisp/mailcrypt/*.el.gz
+%{_datadir}/*/lisp/rmail/*.el.gz
+%{_datadir}/*/lisp/footnote/*.el.gz
+%{_datadir}/*/lisp/supercite/*.el.gz
 
 %files gnus
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/gnus/*.elc
-%doc %{_libdir}/*/etc/gnusrefcard/*
+%doc %{_datadir}/*/lisp/gnus/ChangeLog*
+%doc %{_datadir}/*/etc/gnusrefcard
+%doc %{_datadir}/*/etc/gnus-tut.txt
 %doc %{_infodir}/gnus-mime-en.info*gz
 %doc %{_infodir}/gnus.info*gz
+%lang(ja) %doc %{_infodir}/gnus-mime-ja.info*gz
+%dir %{_datadir}/*/lisp/gnus
+%{_datadir}/*/etc/gnus
+%{_datadir}/*/lisp/gnus/*.elc
 
 %files gnus-el
 %defattr(644,root,root,755)
-%{_libdir}/*/lisp/gnus/*.el.gz
-%{_libdir}/*/lisp/gnus/Makefile
+%{_datadir}/*/lisp/gnus/*.el.gz
+
+%files zenirc
+%defattr(644,root,root,755)
+%{_infodir}/zenirc.info*gz
+%doc %{_datadir}/*/lisp/zenirc/BUGS
+%doc %{_datadir}/*/lisp/zenirc/ChangeLog*
+%doc %{_datadir}/*/lisp/zenirc/NEWS
+%doc %{_datadir}/*/lisp/zenirc/TODO
+%doc %{_datadir}/*/etc/zenirc
+%dir %{_datadir}/*/lisp/zenirc
+%{_datadir}/*/lisp/zenirc/*.elc
+
+%files zenirc-el
+%defattr(644,root,root,755)
+%{_datadir}/*/lisp/zenirc/*.el.gz
+
+%files bbdb
+%defattr(644,root,root,755)
+%{_infodir}/bbdb.info*gz
+%doc %{_datadir}/*/lisp/bbdb/ChangeLog*
+%doc %{_datadir}/*/lisp/bbdb/README
+%doc %{_datadir}/*/etc/bbdb/tex
+%attr(755,root,root) %{_datadir}/*/etc/bbdb/*.pl
+%dir %{_datadir}/*/etc/bbdb
+%dir %{_datadir}/*/lisp/bbdb
+%{_datadir}/*/etc/bbdb/*.el
+%{_datadir}/*/lisp/bbdb/*.elc
+
+%files bbdb-el
+%defattr(644,root,root,755)
+%{_datadir}/*/lisp/bbdb/*.el.gz
+
+%files calc
+%defattr(644,root,root,755)
+%{_infodir}/calc.info*gz
+%doc %{_datadir}/*/lisp/calc/ChangeLog*
+%doc %{_datadir}/*/etc/calccard*
+%dir %{_datadir}/*/lisp/calc
+%{_datadir}/*/lisp/calc/*.elc
+
+%files calc-el
+%defattr(644,root,root,755)
+%{_datadir}/*/lisp/calc/*.el.gz
+
+%files mule
+%defattr(644,root,root,755)
+%{_infodir}/skk.info*gz
+%doc %{_datadir}/*/etc/mule/FAQ-Mule
+%doc %lang(cn) %{_datadir}/*/etc/mule/*.cn
+%doc %lang(ja) %{_datadir}/*/etc/mule/*.ja
+%doc %lang(kr) %{_datadir}/*/etc/mule/*.kr
+%doc %lang(th) %{_datadir}/*/etc/mule/*.th
+%doc %{_datadir}/*/etc/mule/*.1
+%doc %{_datadir}/*/etc/mule/*.ps
+%doc %{_datadir}/*/etc/mule/*.tex
+%doc %{_datadir}/*/etc/mule/*.xbm
+%doc %{_datadir}/*/etc/mule/VERSIONS
+%doc %lang(th) %{_datadir}/*/etc/mule-doc/Thai
+%doc %lang(vt) %{_datadir}/*/etc/mule-doc/viet
+%doc %lang(ja) %{_datadir}/*/etc/mule-doc/*.ja
+%doc %lang(cn) %{_datadir}/*/etc/mule-doc/*.cn
+%doc %{_datadir}/*/etc/mule-doc/ChangeLog*
+%doc %{_datadir}/*/etc/mule-doc/NEWFEATURE
+%doc %{_datadir}/*/etc/mule-doc/README.Mule
+%doc %{_datadir}/*/etc/mule-doc/arabic.txt
+%doc %{_datadir}/*/etc/mule-doc/sample.ks
+%doc %{_datadir}/*/etc/skk
+%lang(fr) %{_datadir}/*/etc/start-files/fr
+%lang(ja) %{_datadir}/*/etc/start-files/ja
+%lang(ro) %{_datadir}/*/etc/start-files/ro
+%doc %{_datadir}/*/lisp/edict/ChangeLog*
+%doc %{_datadir}/*/lisp/edict/edictj.demo
+%doc %{_datadir}/*/lisp/egg-its/ChangeLog*
+%doc %{_datadir}/*/lisp/leim/ChangeLog*
+%doc %{_datadir}/*/lisp/locale/ChangeLog*
+%doc %{_datadir}/*/lisp/mule-base/ChangeLog*
+%doc %{_datadir}/*/lisp/skk/ChangeLog*
+%dir %{_datadir}/*/etc/mule
+%dir %lang(th) %{_datadir}/*/etc/mule-doc
+%dir %{_datadir}/*/lisp/edict
+%dir %{_datadir}/*/lisp/egg-its
+%dir %{_datadir}/*/lisp/leim
+%dir %{_datadir}/*/lisp/leim/quail
+%dir %{_datadir}/*/lisp/locale
+%dir %{_datadir}/*/lisp/mule
+%dir %{_datadir}/*/lisp/mule-base
+%dir %{_datadir}/*/lisp/skk
+%{_datadir}/*/lisp/edict/*.elc
+%{_datadir}/*/lisp/egg-its/eggrc*
+%{_datadir}/*/lisp/egg-its/*.elc
+%{_datadir}/*/lisp/leim/quail/*.elc
+%{_datadir}/*/lisp/leim/*.elc
+%{_datadir}/*/lisp/locale/*.elc
+%{_datadir}/*/lisp/mule/*.elc
+%{_datadir}/*/lisp/mule-base/*.elc
+%{_datadir}/*/lisp/skk/*.elc
+
+%files mule-el
+%defattr(644,root,root,755)
+%{_datadir}/*/lisp/edict/*.el.gz
+%{_datadir}/*/lisp/egg-its/*.el.gz
+%{_datadir}/*/lisp/leim/quail/*.el.gz
+%{_datadir}/*/lisp/leim/*.el.gz
+%{_datadir}/*/lisp/locale/*.el.gz
+%{_datadir}/*/lisp/mule/*.el.gz
+%{_datadir}/*/lisp/mule-base/*.el.gz
+%{_datadir}/*/lisp/skk/*.el.gz
+
+%files jde
+%defattr(644,root,root,755)
+%doc %{_datadir}/*/etc/jde/*.gif
+%doc %{_datadir}/*/etc/jde/*.htm*
+%doc %{_datadir}/*/lisp/jde/ChangeLog*
+%dir %{_datadir}/*/etc/jde
+%dir %{_datadir}/*/lisp/jde
+%{_datadir}/*/etc/jde/java
+%{_datadir}/*/lisp/jde/*.elc
+
+%files jde-el
+%defattr(644,root,root,755)
+%{_datadir}/*/lisp/jde/*.el.gz
