@@ -1,10 +1,10 @@
-Summary:	The XEmacs editor
-Summary(pl):	XEmacs -- Edytor
-Name:		xemacs
-Version:	21.1.12
 %define		ver		21.1
-%define		basepkgver	1.42
-Release:	1
+%define		basepkgver 	1.42
+Summary:	The XEmacs -- Emacs: The Next Generation
+Summary(pl):	XEmacs -- Emacs nastêpnej generacji
+Name:		xemacs
+Version:	%{ver}.12
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -24,49 +24,81 @@ URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	zlib-devel
 BuildRequires:	xpm-devel
-BuildRequires:	openldap-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	ctags
+Requires:	%{name}-common = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Provides:	xemacs-base-pkg
 
 %description
-XEmacs is a version of Emacs, compatible with and containing many
-improvements over GNU Emacs, written by Richard Stallman of the Free
-Software Foundation. It was originally based on an early release of
-GNU Emacs version 19, and has tracked subsequent releases of GNU Emacs
-as they have become available. This XEmacs distribution has been
-splitted in some rpm :
+XEmacs is a highly customizable open source text editor and
+application development system.  XEmacs is a version of Emacs,
+compatible with and containing many improvements over GNU Emacs,
+written by Richard Stallman of the Free Software Foundation. It was
+originally based on an early release of GNU Emacs version 19, and has
+tracked subsequent releases of GNU Emacs as they have become
+available. This XEmacs distribution has been splitted in some rpm:
 
-- xemacs        - the main part
-- xemacs-extras - files in conflict with emacs
+xemacs-common - common files needed by xemacs and xemacs-nox packages 
+xemacs        - XEmacs binary with both X11 and TTY support
+xemacs-nox    - XEmacs binary with TTY support only
+xemacs-extras - files in conflict with emacs
 
-Install xemacs-extras if you do not have emacs installed.
+Install xemacs-extras if you haven't emacs installed.
 
 %description -l pl 
-XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z
-GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
+XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) 
+z GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
 Foundation. Wywodzi siê z wczesnych odmian GNU Emacs 19, wprowadza
 wiele mi³ych ulepszeñ nie trac±c jednak wiêzi z oryginaln± wersj±.
 
-Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych.
-Do pracy niezbêdne s± dwa z nich:
+Ta dystrubucja XEmacsa zosta³± podzielona na wiele pakietów binarnych:
 
-- xemacs: g³ówny pakiet
-- xemacs-extras: pliki wchodz±ce w sk³ad dystrybucji GNU Emacs
+xemacs-common - pakiet zawieraj±cy pliki wspó³dzielone przez pakiety 
+		  xemacs i xemacs-nox 
+xemacs        - XEmacs skompilowany ze wsparciem dla X11 i konsoli
+xemacs-nox    - XEmacs skompilowany bez wsparcia dla X11 (pracuje 
+		tylko na konsoli tekstowej)
+xemacs-extras - pliki wchodz±ce w sk³ad dystrybucji GNU Emacs
 
-Zainstaluj xemacs-extras je¶li nie posiadasz GNU Emacsa.
+Do pracy niezbêdne s± xemacs-common oraz xemacs b±d¼ xemacs-nox.
+Zainstaluj tak¿e xemacs-extras je¶li nie posiadasz GNU Emacsa.
+
+%package common
+Summary:	Common part of XEmacs distribution
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Provides:	xemacs-base-pkg
+
+%description common
+Common files of XEmacs distribution. This package does not contain 
+XEmacs editor binary, you must install xemacs or xemacs-nox package
+to use XEmacs -- Emacs: The Next Generation editor.
+
+%package nox
+Summary:	XEmacs binary compiled without X11 support
+Group:		Applications/Editors/Emacs
+Group(pl):	Aplikacje/Edytory/Emacs
+Requires:	%{name}-common = %{version}
+Provides:	%{name}
+Provides:	%{name} = %{version}
+
+%description nox
+XEmacs binary compiled with TTY support only, without X11 support.
+
+%description nox -l pl
+XEmacs skompilowany bez wsparcia dla X11 (pracuje tylko na konsoli
+lub w okienku xterma).
 
 %package el
 Summary:	.el source files for XEmacs
 Summary(pl):	Pliki ¼ród³owe procedur w eLispie do XEmacsa
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
-Requires:	%{name} = %{version}
+Requires:	%{name}-common = %{version}
 
 %description el
 .el source files -- not necessary to run XEmacs.
@@ -106,6 +138,8 @@ CPPFLAGS="$RPM_OPT_FLAGS"
 LDFLAGS="-s -lc"
 sitelispdir=%{_libdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
+
+# no X 
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
@@ -114,7 +148,36 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--lockdir=/var/lock/xemacs/ \
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--with-site-lisp \
-	--with-sound=native \
+	--without-sound \
+	--without-x11 \
+	--without-jpeg \
+	--without-png \
+	--without-xpm \
+	--with-gpm \
+	--with-ncurses \
+	--with-database=no \
+	--without-tiff \
+	--without-dnet \
+	--without-ldap \
+	--without-dragndrop \
+	--without-mule \
+
+sitelispdir=%{_libdir}/%{name}/site-lisp \
+%{__make}
+cp src/xemacs src/xemacs-nox
+%{__make} distclean
+
+# X
+autoconf
+./configure %{_target_platform} \
+	--prefix=%{_prefix} \
+	--infodir=%{_infodir} \
+	--mandir=%{_mandir}/man1 \
+	--datadir=%{_datadir} \
+	--lockdir=/var/lock/xemacs/ \
+	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
+	--with-site-lisp \
+	--without-sound \
 	--with-x11 \
 	--with-jpeg \
 	--with-png \
@@ -127,7 +190,10 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--without-dnet \
 	--without-ldap \
 	--without-dragndrop \
-	--without-mule \
+	--without-mule 
+
+# if you want to xemacs sings and plays sounds add option 
+#	--with-sound=native 
 
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
@@ -183,6 +249,8 @@ gzip -9nf $RPM_BUILD_ROOT{%{_mandir}/{man1/*,ja/man1/*},%{_infodir}/*info*} \
 
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
+install -s src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -193,6 +261,19 @@ rm -rf $RPM_BUILD_ROOT
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
 
 %files
+%defattr(644,root,root,755)
+%{_applnkdir}/Development/Editors/xemacs.desktop
+%lang(en) %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
+%lang(pl) %{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
+%attr(755,root,root) %{_bindir}/gnu*
+%attr(755,root,root) %{_bindir}/xemacs
+%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/gnuserv
+%{_mandir}/man1/gnuattach.1*
+%{_mandir}/man1/gnuclient.1*
+%{_mandir}/man1/gnudoit.1*
+%{_mandir}/man1/gnuserv.1*
+
+%files common
 %defattr(644,root,root,755)
 %doc *.gz etc/*.gz
 %doc %{_datadir}/*/etc/TUTORIAL
@@ -217,17 +298,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/*/lisp/ChangeLog*
 %doc %{_datadir}/*/lisp/README
 %doc %{_datadir}/*/lisp/term/README
-%{_applnkdir}/Development/Editors/xemacs.desktop
-
-%lang(en) %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
-%lang(pl) %{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 
 %{_libdir}/%{name}
 %dir %{_libdir}/%{name}-%{version}
 %dir %{_libdir}/%{name}-%{version}/%{_target_platform}
 
 %{_datadir}/%{name}
-
 %dir %{_datadir}/%{name}-%{version}
 %dir %{_datadir}/%{name}-%{version}/etc
 %{_datadir}/%{name}-%{version}/etc/custom
@@ -255,14 +331,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-packages/lisp/default.el
 %{_datadir}/%{name}-packages/lisp/kbd_pl
 
-%attr(755,root,root) %{_bindir}/gnu*
-%attr(755,root,root) %{_bindir}/xemacs
-
 %attr(2755,root,mail) %{_libdir}/%{name}-%{version}/*/movemail
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/cvtmail
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/digest-doc
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/fakemail
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/gnuserv
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/hexl
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/make-docfile
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/make-path
@@ -276,10 +348,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/vcdiff
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/wakeup
 
-%{_mandir}/man1/gnuattach.1*
-%{_mandir}/man1/gnuclient.1*
-%{_mandir}/man1/gnudoit.1*
-%{_mandir}/man1/gnuserv.1*
 %{_mandir}/man1/xemacs.1*
 %lang(ja) %{_mandir}/ja/man1/*
 
@@ -294,6 +362,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_infodir}/xemacs.info*gz
 
 /var/lock/xemacs
+
+%files nox
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/xemacs-nox
 
 %files el 
 %defattr(644,root,root,755)
