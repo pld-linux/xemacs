@@ -1,10 +1,12 @@
+# with_postgresql	- postgresql support
+# with_gtk		- gtk enabled version
 %define		ver		21.4
 %define		basepkgver 	1.53
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
 Version:	%{ver}.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(de):	Applikationen/Editors/Emacs
@@ -24,16 +26,17 @@ Patch2:		%{name}-fix_ldflafs.patch
 Patch3:		%{name}-event.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
+BuildRequires:	motif-devel
 BuildRequires:	zlib-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng >= 1.0.8
-BuildRequires:	postgresql-devel >= 7.1
+%{?with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gpm-devel
-BuildRequires:	gtk+-devel >= 1.2.10
-BuildRequires:	glib-devel
+%{?with_gtk:BuildRequires:	gtk+-devel >= 1.2.10}
+%{?with_gtk:BuildRequires:	glib-devel}
 Requires:	ctags
 Requires:	%{name}-common = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -118,8 +121,7 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
 %setup0 -q -b1 -a2
-#FIXME
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -173,14 +175,17 @@ autoconf
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--with-mule \
 	--with-site-lisp \
-	--with-postgresql \
+	--with%{?!with_postgresql:out}-postgresql \
 	--without-sound \
 	--with-jpeg \
 	--with-png \
 	--with-xpm \
 	--with-gpm \
 	--with-ncurses \
-	--with-gtk \
+	--with%{?!with_gtk:out}-gtk \
+	%{?!with_gtk:--with-x11 --with-athena=3d --with-menubars=lucid} \
+	%{?!with_gtk:--with-scrollbars=lucid --with-dialogs=athena} \
+	%{?!with_gtk:--with-widgets=athena} \
 	--with-database=no \
 	--with-gnome=no \
 	--without-tiff \
