@@ -3,8 +3,10 @@
 %define		ver		21.4
 %define		basepkgver	1.67
 Summary:	The XEmacs -- Emacs: The Next Generation
+Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs ¥¨¥Ç¥£¥¿
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
+Summary(pt_BR):	Editor XEmacs
 Summary(ru):	÷ÅÒÓÉÑ GNU Emacs ÄÌÑ X Window System
 Summary(uk):	÷ÅÒÓ¦Ñ GNU Emacs ÄÌÑ X Window System
 Name:		xemacs
@@ -64,6 +66,11 @@ XEmacs ¤Ï Free Software Foundation ¤Î Richard Stallman ¤Ë¤è¤Ã¤Æ
 ÇÉÀ¸¥Ğ¡¼¥¸¥ç¥ó¤Ç¤¹¡¥ ¸µ¡¹ Emacs 19 ¤ò¸µ¤Ë³«È¯¤µ¤ì¡¤Emacs
 ¤Î¸åÂ³¥ê¥ê¡¼¥¹¤ËÄÉ²Ã¤µ¤ì¤¿ µ¡Ç½¤ÈÆ±´ü¤¬¼è¤é¤ì¤Æ¤¤¤Ş¤¹¡¥
 
+%description -l es
+XEmacs es una versión de Emacs, compatible con GNU Emacs y conteniendo
+muchas mejoras. Fue basado originalmente en una versión anterior de
+GNU Emacs, y ha seguido las versiones subsecuentes.
+
 %description -l pl
 XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z
 GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
@@ -80,6 +87,11 @@ sk³ad dystrybucji GNU Emacs
 
 Do pracy niezbêdne s± xemacs-common oraz xemacs b±d¼ xemacs-nox.
 Zainstaluj tak¿e xemacs-extras je¶li nie posiadasz GNU Emacsa.
+
+%description -l pt_BR
+XEmacs é uma versão do Emacs, compatível com o GNU Emacs, contendo
+muitos adicionais. Foi baseado numa versão anterior do GNU Emacs, e
+seguiu as versões subseqüentes.
 
 %description -l ru
 XEmacs (ÒÁ×ÎÏ ËÁË É ÏÒÉÇÉÎÁÌØÎÙÊ GNU Emacs) - ÜÔÏ
