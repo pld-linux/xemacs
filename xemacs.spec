@@ -158,7 +158,7 @@ make install-arch-dep install-arch-indep gzip-el \
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
-( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE3} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
+( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
