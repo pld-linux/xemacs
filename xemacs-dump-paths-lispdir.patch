@@ -1,0 +1,21 @@
+diff -u xemacs-21.4.13/lisp/dump-paths.el.dump-path xemacs-21.4.13/lisp/dump-paths.el
+--- xemacs-21.4.13/lisp/dump-paths.el.dump-path	2003-06-26 23:33:42.000000000 +0900
++++ xemacs-21.4.13/lisp/dump-paths.el	2003-06-26 23:33:42.000000000 +0900
+@@ -58,15 +58,14 @@
+ 		       late-packages late-package-load-path)
+ 	       'external-debugging-output)))
+ 
+-  (setq lisp-directory (paths-find-lisp-directory roots))
++  (setq lisp-directory "@srcdir@/lisp")
+   (if debug-paths
+       (princ (format "lisp-directory:\n%S\n" lisp-directory)
+ 	     'external-debugging-output))
+   (if (featurep 'mule)
+       (progn
+ 	(setq mule-lisp-directory
+-	      (paths-find-mule-lisp-directory roots
+-					      lisp-directory))
++	      "@srcdir@/lisp/mule")
+ 	(if debug-paths
+ 	    (princ (format "mule-lisp-directory:\n%S\n"
+ 			   mule-lisp-directory)
