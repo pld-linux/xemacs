@@ -167,6 +167,8 @@ install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lib-src
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/etc
 install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
 
@@ -253,6 +255,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/lisp/term/*.elc
 
 %dir %{_datadir}/%{name}-packages
+%dir %{_datadir}/%{name}-packages/etc
+%dir %{_datadir}/%{name}-packages/lib-src
 %dir %{_datadir}/%{name}-packages/lisp
 %dir %{_datadir}/%{name}-packages/lisp/xemacs-base
 %{_datadir}/%{name}-packages/lisp/xemacs-base/*.elc
