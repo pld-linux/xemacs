@@ -3,13 +3,14 @@ Summary(pl):	XEmacs -- Edytor
 Name:		xemacs
 Version:	21.1.2
 %define		realversion	21.1-p2
+%define		pkgdate		1999-05-13
 Release:	1
 Copyright:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-sumo.tar.gz
-Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-mule-sumo.tar.gz
+Source1:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-sumo-%{pkgdate}.tar.gz
+Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-mule-sumo-%{pkgdate}.tar.gz
 Source3:	xemacs.wmconfig
 Patch0:		xemacs-static.patch
 Patch1:		xemacs-alpha.patch
