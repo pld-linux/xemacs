@@ -35,6 +35,7 @@ Patch2:		%{name}-ldscript.patch
 Patch3:		%{name}-no-memory-warnings.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
+BuildRequires:	automake
 BuildRequires:	motif-devel
 BuildRequires:	zlib-devel
 BuildRequires:	libtiff-devel
@@ -53,6 +54,8 @@ BuildRequires:	glib-devel
 Requires:	ctags
 Requires:	%{name}-common = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define _ulibdir /usr/lib
 
 %description
 XEmacs is a highly customizable open source text editor and
@@ -188,10 +191,11 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %endif
 
 %build
+cp /usr/share/automake/config.sub .
 CFLAGS=" %{rpmcflags}"
 CPPFLAGS=" %{rpmcflags}"
 LDFLAGS=" %{rpmldflags} -lc"
-sitelispdir=%{_libdir}/%{name}/site-lisp
+sitelispdir=%{_ulibdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 
 # no X
@@ -225,7 +229,7 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--pdump=no
 %endif 
 
-sitelispdir=%{_libdir}/%{name}/site-lisp \
+sitelispdir=%{_ulibdir}/%{name}/site-lisp \
 %{__make} \
 	CC="%{__cc}"
 cp src/xemacs src/xemacs-nox
@@ -287,7 +291,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 #	--debug=no \
 #	--with-session=yes \
 
-sitelispdir=%{_libdir}/%{name}/site-lisp \
+sitelispdir=%{_ulibdir}/%{name}/site-lisp \
 %{__make} \
 	CC="%{__cc}"
 
@@ -296,7 +300,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,%{_pixmapsdir},/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/app-defaults/pl} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
-	$RPM_BUILD_ROOT%{_libdir}/%{name} \
+	$RPM_BUILD_ROOT%{_ulibdir}/%{name} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
 
 %{__make} install-arch-dep install-arch-indep \
@@ -314,11 +318,11 @@ install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-mule.e
 install %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-nomule.el
 install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-#mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
+#mv $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_ulibdir}/%{name}
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
-ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
+ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_ulibdir}/%{name}/site-lisp
 
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
 	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
@@ -345,13 +349,13 @@ install src/xemacs-nox.dmp $RPM_BUILD_ROOT%{_bindir}
 
 # hack...
 install lib-src/gnuserv-nox $RPM_BUILD_ROOT%{_bindir}
-mv -f $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/gnuserv $RPM_BUILD_ROOT%{_bindir}
+mv -f $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/%{_target_platform}/gnuserv $RPM_BUILD_ROOT%{_bindir}
 
 # remove .el file if corresponding .elc file exists
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
 # hmm, maybe xemacs-devel is necessary?
-rm -rf	$RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include \
+rm -rf	$RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/%{_target_platform}/include \
 	$RPM_BUILD_ROOT%{_infodir}/dir* \
 	$RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
@@ -413,16 +417,16 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/refcard.tex
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/sample.*
 
-%{_libdir}/%{name}
+%{_ulibdir}/%{name}
 
 %{_datadir}/%{name}
 
 %dir %{_datadir}/%{name}-%{version}
 # do not know it is necessary
-%{_libdir}/%{name}-%{version}/%{_target_platform}/modules
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/%{_target_platform}/[Dacdfghprsvwy]*
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/%{_target_platform}/m[am]*
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/%{_target_platform}/mov*
+%{_ulibdir}/%{name}-%{version}/%{_target_platform}/modules
+%attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/[Dacdfghprsvwy]*
+%attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/m[am]*
+%attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/mov*
 
 %{_datadir}/%{name}-%{version}/lisp/
 
