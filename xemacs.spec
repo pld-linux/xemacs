@@ -34,6 +34,7 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
 Patch2:		%{name}-ldscript.patch
 Patch3:		%{name}-no-memory-warnings.patch
+Patch4:		%{name}-dump-paths-lispdir.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
@@ -191,6 +192,9 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
 %endif
+%patch4 -p1
+rm lisp/dump-paths.elc
+sed -i -e "s#@srcdir@#$PWD#" lisp/dump-paths.el
 
 %build
 cp /usr/share/automake/config.sub .
@@ -222,14 +226,16 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--with-gpm \
 	--with-ncurses \
 	--with-database=no \
+%if %{with pdump}
+	--pdump=yes \
+%else
+	--pdump=no \
+%endif
 	--without-tiff \
 	--without-dnet \
 	--without-ldap \
 	--without-dragndrop \
-	--without-msw \
-%if %{without pdump}
-	--pdump=no
-%endif
+	--without-msw
 
 sitelispdir=%{_ulibdir}/%{name}/site-lisp \
 %{__make} -j1 \
