@@ -344,6 +344,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README GETTING.GNU.SOFTWARE PROBLEMS BUGS etc/{NEWS,MAILINGLISTS,TERMS,SERVICE}
 %dir %{_datadir}/%{name}-%{version}%{_sysconfdir}
+%{_datadir}/%{name}-%{version}%{_sysconfdir}/package-index.LATEST.pgp
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL
 %doc %lang(de) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.de
 %doc %lang(fr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.fr
@@ -356,6 +357,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc %lang(ru) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ru
 %doc %lang(th) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.th
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/[A-SU-Z]*
+%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/refcard.ps.gz
+%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/refcard.tex
+%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/sample.*
 
 %{_libdir}/%{name}
 
