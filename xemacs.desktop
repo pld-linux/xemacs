@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=XEmacs
 Comment=The XEmacs editor
-Exec=xemacs &
+Exec=xemacs
 Terminal=0
 Type=Application
