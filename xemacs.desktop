@@ -7,4 +7,5 @@ Icon=xemacs.png
 Exec=xemacs
 Terminal=false
 Type=Application
+Categories=Motif;TextEditor;
 # vi: encoding=utf-8
