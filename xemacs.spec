@@ -407,7 +407,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc %lang(hr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.hr
 %doc %lang(ja) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ja
 %doc %lang(ko) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ko
-%doc %lang(no) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.no
+%doc %lang(nb) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.no
 %doc %lang(pl) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.pl
 %doc %lang(ro) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ro
 %doc %lang(ru) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ru
