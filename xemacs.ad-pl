@@ -1,1 +1,2 @@
-.default.attributeFont:  -misc-*-bold-*-*-*-15-*-*-*-c-*-*-2
+Emacs.default.attributeFont:  -misc-*-bold-*-*-*-15-*-*-*-c-*-*-2
+Emacs.italic.attributeForeground:  darkslategray
