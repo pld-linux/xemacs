@@ -5,7 +5,7 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.4
-%define		basepkgver	1.86
+%define		basepkgver	1.96
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs ╔╗╔г╔ё╔©
@@ -14,16 +14,16 @@ Summary(pt_BR):	Editor XEmacs
 Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
-Version:	%{ver}.15
-Release:	5
+Version:	%{ver}.17
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	b80e040d9cb85c9210999554dc210fa6
+# Source0-md5:	835d539709fbbe8e30cd5de8b3541aa1
 Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-# Source1-md5:	0fcacb62b115dd34d2d59fbe8be36166
+# Source1-md5:	8f678003cc78cd0faecc5ab9e3b8818f
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	ab5151789560a085f901dea51f22fbfd
+# Source2-md5:	e6abbd4e2a18006e23d830b404e8e93e
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -32,7 +32,6 @@ Source7:	%{name}-ogony-nomule.el
 Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
-Patch2:		%{name}-ldscript.patch
 Patch3:		%{name}-no-memory-warnings.patch
 Patch4:		%{name}-dump-paths-lispdir.patch
 URL:		http://www.xemacs.org/
@@ -183,7 +182,6 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %setup -q -b1 -a2
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 %ifarch alpha ia64
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
