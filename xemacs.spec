@@ -483,7 +483,9 @@ sitelispdir=%{_datadir}/%{name}/site-lisp \
 	--with-session=yes \
 	--with-gpm=yes \
 	--with-png=yes \
-	--with-mule
+
+
+#	--with-mule
 
 sitelispdir=%{_datadir}/%{name}/site-lisp \
 make dist
@@ -818,6 +820,7 @@ fi
 %dir %{_datadir}/%{name}/lisp/mine
 %dir %{_datadir}/%{name}/lisp/misc-games
 %dir %{_datadir}/%{name}/lisp/net-utils
+%dir %{_datadir}/%{name}/lisp/pc
 %dir %{_datadir}/%{name}/lisp/os-utils
 %dir %{_datadir}/%{name}/lisp/slider
 %dir %{_datadir}/%{name}/lisp/sounds-au
@@ -932,6 +935,7 @@ fi
 %{_datadir}/*/lisp/ispell/*.elc
 %{_datadir}/*/lisp/net-utils/*.elc
 %{_datadir}/*/lisp/os-utils/*.elc
+%{_datadir}/*/lisp/pc/*.elc
 %{_datadir}/*/lisp/sounds-au/*.elc
 %{_datadir}/*/lisp/sounds-wav/*.elc
 %{_datadir}/*/lisp/speedbar/*.elc
@@ -1408,7 +1412,7 @@ fi
 %{_datadir}/*/lisp/leim/quail/*.elc
 %{_datadir}/*/lisp/leim/*.elc
 %{_datadir}/*/lisp/locale/*.elc
-%{_datadir}/*/lisp/mule/*.elc
+#%{_datadir}/*/lisp/mule/*.elc
 %{_datadir}/*/lisp/mule-base/*.elc
 %{_datadir}/*/lisp/skk/*.elc
 
@@ -1419,7 +1423,7 @@ fi
 %{_datadir}/*/lisp/leim/quail/*.el.gz
 %{_datadir}/*/lisp/leim/*.el.gz
 %{_datadir}/*/lisp/locale/*.el.gz
-%{_datadir}/*/lisp/mule/*.el.gz
+#%{_datadir}/*/lisp/mule/*.el.gz
 %{_datadir}/*/lisp/mule-base/*.el.gz
 %{_datadir}/*/lisp/skk/*.el.gz
 
