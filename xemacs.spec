@@ -32,10 +32,8 @@ BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel >= 5.0
 Requires:	ctags
 Prereq:		/usr/sbin/fix-info-dir
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	xemacs-base-pkg
-
-%define		_applnkdir	/usr/X11R6/share/applnk
 
 %description
 XEmacs is a version of Emacs, compatible with and containing many
@@ -194,7 +192,6 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
 
-
 %files
 %defattr(644,root,root,755)
 %doc README GETTING.GNU.SOFTWARE PROBLEMS 
@@ -305,7 +302,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/lisp/*.el.gz
 %{_datadir}/%{name}-%{version}/lisp/term/*.el.gz
 %{_datadir}/%{name}-packages/lisp/xemacs-base/*.el.gz
-
 
 %files extras
 %defattr(644,root,root,755)
