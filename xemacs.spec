@@ -263,6 +263,8 @@ rm -fr $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include
 rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
 rm -f $RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
+find $RPM_BUILD_ROOT -regex '.*~$' -exec rm -f {} \;
+
 gzip -9nf README GETTING.GNU.SOFTWARE PROBLEMS \
 	etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
 
