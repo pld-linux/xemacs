@@ -279,7 +279,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--without-dragndrop \
 	--without-msw \
 %if %{without pdump}
-        --pdump=no
+	--pdump=no
 %endif
 
 
