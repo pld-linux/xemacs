@@ -28,6 +28,7 @@ Source7:	%{name}-ogony-nomule.el
 Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
+Patch2:		%{name}-ldscript.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
@@ -174,6 +175,7 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %setup0 -q -b1 -a2
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 CFLAGS=" %{rpmcflags}"
