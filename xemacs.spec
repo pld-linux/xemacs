@@ -1,12 +1,12 @@
 # _with_postgresql	- postgresql support
 # _with_gtk		- gtk enabled version
 %define		ver		21.4
-%define		basepkgver 	1.53
+%define		basepkgver 	1.55
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
-Version:	%{ver}.3
-Release:	3
+Version:	%{ver}.4
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(de):	Applikationen/Editors/Emacs
@@ -23,7 +23,6 @@ Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-archlibdir.patch
 Patch2:		%{name}-fix_ldflafs.patch
-Patch3:		%{name}-event.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
@@ -126,11 +125,8 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
-aclocal
-autoconf
 CFLAGS="-I%{rpmcflags}"
 CPPFLAGS="-I%{rpmcflags}"
 LDFLAGS="%{rpmldflags} -lc"
@@ -167,8 +163,6 @@ cp src/xemacs src/xemacs-nox
 %{__make} distclean
 
 # X
-aclocal
-autoconf
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
@@ -212,7 +206,7 @@ sitelispdir=%{_libdir}/%{name}/site-lisp \
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,%{_pixmapsdir},/var/lock/xemacs} \
-	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/{,pl}/app-defaults} \
+	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/app-defaults/pl} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
 	$RPM_BUILD_ROOT%{_libdir}/%{name} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
@@ -232,7 +226,7 @@ install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-mule.e
 install %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-nomule.el
 install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
+#mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
@@ -241,8 +235,8 @@ ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
 	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
-	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
-cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
+	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
+cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
@@ -279,12 +273,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %lang(en) %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
-%lang(pl) %{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
+%lang(pl) %{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
 %attr(755,root,root) %{_bindir}/gnu*
 %attr(755,root,root) %{_bindir}/xemacs
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
-%attr(755,root,root) %{_libdir}/%{name}-%{version}/*/gnuserv
+%attr(755,root,root) %{_bindir}/gnuserv
 %{_applnkdir}/Development/Editors/xemacs.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
@@ -315,8 +309,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/[A-SU-Z]*
 
 %{_libdir}/%{name}
-%dir %{_libdir}/%{name}-%{version}
-%attr(755,root,root)  %{_libdir}/%{name}-%{version}/%{_target_platform}
+%dir %{_datadidir}/%{name}-%{version}
+%attr(755,root,root)  %{_datadir}/%{name}-%{version}/%{_target_platform}
 
 %{_datadir}/%{name}
 
