@@ -148,7 +148,7 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,/var/lock/xemacs} \
 	$RPM_BUILD_ROOT%{_libdir}/%{name} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
 
-make install-arch-dep install-arch-indep gzip-el \
+%{__make} install-arch-dep install-arch-indep gzip-el \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	infodir=$RPM_BUILD_ROOT%{_infodir} \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
