@@ -1,5 +1,5 @@
 %define		ver		21.1
-%define		basepkgver 	1.42
+%define		basepkgver 	1.46
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
