@@ -339,7 +339,7 @@ chmod u+wXr * -R
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s -lc" \
-./configure %{_target} \
+./configure %{_target_platform} \
 	--prefix=/usr \
 	--infodir=%{_infodir} \
 	--with-dialogs=athena \
