@@ -350,8 +350,7 @@ CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s -lc" \
 	--lockdir=/var/lock/xemacs \
 	--with-session=yes \
 	--with-gpm=yes \
-	--with-png=yes \
-	%{buildarch}-pld-`echo %{buildos} | tr A-Z a-z`
+	--with-png=yes
 
 make dist
 # xemacs generation
