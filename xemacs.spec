@@ -117,7 +117,7 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--mandir=%{_mandir}/man1 \
 	--datadir=%{_datadir} \
 	--lockdir=/var/lock/xemacs/ \
-	--package_path=~/.xemacs::%{_datadir}/%{name}-packages \
+	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--with-sound=both \
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
