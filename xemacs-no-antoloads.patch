@@ -1,0 +1,21 @@
+diff -Nru xemacs-21.1.8/src/Makefile.in.in xemacs-21.1.8.new/src/Makefile.in.in
+--- xemacs-21.1.8/src/Makefile.in.in	Sat Dec 11 12:02:54 1999
++++ xemacs-21.1.8.new/src/Makefile.in.in	Sat Dec 11 12:04:17 1999
+@@ -335,7 +335,7 @@
+ 	-$(DUMPENV) ./temacs -batch -l ${srcdir}/../lisp/loadup.el dump
+ 	@if test -f $@;        then if test -f SATISFIED; then \
+ 		echo "Testing for Lisp shadows ..."; \
+-		$(DUMPENV) ./${PROGNAME} -batch -vanilla -f list-load-path-shadows; fi; \
++		$(DUMPENV) ./${PROGNAME} -batch -no-autoloads -vanilla -f list-load-path-shadows; fi; \
+ 		$(RM) SATISFIED; exit 0; fi; \
+ 	if test -f SATISFIED; then $(RM) SATISFIED; exit 1; fi; \
+ 	$(RECURSIVE_MAKE) $@;
+@@ -344,7 +344,7 @@
+ 	@$(RM) ${PROGNAME} && touch SATISFIED
+ 	-$(DUMPENV) ./temacs -batch -l ${srcdir}/../lisp/loadup.el dump
+ 	@if test -f ${PROGNAME};        then if test -f SATISFIED; then \
+-		$(DUMPENV) ./${PROGNAME} -batch -vanilla -f list-load-path-shadows; fi; \
++		$(DUMPENV) ./${PROGNAME} -batch -no-autoloads -vanilla -f list-load-path-shadows; fi; \
+ 		$(RM) SATISFIED; exit 0; fi; \
+ 	if test -f SATISFIED; then $(RM) SATISFIED; exit 1; fi;
+ 
