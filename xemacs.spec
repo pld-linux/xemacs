@@ -138,7 +138,7 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 #	--with-session=yes \
 
 sitelispdir=%{_libdir}/%{name}/site-lisp \
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
