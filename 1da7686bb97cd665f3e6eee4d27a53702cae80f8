@@ -1,0 +1,9 @@
+- added "Prereq: /usr/sbin/fix-info-dir" for main,
+- removed %%{name}-%%{version}-info.tar.gz from Sources (this is generated
+  from included in main texinfo documents),
+- wmconfig file replaced by desktop file (added %%{_applnkdir} macro),
+- place in proper path and register xemacs X resources and ja man pages,
+- removed stripping binaries (LDFLAGS="-s" is passed to ./configure env),
+- added info index fixes for info pages (info patch),
+- link additional tools only with necessary libraries (fix_ldflafs patch),
+- added --with-sound=both for compiling both native and nas sound support.
