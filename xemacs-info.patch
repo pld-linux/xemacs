@@ -1,6 +1,6 @@
-diff -Nru xemacs-21.1.8/man/cl.texi xemacs-21.1.8.new/man/cl.texi
---- xemacs-21.1.8/man/cl.texi	Thu Dec  9 06:43:49 1999
-+++ xemacs-21.1.8.new/man/cl.texi	Thu Dec  9 06:43:02 1999
+diff -Nru xemacs-21.4.3/man/cl.texi xemacs-21.4.3.new/man/cl.texi
+--- xemacs-21.4.3/man/cl.texi	Thu Apr 12 20:21:59 2001
++++ xemacs-21.4.3.new/man/cl.texi	Mon May 21 22:16:38 2001
 @@ -7,9 +7,9 @@
  @end iftex
  
@@ -13,9 +13,9 @@ diff -Nru xemacs-21.1.8/man/cl.texi xemacs-21.1.8.new/man/cl.texi
  @end direntry
  
  This file documents the GNU Emacs Common Lisp emulation package.
-diff -Nru xemacs-21.1.8/man/custom.texi xemacs-21.1.8.new/man/custom.texi
---- xemacs-21.1.8/man/custom.texi	Sat Aug 28 22:24:17 1999
-+++ xemacs-21.1.8.new/man/custom.texi	Thu Dec  9 06:44:33 1999
+diff -Nru xemacs-21.4.3/man/custom.texi xemacs-21.4.3.new/man/custom.texi
+--- xemacs-21.4.3/man/custom.texi	Thu Apr 12 20:21:59 2001
++++ xemacs-21.4.3.new/man/custom.texi	Mon May 21 22:24:17 2001
 @@ -10,9 +10,9 @@
  @c %**end of header
  
@@ -25,12 +25,12 @@ diff -Nru xemacs-21.1.8/man/custom.texi xemacs-21.1.8.new/man/custom.texi
  @direntry
 -* Customizations: (custom).	Customization Library.
 +* Customizations: (custom).		Customization Library
- package.
  @end direntry
  @end ifinfo
-diff -Nru xemacs-21.1.8/man/external-widget.texi xemacs-21.1.8.new/man/external-widget.texi
---- xemacs-21.1.8/man/external-widget.texi	Thu May 13 14:19:40 1999
-+++ xemacs-21.1.8.new/man/external-widget.texi	Thu Dec  9 06:44:58 1999
+ 
+diff -Nru xemacs-21.4.3/man/external-widget.texi xemacs-21.4.3.new/man/external-widget.texi
+--- xemacs-21.4.3/man/external-widget.texi	Thu Apr 12 20:22:00 2001
++++ xemacs-21.4.3.new/man/external-widget.texi	Mon May 21 22:25:08 2001
 @@ -2,9 +2,9 @@
  @setfilename ../info/external-widget.info
  
@@ -39,13 +39,13 @@ diff -Nru xemacs-21.1.8/man/external-widget.texi xemacs-21.1.8.new/man/external-
 +@dircategory XEmacs Editor:
  @direntry
 -* External Widget: (external-widget) External Client Widget.
-+* External Widget: (external-widget).	External Client Widget
- package.
++* External Widget: (external-widget)	External Client Widget
  @end direntry
  @end ifinfo
-diff -Nru xemacs-21.1.8/man/internals/internals.texi xemacs-21.1.8.new/man/internals/internals.texi
---- xemacs-21.1.8/man/internals/internals.texi	Thu Dec  9 06:43:49 1999
-+++ xemacs-21.1.8.new/man/internals/internals.texi	Thu Dec  9 06:43:02 1999
+ 
+diff -Nru xemacs-21.4.3/man/internals/internals.texi xemacs-21.4.3.new/man/internals/internals.texi
+--- xemacs-21.4.3/man/internals/internals.texi	Thu Apr 12 20:22:08 2001
++++ xemacs-21.4.3.new/man/internals/internals.texi	Mon May 21 22:26:08 2001
 @@ -5,9 +5,9 @@
  @c %**end of header
  
@@ -53,15 +53,15 @@ diff -Nru xemacs-21.1.8/man/internals/internals.texi xemacs-21.1.8.new/man/inter
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Internals: (internals).	XEmacs Internals Manual.
+-* Internals: (internals).       XEmacs Internals Manual.
 +* Internals: (internals).		XEmacs Internals Manual
  @end direntry
  
  Copyright @copyright{} 1992 - 1996 Ben Wing.
-diff -Nru xemacs-21.1.8/man/lispref/lispref.texi xemacs-21.1.8.new/man/lispref/lispref.texi
---- xemacs-21.1.8/man/lispref/lispref.texi	Thu Dec  9 06:43:49 1999
-+++ xemacs-21.1.8.new/man/lispref/lispref.texi	Thu Dec  9 06:43:02 1999
-@@ -6,9 +6,10 @@
+diff -Nru xemacs-21.4.3/man/lispref/lispref.texi xemacs-21.4.3.new/man/lispref/lispref.texi
+--- xemacs-21.4.3/man/lispref/lispref.texi	Thu Apr 12 20:22:16 2001
++++ xemacs-21.4.3.new/man/lispref/lispref.texi	Mon May 21 22:27:00 2001
+@@ -6,9 +6,9 @@
  @c %**end of header
  
  @ifinfo
@@ -70,13 +70,12 @@ diff -Nru xemacs-21.1.8/man/lispref/lispref.texi xemacs-21.1.8.new/man/lispref/l
  @direntry
 -* Lispref: (lispref).		XEmacs Lisp Reference Manual.
 +* Lispref: (lispref).			XEmacs Lisp Reference Manual
-+
  @end direntry
  
  Edition History:
-diff -Nru xemacs-21.1.8/man/new-users-guide/new-users-guide.texi xemacs-21.1.8.new/man/new-users-guide/new-users-guide.texi
---- xemacs-21.1.8/man/new-users-guide/new-users-guide.texi	Thu May 13 14:19:44 1999
-+++ xemacs-21.1.8.new/man/new-users-guide/new-users-guide.texi	Thu Dec  9 06:45:42 1999
+diff -Nru xemacs-21.4.3/man/new-users-guide/new-users-guide.texi xemacs-21.4.3.new/man/new-users-guide/new-users-guide.texi
+--- xemacs-21.4.3/man/new-users-guide/new-users-guide.texi	Thu Apr 12 20:22:24 2001
++++ xemacs-21.4.3.new/man/new-users-guide/new-users-guide.texi	Mon May 21 22:16:39 2001
 @@ -4,9 +4,9 @@
  
  
@@ -89,9 +88,9 @@ diff -Nru xemacs-21.1.8/man/new-users-guide/new-users-guide.texi xemacs-21.1.8.n
  @end direntry
  
  This manual serves as an introduction to the XEmacs editor.
-diff -Nru xemacs-21.1.8/man/term.texi xemacs-21.1.8.new/man/term.texi
---- xemacs-21.1.8/man/term.texi	Thu May 13 14:19:40 1999
-+++ xemacs-21.1.8.new/man/term.texi	Thu Dec  9 06:46:12 1999
+diff -Nru xemacs-21.4.3/man/term.texi xemacs-21.4.3.new/man/term.texi
+--- xemacs-21.4.3/man/term.texi	Thu May 13 14:19:40 1999
++++ xemacs-21.4.3.new/man/term.texi	Mon May 21 22:16:39 2001
 @@ -8,9 +8,9 @@
  @end titlepage
  
@@ -104,9 +103,9 @@ diff -Nru xemacs-21.1.8/man/term.texi xemacs-21.1.8.new/man/term.texi
  @end direntry
  
  @node Top, , (DIR)
-diff -Nru xemacs-21.1.8/man/widget.texi xemacs-21.1.8.new/man/widget.texi
---- xemacs-21.1.8/man/widget.texi	Sat Aug 28 22:24:19 1999
-+++ xemacs-21.1.8.new/man/widget.texi	Thu Dec  9 06:46:36 1999
+diff -Nru xemacs-21.4.3/man/widget.texi xemacs-21.4.3.new/man/widget.texi
+--- xemacs-21.4.3/man/widget.texi	Thu Apr 12 20:22:04 2001
++++ xemacs-21.4.3.new/man/widget.texi	Mon May 21 22:25:31 2001
 @@ -10,9 +10,9 @@
  @c %**end of header
  
@@ -114,15 +113,15 @@ diff -Nru xemacs-21.1.8/man/widget.texi xemacs-21.1.8.new/man/widget.texi
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Widgets: (widget).		The Emacs Widget Library.
+-* Widgets: (widget).            The Emacs Widget Library.
 +* Widgets: (widget).			The Emacs Widget Library
  @end direntry
  @end ifinfo
  
-diff -Nru xemacs-21.1.8/man/xemacs/xemacs.texi xemacs-21.1.8.new/man/xemacs/xemacs.texi
---- xemacs-21.1.8/man/xemacs/xemacs.texi	Thu Dec  9 06:43:49 1999
-+++ xemacs-21.1.8.new/man/xemacs/xemacs.texi	Thu Dec  9 06:43:02 1999
-@@ -5,9 +5,9 @@
+diff -Nru xemacs-21.4.3/man/xemacs/xemacs.texi xemacs-21.4.3.new/man/xemacs/xemacs.texi
+--- xemacs-21.4.3/man/xemacs/xemacs.texi	Thu Apr 12 20:22:30 2001
++++ xemacs-21.4.3.new/man/xemacs/xemacs.texi	Mon May 21 22:16:39 2001
+@@ -4,9 +4,9 @@
  
  
  @ifinfo
@@ -134,8 +133,9 @@ diff -Nru xemacs-21.1.8/man/xemacs/xemacs.texi xemacs-21.1.8.new/man/xemacs/xema
  @end direntry
  
  This file documents the XEmacs editor.
---- xemacs-21.1.12/man/xemacs-faq.texi	Tue Aug  8 03:29:47 2000
-+++ xemacs-21.1.12.new/man/xemacs-faq.texi	Tue Aug  8 03:51:52 2000
+diff -Nru xemacs-21.4.3/man/xemacs-faq.texi xemacs-21.4.3.new/man/xemacs-faq.texi
+--- xemacs-21.4.3/man/xemacs-faq.texi	Mon Apr 16 11:24:44 2001
++++ xemacs-21.4.3.new/man/xemacs-faq.texi	Mon May 21 22:16:39 2001
 @@ -20,9 +20,9 @@
  @end titlepage
  
