@@ -313,6 +313,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files extras
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/b2m
 %attr(755,root,root) %{_bindir}/rcs-checkin
 /usr/X11R6/lib/X11/pl/app-defaults/*
