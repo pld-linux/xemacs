@@ -3,8 +3,8 @@
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
-Version:	%{ver}.13
-Release:	3
+Version:	%{ver}.14
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -20,6 +20,7 @@ Patch1:		%{name}-sitelisp.patch
 Patch2:		%{name}-fix_ldflafs.patch
 Patch3:		%{name}-EMACSLOADPATH_fix.patch
 Patch4:		%{name}-no-antoloads.patch
+Patch5:		%{name}-mmencode.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	zlib-devel
@@ -128,6 +129,7 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 autoconf
