@@ -31,12 +31,14 @@ BuildRequires:	zlib-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng >= 1.0.8
-%{?with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
+%{?_with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
 BuildRequires:	gpm-devel
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gpm-devel
-%{?with_gtk:BuildRequires:	gtk+-devel >= 1.2.10}
-%{?with_gtk:BuildRequires:	glib-devel}
+%if %{?_with_gtk:1}%{!?_with_gtk:0}
+BuildRequires:	gtk+-devel >= 1.2.10
+BuildRequires:	glib-devel
+%endif
 Requires:	ctags
 Requires:	%{name}-common = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -182,10 +184,10 @@ autoconf
 	--with-xpm \
 	--with-gpm \
 	--with-ncurses \
-	--with%{?!with_gtk:out}-gtk \
-	%{?!with_gtk:--with-x11 --with-athena=3d --with-menubars=lucid} \
-	%{?!with_gtk:--with-scrollbars=lucid --with-dialogs=athena} \
-	%{?!with_gtk:--with-widgets=athena} \
+	--with%{?!_with_gtk:out}-gtk \
+	%{?!_with_gtk:--with-x11 --with-athena=3d --with-menubars=lucid} \
+	%{?!_with_gtk:--with-scrollbars=lucid --with-dialogs=athena} \
+	%{?!_with_gtk:--with-widgets=athena} \
 	--with-database=no \
 	--with-gnome=no \
 	--without-tiff \
