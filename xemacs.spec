@@ -16,7 +16,6 @@ Source4:	xemacs.ad-pl
 Patch0:		xemacs-info.patch
 Patch1:		xemacs-sitelisp.patch
 Patch2:		xemacs-fix_ldflafs.patch
-Patch3:		xemacs-sitelisp.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	nas-devel
 BuildRequires:	XFree86-devel
@@ -104,7 +103,6 @@ chmod u+wXr * -R
 %ifarch alpha
 %patch1 -p1
 %endif
-
 
 %build
 autoconf
