@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/app-defaults}
 
-install -d $RPM_BUILD_ROOT%/usr/X11R6/lib/X11/pl/app-defaults
+install -d $RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults
 
 make install-arch-dep install-arch-indep gzip-el \
 	prefix=$RPM_BUILD_ROOT/usr \
@@ -159,7 +159,7 @@ make install-arch-dep install-arch-indep gzip-el \
 #	etcdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/etc
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
-install %{SOURCE4} $RPM_BUILD_ROOT%/usr/X11R6/lib/X11/pl/app-defaults/Emacs
+install %{SOURCE4} $RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults/Emacs
 
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
@@ -176,7 +176,7 @@ ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 # mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/app-defaults/Emacs \
 #	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
 
-mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/xemacs-ja.1 \
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
@@ -185,7 +185,7 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{man1/*,ja/man1/*} \
 	$RPM_BUILD_ROOT%{_infodir}/*info*
 
-find $RPM_BUILD_ROOT%{_datadir}/%{name}/* -type f -name "ChangeLog*" | xargs gzip -9nf
+find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -279,7 +279,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/wakeup
 
 %{_mandir}/man1/*
-%langja) %{_mandir}/ja/man1/*
+%lang(ja) %{_mandir}/ja/man1/*
 
 %{_infodir}/custom.info*gz
 %{_infodir}/external-widget.info*gz
