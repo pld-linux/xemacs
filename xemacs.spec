@@ -6,14 +6,14 @@ Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
 Version:	%{ver}.3
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
-Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
+Source0:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}.tar.gz
+Source1:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
+Source2:	ftp://ftp.xemacs.org/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
