@@ -12,6 +12,7 @@ Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.g
 Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
 Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/xemacs-base-%{basepkgver}-pkg.tar.gz
 Source3:	xemacs.desktop
+Source4:	xemacs-xdefaults-pl
 Patch0:		xemacs-info.patch
 Patch1:		xemacs-sitelisp.patch
 Patch2:		xemacs-fix_ldflafs.patch
@@ -143,6 +144,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/app-defaults}
 
+install -d $RPM_BUILD_ROOT%/usr/X11R6/lib/X11/pl/app-defaults
+
 make install-arch-dep install-arch-indep gzip-el \
 	prefix=$RPM_BUILD_ROOT/usr \
 	infodir=$RPM_BUILD_ROOT%{_infodir} \
@@ -156,6 +159,8 @@ make install-arch-dep install-arch-indep gzip-el \
 #	etcdir=$RPM_BUILD_ROOT%{_datadir}/%{name}/etc
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
+install %{SOURCE4} $RPM_BUILD_ROOT%/usr/X11R6/lib/X11/pl/app-defaults/Emacs
+
 
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
@@ -168,8 +173,8 @@ mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.value
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 
-mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/app-defaults/Emacs \
-	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
+# mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/app-defaults/Emacs \
+#	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
@@ -219,6 +224,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/*/lisp/README
 %doc %{_datadir}/*/lisp/term/README
 %{_applnkdir}/Editors/xemacs.desktop
+
 
 %{_libdir}/%{name}
 %dir %{_libdir}/%{name}-%{version}
@@ -297,3 +303,4 @@ rm -rf $RPM_BUILD_ROOT
 %files extras
 %attr(755,root,root) %{_bindir}/b2m
 %attr(755,root,root) %{_bindir}/rcs-checkin
+/usr/X11R6/lib/X11/pl/app-defaults/*
