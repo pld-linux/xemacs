@@ -7,8 +7,7 @@ Copyright:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}-info.tar.gz
-Source4:	xemacs.wmconfig
+Source1:	xemacs.wmconfig
 Patch0:		xemacs-static.patch
 Patch1:		xemacs-perl.patch
 Patch2:		xemacs-alpha.patch
@@ -330,9 +329,6 @@ Pliki ¼ród³owe dla xemacs-gnus.
 
 %prep
 %setup -q -T -b 0 -n xemacs-%{version}
-chmod u+wXr * -R
-%setup -q -T -D -b 1 -n xemacs-%{version}
-chmod u+wXr * -R
 %patch0 -p1
 chmod u+wXr * -R
 %patch1 -p0
@@ -342,12 +338,8 @@ chmod u+wXr * -R
 %endif
 
 %build
-
-# Delete the originals for the patched files
-find . -name "*.orig" -exec rm {} \;
-
-CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{buildarch}-unknown-`echo %{buildos} | tr A-Z a-z` \
+CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s -lc" \
+./configure \
 	--prefix=/usr \
 	--infodir=/usr/info \
 	--with-dialogs=athena \
@@ -356,12 +348,14 @@ CFLAGS="$RPM_OPT_FLAGS" CPPFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 	--error-checking=none \
 	--debug=no \
 	--with-xpm \
+	--with-ncurses \
 	--lockdir=/var/lock/xemacs \
 	--with-session=yes \
 	--with-gpm=yes \
-	--with-png=yes
-make dist
+	--with-png=yes \
+	%{buildarch}-pld-`echo %{buildos} | tr A-Z a-z`
 
+make dist
 # xemacs generation
 make
 
@@ -377,7 +371,7 @@ make install-arch-dep install-arch-indep gzip-el \
 gzip -9nf $RPM_BUILD_ROOT/usr/info/*info*
 find $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/auctex/style/ -name \*.el | xargs gzip -9
 
-cp $RPM_SOURCE_DIR/xemacs.wmconfig $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
 
 find $RPM_BUILD_ROOT/usr/bin -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
 find $RPM_BUILD_ROOT/usr/lib/*/* -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
@@ -606,35 +600,35 @@ if [ "$1" = $1 ]; then
 fi
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %config /etc/X11/wmconfig/xemacs
-%attr(2755, root, mail) /usr/lib/*/*/movemail
-%attr(755, root, root) /usr/bin/xemacs
-%attr(755, root, root) /usr/bin/gnuclient
-%attr(755, root, root) /usr/lib/*/*/cvtmail
-%attr(755, root, root) /usr/lib/*/*/digest-doc
-%attr(755, root, root) /usr/lib/*/*/fakemail
-%attr(755, root, root) /usr/lib/*/*/gnuserv
-%attr(755, root, root) /usr/lib/*/*/hexl
-%attr(755, root, root) /usr/lib/*/*/make-docfile
-%attr(755, root, root) /usr/lib/*/*/make-path
-%attr(755, root, root) /usr/lib/*/*/mmencode
-%attr(755, root, root) /usr/lib/*/*/profile
-%attr(755, root, root) /usr/lib/*/*/sorted-doc
-%attr(755, root, root) /usr/lib/*/*/yow
-%attr(755, root, root) /usr/bin/gnuattach
-%attr(755, root, root) /usr/bin/gnudoit
-%attr(755, root, root) /usr/bin/install-sid
-%attr(755, root, root) /usr/bin/pstogif
-%attr(755, root, root) /usr/bin/send-pr
-%attr(755, root, root) /usr/lib/*/*/add-big-package.sh
-%attr(755, root, root) /usr/lib/*/*/add-little-package.sh
-%attr(755, root, root) /usr/lib/*/*/gzip-el.sh
-%attr(755, root, root) /usr/lib/*/*/install-sid
-%attr(755, root, root) /usr/lib/*/*/rcs2log
-%attr(755, root, root) /usr/lib/*/*/send-pr
-%attr(755, root, root) /usr/lib/*/*/vcdiff
-%attr(755, root, root) /usr/lib/*/*/wakeup
+%attr(2755,root,mail) /usr/lib/*/*/movemail
+%attr(755,root,root) /usr/bin/xemacs
+%attr(755,root,root) /usr/bin/gnuclient
+%attr(755,root,root) /usr/lib/*/*/cvtmail
+%attr(755,root,root) /usr/lib/*/*/digest-doc
+%attr(755,root,root) /usr/lib/*/*/fakemail
+%attr(755,root,root) /usr/lib/*/*/gnuserv
+%attr(755,root,root) /usr/lib/*/*/hexl
+%attr(755,root,root) /usr/lib/*/*/make-docfile
+%attr(755,root,root) /usr/lib/*/*/make-path
+%attr(755,root,root) /usr/lib/*/*/mmencode
+%attr(755,root,root) /usr/lib/*/*/profile
+%attr(755,root,root) /usr/lib/*/*/sorted-doc
+%attr(755,root,root) /usr/lib/*/*/yow
+%attr(755,root,root) /usr/bin/gnuattach
+%attr(755,root,root) /usr/bin/gnudoit
+%attr(755,root,root) /usr/bin/install-sid
+%attr(755,root,root) /usr/bin/pstogif
+%attr(755,root,root) /usr/bin/send-pr
+%attr(755,root,root) /usr/lib/*/*/add-big-package.sh
+%attr(755,root,root) /usr/lib/*/*/add-little-package.sh
+%attr(755,root,root) /usr/lib/*/*/gzip-el.sh
+%attr(755,root,root) /usr/lib/*/*/install-sid
+%attr(755,root,root) /usr/lib/*/*/rcs2log
+%attr(755,root,root) /usr/lib/*/*/send-pr
+%attr(755,root,root) /usr/lib/*/*/vcdiff
+%attr(755,root,root) /usr/lib/*/*/wakeup
 %doc %lang(de) /usr/lib/*/etc/TUTORIAL.de
 %doc %lang(fr) /usr/lib/*/etc/TUTORIAL.fr
 %doc %lang(hr) /usr/lib/*/etc/TUTORIAL.hr
@@ -666,12 +660,12 @@ fi
 %doc /usr/lib/*/lisp/eterm/TODO.term
 %doc /usr/lib/*/lisp/mel/ChangeLog
 %doc /usr/lib/*/lisp/term/README
-%attr(644, root, man) /usr/man/man1/gnuattach.1.gz
-%attr(644, root, man) /usr/man/man1/gnuclient.1.gz
-%attr(644, root, man) /usr/man/man1/gnudoit.1.gz
-%attr(644, root, man) /usr/man/man1/gnuserv.1.gz
-%attr(644, root, man) /usr/man/man1/xemacs.1.gz
-%attr(644, root, man) %lang(ja) /usr/man/ja/man1/xemacs.1.gz
+/usr/man/man1/gnuattach.1.gz
+/usr/man/man1/gnuclient.1.gz
+/usr/man/man1/gnudoit.1.gz
+/usr/man/man1/gnuserv.1.gz
+/usr/man/man1/xemacs.1.gz
+%lang(ja) /usr/man/ja/man1/xemacs.1.gz
 %doc README GETTING.GNU.SOFTWARE PROBLEMS 
 %doc etc/NEWS etc/MAILINGLISTS BUGS 
 /usr/lib/*/*/config.values
@@ -752,7 +746,7 @@ fi
 /var/lock/xemacs
 
 %files el 
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/apel/*.el.gz
 /usr/lib/*/lisp/calendar/*.el.gz
 /usr/lib/*/lisp/cc-mode/*.el.gz
@@ -778,35 +772,35 @@ fi
 /usr/lib/*/lisp/x11/*.el.gz
 
 %files emulators 
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/emulators/*.elc
 /usr/lib/*/lisp/emulators/tpu-edt.xmodmap
 
 %files gnats
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/info/gnats.info*gz
 /usr/lib/*/etc/gnats/*
 /usr/lib/*/lisp/gnats/*.elc
 /usr/lib/*/lisp/gnats/*.el.gz
 
 %files emulators-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/emulators/*.el.gz
 
 %files viper 
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc /usr/lib/*/etc/viperCard.tex
 /usr/info/viper.info*gz
 /usr/lib/*/lisp/viper/*.elc
 %doc /usr/lib/*/lisp/viper/README
 
 %files viper-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/viper/*.el.gz
 /usr/lib/*/lisp/viper/Makefile
 
 %files lisp-programming
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/info/cl.info*gz
 /usr/info/ilisp.info*gz
 /usr/info/lispref.info*gz
@@ -832,7 +826,7 @@ fi
 /usr/lib/*/lisp/ilisp/scheme2c.mail
 
 %files lisp-programming-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/ilisp/*.el.gz
 /usr/lib/*/lisp/edebug/*.el.gz
 /usr/lib/*/lisp/bytecomp/*.el.gz
@@ -840,7 +834,7 @@ fi
 /usr/lib/*/lisp/ilisp/Makefile
 
 %files auctex
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/info/auctex.info*gz
 %doc /usr/lib/*/lisp/auctex/CHANGES
 %doc /usr/lib/*/lisp/auctex/ChangeLog
@@ -852,13 +846,13 @@ fi
 %doc /usr/lib/*/lisp/auctex/PROBLEMS
 
 %files auctex-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/auctex/Makefile
 /usr/lib/*/lisp/auctex/*.el.gz
 /usr/lib/*/etc/auctex/style/*.el.gz
 
 %files w3 
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/info/w3-faq.info*gz
 /usr/info/w3.info*gz
 /usr/lib/*/lisp/w3/*.el
@@ -868,12 +862,12 @@ fi
 /usr/lib/*/etc/w3/*
 
 %files w3-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/w3/*.el.gz
 /usr/lib/*/lisp/w3/Makefile
 
 %files psgml 
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/info/hm--html-mode.info*gz
 /usr/info/psgml-api.info*gz
 /usr/info/psgml.info*gz
@@ -891,12 +885,12 @@ fi
 /usr/lib/*/lisp/psgml/psgml-style.fs
 
 %files psgml-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/psgml/*.el.gz
 /usr/lib/*/lisp/hm--html-menus/*.el.gz
 
 %files modes 
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/info/pcl-cvs.info*gz
 %doc /usr/lib/*/lisp/pcl-cvs/ChangeLog
 %doc /usr/lib/*/lisp/pcl-cvs/README
@@ -906,16 +900,16 @@ fi
 %doc /usr/lib/*/lisp/pcl-cvs/NEWS
 
 %files modes-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/pcl-cvs/*.el.gz
 /usr/lib/*/lisp/modes/*.el.gz
 
 %files extras
-%attr(755, root, root) /usr/bin/b2m
-%attr(755, root, root) /usr/bin/rcs-checkin
+%attr(755,root,root) /usr/bin/b2m
+%attr(755,root,root) /usr/bin/rcs-checkin
 
 %files mail
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc /usr/lib/*/etc/MH-E-NEWS
 /usr/info/mailcrypt.info*gz
 /usr/info/mh-e.info*gz
@@ -933,7 +927,7 @@ fi
 %doc /usr/lib/*/lisp/mailcrypt/README
 %doc /usr/lib/*/lisp/rmail/README
 %doc /usr/lib/*/lisp/vm/README
-%attr(755, root, root) /usr/lib/*/%{buildarch}*/tm*
+%attr(755,root,root) /usr/lib/*/%{buildarch}*/tm*
 /usr/lib/*/etc/vm/*
 /usr/lib/*/lisp/mailcrypt/*.elc
 /usr/lib/*/lisp/mh-e/*.elc
@@ -946,7 +940,7 @@ fi
 /usr/lib/*/lisp/vm/make-autoloads
 
 %files mail-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/tm/*.el.gz
 /usr/lib/*/lisp/vm/*.el.gz
 /usr/lib/*/lisp/mh-e/*.el.gz
@@ -954,14 +948,14 @@ fi
 /usr/lib/*/lisp/rmail/*.el.gz
 
 %files gnus
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/gnus/*.elc
 %doc /usr/lib/*/etc/gnusrefcard/*
 %doc /usr/info/gnus-mime-en.info*gz
 %doc /usr/info/gnus.info*gz
 
 %files gnus-el
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/*/lisp/gnus/*.el.gz
 /usr/lib/*/lisp/gnus/Makefile
 
