@@ -1,8 +1,9 @@
-
-%bcond_without pdump 	# portable dumper
-%bcond_with postgresql	# enable postgresql support
-%bcond_with gtk		# gtk enabled version
-
+#
+# Conditional build:
+%bcond_without	pdump		# portable dumper
+%bcond_with	postgresql	# enable PostgreSQL support
+%bcond_with	gtk		# gtk enabled version
+#
 %define		ver		21.4
 %define		basepkgver	1.86
 Summary:	The XEmacs -- Emacs: The Next Generation
@@ -14,7 +15,7 @@ Summary(ru):	÷ÅÒÓÉÑ GNU Emacs ÄÌÑ X Window System
 Summary(uk):	÷ÅÒÓ¦Ñ GNU Emacs ÄÌÑ X Window System
 Name:		xemacs
 Version:	%{ver}.15
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -52,10 +53,11 @@ BuildRequires:	gtk+-devel >= 1.2.10
 BuildRequires:	glib-devel
 %endif
 Requires:	ctags
-Requires:	%{name}-common = %{version}
+Requires:	%{name}-common = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define _ulibdir /usr/lib
+%define		_ulibdir	/usr/lib
+%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
 
 %description
 XEmacs is a highly customizable open source text editor and
@@ -154,8 +156,8 @@ b±d¼ Emacsa: edytor Nastêpnej Generacji.
 Summary:	XEmacs binary compiled without X11 support
 Summary(pl):	XEmacs skompilowany bez wsparcia dla X11
 Group:		Applications/Editors/Emacs
-Requires:	%{name}-common = %{version}
-Provides:	%{name} = %{version}
+Requires:	%{name}-common = %{version}-%{release}
+Provides:	%{name} = %{version}-%{release}
 
 %description nox
 XEmacs binary compiled with TTY support only, without X11 support.
@@ -298,7 +300,7 @@ sitelispdir=%{_ulibdir}/%{name}/site-lisp \
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lock/xemacs} \
-	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/app-defaults/pl} \
+	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_appdefsdir}/pl} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
 	$RPM_BUILD_ROOT%{_ulibdir}/%{name} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
@@ -325,10 +327,10 @@ install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_ulibdir}/%{name}/site-lisp
 
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
-	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
+	$RPM_BUILD_ROOT%{_appdefsdir}/Emacs
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
-	$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
-cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
+	$RPM_BUILD_ROOT%{_appdefsdir}/pl/Emacs
+cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_appdefsdir}/pl/Emacs
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
@@ -372,8 +374,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
-%lang(pl) %{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
 %attr(755,root,root) %{_bindir}/gnuattach
 %attr(755,root,root) %{_bindir}/gnuclient
 %attr(755,root,root) %{_bindir}/gnudoit
@@ -384,61 +384,65 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
+%{_datadir}/%{name}-%{version}/etc/custom
+%{_datadir}/%{name}-%{version}/etc/eos
+%{_datadir}/%{name}-%{version}/etc/toolbar
+%{_datadir}/%{name}-%{version}/etc/*.png
+%{_datadir}/%{name}-%{version}/etc/*.xbm
+%{_datadir}/%{name}-%{version}/etc/*.xpm
+%{_appdefsdir}/Emacs
+%lang(pl) %{_appdefsdir}/pl/Emacs
 %{_desktopdir}/*
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
 %{_mandir}/man1/gnudoit.1*
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/custom
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/eos
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/toolbar
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.png
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xbm
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/*.xpm
 
 %files common
 %defattr(644,root,root,755)
 %doc README GETTING.GNU.SOFTWARE PROBLEMS BUGS etc/{NEWS,MAILINGLISTS,TERMS,SERVICE}
-%dir %{_datadir}/%{name}-%{version}%{_sysconfdir}
-%{_datadir}/%{name}-%{version}%{_sysconfdir}/package-index.LATEST.gpg
-%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL
-%doc %lang(de) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.de
-%doc %lang(fr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.fr
-%doc %lang(hr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.hr
-%doc %lang(ja) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ja
-%doc %lang(ko) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ko
-%doc %lang(nb) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.no
-%doc %lang(pl) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.pl
-%doc %lang(ro) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ro
-%doc %lang(ru) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.ru
-%doc %lang(th) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.th
-%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/[A-SU-Z]*
-%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/refcard.ps.gz
-%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/refcard.tex
-%doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/sample.*
+%dir %{_datadir}/%{name}-%{version}
+%dir %{_datadir}/%{name}-%{version}/etc
+%{_datadir}/%{name}-%{version}/etc/package-index.LATEST.gpg
+%doc %{_datadir}/%{name}-%{version}/etc/TUTORIAL
+%doc %lang(de) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.de
+%doc %lang(fr) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.fr
+%doc %lang(hr) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.hr
+%doc %lang(ja) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ja
+%doc %lang(ko) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ko
+%doc %lang(nb) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.no
+%doc %lang(pl) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.pl
+%doc %lang(ro) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ro
+%doc %lang(ru) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ru
+%doc %lang(th) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.th
+%doc %{_datadir}/%{name}-%{version}/etc/[A-SU-Z]*
+%doc %{_datadir}/%{name}-%{version}/etc/refcard.ps.gz
+%doc %{_datadir}/%{name}-%{version}/etc/refcard.tex
+%doc %{_datadir}/%{name}-%{version}/etc/sample.*
 
 %{_ulibdir}/%{name}
 
 %{_datadir}/%{name}
 
-%dir %{_datadir}/%{name}-%{version}
 # do not know it is necessary
+%dir %{_ulibdir}/%{name}-%{version}
+%dir %{_ulibdir}/%{name}-%{version}/%{_target_platform}
 %{_ulibdir}/%{name}-%{version}/%{_target_platform}/modules
 %attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/[Dacdfghprsvwy]*
 %attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/m[am]*
 %attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/mov*
 
-%{_datadir}/%{name}-%{version}/lisp/
+%{_datadir}/%{name}-%{version}/lisp
 
 %dir %{_datadir}/%{name}-packages
-%{_datadir}/%{name}-packages%{_sysconfdir}
+%{_datadir}/%{name}-packages/etc
 %{_datadir}/%{name}-packages/lisp
 %{_datadir}/%{name}-packages/lib-src
 
 %{_mandir}/man1/xemacs.1*
 %lang(ja) %{_mandir}/ja/man1/*
 
-%{_infodir}/*
+%{_infodir}/*.info*
 
 /var/lock/xemacs
 
