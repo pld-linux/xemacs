@@ -1,8 +1,8 @@
 Summary:	The XEmacs editor
 Summary(pl):	XEmacs -- Edytor
 Name:		xemacs
-version:	20.4
-Release:	8
+version:	21.1.2
+Release:	1
 Copyright:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
