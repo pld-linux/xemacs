@@ -185,9 +185,8 @@ autoconf
 	--with-gpm \
 	--with-ncurses \
 	--with%{?!_with_gtk:out}-gtk \
-	%{?!_with_gtk:--with-x11 --with-athena=3d --with-menubars=lucid} \
-	%{?!_with_gtk:--with-scrollbars=lucid --with-dialogs=athena} \
-	%{?!_with_gtk:--with-widgets=athena} \
+	%{?!_with_gtk:--with-x11 --with-menubars=lucid --with-scrollbars=motif} \
+	%{?!_with_gtk:--with-dialogs=motif --with-widgets=motif} \
 	--with-database=no \
 	--with-gnome=no \
 	--without-tiff \
