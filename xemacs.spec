@@ -17,6 +17,7 @@ Patch1:		xemacs-alpha.patch
 Patch2:		xemacs-perl.patch
 Patch3:		xemacs-sitelisp.patch
 URL:		http://www.xemacs.org/
+BuildRequires:	nas-devel
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
