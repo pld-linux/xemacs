@@ -1,0 +1,12 @@
+diff -urN xemacs-21.4.3.org/event-stream.c xemacs-21.4.3/event-stream.c
+--- xemacs-21.4.3.org/event-stream.c	Fri May 18 23:13:07 2001
++++ xemacs-21.4.3/event-stream.c	Fri May 18 23:13:32 2001
+@@ -3785,7 +3785,7 @@
+ 	  EQ (fun, Qscrollbar_to_right) ||
+ 	  EQ (fun, Qscrollbar_horizontal_drag));
+ #else
+-  return 0
++  return 0;
+ #endif
+ }
+ 
