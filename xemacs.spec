@@ -29,6 +29,7 @@ Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
 Patch2:		%{name}-ldscript.patch
+Patch3:		%{name}-no-memory-warnings.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	motif-devel
@@ -172,10 +173,14 @@ S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU
 Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
-%setup0 -q -b1 -a2
+%setup -q -b1 -a2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%ifarch alpha
+# disable memory_warnings() - it doesn't support memory model used on alpha
+%patch3 -p1
+%endif
 
 %build
 CFLAGS=" %{rpmcflags}"
