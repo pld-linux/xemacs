@@ -9,8 +9,7 @@ Group(pl):	Aplikacje/Edytory/Emacs
 Source0:	ftp://ftp.xemacs.org/pub/xemacs/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:	xemacs.wmconfig
 Patch0:		xemacs-static.patch
-Patch1:		xemacs-perl.patch
-Patch2:		xemacs-alpha.patch
+Patch1:		xemacs-alpha.patch
 URL:		http://www.xemacs.org/
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -330,11 +329,10 @@ Pliki ¼ród³owe dla xemacs-gnus.
 %prep
 %setup -q -T -b 0 -n xemacs-%{version}
 %patch0 -p1
-chmod u+wXr * -R
-%patch1 -p0
+chmod u+wXr * -R || :
 
 %ifarch alpha
-%patch2 -p1
+%patch1 -p1
 %endif
 
 %build
