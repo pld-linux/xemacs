@@ -9,7 +9,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.8
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -291,9 +291,6 @@ rm -rf	$RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include 
 
 find $RPM_BUILD_ROOT -regex '.*~$' -exec rm -f {} \;
 
-gzip -9nf README GETTING.GNU.SOFTWARE PROBLEMS \
-	etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -325,7 +322,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files common
 %defattr(644,root,root,755)
-%doc *.gz etc/*.gz
+%doc README GETTING.GNU.SOFTWARE PROBLEMS BUGS etc/{NEWS,MAILINGLISTS,TERMS,SERVICE}
 %dir %{_datadir}/%{name}-%{version}%{_sysconfdir}
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL
 %doc %lang(de) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.de
