@@ -1,0 +1,8 @@
+- added patches wich allow build xemacs without installed xemacs
+  (no-antoloads and EMACSLOADPATH_fix),
+- removed {c,e}tags, man pages for them and added "Require: ctags",
+- fixed installing xemacs X resources and moved pl X res from extras to main
+  subpackage,
+- added --with-gpm to ./configure options,
+- added installing pl X resources,
+- build against ncurses 5.0.
