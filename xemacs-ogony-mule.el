@@ -1,118 +1,96 @@
 ;; Funkcje wstawiajace polskie litery
-;; Plik znaleziony gdzie¶ w sieci...
 
 (defun insert-a-ogonek ()
   (interactive "*")
-  (insert 177)
+  (insert 305) ;; ±
 )
 
 (defun insert-c-acute ()
   (interactive "*")
-  (insert 230)
+  (insert 358) ;; æ
 )
 
 (defun insert-e-ogonek ()
   (interactive "*")
-  (insert 234)
+  (insert 362) ;; ê 
 )
 
 (defun insert-l-slash ()
   (interactive "*")
-  (insert 179)
+  (insert 307) ;; ³
 )
 
 (defun insert-n-acute ()
   (interactive "*")
-  (insert 241)
+  (insert 369) ;; ñ
 )
 
 (defun insert-o-acute ()
   (interactive "*")
-  (insert 243)
+  (insert 371) ;; ó
 )
 
 (defun insert-s-acute ()
   (interactive "*")
-  (insert 182)
+  (insert 310) ;; ¶
 )
 
 (defun insert-z-acute ()
   (interactive "*")
-  (insert 188)
+  (insert 316) ;; ¼
 )
 
 (defun insert-z-dot ()
   (interactive "*")
-  (insert 191)
+  (insert 319) ;; ¿
 )
 
 (defun insert-A-ogonek ()
   (interactive "*")
-  (insert 161)
+  (insert 289) ;; ¡
 )
 
 (defun insert-C-acute ()
   (interactive "*")
-  (insert 198)
+  (insert 326) ;; Æ
 )
 
 (defun insert-E-ogonek ()
   (interactive "*")
-  (insert 202)
+  (insert 330) ;; Ê
 )
 
 (defun insert-L-slash ()
   (interactive "*")
-  (insert 163)
+  (insert 291) ;; £
 )
 
 (defun insert-N-acute ()
   (interactive "*")
-  (insert 209)
+  (insert 337) ;; Ñ
 )
 
 (defun insert-O-acute ()
   (interactive "*")
-  (insert 211)
+  (insert 339) ;; Ó
 )
 
 (defun insert-S-acute ()
   (interactive "*")
-  (insert 166)
+  (insert 294) ;; ¦
 )
 
 (defun insert-Z-acute ()
   (interactive "*")
-  (insert 172)
+  (insert 300) ;; ¬
 )
 
 (defun insert-Z-dot ()
   (interactive "*")
-  (insert 175)
+  (insert 303) ;; ¯
 )
 
-(global-set-key (quote [plusminus])   (quote insert-a-ogonek))
-(global-set-key (quote [exclamdown])  (quote insert-A-ogonek))
-(global-set-key (quote [ae]) (quote insert-c-acute))
-(global-set-key (quote [AE]) (quote insert-C-acute))
-(global-set-key (quote [ecircumflex]) (quote insert-e-ogonek))
-(global-set-key (quote [Ecircumflex]) (quote insert-E-ogonek))
-(global-set-key (quote [threesuperior]) (quote insert-l-slash))
-(global-set-key (quote [sterling]) (quote insert-L-slash))
-(global-set-key (quote [ntilde]) (quote insert-n-acute))
-(global-set-key (quote [Ntilde]) (quote insert-N-acute))
-(global-set-key (quote [oacute]) (quote insert-o-acute))
-(global-set-key (quote [Oacute]) (quote insert-O-acute))
-(global-set-key (quote [paragraph]) (quote insert-s-acute))
-(global-set-key (quote [brokenbar]) (quote insert-S-acute))
-(global-set-key (quote [onequarter]) (quote insert-z-acute))
-(global-set-key (quote [notsign]) (quote insert-Z-acute))
-(global-set-key (quote [questiondown]) (quote insert-z-dot))
-(global-set-key (quote [macron]) (quote insert-Z-dot))
-
-;; modyfikacja do u¿ywania Xkbd extension Rafa³ Kleger-Rudomin (klakier@pg.gda.pl)
-
-(global-set-key (quote [aogonek])  (quote insert-a-ogonek))
+(global-set-key (quote [aogonek])   (quote insert-a-ogonek))
 (global-set-key (quote [Aogonek])  (quote insert-A-ogonek))
 (global-set-key (quote [cacute]) (quote insert-c-acute))
 (global-set-key (quote [Cacute]) (quote insert-C-acute))
@@ -130,6 +108,4 @@
 (global-set-key (quote [Zacute]) (quote insert-Z-acute))
 (global-set-key (quote [zabovedot]) (quote insert-z-dot))
 (global-set-key (quote [Zabovedot]) (quote insert-Z-dot))
-
-
-
+(global-set-key (quote [?\M-`]) (quote set-justification-left))
