@@ -17,6 +17,7 @@ Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
 Source6:	%{name}-ogony-mule.el
 Source7:	%{name}-ogony-nomule.el
+Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-archlibdir.patch
 Patch2:		%{name}-fix_ldflafs.patch
@@ -204,7 +205,7 @@ sitelispdir=%{_libdir}/%{name}/site-lisp \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,/var/lock/xemacs} \
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,%{_pixmapsdir},/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/{,pl}/app-defaults} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
 	$RPM_BUILD_ROOT%{_libdir}/%{name} \
@@ -223,6 +224,7 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Development/Editors/xemacs.deskt
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/default.el
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-mule.el
 install %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-nomule.el
+install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
 
@@ -268,7 +270,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_applnkdir}/Development/Editors/xemacs.desktop
 %lang(en) %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
 %lang(pl) %{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 %attr(755,root,root) %{_bindir}/gnu*
@@ -276,6 +277,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/gnuserv
+%{_applnkdir}/Development/Editors/xemacs.desktop
+%{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
 %{_mandir}/man1/gnudoit.1*
