@@ -93,7 +93,7 @@ S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU Emacsa,
 to koniecznie zainstaluj ten pakiet.
 
 %prep
-%setup0 -q -b1 -b2 -a3
+%setup0 -q -b1 -b2
 #%patch0 -p1
 #%patch2 -p1
 %patch3 -p1
@@ -114,8 +114,8 @@ sitelispdir=%{_libdir}/%{name}/site-lisp \
 	--mandir=%{_mandir}/man1 \
 	--datadir=%{_datadir} \
 	--lockdir=/var/lock/xemacs/ \
+	--package_path=~/.xemacs::%{_datadir}/%{name}-packages \
 
-#	--package_path=~/.xemacs::%{_datadir}/%{name} \
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
 #	--etcdir=%{_datadir}/%{name}/etc \
@@ -156,24 +156,20 @@ make install-arch-dep install-arch-indep gzip-el \
 
 install %{SOURCE6} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
 
-#install lib-src/{install-sid,send-pr} $RPM_BUILD_ROOT%{_libdir}/%{name}-%{realversion}/*/
-#install lib-src/tm* $RPM_BUILD_ROOT%{_libdir}/%{name}-%{realversion}/*/
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
+( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE3} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
 
-## !!!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-## I introduced some of this nasty links in 21.1.8-4 ver to bypass broken build process
-## There are to be removed in future verions, I hope - klakier
-
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_libdir}/%{name}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_datadir}/%{name}
-ln -s %{_datadir}/%{name} $RPM_BUILD_ROOT%{_libdir}/%{name}/xemacs-packages
-
-[ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp/xemacs-base ] || \
-mv lisp/xemacs-base $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp/
-
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/lisp
+install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
+ln -s %{_datadir}/%{name}-packages $RPM_BUILD_ROOT%{_libdir}/%{name}/%{name}-packages
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
+
+
+
 
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/*info*
 
@@ -237,14 +233,12 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/X11/wmconfig/xemacs
 
 %{_libdir}/%{name}
-%{_libdir}/%{name}/xemacs-packages
 %dir %{_libdir}/%{name}-%{version}
 %dir %{_libdir}/%{name}-%{version}/%{_target_platform}
-%{_libdir}/%{name}-%{version}/site-lisp
 
 %{_datadir}/%{name}
+
 %dir %{_datadir}/%{name}-%{version}
-%dir %{_datadir}/%{name}-%{version}/site-lisp
 %dir %{_datadir}/%{name}-%{version}/etc
 %{_datadir}/%{name}-%{version}/etc/custom
 %{_datadir}/%{name}-%{version}/etc/eos
@@ -260,8 +254,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/lisp/*.elc
 %dir %{_datadir}/%{name}-%{version}/lisp/term
 %{_datadir}/%{name}-%{version}/lisp/term/*.elc
-%dir %{_datadir}/%{name}-%{version}/lisp/xemacs-base
-%{_datadir}/%{name}-%{version}/lisp/xemacs-base/*.elc
+
+%dir %{_datadir}/%{name}-packages
+%dir %{_datadir}/%{name}-packages/lisp
+%dir %{_datadir}/%{name}-packages/lisp/xemacs-base
+%{_datadir}/%{name}-packages/lisp/xemacs-base/*.elc
 
 %attr(755,root,root) %{_bindir}/*tags
 %attr(755,root,root) %{_bindir}/gnu*
@@ -286,7 +283,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/rcs2log
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/vcdiff
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/wakeup
-%{_libdir}/%{name}-%{version}/*/config.values
 
 %{_mandir}/man1/*
 
@@ -304,8 +300,9 @@ rm -rf $RPM_BUILD_ROOT
 %files el 
 %defattr(644,root,root,755)
 
-%{_datadir}/*/lisp/*.el.gz
-%{_datadir}/*/lisp/term/*.el.gz
+%{_datadir}/%{name}-%{version}/lisp/*.el.gz
+%{_datadir}/%{name}-%{version}/lisp/term/*.el.gz
+%{_datadir}/%{name}-packages/lisp/xemacs-base/*.el.gz
 
 
 %files extras
