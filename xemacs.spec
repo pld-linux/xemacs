@@ -16,6 +16,8 @@ Source4:	xemacs.ad-pl
 Patch0:		xemacs-info.patch
 Patch1:		xemacs-sitelisp.patch
 Patch2:		xemacs-fix_ldflafs.patch
+Patch3:		xemacs-EMACSLOADPATH_fix.patch
+Patch4:		xemacs-no-antoloads.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	nas-devel
 BuildRequires:	XFree86-devel
@@ -26,11 +28,9 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	gpm-devel
-BuildRequires:	ncurses-devel
+BuildRequires:	ncurses-devel >= 5.0
+Requires:	ctags
 Prereq:		/usr/sbin/fix-info-dir
-# BuildConflicts: xemacs 
-# Yes! I need tu uninstall xemacs-21.1.8-4 to be able to build it!!!!!!!
-# I don't understand it 
 Buildroot:	/tmp/%{name}-%{version}-root
 Provides:	xemacs-base-pkg
 
@@ -98,11 +98,8 @@ to koniecznie zainstaluj ten pakiet.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-chmod u+wXr * -R
-
-%ifarch alpha
-%patch1 -p1
-%endif
+%patch3 -p1
+%patch4 -p1
 
 %build
 autoconf
@@ -118,22 +115,21 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--datadir=%{_datadir} \
 	--lockdir=/var/lock/xemacs/ \
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
+	--with-site-lisp \
 	--with-sound=native \
 	--with-x11 \
 	--with-jpeg \
 	--with-png \
-	--without-tiff \
+	--with-xpm \
+	--with-gpm \
+	--with-ncurses \
 	--with-dialogs=athena \
 	--with-database=no \
+	--without-tiff \
 	--without-dnet \
 	--without-ldap \
-	--with-xpm \
-	--with-ncurses \
-	--without-ldap \
 	--without-dragndrop \
-	--with-site-lisp \
 	--without-mule \
-
 
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
@@ -142,10 +138,6 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 #	--error-checking=none \
 #	--debug=no \
 #	--with-session=yes \
-#	--with-gpm=yes \
-#	--with-png=yes \
-
-#	--with-mule
 
 sitelispdir=%{_libdir}/%{name}/site-lisp \
 make
@@ -153,7 +145,7 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,/var/lock/xemacs} \
-	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/app-defaults}
+	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},/usr/X11R6/lib/X11/{,pl}/app-defaults}
 
 install -d $RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults
 
@@ -172,7 +164,6 @@ make install-arch-dep install-arch-indep gzip-el \
 install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
 install %{SOURCE4} $RPM_BUILD_ROOT/usr/X11R6/lib/X11/pl/app-defaults/Emacs
 
-
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
 
@@ -184,8 +175,8 @@ mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.value
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 
-# mv $RPM_BUILD_ROOT%{_datadir}/%{name}/etc/app-defaults/Emacs \
-#	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/Emacs.ad \
+	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
 
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/etc/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
@@ -236,6 +227,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/*/lisp/term/README
 %{_applnkdir}/Editors/xemacs.desktop
 
+%lang(en) /usr/X11R6/lib/X11/app-defaults/Emacs
+%lang(pl) /usr/X11R6/lib/X11/pl/app-defaults/Emacs
 
 %{_libdir}/%{name}
 %dir %{_libdir}/%{name}-%{version}
@@ -265,11 +258,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}-packages/lisp/xemacs-base
 %{_datadir}/%{name}-packages/lisp/xemacs-base/*.elc
 
-%attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/gnu*
 %attr(755,root,root) %{_bindir}/pstogif
 %attr(755,root,root) %{_bindir}/xemacs
-
 
 %attr(2755,root,mail) %{_libdir}/%{name}-%{version}/*/movemail
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/cvtmail
@@ -289,8 +280,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/vcdiff
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/wakeup
 
-%{_mandir}/man1/gnu*
-%{_mandir}/man1/xemacs*
+%{_mandir}/man1/gnuattach.1*
+%{_mandir}/man1/gnuclient.1*
+%{_mandir}/man1/gnudoit.1*
+%{_mandir}/man1/gnuserv.1*
+%{_mandir}/man1/xemacs.1*
 %lang(ja) %{_mandir}/ja/man1/*
 
 %{_infodir}/custom.info*gz
@@ -316,4 +310,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/b2m
 %attr(755,root,root) %{_bindir}/rcs-checkin
-/usr/X11R6/lib/X11/pl/app-defaults/*
