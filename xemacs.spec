@@ -4,7 +4,7 @@ Name:		xemacs
 Version:	21.1.8
 %define		ver		21.1
 %define		basepkgver	1.32
-Release:	4
+Release:	5
 Copyright:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -118,16 +118,29 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--datadir=%{_datadir} \
 	--lockdir=/var/lock/xemacs/ \
 	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
-	--with-sound=both \
+	--with-sound=native \
+	--with-x11 \
+	--with-jpeg \
+	--with-png \
+	--without-tiff \
+	--with-dialogs=athena \
+	--with-database=no \
+	--without-dnet \
+	--without-ldap \
+	--with-xpm \
+	--with-ncurses \
+	--without-ldap \
+	--without-dragndrop \
+	--with-site-lisp \
+	--without-mule \
+
+
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
 #	--etcdir=%{_datadir}/%{name}/etc \
-#	--with-dialogs=athena \
 #	--cflags="$RPM_OPT_FLAGS" \
 #	--error-checking=none \
 #	--debug=no \
-#	--with-xpm \
-#	--with-ncurses \
 #	--with-session=yes \
 #	--with-gpm=yes \
 #	--with-png=yes \
