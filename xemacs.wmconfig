@@ -1,4 +1,0 @@
-xemacs name "XEmacs"
-xemacs description "The XEmacs editor"
-xemacs exec "xemacs &"
-xemacs group Applications/Editors
