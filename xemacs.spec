@@ -8,7 +8,7 @@ Summary(pl):	XEmacs -- Emacs nastЙpnej generacji
 Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
-Version:	%{ver}.7
+Version:	%{ver}.8
 Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
