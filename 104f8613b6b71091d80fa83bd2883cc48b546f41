@@ -1,0 +1,2 @@
+- removed nas-devel from BuildRequires list because xemacs is now built
+  only with native sound support.
