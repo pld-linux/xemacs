@@ -290,6 +290,7 @@ rm -rf $RPM_BUILD_ROOT
 %files common
 %defattr(644,root,root,755)
 %doc *.gz etc/*.gz
+%dir %{_datadir}/%{name}-%{version}%{_sysconfdir}
 %doc %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL
 %doc %lang(de) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.de
 %doc %lang(fr) %{_datadir}/%{name}-%{version}%{_sysconfdir}/TUTORIAL.fr
