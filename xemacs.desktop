@@ -5,4 +5,5 @@ Comment[pl]=Edytor XEmacs
 Icon=xemacs.png
 Exec=xemacs
 Terminal=0
+Type=Application
 # vi: encoding=utf-8
