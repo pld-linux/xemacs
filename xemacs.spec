@@ -9,7 +9,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.8
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -305,7 +305,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%lang(en) %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
+%{_prefix}/X11R6/lib/X11/app-defaults/Emacs
 %lang(pl) %{_prefix}/X11R6/lib/X11/app-defaults/pl/Emacs
 %attr(755,root,root) %{_bindir}/gnu*
 %attr(755,root,root) %{_bindir}/xemacs
