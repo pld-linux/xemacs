@@ -369,18 +369,18 @@ make install-arch-dep install-arch-indep gzip-el \
 	infodir=$RPM_BUILD_ROOT%{_infodir}
 
 gzip -9nf $RPM_BUILD_ROOT%{_infodir}/*info*
-find $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/auctex/style/ -name \*.el | xargs gzip -9
+find $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/auctex/style/ -name \*.el | xargs gzip -9
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
 
 find $RPM_BUILD_ROOT/usr/bin -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
-find $RPM_BUILD_ROOT/usr/lib/*/* -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
+find $RPM_BUILD_ROOT%{_libdir}/*/* -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
 
-mv $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/Emacs.ad \
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/Emacs.ad \
 	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/app-defaults/Emacs
-mv $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/app-defaults/ja/Emacs \
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/app-defaults/ja/Emacs \
 	$RPM_BUILD_ROOT/usr/X11R6/lib/X11/ja/app-defaults/Emacs
-mv $RPM_BUILD_ROOT/usr/lib/%{name}-%{version}/etc/xemacs-ja.1 \
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
 mv -f $RPM_BUILD_ROOT/usr/bin/xemacs-%{version} \
@@ -602,64 +602,64 @@ fi
 %files
 %defattr(644,root,root,755)
 %config /etc/X11/wmconfig/xemacs
-%attr(2755,root,mail) /usr/lib/*/*/movemail
+%attr(2755,root,mail) %{_libdir}/*/*/movemail
 %attr(755,root,root) /usr/bin/xemacs
 %attr(755,root,root) /usr/bin/gnuclient
-%attr(755,root,root) /usr/lib/*/*/cvtmail
-%attr(755,root,root) /usr/lib/*/*/digest-doc
-%attr(755,root,root) /usr/lib/*/*/fakemail
-%attr(755,root,root) /usr/lib/*/*/gnuserv
-%attr(755,root,root) /usr/lib/*/*/hexl
-%attr(755,root,root) /usr/lib/*/*/make-docfile
-%attr(755,root,root) /usr/lib/*/*/make-path
-%attr(755,root,root) /usr/lib/*/*/mmencode
-%attr(755,root,root) /usr/lib/*/*/profile
-%attr(755,root,root) /usr/lib/*/*/sorted-doc
-%attr(755,root,root) /usr/lib/*/*/yow
+%attr(755,root,root) %{_libdir}/*/*/cvtmail
+%attr(755,root,root) %{_libdir}/*/*/digest-doc
+%attr(755,root,root) %{_libdir}/*/*/fakemail
+%attr(755,root,root) %{_libdir}/*/*/gnuserv
+%attr(755,root,root) %{_libdir}/*/*/hexl
+%attr(755,root,root) %{_libdir}/*/*/make-docfile
+%attr(755,root,root) %{_libdir}/*/*/make-path
+%attr(755,root,root) %{_libdir}/*/*/mmencode
+%attr(755,root,root) %{_libdir}/*/*/profile
+%attr(755,root,root) %{_libdir}/*/*/sorted-doc
+%attr(755,root,root) %{_libdir}/*/*/yow
 %attr(755,root,root) /usr/bin/gnuattach
 %attr(755,root,root) /usr/bin/gnudoit
 %attr(755,root,root) /usr/bin/install-sid
 %attr(755,root,root) /usr/bin/pstogif
 %attr(755,root,root) /usr/bin/send-pr
-%attr(755,root,root) /usr/lib/*/*/add-big-package.sh
-%attr(755,root,root) /usr/lib/*/*/add-little-package.sh
-%attr(755,root,root) /usr/lib/*/*/gzip-el.sh
-%attr(755,root,root) /usr/lib/*/*/install-sid
-%attr(755,root,root) /usr/lib/*/*/rcs2log
-%attr(755,root,root) /usr/lib/*/*/send-pr
-%attr(755,root,root) /usr/lib/*/*/vcdiff
-%attr(755,root,root) /usr/lib/*/*/wakeup
-%doc %lang(de) /usr/lib/*/etc/TUTORIAL.de
-%doc %lang(fr) /usr/lib/*/etc/TUTORIAL.fr
-%doc %lang(hr) /usr/lib/*/etc/TUTORIAL.hr
-%doc %lang(ja) /usr/lib/*/etc/TUTORIAL.ja
-%doc %lang(ko) /usr/lib/*/etc/TUTORIAL.ko
-%doc %lang(no) /usr/lib/*/etc/TUTORIAL.no
-%doc %lang(pl) /usr/lib/*/etc/TUTORIAL.pl
-%doc %lang(th) /usr/lib/*/etc/TUTORIAL.th
-%doc /usr/lib/*/*/DOC
-%doc /usr/lib/*/etc/*.doc
-%doc /usr/lib/*/etc/README.HYPERBOLE
-%doc /usr/lib/*/etc/README.OO-BROWSER
-%doc /usr/lib/*/etc/e/README
-%doc /usr/lib/*/etc/gnuserv.README
-%doc /usr/lib/*/etc/hypb-mouse.txt
-%doc /usr/lib/*/etc/refcard.ps
-%doc /usr/lib/*/etc/refcard.tex
-%doc /usr/lib/*/etc/refcard3.ps
-%doc /usr/lib/*/etc/sample.Xdefaults
-%doc /usr/lib/*/etc/sample.emacs
-%doc /usr/lib/*/lisp/ChangeLog
-%doc /usr/lib/*/lisp/README
-%doc /usr/lib/*/lisp/apel/ChangeLog*
-%doc /usr/lib/*/lisp/ediff/README
-%doc /usr/lib/*/lisp/efs/README
-%doc /usr/lib/*/lisp/eterm/ChangeLog
-%doc /usr/lib/*/lisp/eterm/QUESTIONS
-%doc /usr/lib/*/lisp/eterm/README.term
-%doc /usr/lib/*/lisp/eterm/TODO.term
-%doc /usr/lib/*/lisp/mel/ChangeLog
-%doc /usr/lib/*/lisp/term/README
+%attr(755,root,root) %{_libdir}/*/*/add-big-package.sh
+%attr(755,root,root) %{_libdir}/*/*/add-little-package.sh
+%attr(755,root,root) %{_libdir}/*/*/gzip-el.sh
+%attr(755,root,root) %{_libdir}/*/*/install-sid
+%attr(755,root,root) %{_libdir}/*/*/rcs2log
+%attr(755,root,root) %{_libdir}/*/*/send-pr
+%attr(755,root,root) %{_libdir}/*/*/vcdiff
+%attr(755,root,root) %{_libdir}/*/*/wakeup
+%doc %lang(de) %{_libdir}/*/etc/TUTORIAL.de
+%doc %lang(fr) %{_libdir}/*/etc/TUTORIAL.fr
+%doc %lang(hr) %{_libdir}/*/etc/TUTORIAL.hr
+%doc %lang(ja) %{_libdir}/*/etc/TUTORIAL.ja
+%doc %lang(ko) %{_libdir}/*/etc/TUTORIAL.ko
+%doc %lang(no) %{_libdir}/*/etc/TUTORIAL.no
+%doc %lang(pl) %{_libdir}/*/etc/TUTORIAL.pl
+%doc %lang(th) %{_libdir}/*/etc/TUTORIAL.th
+%doc %{_libdir}/*/*/DOC
+%doc %{_libdir}/*/etc/*.doc
+%doc %{_libdir}/*/etc/README.HYPERBOLE
+%doc %{_libdir}/*/etc/README.OO-BROWSER
+%doc %{_libdir}/*/etc/e/README
+%doc %{_libdir}/*/etc/gnuserv.README
+%doc %{_libdir}/*/etc/hypb-mouse.txt
+%doc %{_libdir}/*/etc/refcard.ps
+%doc %{_libdir}/*/etc/refcard.tex
+%doc %{_libdir}/*/etc/refcard3.ps
+%doc %{_libdir}/*/etc/sample.Xdefaults
+%doc %{_libdir}/*/etc/sample.emacs
+%doc %{_libdir}/*/lisp/ChangeLog
+%doc %{_libdir}/*/lisp/README
+%doc %{_libdir}/*/lisp/apel/ChangeLog*
+%doc %{_libdir}/*/lisp/ediff/README
+%doc %{_libdir}/*/lisp/efs/README
+%doc %{_libdir}/*/lisp/eterm/ChangeLog
+%doc %{_libdir}/*/lisp/eterm/QUESTIONS
+%doc %{_libdir}/*/lisp/eterm/README.term
+%doc %{_libdir}/*/lisp/eterm/TODO.term
+%doc %{_libdir}/*/lisp/mel/ChangeLog
+%doc %{_libdir}/*/lisp/term/README
 %{_mandir}/man1/gnuattach.1.gz
 %{_mandir}/man1/gnuclient.1.gz
 %{_mandir}/man1/gnudoit.1.gz
@@ -668,8 +668,8 @@ fi
 %lang(ja) %{_mandir}/ja/man1/xemacs.1.gz
 %doc README GETTING.GNU.SOFTWARE PROBLEMS 
 %doc etc/NEWS etc/MAILINGLISTS BUGS 
-/usr/lib/*/*/config.values
-/usr/lib/*/etc/*.xbm
+%{_libdir}/*/*/config.values
+%{_libdir}/*/etc/*.xbm
 %{_infodir}/cc-mode.info*gz
 %{_infodir}/custom.info*gz
 %{_infodir}/efs.info*gz
@@ -686,223 +686,223 @@ fi
 %{_infodir}/widget.info*gz
 %{_infodir}/xemacs-faq.info*gz
 %{_infodir}/xemacs.info*gz
-/usr/lib/*/etc/*.xpm
-/usr/lib/*/etc/*.xpm.Z
-/usr/lib/*/etc/categories
-/usr/lib/*/etc/cbx.gif
-/usr/lib/*/etc/custom/*
-/usr/lib/*/etc/eos/*
-/usr/lib/*/etc/frame-icon/*
-/usr/lib/*/etc/idd/*
-/usr/lib/*/etc/message/*
-/usr/lib/*/etc/mine/*
-/usr/lib/*/etc/ms-kermit
-/usr/lib/*/etc/ms-kermit-7bit
-/usr/lib/*/etc/smilies/*
-/usr/lib/*/etc/sounds/*
-/usr/lib/*/etc/sparcworks/*
-/usr/lib/*/etc/spook.lines
-/usr/lib/*/etc/time/*
-/usr/lib/*/etc/toolbar/*
-/usr/lib/*/etc/xemacs-fe.sh
-/usr/lib/*/etc/yow.lines
-/usr/lib/*/lisp/*.el
-/usr/lib/*/lisp/apel/*.el
-/usr/lib/*/lisp/apel/*.elc
-/usr/lib/*/lisp/calendar/*.elc
-/usr/lib/*/lisp/cc-mode/*.elc
-/usr/lib/*/lisp/comint/*.elc
-/usr/lib/*/lisp/custom/*.elc
-/usr/lib/*/lisp/ediff/*.elc
-/usr/lib/*/lisp/ediff/Makefile
-/usr/lib/*/lisp/efs/*.el
-/usr/lib/*/lisp/efs/*.elc
-/usr/lib/*/lisp/efs/Makefile
-/usr/lib/*/lisp/electric/*.elc
-/usr/lib/*/lisp/eos/*.el
-/usr/lib/*/lisp/eos/*.elc
-/usr/lib/*/lisp/eos/Makefile
-/usr/lib/*/lisp/eterm/*.elc
-/usr/lib/*/lisp/games/*.elc
-/usr/lib/*/lisp/iso/*.elc
-/usr/lib/*/lisp/mel/*.elc
-/usr/lib/*/lisp/mu/*.el
-/usr/lib/*/lisp/mu/*.elc
-/usr/lib/*/lisp/packages/*.elc
-/usr/lib/*/lisp/prim/*.el
-/usr/lib/*/lisp/prim/*.elc
-/usr/lib/*/lisp/sunpro/*.elc
-/usr/lib/*/lisp/term/*.elc
-/usr/lib/*/lisp/tl/*.el
-/usr/lib/*/lisp/tl/*.elc
-/usr/lib/*/lisp/tooltalk/*.elc
-/usr/lib/*/lisp/tooltalk/Makefile
-/usr/lib/*/lisp/utils/*.elc
-/usr/lib/*/lisp/utils/forms-d2.dat
-/usr/lib/*/lisp/vc/*.elc
-/usr/lib/*/lisp/x11/*.elc
+%{_libdir}/*/etc/*.xpm
+%{_libdir}/*/etc/*.xpm.Z
+%{_libdir}/*/etc/categories
+%{_libdir}/*/etc/cbx.gif
+%{_libdir}/*/etc/custom/*
+%{_libdir}/*/etc/eos/*
+%{_libdir}/*/etc/frame-icon/*
+%{_libdir}/*/etc/idd/*
+%{_libdir}/*/etc/message/*
+%{_libdir}/*/etc/mine/*
+%{_libdir}/*/etc/ms-kermit
+%{_libdir}/*/etc/ms-kermit-7bit
+%{_libdir}/*/etc/smilies/*
+%{_libdir}/*/etc/sounds/*
+%{_libdir}/*/etc/sparcworks/*
+%{_libdir}/*/etc/spook.lines
+%{_libdir}/*/etc/time/*
+%{_libdir}/*/etc/toolbar/*
+%{_libdir}/*/etc/xemacs-fe.sh
+%{_libdir}/*/etc/yow.lines
+%{_libdir}/*/lisp/*.el
+%{_libdir}/*/lisp/apel/*.el
+%{_libdir}/*/lisp/apel/*.elc
+%{_libdir}/*/lisp/calendar/*.elc
+%{_libdir}/*/lisp/cc-mode/*.elc
+%{_libdir}/*/lisp/comint/*.elc
+%{_libdir}/*/lisp/custom/*.elc
+%{_libdir}/*/lisp/ediff/*.elc
+%{_libdir}/*/lisp/ediff/Makefile
+%{_libdir}/*/lisp/efs/*.el
+%{_libdir}/*/lisp/efs/*.elc
+%{_libdir}/*/lisp/efs/Makefile
+%{_libdir}/*/lisp/electric/*.elc
+%{_libdir}/*/lisp/eos/*.el
+%{_libdir}/*/lisp/eos/*.elc
+%{_libdir}/*/lisp/eos/Makefile
+%{_libdir}/*/lisp/eterm/*.elc
+%{_libdir}/*/lisp/games/*.elc
+%{_libdir}/*/lisp/iso/*.elc
+%{_libdir}/*/lisp/mel/*.elc
+%{_libdir}/*/lisp/mu/*.el
+%{_libdir}/*/lisp/mu/*.elc
+%{_libdir}/*/lisp/packages/*.elc
+%{_libdir}/*/lisp/prim/*.el
+%{_libdir}/*/lisp/prim/*.elc
+%{_libdir}/*/lisp/sunpro/*.elc
+%{_libdir}/*/lisp/term/*.elc
+%{_libdir}/*/lisp/tl/*.el
+%{_libdir}/*/lisp/tl/*.elc
+%{_libdir}/*/lisp/tooltalk/*.elc
+%{_libdir}/*/lisp/tooltalk/Makefile
+%{_libdir}/*/lisp/utils/*.elc
+%{_libdir}/*/lisp/utils/forms-d2.dat
+%{_libdir}/*/lisp/vc/*.elc
+%{_libdir}/*/lisp/x11/*.elc
 /usr/X11R6/lib/X11/ja/app-defaults/Emacs
 /usr/X11R6/lib/X11/app-defaults/Emacs
 /var/lock/xemacs
 
 %files el 
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/apel/*.el.gz
-/usr/lib/*/lisp/calendar/*.el.gz
-/usr/lib/*/lisp/cc-mode/*.el.gz
-/usr/lib/*/lisp/comint/*.el.gz
-/usr/lib/*/lisp/custom/*.el.gz
-/usr/lib/*/lisp/ediff/*.el.gz
-/usr/lib/*/lisp/efs/*.el.gz
-/usr/lib/*/lisp/electric/*.el.gz
-/usr/lib/*/lisp/eos/*.el.gz
-/usr/lib/*/lisp/eterm/*.el.gz
-/usr/lib/*/lisp/games/*.el.gz
-/usr/lib/*/lisp/iso/*.el.gz
-/usr/lib/*/lisp/mel/*.el.gz
-/usr/lib/*/lisp/mu/*.el.gz
-/usr/lib/*/lisp/packages/*.el.gz
-/usr/lib/*/lisp/prim/*.el.gz
-/usr/lib/*/lisp/sunpro/*.el.gz
-/usr/lib/*/lisp/term/*.el.gz
-/usr/lib/*/lisp/tl/*.el.gz
-/usr/lib/*/lisp/tooltalk/*.el.gz
-/usr/lib/*/lisp/utils/*.el.gz
-/usr/lib/*/lisp/vc/*.el.gz
-/usr/lib/*/lisp/x11/*.el.gz
+%{_libdir}/*/lisp/apel/*.el.gz
+%{_libdir}/*/lisp/calendar/*.el.gz
+%{_libdir}/*/lisp/cc-mode/*.el.gz
+%{_libdir}/*/lisp/comint/*.el.gz
+%{_libdir}/*/lisp/custom/*.el.gz
+%{_libdir}/*/lisp/ediff/*.el.gz
+%{_libdir}/*/lisp/efs/*.el.gz
+%{_libdir}/*/lisp/electric/*.el.gz
+%{_libdir}/*/lisp/eos/*.el.gz
+%{_libdir}/*/lisp/eterm/*.el.gz
+%{_libdir}/*/lisp/games/*.el.gz
+%{_libdir}/*/lisp/iso/*.el.gz
+%{_libdir}/*/lisp/mel/*.el.gz
+%{_libdir}/*/lisp/mu/*.el.gz
+%{_libdir}/*/lisp/packages/*.el.gz
+%{_libdir}/*/lisp/prim/*.el.gz
+%{_libdir}/*/lisp/sunpro/*.el.gz
+%{_libdir}/*/lisp/term/*.el.gz
+%{_libdir}/*/lisp/tl/*.el.gz
+%{_libdir}/*/lisp/tooltalk/*.el.gz
+%{_libdir}/*/lisp/utils/*.el.gz
+%{_libdir}/*/lisp/vc/*.el.gz
+%{_libdir}/*/lisp/x11/*.el.gz
 
 %files emulators 
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/emulators/*.elc
-/usr/lib/*/lisp/emulators/tpu-edt.xmodmap
+%{_libdir}/*/lisp/emulators/*.elc
+%{_libdir}/*/lisp/emulators/tpu-edt.xmodmap
 
 %files gnats
 %defattr(644,root,root,755)
 %{_infodir}/gnats.info*gz
-/usr/lib/*/etc/gnats/*
-/usr/lib/*/lisp/gnats/*.elc
-/usr/lib/*/lisp/gnats/*.el.gz
+%{_libdir}/*/etc/gnats/*
+%{_libdir}/*/lisp/gnats/*.elc
+%{_libdir}/*/lisp/gnats/*.el.gz
 
 %files emulators-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/emulators/*.el.gz
+%{_libdir}/*/lisp/emulators/*.el.gz
 
 %files viper 
 %defattr(644,root,root,755)
-%doc /usr/lib/*/etc/viperCard.tex
+%doc %{_libdir}/*/etc/viperCard.tex
 %{_infodir}/viper.info*gz
-/usr/lib/*/lisp/viper/*.elc
-%doc /usr/lib/*/lisp/viper/README
+%{_libdir}/*/lisp/viper/*.elc
+%doc %{_libdir}/*/lisp/viper/README
 
 %files viper-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/viper/*.el.gz
-/usr/lib/*/lisp/viper/Makefile
+%{_libdir}/*/lisp/viper/*.el.gz
+%{_libdir}/*/lisp/viper/Makefile
 
 %files lisp-programming
 %defattr(644,root,root,755)
 %{_infodir}/cl.info*gz
 %{_infodir}/ilisp.info*gz
 %{_infodir}/lispref.info*gz
-%doc /usr/lib/*/lisp/edebug/README
-%doc /usr/lib/*/lisp/ilisp/ACKNOWLEDGMENTS
-%doc /usr/lib/*/lisp/ilisp/COPYING
-%doc /usr/lib/*/lisp/ilisp/GETTING-ILISP
-%doc /usr/lib/*/lisp/ilisp/HISTORY
-#%doc /usr/lib/*/lisp/ilisp/INSTALLATION
-%doc /usr/lib/*/lisp/ilisp/README
-%doc /usr/lib/*/lisp/ilisp/Welcome
-/usr/lib/*/lisp/bytecomp/*.elc
-/usr/lib/*/lisp/cl/*.elc
-/usr/lib/*/lisp/edebug/*.el
-/usr/lib/*/lisp/edebug/*.elc
-/usr/lib/*/lisp/edebug/Makefile
-/usr/lib/*/lisp/edebug/edebug-history
-/usr/lib/*/lisp/ilisp/*.el
-/usr/lib/*/lisp/ilisp/*.elc
-/usr/lib/*/lisp/ilisp/*.lisp
-/usr/lib/*/lisp/ilisp/ild.mail
-/usr/lib/*/lisp/ilisp/ilisp.emacs
-/usr/lib/*/lisp/ilisp/scheme2c.mail
+%doc %{_libdir}/*/lisp/edebug/README
+%doc %{_libdir}/*/lisp/ilisp/ACKNOWLEDGMENTS
+%doc %{_libdir}/*/lisp/ilisp/COPYING
+%doc %{_libdir}/*/lisp/ilisp/GETTING-ILISP
+%doc %{_libdir}/*/lisp/ilisp/HISTORY
+#%doc %{_libdir}/*/lisp/ilisp/INSTALLATION
+%doc %{_libdir}/*/lisp/ilisp/README
+%doc %{_libdir}/*/lisp/ilisp/Welcome
+%{_libdir}/*/lisp/bytecomp/*.elc
+%{_libdir}/*/lisp/cl/*.elc
+%{_libdir}/*/lisp/edebug/*.el
+%{_libdir}/*/lisp/edebug/*.elc
+%{_libdir}/*/lisp/edebug/Makefile
+%{_libdir}/*/lisp/edebug/edebug-history
+%{_libdir}/*/lisp/ilisp/*.el
+%{_libdir}/*/lisp/ilisp/*.elc
+%{_libdir}/*/lisp/ilisp/*.lisp
+%{_libdir}/*/lisp/ilisp/ild.mail
+%{_libdir}/*/lisp/ilisp/ilisp.emacs
+%{_libdir}/*/lisp/ilisp/scheme2c.mail
 
 %files lisp-programming-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/ilisp/*.el.gz
-/usr/lib/*/lisp/edebug/*.el.gz
-/usr/lib/*/lisp/bytecomp/*.el.gz
-/usr/lib/*/lisp/cl/*.el.gz
-/usr/lib/*/lisp/ilisp/Makefile
+%{_libdir}/*/lisp/ilisp/*.el.gz
+%{_libdir}/*/lisp/edebug/*.el.gz
+%{_libdir}/*/lisp/bytecomp/*.el.gz
+%{_libdir}/*/lisp/cl/*.el.gz
+%{_libdir}/*/lisp/ilisp/Makefile
 
 %files auctex
 %defattr(644,root,root,755)
 %{_infodir}/auctex.info*gz
-%doc /usr/lib/*/lisp/auctex/CHANGES
-%doc /usr/lib/*/lisp/auctex/ChangeLog
-%doc /usr/lib/*/lisp/auctex/README
-/usr/lib/*/etc/auctex/style/*.elc
-/usr/lib/*/lisp/auctex/*.el
-/usr/lib/*/lisp/auctex/*.elc
-#/usr/lib/*/lisp/auctex/INSTALLATION
-%doc /usr/lib/*/lisp/auctex/PROBLEMS
+%doc %{_libdir}/*/lisp/auctex/CHANGES
+%doc %{_libdir}/*/lisp/auctex/ChangeLog
+%doc %{_libdir}/*/lisp/auctex/README
+%{_libdir}/*/etc/auctex/style/*.elc
+%{_libdir}/*/lisp/auctex/*.el
+%{_libdir}/*/lisp/auctex/*.elc
+#%{_libdir}/*/lisp/auctex/INSTALLATION
+%doc %{_libdir}/*/lisp/auctex/PROBLEMS
 
 %files auctex-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/auctex/Makefile
-/usr/lib/*/lisp/auctex/*.el.gz
-/usr/lib/*/etc/auctex/style/*.el.gz
+%{_libdir}/*/lisp/auctex/Makefile
+%{_libdir}/*/lisp/auctex/*.el.gz
+%{_libdir}/*/etc/auctex/style/*.el.gz
 
 %files w3 
 %defattr(644,root,root,755)
 %{_infodir}/w3-faq.info*gz
 %{_infodir}/w3.info*gz
-/usr/lib/*/lisp/w3/*.el
-/usr/lib/*/lisp/w3/*.elc
-%doc /usr/lib/*/lisp/w3/ChangeLog
-/usr/lib/*/lisp/w3/descrip.mms
-/usr/lib/*/etc/w3/*
+%{_libdir}/*/lisp/w3/*.el
+%{_libdir}/*/lisp/w3/*.elc
+%doc %{_libdir}/*/lisp/w3/ChangeLog
+%{_libdir}/*/lisp/w3/descrip.mms
+%{_libdir}/*/etc/w3/*
 
 %files w3-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/w3/*.el.gz
-/usr/lib/*/lisp/w3/Makefile
+%{_libdir}/*/lisp/w3/*.el.gz
+%{_libdir}/*/lisp/w3/Makefile
 
 %files psgml 
 %defattr(644,root,root,755)
 %{_infodir}/hm--html-mode.info*gz
 %{_infodir}/psgml-api.info*gz
 %{_infodir}/psgml.info*gz
-%doc /usr/lib/*/lisp/hm--html-menus/ANNOUNCEMENT
-%doc /usr/lib/*/lisp/hm--html-menus/NEWS
-%doc /usr/lib/*/lisp/hm--html-menus/README
-%doc /usr/lib/*/lisp/psgml/ChangeLog
-%doc /usr/lib/*/lisp/psgml/README.psgml
-/usr/lib/*/etc/sgml/*
-/usr/lib/*/lisp/hm--html-menus/*.elc
-/usr/lib/*/lisp/hm--html-menus/command-description.html.tmpl
-/usr/lib/*/lisp/hm--html-menus/frame.html.tmpl
-/usr/lib/*/lisp/hm--html-menus/templates.doc
-/usr/lib/*/lisp/psgml/*.elc
-/usr/lib/*/lisp/psgml/psgml-style.fs
+%doc %{_libdir}/*/lisp/hm--html-menus/ANNOUNCEMENT
+%doc %{_libdir}/*/lisp/hm--html-menus/NEWS
+%doc %{_libdir}/*/lisp/hm--html-menus/README
+%doc %{_libdir}/*/lisp/psgml/ChangeLog
+%doc %{_libdir}/*/lisp/psgml/README.psgml
+%{_libdir}/*/etc/sgml/*
+%{_libdir}/*/lisp/hm--html-menus/*.elc
+%{_libdir}/*/lisp/hm--html-menus/command-description.html.tmpl
+%{_libdir}/*/lisp/hm--html-menus/frame.html.tmpl
+%{_libdir}/*/lisp/hm--html-menus/templates.doc
+%{_libdir}/*/lisp/psgml/*.elc
+%{_libdir}/*/lisp/psgml/psgml-style.fs
 
 %files psgml-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/psgml/*.el.gz
-/usr/lib/*/lisp/hm--html-menus/*.el.gz
+%{_libdir}/*/lisp/psgml/*.el.gz
+%{_libdir}/*/lisp/hm--html-menus/*.el.gz
 
 %files modes 
 %defattr(644,root,root,755)
 %{_infodir}/pcl-cvs.info*gz
-%doc /usr/lib/*/lisp/pcl-cvs/ChangeLog
-%doc /usr/lib/*/lisp/pcl-cvs/README
-/usr/lib/*/lisp/modes/*.elc
-/usr/lib/*/lisp/pcl-cvs/*.elc
-#/usr/lib/*/lisp/pcl-cvs/INSTALL
-%doc /usr/lib/*/lisp/pcl-cvs/NEWS
+%doc %{_libdir}/*/lisp/pcl-cvs/ChangeLog
+%doc %{_libdir}/*/lisp/pcl-cvs/README
+%{_libdir}/*/lisp/modes/*.elc
+%{_libdir}/*/lisp/pcl-cvs/*.elc
+#%{_libdir}/*/lisp/pcl-cvs/INSTALL
+%doc %{_libdir}/*/lisp/pcl-cvs/NEWS
 
 %files modes-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/pcl-cvs/*.el.gz
-/usr/lib/*/lisp/modes/*.el.gz
+%{_libdir}/*/lisp/pcl-cvs/*.el.gz
+%{_libdir}/*/lisp/modes/*.el.gz
 
 %files extras
 %attr(755,root,root) /usr/bin/b2m
@@ -910,7 +910,7 @@ fi
 
 %files mail
 %defattr(644,root,root,755)
-%doc /usr/lib/*/etc/MH-E-NEWS
+%doc %{_libdir}/*/etc/MH-E-NEWS
 %{_infodir}/mailcrypt.info*gz
 %{_infodir}/mh-e.info*gz
 %{_infodir}/rmail.info*gz
@@ -921,43 +921,43 @@ fi
 %{_infodir}/tm-view-en.info*gz
 %{_infodir}/tm-vm-en.info*gz
 %{_infodir}/vm.info*gz
-%doc /usr/lib/*/lisp/mailcrypt/ChangeLog
-%doc /usr/lib/*/lisp/mailcrypt/NEWS
-%doc /usr/lib/*/lisp/mailcrypt/ONEWS
-%doc /usr/lib/*/lisp/mailcrypt/README
-%doc /usr/lib/*/lisp/rmail/README
-%doc /usr/lib/*/lisp/vm/README
-%attr(755,root,root) /usr/lib/*/%{buildarch}*/tm*
-/usr/lib/*/etc/vm/*
-/usr/lib/*/lisp/mailcrypt/*.elc
-/usr/lib/*/lisp/mh-e/*.elc
-/usr/lib/*/lisp/rmail/*.elc
-/usr/lib/*/lisp/tm/*.elc
-/usr/lib/*/lisp/vm/*.el
-/usr/lib/*/lisp/vm/*.elc
-/usr/lib/*/lisp/vm/.autoload
-/usr/lib/*/lisp/vm/Makefile
-/usr/lib/*/lisp/vm/make-autoloads
+%doc %{_libdir}/*/lisp/mailcrypt/ChangeLog
+%doc %{_libdir}/*/lisp/mailcrypt/NEWS
+%doc %{_libdir}/*/lisp/mailcrypt/ONEWS
+%doc %{_libdir}/*/lisp/mailcrypt/README
+%doc %{_libdir}/*/lisp/rmail/README
+%doc %{_libdir}/*/lisp/vm/README
+%attr(755,root,root) %{_libdir}/*/%{buildarch}*/tm*
+%{_libdir}/*/etc/vm/*
+%{_libdir}/*/lisp/mailcrypt/*.elc
+%{_libdir}/*/lisp/mh-e/*.elc
+%{_libdir}/*/lisp/rmail/*.elc
+%{_libdir}/*/lisp/tm/*.elc
+%{_libdir}/*/lisp/vm/*.el
+%{_libdir}/*/lisp/vm/*.elc
+%{_libdir}/*/lisp/vm/.autoload
+%{_libdir}/*/lisp/vm/Makefile
+%{_libdir}/*/lisp/vm/make-autoloads
 
 %files mail-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/tm/*.el.gz
-/usr/lib/*/lisp/vm/*.el.gz
-/usr/lib/*/lisp/mh-e/*.el.gz
-/usr/lib/*/lisp/mailcrypt/*.el.gz
-/usr/lib/*/lisp/rmail/*.el.gz
+%{_libdir}/*/lisp/tm/*.el.gz
+%{_libdir}/*/lisp/vm/*.el.gz
+%{_libdir}/*/lisp/mh-e/*.el.gz
+%{_libdir}/*/lisp/mailcrypt/*.el.gz
+%{_libdir}/*/lisp/rmail/*.el.gz
 
 %files gnus
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/gnus/*.elc
-%doc /usr/lib/*/etc/gnusrefcard/*
+%{_libdir}/*/lisp/gnus/*.elc
+%doc %{_libdir}/*/etc/gnusrefcard/*
 %doc %{_infodir}/gnus-mime-en.info*gz
 %doc %{_infodir}/gnus.info*gz
 
 %files gnus-el
 %defattr(644,root,root,755)
-/usr/lib/*/lisp/gnus/*.el.gz
-/usr/lib/*/lisp/gnus/Makefile
+%{_libdir}/*/lisp/gnus/*.el.gz
+%{_libdir}/*/lisp/gnus/Makefile
 
 %changelog
 * Sat Dec 19 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
@@ -980,8 +980,7 @@ fi
 - removed /usr/lib/xemacs-20.4/etc/tests
 - added full url to Source{0,1},
 - all info pages moved to %{_infodir}/,
-- /usr/lib/xemacs-20.4/etc/xemacs-ja.1.gz moved to
-  %{_mandir}/ja/man1/xemacs.1.gz
+- /usr/lib/xemacs-20.4/etc/xemacs-ja.1.gz
 - added Group(pl),
 - simplifications in all %files,
 - added /var/lock/xemacs direcrory to main.
