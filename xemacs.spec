@@ -83,7 +83,6 @@ Summary:	XEmacs binary compiled without X11 support
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
 Requires:	%{name}-common = %{version}
-Provides:	%{name}
 Provides:	%{name} = %{version}
 
 %description nox
