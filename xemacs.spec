@@ -249,8 +249,8 @@ find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || 
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
 # hmm, maybe xemacs-devel is necessary?
 rm -fr $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/include
-rm -f $RPM_BUILD_ROOT%{_infodir}/dir.gz 
-rm -f $RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*.gz
+rm -f $RPM_BUILD_ROOT%{_infodir}/dir*
+rm -f $RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
 gzip -9nf README GETTING.GNU.SOFTWARE PROBLEMS \
 	etc/NEWS etc/MAILINGLISTS BUGS etc/TERMS etc/SERVICE
