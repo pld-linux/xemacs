@@ -373,7 +373,7 @@ find $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/auctex/style/ -name \*.el 
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/xemacs
 
-find $RPM_BUILD_ROOT/usr/bin -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
+find $RPM_BUILD_ROOT%{_bindir} -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
 find $RPM_BUILD_ROOT%{_libdir}/*/* -type f |xargs  file |grep stripped|  awk -F: '{print $1}' | xargs strip 
 
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/Emacs.ad \
@@ -383,8 +383,8 @@ mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/app-defaults/ja/Emacs \
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/etc/xemacs-ja.1 \
 	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
-mv -f $RPM_BUILD_ROOT/usr/bin/xemacs-%{version} \
-	$RPM_BUILD_ROOT/usr/bin/xemacs
+mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
+	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{ja/man1/*,man1/*}
 
@@ -603,8 +603,8 @@ fi
 %defattr(644,root,root,755)
 %config /etc/X11/wmconfig/xemacs
 %attr(2755,root,mail) %{_libdir}/*/*/movemail
-%attr(755,root,root) /usr/bin/xemacs
-%attr(755,root,root) /usr/bin/gnuclient
+%attr(755,root,root) %{_bindir}/xemacs
+%attr(755,root,root) %{_bindir}/gnuclient
 %attr(755,root,root) %{_libdir}/*/*/cvtmail
 %attr(755,root,root) %{_libdir}/*/*/digest-doc
 %attr(755,root,root) %{_libdir}/*/*/fakemail
@@ -616,11 +616,11 @@ fi
 %attr(755,root,root) %{_libdir}/*/*/profile
 %attr(755,root,root) %{_libdir}/*/*/sorted-doc
 %attr(755,root,root) %{_libdir}/*/*/yow
-%attr(755,root,root) /usr/bin/gnuattach
-%attr(755,root,root) /usr/bin/gnudoit
-%attr(755,root,root) /usr/bin/install-sid
-%attr(755,root,root) /usr/bin/pstogif
-%attr(755,root,root) /usr/bin/send-pr
+%attr(755,root,root) %{_bindir}/gnuattach
+%attr(755,root,root) %{_bindir}/gnudoit
+%attr(755,root,root) %{_bindir}/install-sid
+%attr(755,root,root) %{_bindir}/pstogif
+%attr(755,root,root) %{_bindir}/send-pr
 %attr(755,root,root) %{_libdir}/*/*/add-big-package.sh
 %attr(755,root,root) %{_libdir}/*/*/add-little-package.sh
 %attr(755,root,root) %{_libdir}/*/*/gzip-el.sh
@@ -905,8 +905,8 @@ fi
 %{_libdir}/*/lisp/modes/*.el.gz
 
 %files extras
-%attr(755,root,root) /usr/bin/b2m
-%attr(755,root,root) /usr/bin/rcs-checkin
+%attr(755,root,root) %{_bindir}/b2m
+%attr(755,root,root) %{_bindir}/rcs-checkin
 
 %files mail
 %defattr(644,root,root,755)
