@@ -4,7 +4,7 @@ Name:		xemacs
 Version:	21.1.8
 %define		ver		21.1
 %define		basepkgver	1.32
-Release:	7
+Release:	8
 License:	GPL
 Group:		Applications/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -142,7 +142,7 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Editors,/var/lock/xemacs} \
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Development/Editors,/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_prefix}/X11R6/lib/X11/{,pl}/app-defaults} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
 	$RPM_BUILD_ROOT%{_libdir}/%{name} \
@@ -154,7 +154,7 @@ make install-arch-dep install-arch-indep gzip-el \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	datadir=$RPM_BUILD_ROOT%{_datadir} \
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Editors/xemacs.desktop
+install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Development/Editors/xemacs.desktop
 install %{SOURCE4} $RPM_BUILD_ROOT%{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
 
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - ; cd lisp/xemacs-base; gzip -9nf *.el)
@@ -217,7 +217,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/*/lisp/ChangeLog*
 %doc %{_datadir}/*/lisp/README
 %doc %{_datadir}/*/lisp/term/README
-%{_applnkdir}/Editors/xemacs.desktop
+%{_applnkdir}/Development/Editors/xemacs.desktop
 
 %lang(en) %{_prefix}/X11R6/lib/X11/app-defaults/Emacs
 %lang(pl) %{_prefix}/X11R6/lib/X11/pl/app-defaults/Emacs
