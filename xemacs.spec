@@ -15,7 +15,8 @@ Source2:	ftp://ftp.xemacs.org/pub/xemacs/packages/%{name}-base-%{basepkgver}-pkg
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
-Source6:	%{name}-kbd_pl
+Source6:	%{name}-ogony-mule.el
+Source7:	%{name}-ogony-nomule.el
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-archlibdir.patch
 Patch2:		%{name}-fix_ldflafs.patch
@@ -220,7 +221,8 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_applnkdir}/Development/Editors/xemacs.deskt
 ( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - )
 
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/default.el
-install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/kbd_pl
+install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-mule.el
+install %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-nomule.el
 
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_libdir}/%{name}
 
