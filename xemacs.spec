@@ -1,7 +1,7 @@
 # _with_postgresql	- postgresql support
 # _with_gtk		- gtk enabled version
 %define		ver		21.4
-%define		basepkgver 	1.55
+%define		basepkgver	1.55
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(pl):	XEmacs -- Emacs nastêpnej generacji
 Name:		xemacs
@@ -57,7 +57,7 @@ with emacs
 
 Install xemacs-extras if you haven't emacs installed.
 
-%description -l pl 
+%description -l pl
 XEmacs jest odmian± Emacsa, zgodn± (i zawieraj±c± wiele udogodnieñ) z
 GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
 Foundation. Wywodzi siê z wczesnych odmian GNU Emacs 19, wprowadza
@@ -76,6 +76,7 @@ Zainstaluj tak¿e xemacs-extras je¶li nie posiadasz GNU Emacsa.
 
 %package common
 Summary:	Common part of XEmacs distribution
+Summary(pl):	Wspólne czê¶ci XEmacsa
 Group:		Applications/Editors/Emacs
 Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -86,8 +87,14 @@ Common files of XEmacs distribution. This package does not contain
 XEmacs editor binary, you must install xemacs or xemacs-nox package to
 use XEmacs -- Emacs: The Next Generation editor.
 
+%description common -l pl
+Wspólne pliki XEmacsa. Ten pakiet nie zawiera pliku wykonywalnego
+edytora, musisz zainstalowaæ xemacs lub xemacs-nox, aby u¿ywaæ XEmacsa
+b±d¼ Emacsa: edytor Nastêpnej Generacji.
+
 %package nox
 Summary:	XEmacs binary compiled without X11 support
+Summary(pl):	XEmacs skompilowany bez wsparcia dla X11
 Group:		Applications/Editors/Emacs
 Group(de):	Applikationen/Editors/Emacs
 Group(pl):	Aplikacje/Edytory/Emacs
@@ -131,7 +138,7 @@ LDFLAGS="%{rpmldflags} -lc"
 sitelispdir=%{_libdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 
-# no X 
+# no X
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
@@ -187,8 +194,8 @@ cp src/xemacs src/xemacs-nox
 	--without-dragndrop \
 	--without-msw
 
-# if you want to xemacs sings and plays sounds add option 
-#	--with-sound=native 
+# if you want to xemacs sings and plays sounds add option
+#	--with-sound=native
 
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
@@ -263,10 +270,10 @@ gzip -9nf README GETTING.GNU.SOFTWARE PROBLEMS \
 rm -rf $RPM_BUILD_ROOT
 
 %post
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1 
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %files
 %defattr(644,root,root,755)
