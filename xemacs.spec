@@ -23,7 +23,6 @@ Patch4:		%{name}-no-antoloads.patch
 URL:		http://www.xemacs.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	zlib-devel
-BuildRequires:	xpm-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng >= 1.0.8
