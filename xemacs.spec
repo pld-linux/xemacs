@@ -252,7 +252,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}-packages/lisp/xemacs-base
 %{_datadir}/%{name}-packages/lisp/xemacs-base/*.elc
 
-%attr(755,root,root) %{_bindir}/*tags
+%attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/gnu*
 %attr(755,root,root) %{_bindir}/pstogif
 %attr(755,root,root) %{_bindir}/xemacs
@@ -276,7 +276,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/vcdiff
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/*/wakeup
 
-%{_mandir}/man1/*
+%{_mandir}/man1/gnu*
+%{_mandir}/man1/xemacs*
 %lang(ja) %{_mandir}/ja/man1/*
 
 %{_infodir}/custom.info*gz
