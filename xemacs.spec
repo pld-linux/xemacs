@@ -187,7 +187,7 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%ifarch alpha
+%ifarch alpha ia64
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
 %endif
