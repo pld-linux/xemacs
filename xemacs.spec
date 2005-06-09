@@ -5,7 +5,7 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.4
-%define		basepkgver	1.96
+%define		basepkgver	1.97
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs ╔╗╔г╔ё╔©
@@ -15,7 +15,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.17
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -23,7 +23,7 @@ Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
 Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
 # Source1-md5:	8f678003cc78cd0faecc5ab9e3b8818f
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	e6abbd4e2a18006e23d830b404e8e93e
+# Source2-md5:	d51d8afe507a0bb17f08ef211f9f6f5a
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -35,6 +35,8 @@ Patch1:		%{name}-fix_ldflafs.patch
 Patch3:		%{name}-no-memory-warnings.patch
 Patch4:		%{name}-dump-paths-lispdir.patch
 URL:		http://www.xemacs.org/
+# for X11/bitmaps/gray
+BuildRequires:	XFree86
 BuildRequires:	XFree86-devel
 BuildRequires:	automake
 BuildRequires:	libjpeg-devel
