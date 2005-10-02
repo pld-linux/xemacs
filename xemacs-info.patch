@@ -1,150 +1,120 @@
-diff -Nru xemacs-21.4.3/man/cl.texi xemacs-21.4.3.new/man/cl.texi
---- xemacs-21.4.3/man/cl.texi	Thu Apr 12 20:21:59 2001
-+++ xemacs-21.4.3.new/man/cl.texi	Mon May 21 22:16:38 2001
-@@ -7,9 +7,9 @@
+diff -urbB xemacs-21.5.22.org/man/cl.texi xemacs-21.5.22/man/cl.texi
+--- xemacs-21.5.22.org/man/cl.texi	2003-03-12 18:35:06.000000000 +0100
++++ xemacs-21.5.22/man/cl.texi	2005-10-02 23:48:48.041449750 +0200
+@@ -7,7 +7,7 @@
  @end iftex
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Common Lisp: (cl).		GNU Emacs Common Lisp emulation package.
-+* Common Lisp: (cl).			GNU Emacs Common Lisp emulation package
+ * Common Lisp: (cl).		XEmacs Common Lisp emulation package.
  @end direntry
- 
- This file documents the GNU Emacs Common Lisp emulation package.
-diff -Nru xemacs-21.4.3/man/custom.texi xemacs-21.4.3.new/man/custom.texi
---- xemacs-21.4.3/man/custom.texi	Thu Apr 12 20:21:59 2001
-+++ xemacs-21.4.3.new/man/custom.texi	Mon May 21 22:24:17 2001
-@@ -10,9 +10,9 @@
+diff -urbB xemacs-21.5.22.org/man/custom.texi xemacs-21.5.22/man/custom.texi
+--- xemacs-21.5.22.org/man/custom.texi	2003-10-10 14:39:27.000000000 +0200
++++ xemacs-21.5.22/man/custom.texi	2005-10-02 23:49:07.730680250 +0200
+@@ -10,7 +10,7 @@
  @c %**end of header
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Customizations: (custom).	Customization Library.
-+* Customizations: (custom).		Customization Library
+ * Customizations: (custom).	Customization Library.
  @end direntry
- @end ifinfo
- 
-diff -Nru xemacs-21.4.3/man/external-widget.texi xemacs-21.4.3.new/man/external-widget.texi
---- xemacs-21.4.3/man/external-widget.texi	Thu Apr 12 20:22:00 2001
-+++ xemacs-21.4.3.new/man/external-widget.texi	Mon May 21 22:25:08 2001
-@@ -2,9 +2,9 @@
- @setfilename ../info/external-widget.info
+diff -urbB xemacs-21.5.22.org/man/external-widget.texi xemacs-21.5.22/man/external-widget.texi
+--- xemacs-21.5.22.org/man/external-widget.texi	2002-06-04 08:04:35.000000000 +0200
++++ xemacs-21.5.22/man/external-widget.texi	2005-10-02 23:49:34.848375000 +0200
+@@ -3,7 +3,7 @@
+ @settitle The External Client Widget
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* External Widget: (external-widget) External Client Widget.
-+* External Widget: (external-widget)	External Client Widget
+ * External Widget: (external-widget).   External Client Widget.
  @end direntry
- @end ifinfo
- 
-diff -Nru xemacs-21.4.3/man/internals/internals.texi xemacs-21.4.3.new/man/internals/internals.texi
---- xemacs-21.4.3/man/internals/internals.texi	Thu Apr 12 20:22:08 2001
-+++ xemacs-21.4.3.new/man/internals/internals.texi	Mon May 21 22:26:08 2001
-@@ -5,9 +5,9 @@
+diff -urbB xemacs-21.5.22.org/man/internals/internals.texi xemacs-21.5.22/man/internals/internals.texi
+--- xemacs-21.5.22.org/man/internals/internals.texi	2005-06-26 20:04:56.000000000 +0200
++++ xemacs-21.5.22/man/internals/internals.texi	2005-10-02 23:49:59.721929500 +0200
+@@ -5,7 +5,7 @@
  @c %**end of header
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Internals: (internals).       XEmacs Internals Manual.
-+* Internals: (internals).		XEmacs Internals Manual
+ * Internals: (internals).       XEmacs Internals Manual.
  @end direntry
- 
- Copyright @copyright{} 1992 - 1996 Ben Wing.
-diff -Nru xemacs-21.4.3/man/lispref/lispref.texi xemacs-21.4.3.new/man/lispref/lispref.texi
---- xemacs-21.4.3/man/lispref/lispref.texi	Thu Apr 12 20:22:16 2001
-+++ xemacs-21.4.3.new/man/lispref/lispref.texi	Mon May 21 22:27:00 2001
-@@ -6,9 +6,9 @@
+diff -urbB xemacs-21.5.22.org/man/lispref/lispref.texi xemacs-21.5.22/man/lispref/lispref.texi
+--- xemacs-21.5.22.org/man/lispref/lispref.texi	2005-06-19 22:49:47.000000000 +0200
++++ xemacs-21.5.22/man/lispref/lispref.texi	2005-10-02 23:50:17.779058000 +0200
+@@ -6,7 +6,7 @@
  @c %**end of header
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Lispref: (lispref).		XEmacs Lisp Reference Manual.
-+* Lispref: (lispref).			XEmacs Lisp Reference Manual
+ * Lispref: (lispref).		XEmacs Lisp Reference Manual.
  @end direntry
- 
- Edition History:
-diff -Nru xemacs-21.4.3/man/new-users-guide/new-users-guide.texi xemacs-21.4.3.new/man/new-users-guide/new-users-guide.texi
---- xemacs-21.4.3/man/new-users-guide/new-users-guide.texi	Thu Apr 12 20:22:24 2001
-+++ xemacs-21.4.3.new/man/new-users-guide/new-users-guide.texi	Mon May 21 22:16:39 2001
-@@ -4,9 +4,9 @@
+diff -urbB xemacs-21.5.22.org/man/new-users-guide/new-users-guide.texi xemacs-21.5.22/man/new-users-guide/new-users-guide.texi
+--- xemacs-21.5.22.org/man/new-users-guide/new-users-guide.texi	2001-04-12 20:22:24.000000000 +0200
++++ xemacs-21.5.22/man/new-users-guide/new-users-guide.texi	2005-10-02 23:50:53.533292500 +0200
+@@ -4,7 +4,7 @@
  
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Intro: (new-users-guide).	Introduction to the XEmacs Editor.
-+* Intro: (new-users-guide).		Introduction to the XEmacs Editor
+ * Intro: (new-users-guide).	Introduction to the XEmacs Editor.
  @end direntry
- 
- This manual serves as an introduction to the XEmacs editor.
-diff -Nru xemacs-21.4.3/man/term.texi xemacs-21.4.3.new/man/term.texi
---- xemacs-21.4.3/man/term.texi	Thu May 13 14:19:40 1999
-+++ xemacs-21.4.3.new/man/term.texi	Mon May 21 22:16:39 2001
-@@ -8,9 +8,9 @@
+diff -urbB xemacs-21.5.22.org/man/term.texi xemacs-21.5.22/man/term.texi
+--- xemacs-21.5.22.org/man/term.texi	2002-07-29 23:52:15.000000000 +0200
++++ xemacs-21.5.22/man/term.texi	2005-10-02 23:51:06.194083750 +0200
+@@ -8,7 +8,7 @@
  @end titlepage
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Term mode: (term).		Emacs terminal emulator mode.
-+* Term mode: (term).			Emacs terminal emulator mode
+ * Term mode: (term).		XEmacs Terminal Emulator Mode.
  @end direntry
- 
- @node Top, , (DIR)
-diff -Nru xemacs-21.4.3/man/widget.texi xemacs-21.4.3.new/man/widget.texi
---- xemacs-21.4.3/man/widget.texi	Thu Apr 12 20:22:04 2001
-+++ xemacs-21.4.3.new/man/widget.texi	Mon May 21 22:25:31 2001
-@@ -10,9 +10,9 @@
+diff -urbB xemacs-21.5.22.org/man/widget.texi xemacs-21.5.22/man/widget.texi
+--- xemacs-21.5.22.org/man/widget.texi	2004-04-19 10:02:27.000000000 +0200
++++ xemacs-21.5.22/man/widget.texi	2005-10-02 23:51:20.506978250 +0200
+@@ -10,7 +10,7 @@
  @c %**end of header
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* Widgets: (widget).            The Emacs Widget Library.
-+* Widgets: (widget).			The Emacs Widget Library
+ * Widgets: (widget).            The Emacs Widget Library.
  @end direntry
- @end ifinfo
- 
-diff -Nru xemacs-21.4.3/man/xemacs/xemacs.texi xemacs-21.4.3.new/man/xemacs/xemacs.texi
---- xemacs-21.4.3/man/xemacs/xemacs.texi	Thu Apr 12 20:22:30 2001
-+++ xemacs-21.4.3.new/man/xemacs/xemacs.texi	Mon May 21 22:16:39 2001
-@@ -4,9 +4,9 @@
+diff -urbB xemacs-21.5.22.org/man/xemacs/xemacs.texi xemacs-21.5.22/man/xemacs/xemacs.texi
+--- xemacs-21.5.22.org/man/xemacs/xemacs.texi	2005-01-31 21:08:50.000000000 +0100
++++ xemacs-21.5.22/man/xemacs/xemacs.texi	2005-10-02 23:51:40.340217750 +0200
+@@ -4,7 +4,7 @@
  
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* XEmacs: (xemacs).		XEmacs Editor.
-+* XEmacs: (xemacs).			XEmacs Editor
+ * XEmacs: (xemacs).		XEmacs Editor.
  @end direntry
- 
- This file documents the XEmacs editor.
-diff -Nru xemacs-21.4.3/man/xemacs-faq.texi xemacs-21.4.3.new/man/xemacs-faq.texi
---- xemacs-21.4.3/man/xemacs-faq.texi	Mon Apr 16 11:24:44 2001
-+++ xemacs-21.4.3.new/man/xemacs-faq.texi	Mon May 21 22:16:39 2001
-@@ -20,9 +20,9 @@
+diff -urbB xemacs-21.5.22.org/man/xemacs-faq.texi xemacs-21.5.22/man/xemacs-faq.texi
+--- xemacs-21.5.22.org/man/xemacs-faq.texi	2005-05-10 19:56:15.000000000 +0200
++++ xemacs-21.5.22/man/xemacs-faq.texi	2005-10-02 23:51:55.141142750 +0200
+@@ -20,7 +20,7 @@
  @end titlepage
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
--* FAQ: (xemacs-faq).            XEmacs FAQ.
-+* FAQ: (xemacs-faq).			XEmacs FAQ
+ * FAQ: (xemacs-faq).            XEmacs FAQ.
  @end direntry
- @end ifinfo
- 
