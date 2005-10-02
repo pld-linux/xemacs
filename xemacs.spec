@@ -182,15 +182,15 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
 %setup -q -a2
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
 %ifarch alpha ia64
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
 %endif
-#%patch4 -p1
-rm lisp/dump-paths.elc
-sed -i -e "s#@srcdir@#$PWD#" lisp/dump-paths.el
+%patch4 -p1
+rm lisp/startup.elc
+sed -i -e "s#@srcdir@#$PWD#" lisp/startup.el
 
 %build
 cp /usr/share/automake/config.sub .
@@ -201,7 +201,7 @@ sitelispdir=%{_ulibdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 
 # no X
-%configure \
+%configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
 	--mandir=%{_mandir}/man1 \
@@ -244,7 +244,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 %{__make} -j1 distclean
 
 # X
-./configure *-linux \
+./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
 	--mandir=%{_mandir}/man1 \
