@@ -4,7 +4,9 @@
 %bcond_with	postgresql	# enable PostgreSQL support
 %bcond_with	gtk		# GTK+ enabled version
 #
-%define		ver		21.4
+%define		ver		21.5
+%define		sver		22
+%define		xver		%{ver}-b%{sver}
 %define		basepkgver	1.97
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
@@ -14,14 +16,12 @@ Summary(pt_BR):	Editor XEmacs
 Summary(ru):	÷ÅÒÓÉÑ GNU Emacs ÄÌÑ X Window System
 Summary(uk):	÷ÅÒÓ¦Ñ GNU Emacs ÄÌÑ X Window System
 Name:		xemacs
-Version:	%{ver}.17
-Release:	3
+Version:	%{ver}.%{sver}
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	835d539709fbbe8e30cd5de8b3541aa1
-Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-# Source1-md5:	8f678003cc78cd0faecc5ab9e3b8818f
+# Source0-md5:	e0f7bb54c771d93b5b54e7c06204d548
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 # Source2-md5:	d51d8afe507a0bb17f08ef211f9f6f5a
 Source3:	%{name}.desktop
@@ -181,14 +181,14 @@ S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU
 Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
-%setup -q -b1 -a2
-%patch0 -p1
+%setup -q -a2
+#%patch0 -p1
 %patch1 -p1
 %ifarch alpha ia64
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
 %endif
-%patch4 -p1
+#%patch4 -p1
 rm lisp/dump-paths.elc
 sed -i -e "s#@srcdir@#$PWD#" lisp/dump-paths.el
 
@@ -201,31 +201,31 @@ sitelispdir=%{_ulibdir}/%{name}/site-lisp
 export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 
 # no X
-./configure %{_target_platform} \
+%configure \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
 	--mandir=%{_mandir}/man1 \
 	--datadir=%{_datadir} \
-	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
-	--with-mule \
+	--with-package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
+	--enable-mule \
 	--with-site-lisp \
 %if %{with postgreql}
 	--with-postgresql \
 %else
 	--without-postgresql \
 %endif
-	--without-sound \
+	--disable-sound \
 	--without-x11 \
 	--without-jpeg \
 	--without-png \
 	--without-xpm \
 	--with-gpm \
 	--with-ncurses \
-	--with-database=no \
+	--enable-database=no \
 %if %{with pdump}
-	--pdump=yes \
+	--enable-pdump=yes \
 %else
-	--pdump=no \
+	--enable-pdump=no \
 %endif
 	--without-tiff \
 	--without-dnet \
@@ -244,20 +244,20 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 %{__make} -j1 distclean
 
 # X
-./configure %{_target_platform} \
+./configure *-linux \
 	--prefix=%{_prefix} \
 	--infodir=%{_infodir} \
 	--mandir=%{_mandir}/man1 \
 	--datadir=%{_datadir} \
-	--package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
-	--with-mule \
+	--with-package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
+	--enable-mule \
 	--with-site-lisp \
 %if %{with postgresql}
 	--with-postgresql \
 %else
 	--without-postgresql \
 %endif
-	--without-sound \
+	--disable-sound \
 	--with-jpeg \
 	--with-png \
 	--with-xpm \
@@ -269,11 +269,11 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--without-gtk \
 %endif
 %if %{undefined gtk}
-	--with-x11 --with-menubars=lucid --with-scrollbars=motif \
-	--with-dialogs=motif --with-widgets=motif \
+	--with-x11 --enable-menubars=lucid --enable-scrollbars=motif \
+	--enable-dialogs=motif --enable-widgets=motif \
 %endif
-	--with-database=no \
-	--with-gnome=no \
+	--enable-database=no \
+	--enable-gnome=no \
 	--without-tiff \
 	--without-dnet \
 	--without-ldap \
@@ -285,7 +285,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 
 
 # if you want to xemacs sings and plays sounds add option
-#	--with-sound=native
+#	--enable-sound=native
 
 #	--lispdir=%{_datadir}/%{name}/lisp \
 #	--pkgdir=%{_datadir}/%{name}/lisp \
@@ -322,29 +322,29 @@ install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-mule.e
 install %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-nomule.el
 install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-#mv $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/%{_target_platform}/config.values $RPM_BUILD_ROOT%{_ulibdir}/%{name}
+#mv $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/*-linux/config.values $RPM_BUILD_ROOT%{_ulibdir}/%{name}
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_ulibdir}/%{name}/site-lisp
 
-install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
+install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/Emacs.ad \
 	$RPM_BUILD_ROOT%{_appdefsdir}/Emacs
-install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/Emacs.ad \
+install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/Emacs.ad \
 	$RPM_BUILD_ROOT%{_appdefsdir}/pl/Emacs
 cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_appdefsdir}/pl/Emacs
 
-mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}%{_sysconfdir}/xemacs-ja.1 \
-	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
+#mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/xemacs-ja.1 \
+#	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
 
-mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{version} \
+mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{xver} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
 %if %{with pdump}
 install src/xemacs.dmp $RPM_BUILD_ROOT/%{_bindir}
 %endif
 
-find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{version}/* -type f -name "ChangeLog*" | xargs gzip -9nf
+find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}/* -type f -name "ChangeLog*" | xargs gzip -9nf
 
 install src/xemacs-nox $RPM_BUILD_ROOT%{_bindir}
 %if %{with pdump}
@@ -353,13 +353,13 @@ install src/xemacs-nox.dmp $RPM_BUILD_ROOT%{_bindir}
 
 # hack...
 install lib-src/gnuserv-nox $RPM_BUILD_ROOT%{_bindir}
-mv -f $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/%{_target_platform}/gnuserv $RPM_BUILD_ROOT%{_bindir}
+mv -f $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux*/gnuserv $RPM_BUILD_ROOT%{_bindir}
 
 # remove .el file if corresponding .elc file exists
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
 # hmm, maybe xemacs-devel is necessary?
-rm -rf	$RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/%{_target_platform}/include \
+rm -rf	$RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux/include \
 	$RPM_BUILD_ROOT%{_infodir}/dir* \
 	$RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
@@ -386,12 +386,12 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
-%{_datadir}/%{name}-%{version}/etc/custom
-%{_datadir}/%{name}-%{version}/etc/eos
-%{_datadir}/%{name}-%{version}/etc/toolbar
-%{_datadir}/%{name}-%{version}/etc/*.png
-%{_datadir}/%{name}-%{version}/etc/*.xbm
-%{_datadir}/%{name}-%{version}/etc/*.xpm
+%{_datadir}/%{name}-%{xver}/etc/custom
+%{_datadir}/%{name}-%{xver}/etc/eos
+%{_datadir}/%{name}-%{xver}/etc/toolbar
+%{_datadir}/%{name}-%{xver}/etc/*.png
+%{_datadir}/%{name}-%{xver}/etc/*.xbm
+%{_datadir}/%{name}-%{xver}/etc/*.xpm
 %{_appdefsdir}/Emacs
 %lang(pl) %{_appdefsdir}/pl/Emacs
 %{_desktopdir}/*
@@ -399,42 +399,43 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
 %{_mandir}/man1/gnudoit.1*
+%{_mandir}/man1/gnuserv.1*
 
 %files common
 %defattr(644,root,root,755)
-%doc README GETTING.GNU.SOFTWARE PROBLEMS BUGS etc/{NEWS,MAILINGLISTS,TERMS,SERVICE}
-%dir %{_datadir}/%{name}-%{version}
-%dir %{_datadir}/%{name}-%{version}/etc
-%{_datadir}/%{name}-%{version}/etc/package-index.LATEST.gpg
-%doc %{_datadir}/%{name}-%{version}/etc/TUTORIAL
-%doc %lang(de) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.de
-%doc %lang(fr) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.fr
-%doc %lang(hr) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.hr
-%doc %lang(ja) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ja
-%doc %lang(ko) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ko
-%doc %lang(nb) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.no
-%doc %lang(pl) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.pl
-%doc %lang(ro) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ro
-%doc %lang(ru) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ru
-%doc %lang(th) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.th
-%doc %{_datadir}/%{name}-%{version}/etc/[A-SU-Z]*
-%doc %{_datadir}/%{name}-%{version}/etc/refcard.ps.gz
-%doc %{_datadir}/%{name}-%{version}/etc/refcard.tex
-%doc %{_datadir}/%{name}-%{version}/etc/sample.*
+%doc README etc/NEWS
+%dir %{_datadir}/%{name}-%{xver}
+%dir %{_datadir}/%{name}-%{xver}/etc
+%{_datadir}/%{name}-%{xver}/etc/package-index.LATEST.gpg
+%doc %{_datadir}/%{name}-%{xver}/etc/TUTORIAL
+%doc %lang(de) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.de
+%doc %lang(fr) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.fr
+%doc %lang(hr) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.hr
+%doc %lang(ja) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ja
+%doc %lang(ko) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ko
+%doc %lang(nb) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.no
+%doc %lang(pl) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.pl
+%doc %lang(ro) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ro
+%doc %lang(ru) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ru
+%doc %lang(th) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.th
+%doc %{_datadir}/%{name}-%{xver}/etc/[A-SU-Z]*
+%doc %{_datadir}/%{name}-%{xver}/etc/refcard.ps.gz
+%doc %{_datadir}/%{name}-%{xver}/etc/refcard.tex
+%doc %{_datadir}/%{name}-%{xver}/etc/sample.*
 
 %{_ulibdir}/%{name}
 
 %{_datadir}/%{name}
 
 # do not know it is necessary
-%dir %{_ulibdir}/%{name}-%{version}
-%dir %{_ulibdir}/%{name}-%{version}/%{_target_platform}
-%{_ulibdir}/%{name}-%{version}/%{_target_platform}/modules
-%attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/[Dacdfghprsvwy]*
-%attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/m[am]*
-%attr(755,root,root) %{_ulibdir}/%{name}-%{version}/%{_target_platform}/mov*
+%dir %{_ulibdir}/%{name}-%{xver}
+%dir %{_ulibdir}/%{name}-%{xver}/*-linux*
+%{_ulibdir}/%{name}-%{xver}/*-linux/modules
+%attr(755,root,root) %{_ulibdir}/%{name}-%{xver}/*-linux/[Dacdfghprsvwy]*
+%attr(755,root,root) %{_ulibdir}/%{name}-%{xver}/*-linux/m[am]*
+%attr(755,root,root) %{_ulibdir}/%{name}-%{xver}/*-linux/mov*
 
-%{_datadir}/%{name}-%{version}/lisp
+%{_datadir}/%{name}-%{xver}/lisp
 
 %dir %{_datadir}/%{name}-packages
 %{_datadir}/%{name}-packages/etc
@@ -442,7 +443,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-packages/lib-src
 
 %{_mandir}/man1/xemacs.1*
-%lang(ja) %{_mandir}/ja/man1/*
+#%lang(ja) %{_mandir}/ja/man1/*
 
 %{_infodir}/*.info*
 
