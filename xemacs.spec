@@ -17,7 +17,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
@@ -365,6 +365,8 @@ rm -rf	$RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux/include \
 
 find $RPM_BUILD_ROOT -regex '.*~$' -exec rm -f {} \;
 
+find $RPM_BUILD_ROOT -type f -name "*.el" -exec sed -i -e "s#$RPM_BUILD_ROOT%{name}-%{version}##g" "{}" ";"
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -422,6 +424,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/%{name}-%{xver}/etc/refcard.ps.gz
 %doc %{_datadir}/%{name}-%{xver}/etc/refcard.tex
 %doc %{_datadir}/%{name}-%{xver}/etc/sample.*
+
+%{_datadir}/%{name}-%{xver}/etc/unicode
 
 %{_ulibdir}/%{name}
 
