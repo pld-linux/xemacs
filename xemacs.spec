@@ -34,12 +34,12 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
 Patch3:		%{name}-no-memory-warnings.patch
 Patch4:		%{name}-dump-paths-lispdir.patch
-Patch5:		xemacs-destdir.patch
-Patch6:		xemacs-do-not-create-backups-in-temp-directories.patch
-Patch7:		xemacs-level3.patch
-Patch8:		xemacs-ptmx.patch
-Patch9:		xemacs-set-locale-to-c-when-not-supported-by-x.patch
-Patch10:	xemacs-vendor.patch
+Patch5:		%{name}-destdir.patch
+Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
+Patch7:		%{name}-level3.patch
+Patch8:		%{name}-ptmx.patch
+Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
+Patch10:	%{name}-vendor.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
 BuildRequires:	XFree86
