@@ -1,0 +1,13 @@
+diff -ru xemacs-21.4.15.orig/lisp/x-init.el xemacs-21.4.15/lisp/x-init.el
+--- xemacs-21.4.15.orig/lisp/x-init.el	2001-04-12 20:21:40.000000000 +0200
++++ xemacs-21.4.15/lisp/x-init.el	2004-09-28 17:16:55.881291820 +0200
+@@ -238,7 +238,8 @@
+ 	       (string-equal "X Consortium" vendor))
+            ;; Ok, we think this could be a Sun keyboard.  Run the Sun code.
+ 	   (x-win-init-sun))
+-          ((string-match "XFree86" vendor)
++          ((or (string-match "XFree86" vendor)
++	       (string-match "The X.Org Foundation" vendor))
+            ;; Those XFree86 people do some weird keysym stuff, too.
+ 	   (x-win-init-xfree86)))))
+ 

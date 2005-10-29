@@ -1,0 +1,360 @@
+diff -ru xemacs-21.5.21.orig/Makefile.in.in xemacs-21.5.21/Makefile.in.in
+--- xemacs-21.5.21.orig/Makefile.in.in	2005-04-09 01:10:02.000000000 +0200
++++ xemacs-21.5.21/Makefile.in.in	2005-06-02 12:56:39.000000000 +0200
+@@ -61,6 +61,8 @@
+ RECURSIVE_MAKE_ARGS=@RECURSIVE_MAKE_ARGS@
+ #endif
+ 
++DESTDIR=
++
+ SHELL = /bin/sh
+ LANG = C
+ LC_ALL = C
+@@ -378,35 +380,35 @@
+ 	(cd ./$${subdir} && $(MAKE) $(RECURSIVE_MAKE_ARGS) install prefix=${prefix} \
+ 	    exec_prefix=${exec_prefix} bindir=${bindir} libdir=${libdir} \
+ 	    archlibdir=${archlibdir}) ; done
+-	if test "`(cd ${archlibdir} && $(pwd))`" != \
++	if test "`(cd $(DESTDIR)${archlibdir} && $(pwd))`" != \
+ 		"`(cd ./lib-src && $(pwd))`"; then \
+ 	   if test -f ../Installation; then \
+-		${INSTALL_DATA} ../Installation ${archlibdir}/Installation; \
++		${INSTALL_DATA} ../Installation $(DESTDIR)${archlibdir}/Installation; \
+ 	   fi; \
+-	   ${INSTALL_DATA} lib-src/config.values ${docdir}/config.values; \
+-	   ${INSTALL_DATA} lib-src/DOC ${docdir}/DOC; \
++	   ${INSTALL_DATA} lib-src/config.values $(DESTDIR)${docdir}/config.values; \
++	   ${INSTALL_DATA} lib-src/DOC $(DESTDIR)${docdir}/DOC; \
+ 	   for subdir in `find ${archlibdir} -type d ! -name RCS ! -name SCCS ! -name CVS -print` ; \
+ 	     do (cd $${subdir} && $(RM) -r RCS CVS SCCS \#* *~) ; done ; \
+ 	else true; fi
+ #if (defined(PDUMP) && !defined (DUMP_IN_EXEC)) || (defined (PDUMP) && defined(WIN32_NATIVE))
+-	${INSTALL_DATA} src/${PROGNAME}.dmp ${bindir}/${PROGNAME}-${version}-`src/${PROGNAME} -sd`.dmp
++	${INSTALL_DATA} src/${PROGNAME}.dmp $(DESTDIR)${bindir}/${PROGNAME}-${version}-`src/${PROGNAME} -sd`.dmp
+ #endif
+ #ifdef WIN32_NATIVE
+-	${INSTALL_PROGRAM} src/${PROGNAME} ${bindir}/${PROGNAME}
+-	-chmod 0755 ${bindir}/${PROGNAME}
++	${INSTALL_PROGRAM} src/${PROGNAME} $(DESTDIR)${bindir}/${PROGNAME}
++	-chmod 0755 $(DESTDIR)${bindir}/${PROGNAME}
+ #else
+ # ifdef CYGWIN
+-	${INSTALL_PROGRAM} src/${PROGNAME} ${bindir}/${PROGNAME}-${version}.exe
+-	-chmod 0755 ${bindir}/${PROGNAME}-${version}.exe
+-	cd ${bindir} && $(RM) ./${PROGNAME} && ${LN_S} ${PROGNAME}-${version}.exe ./${PROGNAME}
++	${INSTALL_PROGRAM} src/${PROGNAME} $(DESTDIR)${bindir}/${PROGNAME}-${version}.exe
++	-chmod 0755 $(DESTDIR)${bindir}/${PROGNAME}-${version}.exe
++	cd $(DESTDIR)${bindir} && $(RM) ./${PROGNAME} && ${LN_S} ${PROGNAME}-${version}.exe ./${PROGNAME}
+ # else
+-	${INSTALL_PROGRAM} src/${PROGNAME} ${bindir}/${PROGNAME}-${version}
+-	-chmod 0755 ${bindir}/${PROGNAME}-${version}
+-	cd ${bindir} && $(RM) ./${PROGNAME} && ${LN_S} ${PROGNAME}-${version} ./${PROGNAME}
++	${INSTALL_PROGRAM} src/${PROGNAME} $(DESTDIR)${bindir}/${PROGNAME}-${version}
++	-chmod 0755 $(DESTDIR)${bindir}/${PROGNAME}-${version}
++	cd $(DESTDIR)${bindir} && $(RM) ./${PROGNAME} && ${LN_S} ${PROGNAME}-${version} ./${PROGNAME}
+ # endif /* CYGWIN */
+ #endif /* WIN32_NATIVE */
+ 	if test "${prefix}" != "${exec_prefix}"; then \
+-	  $(MAKEPATH) ${exec_prefix}/lib/${instvardir}; \
++	  $(MAKEPATH) $(DESTDIR)${exec_prefix}/lib/${instvardir}; \
+ 	  for dir in \
+ 		lib/${inststaticdir} \
+ 	 	lib/${instvardir}/etc \
+@@ -417,13 +419,13 @@
+ 	  done; \
+ 	fi
+ #ifdef HAVE_SHLIB
+-	$(INSTALL_DATA) $(srcdir)/modules/auto-autoloads.* $(moduledir)
++	$(INSTALL_DATA) $(srcdir)/modules/auto-autoloads.* $(DESTDIR)$(moduledir)
+ #endif
+ 
+ install-arch-indep: mkdir info
+ 	-@set ${COPYDESTS} ; \
+ 	 for dir in ${COPYDIR} ; do \
+-	   if test "`(cd $$1 && $(pwd))`" != \
++	   if test "`(cd $(DESTDIR)$$1 && $(pwd))`" != \
+ 		   "`(cd $${dir} && $(pwd))`"; then \
+ 	     : do nothing - echo "rm -rf $$1" ; \
+ 	   fi ; \
+@@ -431,35 +433,35 @@
+ 	 done
+ 	-set ${COPYDESTS} ; \
+ 	 for dir in ${COPYDESTS} ; do \
+-	   if test ! -d $${dir} ; then mkdir $${dir} ; fi ; \
++	   if test ! -d $${dir} ; then mkdir $(DESTDIR)$${dir} ; fi ; \
+ 	 done ; \
+ 	 for dir in ${COPYDIR} ; do \
+ 	   dest=$$1 ; shift ; \
+ 	   test -d $${dir} \
+ 	     -a "`(cd $${dir} && $(pwd))`" != \
+-		"`(cd $${dest} && $(pwd))`" \
++		"`(cd $(DESTDIR)$${dest} && $(pwd))`" \
+ 	   && (echo "Copying $${dir}..." ; \
+ 	       (cd $${dir} && $(TAR) -cf - . ) | \
+-		(cd $${dest} && umask 022 && $(TAR) -xf - );\
+-	       chmod 0755 $${dest}; \
+-	       for subdir in `find $${dest} -type d ! -name RCS ! -name SCCS ! -name CVS -print` ; do \
++		(cd $(DESTDIR)$${dest} && umask 022 && $(TAR) -xf - );\
++	       chmod 0755 $(DESTDIR)$${dest}; \
++	       for subdir in `find $(DESTDIR)$${dest} -type d ! -name RCS ! -name SCCS ! -name CVS -print` ; do \
+ 		 (cd $${subdir} && $(RM) -r RCS CVS SCCS \#* *~) ; \
+ 	       done) ; \
+ 	 done
+ 	if test "`(cd ${srcdir}/info && $(pwd))`" != \
+-		"`(cd ${infodir} && $(pwd))`" && cd ${srcdir}/info; then \
+-	  if test ! -f ${infodir}/dir -a -f dir ; then \
+-	    ${INSTALL_DATA} ${srcdir}/info/dir ${infodir}/dir ; \
++		"`(cd $(DESTDIR)${infodir} && $(pwd))`" && cd ${srcdir}/info; then \
++	  if test ! -f $(DESTDIR)${infodir}/dir -a -f dir ; then \
++	    ${INSTALL_DATA} ${srcdir}/info/dir $(DESTDIR)${infodir}/dir ; \
+ 	  fi ; \
+ 	  for file in *.info* ; do \
+-	    ${INSTALL_DATA} $${file} ${infodir}/$${file} ; \
+-	    chmod 0644 ${infodir}/$${file}; \
++	    ${INSTALL_DATA} $${file} $(DESTDIR)${infodir}/$${file} ; \
++	    chmod 0644 $(DESTDIR)${infodir}/$${file}; \
+ 	  done ; \
+ 	fi
+ 	cd ${srcdir}/etc && \
+ 	  for page in xemacs etags ctags gnuserv gnuclient gnuattach gnudoit; do \
+-	    ${INSTALL_DATA} ${srcdir}/etc/$${page}.1 ${mandir}/$${page}${manext} ; \
+-	    chmod 0644 ${mandir}/$${page}${manext} ; \
++	    ${INSTALL_DATA} ${srcdir}/etc/$${page}.1 $(DESTDIR)${mandir}/$${page}${manext} ; \
++	    chmod 0644 $(DESTDIR)${mandir}/$${page}${manext} ; \
+ 	  done
+ 	@echo "If you would like to save approximately 4M of disk space, do"
+ 	@echo "make gzip-el"
+@@ -469,19 +471,23 @@
+ 	@echo "${lispdir}"
+ 
+ gzip-el:
+-	$(SHELL) ${srcdir}/lib-src/gzip-el.sh ${lispdir}
++	$(SHELL) ${srcdir}/lib-src/gzip-el.sh $(DESTDIR)${lispdir}
+ 
+ ## Build all the directories to install XEmacs in.
+ ## Since we may be creating several layers of directories,
+ ## (e.g. /usr/local/lib/${PROGNAME}-20.5/sparc-sun-solaris2.6), we use
+ ## make-path instead of mkdir.  Not all mkdirs have the `-p' flag.
+ mkdir: FRC.mkdir
+-	${MAKEPATH} ${COPYDESTS} ${docdir} ${infodir} ${archlibdir} \
+-	  ${mandir} ${bindir} ${datadir} ${libdir} \
++	for dir in \
++	    ${COPYDESTS} ${docdir} ${infodir} ${archlibdir} \
++	    ${mandir} ${bindir} ${datadir} ${libdir} \
+ #ifdef HAVE_SHLIB
+-	  ${moduledir} ${sitemoduledir} \
++	    ${moduledir} ${sitemoduledir} \
+ #endif
+-	  ${sitelispdir}
++	    ${sitelispdir} ; \
++	do \
++	    ${MAKEPATH} $(DESTDIR)$${dir} ; \
++	done ;
+ 
+ ## Delete all the installed files that the `install' target would
+ ## create (but not the noninstalled files such as `make all' would
+diff -ru xemacs-21.5.21.orig/dynodump/Makefile.in.in xemacs-21.5.21/dynodump/Makefile.in.in
+--- xemacs-21.5.21.orig/dynodump/Makefile.in.in	2001-04-12 20:20:43.000000000 +0200
++++ xemacs-21.5.21/dynodump/Makefile.in.in	2005-06-02 12:51:26.000000000 +0200
+@@ -21,6 +21,8 @@
+ 
+ ## Synched up with: Not synched with FSF.
+ 
++DESTDIR=
++
+ ## For performance and consistency, no built-in rules.
+ .SUFFIXES:
+ .SUFFIXES: .c .o .i .h
+diff -ru xemacs-21.5.21.orig/etc/tests/external-widget/Makefile xemacs-21.5.21/etc/tests/external-widget/Makefile
+--- xemacs-21.5.21.orig/etc/tests/external-widget/Makefile	1996-12-18 23:42:31.000000000 +0100
++++ xemacs-21.5.21/etc/tests/external-widget/Makefile	2005-06-02 12:51:26.000000000 +0200
+@@ -1,3 +1,5 @@
++DESTDIR=
++
+ CFLAGS += -Xc -g -DTOOLTALK
+ EMACSHOME = ../../..
+ EMACSLIBDIR = $(EMACSHOME)/editor/src
+diff -ru xemacs-21.5.21.orig/lib-src/Makefile.in.in xemacs-21.5.21/lib-src/Makefile.in.in
+--- xemacs-21.5.21.orig/lib-src/Makefile.in.in	2005-04-09 01:10:36.000000000 +0200
++++ xemacs-21.5.21/lib-src/Makefile.in.in	2005-06-02 12:51:26.000000000 +0200
+@@ -23,6 +23,8 @@
+ ## above a certain point in this file are in shell format instead of
+ ## in C format.  How the hell is this supposed to work? */
+ 
++DESTDIR=
++
+ ## For performance and consistency, no built-in rules
+ .SUFFIXES:
+ .SUFFIXES: .c .h .o
+@@ -243,26 +245,26 @@
+ ## just run them directly from lib-src.
+ ${archlibdir}: all
+ 	@echo; echo "Installing utilities run internally by XEmacs."
+-	./make-path ${archlibdir}
++	./make-path $(DESTDIR)${archlibdir}
+ 	if test "`(cd ${archlibdir} && $(pwd))`" != "`$(pwd)`"; then \
+ 	  for f in ${PRIVATE_INSTALLABLE_EXES}; do \
+-	    (cd .. && $(INSTALL_PROGRAM) lib-src/$$f ${archlibdir}/$$f) ; \
++	    (cd .. && $(INSTALL_PROGRAM) lib-src/$$f $(DESTDIR)${archlibdir}/$$f) ; \
+ 	  done ; \
+ 	fi
+ 	if test "`(cd ${archlibdir} && $(pwd))`" \
+ 	     != "`(cd ${srcdir}     && $(pwd))`"; then \
+ 	  for f in ${PRIVATE_INSTALLABLE_SCRIPTS}; do \
+-	    (cd .. && $(INSTALL_PROGRAM) ${srcdir}/$$f ${archlibdir}/$$f); \
++	    (cd .. && $(INSTALL_PROGRAM) ${srcdir}/$$f $(DESTDIR)${archlibdir}/$$f); \
+ 	  done ; \
+ 	fi
+ 
+ install: ${archlibdir}
+ 	@echo; echo "Installing utilities for users to run."
+ 	for file in ${PUBLIC_INSTALLABLE_EXES} ; do \
+-	  (cd .. && $(INSTALL_PROGRAM) lib-src/$${file} ${bindir}/$${file}) ; \
++	  (cd .. && $(INSTALL_PROGRAM) lib-src/$${file} $(DESTDIR)${bindir}/$${file}) ; \
+ 	done
+ 	for file in ${PUBLIC_INSTALLABLE_SCRIPTS} ; do \
+-	  (cd .. && $(INSTALL_PROGRAM) ${srcdir}/$${file} ${bindir}/$${file}) ; \
++	  (cd .. && $(INSTALL_PROGRAM) ${srcdir}/$${file} $(DESTDIR)${bindir}/$${file}) ; \
+ 	done
+ 
+ uninstall:
+diff -ru xemacs-21.5.21.orig/lwlib/Makefile.in.in xemacs-21.5.21/lwlib/Makefile.in.in
+--- xemacs-21.5.21.orig/lwlib/Makefile.in.in	2004-09-20 21:19:16.000000000 +0200
++++ xemacs-21.5.21/lwlib/Makefile.in.in	2005-06-02 12:51:26.000000000 +0200
+@@ -21,6 +21,8 @@
+ ## the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ ## Boston, MA 02111-1307, USA.
+ 
++DESTDIR=
++
+ ## For performance and consistency, no built-in rules
+ .SUFFIXES:
+ .SUFFIXES: .c .h .o .i .s
+diff -ru xemacs-21.5.21.orig/man/Makefile xemacs-21.5.21/man/Makefile
+--- xemacs-21.5.21.orig/man/Makefile	2005-01-31 21:08:47.000000000 +0100
++++ xemacs-21.5.21/man/Makefile	2005-06-02 12:51:27.000000000 +0200
+@@ -19,6 +19,8 @@
+ # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ # Boston, MA 02111-1307, USA.
+ 
++DESTDIR=
++
+ SHELL    = /bin/sh
+ MAKEINFO = makeinfo
+ TEXI2DVI = texi2dvi
+diff -ru xemacs-21.5.21.orig/modules/base64/Makefile xemacs-21.5.21/modules/base64/Makefile
+--- xemacs-21.5.21.orig/modules/base64/Makefile	2001-04-12 20:22:33.000000000 +0200
++++ xemacs-21.5.21/modules/base64/Makefile	2005-06-02 12:51:27.000000000 +0200
+@@ -7,6 +7,8 @@
+ # 'installed'.
+ #
+ 
++DESTDIR=
++
+ SHELL=/bin/sh
+ RM=rm -f
+ CC=../../lib-src/ellcc
+diff -ru xemacs-21.5.21.orig/modules/common/Makefile.common xemacs-21.5.21/modules/common/Makefile.common
+--- xemacs-21.5.21.orig/modules/common/Makefile.common	2004-11-08 16:14:52.000000000 +0100
++++ xemacs-21.5.21/modules/common/Makefile.common	2005-06-02 12:51:27.000000000 +0200
+@@ -30,6 +30,8 @@
+ #define NOT_C_CODE
+ #include "../../src/config.h"
+ 
++DESTDIR=
++
+ SHELL=/bin/sh
+ RM=rm -f
+ PROGNAME=@PROGNAME@
+@@ -86,4 +88,4 @@
+ extraclean: distclean
+ 
+ install: $(OBJECT_TO_BUILD)
+-	$(INSTALL_PROGRAM) $< $(INSTALLPATH)
++	$(INSTALL_PROGRAM) $< $(DESTDIR)$(INSTALLPATH)
+diff -ru xemacs-21.5.21.orig/modules/zlib/Makefile xemacs-21.5.21/modules/zlib/Makefile
+--- xemacs-21.5.21.orig/modules/zlib/Makefile	2001-04-12 20:22:40.000000000 +0200
++++ xemacs-21.5.21/modules/zlib/Makefile	2005-06-02 12:51:27.000000000 +0200
+@@ -8,6 +8,8 @@
+ # 'installed'.
+ #
+ 
++DESTDIR=
++
+ SHELL=/bin/sh
+ RM=rm -f
+ CC=../../lib-src/ellcc
+diff -ru xemacs-21.5.21.orig/netinstall/Makefile.in.in xemacs-21.5.21/netinstall/Makefile.in.in
+--- xemacs-21.5.21.orig/netinstall/Makefile.in.in	2001-12-20 06:49:40.000000000 +0100
++++ xemacs-21.5.21/netinstall/Makefile.in.in	2005-06-02 12:51:27.000000000 +0200
+@@ -13,6 +13,8 @@
+ ##
+ ## Makefile for Cygwin installer
+ 
++DESTDIR=
++
+ ## For performance and consistency, no built-in rules
+ .SUFFIXES:
+ .SUFFIXES: .c .cc .h .o
+@@ -171,7 +173,7 @@
+ install:
+ 	@echo; echo "Installing net setup."
+ 	for file in ${INSTALLABLES} ; do \
+-	  (cd .. && $(INSTALL_PROGRAM) netinstall/$${file} ${bindir}/$${file}) ; \
++	  (cd .. && $(INSTALL_PROGRAM) netinstall/$${file} $(DESTDIR)${bindir}/$${file}) ; \
+ 	done
+ 
+ version.c : $(srcdir)/ChangeLog Makefile
+diff -ru xemacs-21.5.21.orig/src/Makefile.in.in xemacs-21.5.21/src/Makefile.in.in
+--- xemacs-21.5.21.orig/src/Makefile.in.in	2005-04-09 01:11:18.000000000 +0200
++++ xemacs-21.5.21/src/Makefile.in.in	2005-06-02 12:51:27.000000000 +0200
+@@ -39,6 +39,8 @@
+ RECURSIVE_MAKE_ARGS=@RECURSIVE_MAKE_ARGS@
+ #endif
+ 
++DESTDIR=
++
+ PROGNAME=@PROGNAME@
+ prefix=@prefix@
+ SRC=@srcdir@
+@@ -1045,7 +1047,7 @@
+ #ifdef HAVE_SHLIB
+ MAKEPATH=../lib-src/make-path
+ install: $(PROGNAME)
+-	$(MAKEPATH) $(archlibdir)/include $(archlibdir)/include/m $(archlibdir)/include/s
++	$(MAKEPATH) $(DESTDIR)$(archlibdir)/include $(DESTDIR)$(archlibdir)/include/m $(DESTDIR)$(archlibdir)/include/s
+ 	-@echo "Copying include files for ellcc..."
+ 	-@hdir=`pwd`; \
+ 	cd $(SRC); hdrdir2=`pwd`; cd $$hdir; \
+@@ -1059,12 +1061,12 @@
+ 		test -d s && hdrtars="$$hdrtars s/*"; \
+ 		test -d m && hdrtars="$$hdrtars m/*"; \
+ 		test -n "$$hdrtars" && (tar cf - $$hdrtars) | \
+-			(cd $(archlibdir)/include && umask 022 && tar xf -); \
+-		chmod 755 $(archlibdir)/include; \
+-		test -d $(archlibdir)/include/s && \
+-		  chmod 755 $(archlibdir)/include/s; \
+-		test -d $(archlibdir)/include/m && \
+-		  chmod 755 $(archlibdir)/include/s;) \
++			(cd $(DESTDIR)$(archlibdir)/include && umask 022 && tar xf -); \
++		chmod 755 $(DESTDIR)$(archlibdir)/include; \
++		test -d $(DESTDIR)$(archlibdir)/include/s && \
++		  chmod 755 $(DESTDIR)$(archlibdir)/include/s; \
++		test -d $(DESTDIR)$(archlibdir)/include/m && \
++		  chmod 755 $(DESTDIR)$(archlibdir)/include/s;) \
+ 	done)
+ #endif
+ 
+xemacs-21.5.21/srcだけに発見: Makefile.in.in.orig
+diff -ru xemacs-21.5.21.orig/tests/tooltalk/Makefile xemacs-21.5.21/tests/tooltalk/Makefile
+--- xemacs-21.5.21.orig/tests/tooltalk/Makefile	1996-12-18 23:44:15.000000000 +0100
++++ xemacs-21.5.21/tests/tooltalk/Makefile	2005-06-02 12:51:27.000000000 +0200
+@@ -12,6 +12,8 @@
+ 
+ ### Code:
+ 
++DESTDIR=
++
+ CC       = cc -Xc
+ CPPFLAGS = -I/usr/openwin/include
+ CFLAGS   = -g -v -DNeedFunctionPrototypes
