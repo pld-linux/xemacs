@@ -5,7 +5,7 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.5
-%define		sver		22
+%define		sver		23
 %define		xver		%{ver}-b%{sver}
 %define		basepkgver	1.97
 Summary:	The XEmacs -- Emacs: The Next Generation
@@ -17,11 +17,11 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	2
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	e0f7bb54c771d93b5b54e7c06204d548
+# Source0-md5:	3a8111472fa7ae47d74374f85f1d0aae
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 # Source2-md5:	d51d8afe507a0bb17f08ef211f9f6f5a
 Source3:	%{name}.desktop
@@ -34,6 +34,12 @@ Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
 Patch3:		%{name}-no-memory-warnings.patch
 Patch4:		%{name}-dump-paths-lispdir.patch
+Patch5:		xemacs-destdir.patch
+Patch6:		xemacs-do-not-create-backups-in-temp-directories.patch
+Patch7:		xemacs-level3.patch
+Patch8:		xemacs-ptmx.patch
+Patch9:		xemacs-set-locale-to-c-when-not-supported-by-x.patch
+Patch10:	xemacs-vendor.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
 BuildRequires:	XFree86
@@ -189,6 +195,12 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %patch3 -p1
 %endif
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
 rm lisp/startup.elc
 sed -i -e "s#@srcdir@#$PWD#" lisp/startup.el
 
@@ -308,10 +320,11 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lock/xemacs} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
 
 %{__make} install-arch-dep install-arch-indep \
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	infodir=$RPM_BUILD_ROOT%{_infodir} \
-	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
-	datadir=$RPM_BUILD_ROOT%{_datadir} \
+	DESTDIR=$RPM_BUILD_ROOT \
+	prefix=%{_prefix} \
+	infodir=%{_infodir} \
+	mandir=%{_mandir}/man1 \
+	datadir=%{_datadir} \
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
 
@@ -364,8 +377,6 @@ rm -rf	$RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux/include \
 	$RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
 find $RPM_BUILD_ROOT -regex '.*~$' -exec rm -f {} \;
-
-find $RPM_BUILD_ROOT -type f -name "*.el" -exec sed -i -e "s#$RPM_BUILD_ROOT%{name}-%{version}##g" "{}" ";"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
