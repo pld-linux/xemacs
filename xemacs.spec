@@ -368,6 +368,10 @@ install src/xemacs-nox.dmp $RPM_BUILD_ROOT%{_bindir}
 install lib-src/gnuserv-nox $RPM_BUILD_ROOT%{_bindir}
 mv -f $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux*/gnuserv $RPM_BUILD_ROOT%{_bindir}
 
+# remove some .elc files
+find $RPM_BUILD_ROOT -name '_pkg.elc' -exec rm "{}" ";"
+find $RPM_BUILD_ROOT -name 'auto-autoloads.elc' -exec rm "{}" ";"
+
 # remove .el file if corresponding .elc file exists
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
