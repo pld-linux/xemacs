@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=XEmacs console
+Name[pl]=XEmacs konsola
+Comment=The XEmacs editor - console version
+Comment[pl]=Edytor XEmacs - wersja konsolowa
+Icon=xemacs.png
+Exec=xterm -e xemacs-nox
+Terminal=True
+Type=Application
+Categories=ConsoleOnly;TextEditor;
+# vi: encoding=utf-8
