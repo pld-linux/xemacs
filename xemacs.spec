@@ -5,7 +5,7 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.4
-%define		basepkgver	1.97
+%define		basepkgver	2.01	
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs ¥¨¥Ç¥£¥¿
@@ -14,16 +14,15 @@ Summary(pt_BR):	Editor XEmacs
 Summary(ru):	÷ÅÒÓÉÑ GNU Emacs ÄÌÑ X Window System
 Summary(uk):	÷ÅÒÓ¦Ñ GNU Emacs ÄÌÑ X Window System
 Name:		xemacs
-Version:	%{ver}.17
-Release:	3
+Version:	%{ver}.19
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	835d539709fbbe8e30cd5de8b3541aa1
-Source1:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}-elc.tar.gz
-# Source1-md5:	8f678003cc78cd0faecc5ab9e3b8818f
-Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	d51d8afe507a0bb17f08ef211f9f6f5a
+# Source0-md5:	3f753e2cc22a428c7d775339f29c7e46
+Source1:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
+# Source1-md5:	a378f0ed585ebb9d6d8ace534f7e5987
+Source2:	%{name}-nox.desktop
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -181,7 +180,7 @@ S± to wpólne pliki GNU Emacs i XEmacs. Je¶li nie zainstalowa³e¶ GNU
 Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
-%setup -q -b1 -a2
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %ifarch alpha ia64
@@ -305,7 +304,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_appdefsdir}/pl} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
 	$RPM_BUILD_ROOT%{_ulibdir}/%{name} \
-	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
+	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src,lisp,{,pkg}info}
 
 %{__make} install-arch-dep install-arch-indep \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -313,10 +312,11 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lock/xemacs} \
 	mandir=$RPM_BUILD_ROOT%{_mandir}/man1 \
 	datadir=$RPM_BUILD_ROOT%{_datadir} \
 
+
+%{__tar} zxf %{SOURCE1} -C $RPM_BUILD_ROOT%{_datadir}/%{name}-packages
+
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
-
-( cd $RPM_BUILD_ROOT%{_datadir}/%{name}-packages; gzip -dc %{SOURCE2} | tar xf - )
-
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/default.el
 install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-mule.el
 install %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-nomule.el
@@ -394,7 +394,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/etc/*.xpm
 %{_appdefsdir}/Emacs
 %lang(pl) %{_appdefsdir}/pl/Emacs
-%{_desktopdir}/*
+%{_desktopdir}/xemacs.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
@@ -407,6 +407,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}-%{version}/etc
 %{_datadir}/%{name}-%{version}/etc/package-index.LATEST.gpg
 %doc %{_datadir}/%{name}-%{version}/etc/TUTORIAL
+%doc %lang(cs) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.cs
 %doc %lang(de) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.de
 %doc %lang(fr) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.fr
 %doc %lang(hr) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.hr
@@ -416,6 +417,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc %lang(pl) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.pl
 %doc %lang(ro) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ro
 %doc %lang(ru) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.ru
+%doc %lang(se) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.se
+%doc %lang(sl) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.sl
 %doc %lang(th) %{_datadir}/%{name}-%{version}/etc/TUTORIAL.th
 %doc %{_datadir}/%{name}-%{version}/etc/[A-SU-Z]*
 %doc %{_datadir}/%{name}-%{version}/etc/refcard.ps.gz
@@ -437,9 +440,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{version}/lisp
 
 %dir %{_datadir}/%{name}-packages
-%{_datadir}/%{name}-packages/etc
-%{_datadir}/%{name}-packages/lisp
-%{_datadir}/%{name}-packages/lib-src
+%dir %{_datadir}/%{name}-packages/etc
+%{_datadir}/%{name}-packages/etc/*
+%dir %{_datadir}/%{name}-packages/lisp
+%{_datadir}/%{name}-packages/lisp/*
+%dir %{_datadir}/%{name}-packages/lib-src
+%dir %{_datadir}/%{name}-packages/info
+%dir %{_datadir}/%{name}-packages/pkginfo
+%{_datadir}/%{name}-packages/pkginfo/*
 
 %{_mandir}/man1/xemacs.1*
 %lang(ja) %{_mandir}/ja/man1/*
@@ -451,6 +459,7 @@ rm -rf $RPM_BUILD_ROOT
 %files nox
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xemacs-nox
+%{_desktopdir}/xemacs-nox.desktop
 %if %{with pdump}
 %attr(644,root,root) %{_bindir}/xemacs-nox.dmp
 %endif
