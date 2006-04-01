@@ -266,12 +266,15 @@ diff -ru xemacs-21.5.21.orig/modules/common/Makefile.common xemacs-21.5.21/modul
  SHELL=/bin/sh
  RM=rm -f
  PROGNAME=@PROGNAME@
-@@ -86,4 +88,4 @@
- extraclean: distclean
+@@ -100,7 +100,7 @@
+ 	-$(RM) *~ \#*
  
  install: $(OBJECT_TO_BUILD)
 -	$(INSTALL_PROGRAM) $< $(INSTALLPATH)
 +	$(INSTALL_PROGRAM) $< $(DESTDIR)$(INSTALLPATH)
+ 
+ ##
+ ## Local Variables:
 diff -ru xemacs-21.5.21.orig/modules/zlib/Makefile xemacs-21.5.21/modules/zlib/Makefile
 --- xemacs-21.5.21.orig/modules/zlib/Makefile	2001-04-12 20:22:40.000000000 +0200
 +++ xemacs-21.5.21/modules/zlib/Makefile	2005-06-02 12:51:27.000000000 +0200
