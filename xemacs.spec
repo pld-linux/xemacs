@@ -5,9 +5,9 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.5
-%define		sver		23
+%define		sver		26
 %define		xver		%{ver}-b%{sver}
-%define		basepkgver	1.97
+%define		basepkgver	2.01
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs エディタ
@@ -21,9 +21,9 @@ Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	3a8111472fa7ae47d74374f85f1d0aae
+# Source0-md5:	e0cd4521e8857a16f6cd675bb4c1039b
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	d51d8afe507a0bb17f08ef211f9f6f5a
+# Source2-md5:	a378f0ed585ebb9d6d8ace534f7e5987
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -42,8 +42,8 @@ Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
 Patch10:	%{name}-vendor.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
-BuildRequires:	XFree86
-BuildRequires:	XFree86-devel
+BuildRequires:	xorg-data-xbitmaps
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	automake
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0.8
@@ -370,7 +370,6 @@ mv -f $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux*/gnuserv $RPM_BUILD_ROO
 
 # remove some .elc files
 find $RPM_BUILD_ROOT -name '_pkg.elc' -exec rm "{}" ";"
-find $RPM_BUILD_ROOT -name 'auto-autoloads.elc' -exec rm "{}" ";"
 
 # remove .el file if corresponding .elc file exists
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
