@@ -20,7 +20,7 @@ Version:	%{ver}.%{sver}
 Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
-Source0:	ftp://ftp.xemacs.org/xemacs/%{name}-%{ver}/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
 # Source0-md5:	e0cd4521e8857a16f6cd675bb4c1039b
 Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 # Source2-md5:	a378f0ed585ebb9d6d8ace534f7e5987
@@ -42,22 +42,22 @@ Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
 Patch10:	%{name}-vendor.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
-BuildRequires:	xorg-data-xbitmaps
-BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	automake
+BuildRequires:	gpm-devel
+%{?with_gtk:BuildRequires:	gtk+-devel >= 1.2.10}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libtiff-devel
-BuildRequires:	gpm-devel
-%{?with_gtk:BuildRequires:	gtk+-devel >= 1.2.10}
 BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel >= 5.0
 %{?with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
 BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
+BuildRequires:	xorg-data-xbitmaps
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	zlib-devel
-Requires:	ctags
 Requires:	%{name}-common = %{version}-%{release}
+Requires:	ctags
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_ulibdir	/usr/lib
@@ -143,8 +143,8 @@ control-h для п╕дказки про можлив╕ опц╕╖ або про те, що робить
 Summary:	Common part of XEmacs distribution
 Summary(pl):	WspСlne czЙ╤ci XEmacsa
 Group:		Applications/Editors/Emacs
-Provides:	xemacs-base-pkg
 Requires:	emacscommon
+Provides:	xemacs-base-pkg
 
 %description common
 Common files of XEmacs distribution. This package does not contain
