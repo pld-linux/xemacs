@@ -354,7 +354,7 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{xver} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
 
 %if %{with pdump}
-install src/xemacs.dmp $RPM_BUILD_ROOT/%{_bindir}
+install src/xemacs.dmp $RPM_BUILD_ROOT%{_bindir}
 %endif
 
 find $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}/* -type f -name "ChangeLog*" | xargs gzip -9nf
@@ -398,7 +398,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnuserv
 %attr(755,root,root) %{_bindir}/xemacs
 %if %{with pdump}
-%attr(644,root,root) %{_bindir}/xemacs.dmp
+%{_bindir}/xemacs.dmp
 %endif
 %attr(755,root,root) %{_bindir}/ootags
 %attr(755,root,root) %{_bindir}/ellcc
@@ -471,7 +471,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xemacs-nox
 %if %{with pdump}
-%attr(644,root,root) %{_bindir}/xemacs-nox.dmp
+%{_bindir}/xemacs-nox.dmp
 %endif
 %attr(755,root,root) %{_bindir}/gnuserv-nox
 
