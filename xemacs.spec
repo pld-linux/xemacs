@@ -410,7 +410,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{xver}/etc/*.xpm
 %{_appdefsdir}/Emacs
 %lang(pl) %{_appdefsdir}/pl/Emacs
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
 %{_mandir}/man1/gnuclient.1*
