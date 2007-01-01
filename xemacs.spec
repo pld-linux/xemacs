@@ -17,7 +17,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
@@ -61,7 +61,6 @@ Requires:	ctags
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_ulibdir	/usr/lib
-%define		_appdefsdir	%{_datadir}/X11/app-defaults
 
 %description
 XEmacs is a highly customizable open source text editor and
@@ -314,7 +313,7 @@ sitelispdir=%{_ulibdir}/%{name}/site-lisp \
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lock/xemacs} \
-	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_appdefsdir}/pl} \
+	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_datadir}/X11/{pl,}/app-defaults} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
 	$RPM_BUILD_ROOT%{_ulibdir}/%{name} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
@@ -342,10 +341,10 @@ install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
 ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_ulibdir}/%{name}/site-lisp
 
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/Emacs.ad \
-	$RPM_BUILD_ROOT%{_appdefsdir}/Emacs
+	$RPM_BUILD_ROOT%{_datadir}/X11/app-defaults/Emacs
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/Emacs.ad \
-	$RPM_BUILD_ROOT%{_appdefsdir}/pl/Emacs
-cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_appdefsdir}/pl/Emacs
+	$RPM_BUILD_ROOT%{_datadir}/X11/pl/app-defaults/Emacs
+cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_datadir}/X11/pl/app-defaults/Emacs
 
 #mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/xemacs-ja.1 \
 #	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
@@ -408,8 +407,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{xver}/etc/*.png
 %{_datadir}/%{name}-%{xver}/etc/*.xbm
 %{_datadir}/%{name}-%{xver}/etc/*.xpm
-%{_appdefsdir}/Emacs
-%lang(pl) %{_appdefsdir}/pl/Emacs
+%{_datadir}/X11/app-defaults/Emacs
+%lang(pl) %{_datadir}/X11/pl/app-defaults/Emacs
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
