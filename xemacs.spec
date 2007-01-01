@@ -17,7 +17,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
@@ -61,7 +61,7 @@ Requires:	ctags
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_ulibdir	/usr/lib
-%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
+%define		_appdefsdir	%{_datadir}/X11/app-defaults
 
 %description
 XEmacs is a highly customizable open source text editor and
