@@ -5,9 +5,9 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.5
-%define		sver		26
+%define		sver		27
 %define		xver		%{ver}-b%{sver}
-%define		basepkgver	2.01
+%define		basepkgver	2.08
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es):	El editor XEmacs
 Summary(ja):	XEmacs エディタ
@@ -20,10 +20,10 @@ Version:	%{ver}.%{sver}
 Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
-Source0:	ftp://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	e0cd4521e8857a16f6cd675bb4c1039b
-Source2:	ftp://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	a378f0ed585ebb9d6d8ace534f7e5987
+Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
+# Source0-md5:	c415348d58eb18a9f4ed57d97e2acc62
+Source2:	http://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
+# Source2-md5:	0cb5bfa17dab40ab16c4e7aec19ce2d4
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
