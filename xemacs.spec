@@ -56,6 +56,12 @@ BuildRequires:	texinfo
 BuildRequires:	xorg-data-xbitmaps
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	zlib-devel
+# If xemacs is already installed build fails:
+# Load file misc: not found
+# Fatal error during load, aborting
+# because src/temacs opens files from /usr/../xemacs*
+BuildConflicts:	xemacs
+BuildConflicts:	xemacs-common
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	ctags
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
