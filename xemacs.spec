@@ -17,7 +17,7 @@ Summary(ru):	Версия GNU Emacs для X Window System
 Summary(uk):	Верс╕я GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
@@ -32,8 +32,8 @@ Source7:	%{name}-ogony-nomule.el
 Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
+Patch2:		%{name}-ac260.patch
 Patch3:		%{name}-no-memory-warnings.patch
-Patch4:		%{name}-dump-paths-lispdir.patch
 Patch5:		%{name}-destdir.patch
 Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
 Patch7:		%{name}-level3.patch
@@ -59,8 +59,6 @@ BuildRequires:	zlib-devel
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	ctags
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_ulibdir	/usr/lib
 
 %description
 XEmacs is a highly customizable open source text editor and
@@ -189,34 +187,44 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %setup -q -a2
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 %ifarch alpha ia64
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
 %endif
-%patch4 -p1
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
-rm lisp/startup.elc
-sed -i -e "s#@srcdir@#$PWD#" lisp/startup.el
+
+%if "%{_lib}" == "lib64"
+sed -i -e 's#"lib"#"lib64"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.el
+%endif
 
 %build
 cp /usr/share/automake/config.sub .
 CFLAGS=" %{rpmcflags}"
 CPPFLAGS=" %{rpmcflags}"
 LDFLAGS=" %{rpmldflags} -lc"
-sitelispdir=%{_ulibdir}/%{name}/site-lisp
-export CFLAGS CPPFLAGS LDFLAGS sitelispdir
+export CFLAGS CPPFLAGS LDFLAGS
 
 # no X
 %configure %{_target_platform} \
 	--prefix=%{_prefix} \
+	--exec-prefix=%{_prefix} \
 	--infodir=%{_infodir} \
-	--mandir=%{_mandir}/man1 \
+	--mandir=%{_mandir} \
 	--datadir=%{_datadir} \
+	--libdir=%{_libdir} \
+	--with-prefix=%{_prefix} \
+	--with-statedir=%{_libdir} \
+	--with-archlibdir=%{_libdir}/%{name}-%{xver}/%{_target_cpu}-pld-linux \
+	--with-lispdir=%{_datadir}/%{name}-%{xver}/lisp \
+	--with-moduledir=%{_libdir}/%{name}-%{xver}/%{_target_cpu}-pld-linux/modules \
+	--with-etcdir=%{_datadir}/%{name}-%{xver}/etc \
+	--with-docdir=%{_datadir}/%{name}-%{xver}/etc \
 	--with-package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--enable-mule \
 	--with-site-lisp \
@@ -242,9 +250,12 @@ export CFLAGS CPPFLAGS LDFLAGS sitelispdir
 	--without-dnet \
 	--without-ldap \
 	--without-dragndrop \
-	--without-msw
+	--without-msw \
+	--disable-kkcc \
+	--with-error-checking=none \
+	--with-debug=no
 
-sitelispdir=%{_ulibdir}/%{name}/site-lisp \
+
 %{__make} -j1 \
 	CC="%{__cc}"
 cp src/xemacs src/xemacs-nox
@@ -257,9 +268,18 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 # X
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
+	--exec-prefix=%{_prefix} \
 	--infodir=%{_infodir} \
 	--mandir=%{_mandir}/man1 \
 	--datadir=%{_datadir} \
+	--libdir=%{_libdir} \
+	--with-prefix=%{_prefix} \
+	--with-statedir=%{_libdir} \
+	--with-archlibdir=%{_libdir}/%{name}-%{xver}/%{_target_cpu}-pld-linux \
+	--with-lispdir=%{_datadir}/%{name}-%{xver}/lisp \
+	--with-moduledir=%{_libdir}/%{name}-%{xver}/%{_target_cpu}-pld-linux/modules \
+	--with-etcdir=%{_datadir}/%{name}-%{xver}/etc \
+	--with-docdir=%{_datadir}/%{name}-%{xver}/etc \
 	--with-package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--enable-mule \
 	--with-site-lisp \
@@ -290,6 +310,9 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--without-ldap \
 	--without-dragndrop \
 	--without-msw \
+	--disable-kkcc \
+	--with-error-checking=none \
+	--with-debug=no \
 %if !%{with pdump}
 	--pdump=no
 %endif
@@ -298,15 +321,9 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 # if you want to xemacs sings and plays sounds add option
 #	--enable-sound=native
 
-#	--lispdir=%{_datadir}/%{name}/lisp \
-#	--pkgdir=%{_datadir}/%{name}/lisp \
-#	--etcdir=%{_datadir}/%{name}/etc \
 #	--cflags="$RPM_OPT_FLAGS" \
-#	--error-checking=none \
-#	--debug=no \
 #	--with-session=yes \
 
-sitelispdir=%{_ulibdir}/%{name}/site-lisp \
 %{__make} -j1 \
 	CC="%{__cc}"
 
@@ -315,7 +332,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_datadir}/X11/{pl,}/app-defaults} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
-	$RPM_BUILD_ROOT%{_ulibdir}/%{name} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src}
 
 %{__make} install-arch-dep install-arch-indep \
@@ -334,20 +350,17 @@ install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-mule.e
 install %{SOURCE7} $RPM_BUILD_ROOT%{_datadir}/%{name}-packages/lisp/ogony-nomule.el
 install %{SOURCE8} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-#mv $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{version}/*-linux/config.values $RPM_BUILD_ROOT%{_ulibdir}/%{name}
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp ] || \
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/site-lisp
-ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_ulibdir}/%{name}/site-lisp
+
+ln -s %{_datadir}/%{name}/site-lisp $RPM_BUILD_ROOT%{_libdir}/%{name}/site-lisp
 
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/Emacs.ad \
-	$RPM_BUILD_ROOT%{_datadir}/X11/app-defaults/Emacs
+	$RPM_BUILD_ROOT%{_datadir}/X11/app-defaults/XEmacs
 install $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/Emacs.ad \
-	$RPM_BUILD_ROOT%{_datadir}/X11/pl/app-defaults/Emacs
-cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_datadir}/X11/pl/app-defaults/Emacs
-
-#mv $RPM_BUILD_ROOT%{_datadir}/%{name}-%{xver}%{_sysconfdir}/xemacs-ja.1 \
-#	$RPM_BUILD_ROOT%{_mandir}/ja/man1/xemacs.1
+	$RPM_BUILD_ROOT%{_datadir}/X11/pl/app-defaults/XEmacs
+cat %{SOURCE4} >>$RPM_BUILD_ROOT%{_datadir}/X11/pl/app-defaults/XEmacs
 
 mv -f $RPM_BUILD_ROOT%{_bindir}/xemacs-%{xver} \
 	$RPM_BUILD_ROOT%{_bindir}/xemacs
@@ -365,7 +378,7 @@ install src/xemacs-nox.dmp $RPM_BUILD_ROOT%{_bindir}
 
 # hack...
 install lib-src/gnuserv-nox $RPM_BUILD_ROOT%{_bindir}
-mv -f $RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux*/gnuserv $RPM_BUILD_ROOT%{_bindir}
+mv -f $RPM_BUILD_ROOT%{_libdir}/%{name}-%{xver}/*-linux*/gnuserv $RPM_BUILD_ROOT%{_bindir}
 
 # remove some .elc files
 find $RPM_BUILD_ROOT -name '_pkg.elc' -exec rm "{}" ";"
@@ -373,8 +386,9 @@ find $RPM_BUILD_ROOT -name '_pkg.elc' -exec rm "{}" ";"
 # remove .el file if corresponding .elc file exists
 find $RPM_BUILD_ROOT -type f -name "*.el" | while read i; do test ! -f ${i}c || rm -f $i; done
 rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
+
 # hmm, maybe xemacs-devel is necessary?
-rm -rf	$RPM_BUILD_ROOT%{_ulibdir}/%{name}-%{xver}/*-linux/include \
+rm -rf	$RPM_BUILD_ROOT%{_libdir}/%{name}-%{xver}/*-linux/include \
 	$RPM_BUILD_ROOT%{_infodir}/dir* \
 	$RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
 
@@ -407,8 +421,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}-%{xver}/etc/*.png
 %{_datadir}/%{name}-%{xver}/etc/*.xbm
 %{_datadir}/%{name}-%{xver}/etc/*.xpm
-%{_datadir}/X11/app-defaults/Emacs
-%lang(pl) %{_datadir}/X11/pl/app-defaults/Emacs
+%{_datadir}/X11/app-defaults/XEmacs
+%lang(pl) %{_datadir}/X11/pl/app-defaults/XEmacs
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 %{_mandir}/man1/gnuattach.1*
@@ -439,18 +453,15 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_datadir}/%{name}-%{xver}/etc/sample.*
 
 %{_datadir}/%{name}-%{xver}/etc/unicode
-
-%{_ulibdir}/%{name}
-
 %{_datadir}/%{name}
 
 # do not know it is necessary
-%dir %{_ulibdir}/%{name}-%{xver}
-%dir %{_ulibdir}/%{name}-%{xver}/*-linux*
-%{_ulibdir}/%{name}-%{xver}/*-linux/modules
-%attr(755,root,root) %{_ulibdir}/%{name}-%{xver}/*-linux/[Dacdfghprsvwy]*
-%attr(755,root,root) %{_ulibdir}/%{name}-%{xver}/*-linux/m[am]*
-%attr(755,root,root) %{_ulibdir}/%{name}-%{xver}/*-linux/mov*
+%dir %{_libdir}/%{name}-%{xver}
+%dir %{_libdir}/%{name}-%{xver}/*-linux*
+%{_libdir}/%{name}-%{xver}/*-linux/modules
+%attr(755,root,root) %{_libdir}/%{name}-%{xver}/*-linux/[Dacdfghprsvwy]*
+%attr(755,root,root) %{_libdir}/%{name}-%{xver}/*-linux/m[am]*
+%attr(755,root,root) %{_libdir}/%{name}-%{xver}/*-linux/mov*
 
 %{_datadir}/%{name}-%{xver}/lisp
 
