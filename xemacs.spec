@@ -9,12 +9,12 @@
 %define		xver		%{ver}-b%{sver}
 %define		basepkgver	2.08
 Summary:	The XEmacs -- Emacs: The Next Generation
-Summary(es):	El editor XEmacs
-Summary(ja):	XEmacs ╔╗╔г╔ё╔©
-Summary(pl):	XEmacs -- Emacs nastЙpnej generacji
-Summary(pt_BR):	Editor XEmacs
-Summary(ru):	Версия GNU Emacs для X Window System
-Summary(uk):	Верс╕я GNU Emacs для X Window System
+Summary(es.UTF-8):   El editor XEmacs
+Summary(ja.UTF-8):   XEmacs Ц┌╗Ц┐┤Ц┌ёЦ┌©
+Summary(pl.UTF-8):   XEmacs -- Emacs nastд≥pnej generacji
+Summary(pt_BR.UTF-8):   Editor XEmacs
+Summary(ru.UTF-8):   п▓п╣я─я│п╦я▐ GNU Emacs п╢п╩я▐ X Window System
+Summary(uk.UTF-8):   п▓п╣я─я│я√я▐ GNU Emacs п╢п╩я▐ X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
 Release:	4
@@ -82,69 +82,69 @@ with emacs
 
 Install xemacs-extras if you haven't emacs installed.
 
-%description -l ja
-XEmacs ╓о Free Software Foundation ╓н Richard Stallman ╓к╓Х╓ц╓ф
-╫Я╓╚╓Л╓© GNU Emacs ╓х╓н╦ъ╢╧ю╜╓Р╟щ╩Щ╓╥╓д╓д©Тб©╓╞╓н╡Чни╓╛╩э╓╣╓Л╓©
-гию╦╔п║╪╔╦╔Г╔С╓г╓╧║╔ ╦╣║╧ Emacs 19 ╓Р╦╣╓кЁ╚х╞╓╣╓Л║╓Emacs
-╓н╦ЕбЁ╔Й╔Й║╪╔╧╓кди╡ц╓╣╓Л╓© ╣║г╫╓хф╠╢Э╓╛╪Х╓И╓Л╓ф╓╓╓ч╓╧║╔
+%description -l ja.UTF-8
+XEmacs Ц│╞ Free Software Foundation Ц│╝ Richard Stallman Ц│╚Ц┌┬Ц│ёЦ│╕
+Ф⌡╦Ц│▀Ц┌▄Ц│÷ GNU Emacs Ц│╗Ц│╝Д╨▓Ф▐⌡Ф─╖Ц┌▓Г╤╜Ф▄│Ц│≈Ц│╓Ц│╓Ф∙╟Е╓ Ц│▐Ц│╝Ф■╧Х┴╞Ц│▄Ф√╫Ц│∙Ц┌▄Ц│÷
+Ф╢╬Г■÷Ц┐░Ц┐╪Ц┌╦Ц┐╖Ц┐ЁЦ│╖Ц│≥О╪▌ Е┘┐Ц─┘ Emacs 19 Ц┌▓Е┘┐Ц│╚И√▀Г≥╨Ц│∙Ц┌▄О╪▄Emacs
+Ц│╝Е╬▄Г╤ Ц┐╙Ц┐╙Ц┐╪Ц┌╧Ц│╚Х©╫Е┼═Ц│∙Ц┌▄Ц│÷ Ф╘÷Х┐╫Ц│╗Е░▄Ф°÷Ц│▄Е▐√Ц┌┴Ц┌▄Ц│╕Ц│└Ц│╬Ц│≥О╪▌
 
-%description -l es
-XEmacs es una versiСn de Emacs, compatible con GNU Emacs y conteniendo
-muchas mejoras. Fue basado originalmente en una versiСn anterior de
+%description -l es.UTF-8
+XEmacs es una versiцЁn de Emacs, compatible con GNU Emacs y conteniendo
+muchas mejoras. Fue basado originalmente en una versiцЁn anterior de
 GNU Emacs, y ha seguido las versiones subsecuentes.
 
-%description -l pl
-XEmacs jest odmian╠ Emacsa, zgodn╠ (i zawieraj╠c╠ wiele udogodnieЯ) z
+%description -l pl.UTF-8
+XEmacs jest odmianд┘ Emacsa, zgodnд┘ (i zawierajд┘cд┘ wiele udogodnieе└) z
 GNU Emacsem tworzonym przez Richarda Stallmana z Free Software
-Foundation. Wywodzi siЙ z wczesnych odmian GNU Emacs 19, wprowadza
-wiele miЁych ulepszeЯ nie trac╠c jednak wiЙzi z oryginaln╠ wersj╠.
+Foundation. Wywodzi siд≥ z wczesnych odmian GNU Emacs 19, wprowadza
+wiele miе┌ych ulepszeе└ nie tracд┘c jednak wiд≥zi z oryginalnд┘ wersjд┘.
 
-Ta dystrybucja XEmacsa zostaЁa podzielona na wiele pakietСw binarnych:
+Ta dystrybucja XEmacsa zostaе┌a podzielona na wiele pakietцЁw binarnych:
 
-xemacs-common - pakiet zawieraj╠cy pliki wspСЁdzielone przez pakiety
+xemacs-common - pakiet zawierajд┘cy pliki wspцЁе┌dzielone przez pakiety
 xemacs i xemacs-nox xemacs - XEmacs skompilowany ze wsparciem dla X11
 i konsoli xemacs-nox - XEmacs skompilowany bez wsparcia dla X11
-(pracuje tylko na konsoli tekstowej) xemacs-extras - pliki wchodz╠ce w
-skЁad dystrybucji GNU Emacs
+(pracuje tylko na konsoli tekstowej) xemacs-extras - pliki wchodzд┘ce w
+skе┌ad dystrybucji GNU Emacs
 
-Do pracy niezbЙdne s╠ xemacs-common oraz xemacs b╠d╪ xemacs-nox.
-Zainstaluj tak©e xemacs-extras je╤li nie posiadasz GNU Emacsa.
+Do pracy niezbд≥dne sд┘ xemacs-common oraz xemacs bд┘dе╨ xemacs-nox.
+Zainstaluj takе╪e xemacs-extras jeе⌡li nie posiadasz GNU Emacsa.
 
-%description -l pt_BR
-XEmacs И uma versЦo do Emacs, compatМvel com o GNU Emacs, contendo
-muitos adicionais. Foi baseado numa versЦo anterior do GNU Emacs, e
-seguiu as versУes subseqЭentes.
+%description -l pt_BR.UTF-8
+XEmacs ц╘ uma versцёo do Emacs, compatц╜vel com o GNU Emacs, contendo
+muitos adicionais. Foi baseado numa versцёo anterior do GNU Emacs, e
+seguiu as versц╣es subseqц╪entes.
 
-%description -l ru
-XEmacs (равно как и оригинальный GNU Emacs) - это
-самодокументированный, настраиваемый, расширяемый редактор с
-отображением в реальном времени. XEmacs самодокументирован потому что
-в любое время вы можете нажать control-h для подсказки о возможных
-опциях или о том, что делает команда. XEmacs настраиваем потому что вы
-можете изменить определения его команд на все, что вам угодно. XEmacs
-расширяем потому что вы можете написать совершенно новые
-команды-программы на языке Lisp, которые будут исполняться встроенным
-интерпретатором Lisp. XEmacs включает отображение в реальном времени,
-что значит что редактируемый текст видим на экране и обновляется очень
-часто (обычно после каждого символа или пары символов) по мере набора
-текста.
+%description -l ru.UTF-8
+XEmacs (я─п╟п╡п╫п╬ п╨п╟п╨ п╦ п╬я─п╦пЁп╦п╫п╟п╩я▄п╫я▀п╧ GNU Emacs) - я█я┌п╬
+я│п╟п╪п╬п╢п╬п╨я┐п╪п╣п╫я┌п╦я─п╬п╡п╟п╫п╫я▀п╧, п╫п╟я│я┌я─п╟п╦п╡п╟п╣п╪я▀п╧, я─п╟я│я┬п╦я─я▐п╣п╪я▀п╧ я─п╣п╢п╟п╨я┌п╬я─ я│
+п╬я┌п╬п╠я─п╟п╤п╣п╫п╦п╣п╪ п╡ я─п╣п╟п╩я▄п╫п╬п╪ п╡я─п╣п╪п╣п╫п╦. XEmacs я│п╟п╪п╬п╢п╬п╨я┐п╪п╣п╫я┌п╦я─п╬п╡п╟п╫ п©п╬я┌п╬п╪я┐ я┤я┌п╬
+п╡ п╩я▌п╠п╬п╣ п╡я─п╣п╪я▐ п╡я▀ п╪п╬п╤п╣я┌п╣ п╫п╟п╤п╟я┌я▄ control-h п╢п╩я▐ п©п╬п╢я│п╨п╟п╥п╨п╦ п╬ п╡п╬п╥п╪п╬п╤п╫я▀я┘
+п╬п©я├п╦я▐я┘ п╦п╩п╦ п╬ я┌п╬п╪, я┤я┌п╬ п╢п╣п╩п╟п╣я┌ п╨п╬п╪п╟п╫п╢п╟. XEmacs п╫п╟я│я┌я─п╟п╦п╡п╟п╣п╪ п©п╬я┌п╬п╪я┐ я┤я┌п╬ п╡я▀
+п╪п╬п╤п╣я┌п╣ п╦п╥п╪п╣п╫п╦я┌я▄ п╬п©я─п╣п╢п╣п╩п╣п╫п╦я▐ п╣пЁп╬ п╨п╬п╪п╟п╫п╢ п╫п╟ п╡я│п╣, я┤я┌п╬ п╡п╟п╪ я┐пЁп╬п╢п╫п╬. XEmacs
+я─п╟я│я┬п╦я─я▐п╣п╪ п©п╬я┌п╬п╪я┐ я┤я┌п╬ п╡я▀ п╪п╬п╤п╣я┌п╣ п╫п╟п©п╦я│п╟я┌я▄ я│п╬п╡п╣я─я┬п╣п╫п╫п╬ п╫п╬п╡я▀п╣
+п╨п╬п╪п╟п╫п╢я▀-п©я─п╬пЁя─п╟п╪п╪я▀ п╫п╟ я▐п╥я▀п╨п╣ Lisp, п╨п╬я┌п╬я─я▀п╣ п╠я┐п╢я┐я┌ п╦я│п©п╬п╩п╫я▐я┌я▄я│я▐ п╡я│я┌я─п╬п╣п╫п╫я▀п╪
+п╦п╫я┌п╣я─п©я─п╣я┌п╟я┌п╬я─п╬п╪ Lisp. XEmacs п╡п╨п╩я▌я┤п╟п╣я┌ п╬я┌п╬п╠я─п╟п╤п╣п╫п╦п╣ п╡ я─п╣п╟п╩я▄п╫п╬п╪ п╡я─п╣п╪п╣п╫п╦,
+я┤я┌п╬ п╥п╫п╟я┤п╦я┌ я┤я┌п╬ я─п╣п╢п╟п╨я┌п╦я─я┐п╣п╪я▀п╧ я┌п╣п╨я│я┌ п╡п╦п╢п╦п╪ п╫п╟ я█п╨я─п╟п╫п╣ п╦ п╬п╠п╫п╬п╡п╩я▐п╣я┌я│я▐ п╬я┤п╣п╫я▄
+я┤п╟я│я┌п╬ (п╬п╠я▀я┤п╫п╬ п©п╬я│п╩п╣ п╨п╟п╤п╢п╬пЁп╬ я│п╦п╪п╡п╬п╩п╟ п╦п╩п╦ п©п╟я─я▀ я│п╦п╪п╡п╬п╩п╬п╡) п©п╬ п╪п╣я─п╣ п╫п╟п╠п╬я─п╟
+я┌п╣п╨я│я┌п╟.
 
-%description -l uk
-XEmacs (так само як ╕ ориг╕нальний GNU Emacs) - це самодокументований,
-настроюваний, розширюваний редактор з в╕дображенням у реальному час╕.
-XEmacs самодокументований тому що у любий час ви можете натиснути
-control-h для п╕дказки про можлив╕ опц╕╖ або про те, що робить
-команда. XEmacs настроюваний тому що ви можете зм╕нити визначення його
-команд на все, що вам завгодно. XEmacs розширюваний тому що ви можете
-написати абсолютно нов╕ команди-програми на мов╕ Lisp, як╕ будуть
-виконуватися вбудованим ╕нтерпретатором Lisp. XEmacs включа╓
-в╕дображення у реальному час╕, що означа╓ що редагований текст видно
-на екран╕ ╕ в╕н поновлю╓ться дуже часто (зазвичай п╕сля кожного
-символу або пари символ╕в) по м╕р╕ набору тексту.
+%description -l uk.UTF-8
+XEmacs (я┌п╟п╨ я│п╟п╪п╬ я▐п╨ я√ п╬я─п╦пЁя√п╫п╟п╩я▄п╫п╦п╧ GNU Emacs) - я├п╣ я│п╟п╪п╬п╢п╬п╨я┐п╪п╣п╫я┌п╬п╡п╟п╫п╦п╧,
+п╫п╟я│я┌я─п╬я▌п╡п╟п╫п╦п╧, я─п╬п╥я┬п╦я─я▌п╡п╟п╫п╦п╧ я─п╣п╢п╟п╨я┌п╬я─ п╥ п╡я√п╢п╬п╠я─п╟п╤п╣п╫п╫я▐п╪ я┐ я─п╣п╟п╩я▄п╫п╬п╪я┐ я┤п╟я│я√.
+XEmacs я│п╟п╪п╬п╢п╬п╨я┐п╪п╣п╫я┌п╬п╡п╟п╫п╦п╧ я┌п╬п╪я┐ я┴п╬ я┐ п╩я▌п╠п╦п╧ я┤п╟я│ п╡п╦ п╪п╬п╤п╣я┌п╣ п╫п╟я┌п╦я│п╫я┐я┌п╦
+control-h п╢п╩я▐ п©я√п╢п╨п╟п╥п╨п╦ п©я─п╬ п╪п╬п╤п╩п╦п╡я√ п╬п©я├я√я≈ п╟п╠п╬ п©я─п╬ я┌п╣, я┴п╬ я─п╬п╠п╦я┌я▄
+п╨п╬п╪п╟п╫п╢п╟. XEmacs п╫п╟я│я┌я─п╬я▌п╡п╟п╫п╦п╧ я┌п╬п╪я┐ я┴п╬ п╡п╦ п╪п╬п╤п╣я┌п╣ п╥п╪я√п╫п╦я┌п╦ п╡п╦п╥п╫п╟я┤п╣п╫п╫я▐ п╧п╬пЁп╬
+п╨п╬п╪п╟п╫п╢ п╫п╟ п╡я│п╣, я┴п╬ п╡п╟п╪ п╥п╟п╡пЁп╬п╢п╫п╬. XEmacs я─п╬п╥я┬п╦я─я▌п╡п╟п╫п╦п╧ я┌п╬п╪я┐ я┴п╬ п╡п╦ п╪п╬п╤п╣я┌п╣
+п╫п╟п©п╦я│п╟я┌п╦ п╟п╠я│п╬п╩я▌я┌п╫п╬ п╫п╬п╡я√ п╨п╬п╪п╟п╫п╢п╦-п©я─п╬пЁя─п╟п╪п╦ п╫п╟ п╪п╬п╡я√ Lisp, я▐п╨я√ п╠я┐п╢я┐я┌я▄
+п╡п╦п╨п╬п╫я┐п╡п╟я┌п╦я│я▐ п╡п╠я┐п╢п╬п╡п╟п╫п╦п╪ я√п╫я┌п╣я─п©я─п╣я┌п╟я┌п╬я─п╬п╪ Lisp. XEmacs п╡п╨п╩я▌я┤п╟я■
+п╡я√п╢п╬п╠я─п╟п╤п╣п╫п╫я▐ я┐ я─п╣п╟п╩я▄п╫п╬п╪я┐ я┤п╟я│я√, я┴п╬ п╬п╥п╫п╟я┤п╟я■ я┴п╬ я─п╣п╢п╟пЁп╬п╡п╟п╫п╦п╧ я┌п╣п╨я│я┌ п╡п╦п╢п╫п╬
+п╫п╟ п╣п╨я─п╟п╫я√ я√ п╡я√п╫ п©п╬п╫п╬п╡п╩я▌я■я┌я▄я│я▐ п╢я┐п╤п╣ я┤п╟я│я┌п╬ (п╥п╟п╥п╡п╦я┤п╟п╧ п©я√я│п╩я▐ п╨п╬п╤п╫п╬пЁп╬
+я│п╦п╪п╡п╬п╩я┐ п╟п╠п╬ п©п╟я─п╦ я│п╦п╪п╡п╬п╩я√п╡) п©п╬ п╪я√я─я√ п╫п╟п╠п╬я─я┐ я┌п╣п╨я│я┌я┐.
 
 %package common
 Summary:	Common part of XEmacs distribution
-Summary(pl):	WspСlne czЙ╤ci XEmacsa
+Summary(pl.UTF-8):   WspцЁlne czд≥е⌡ci XEmacsa
 Group:		Applications/Editors/Emacs
 Requires:	emacscommon
 Provides:	xemacs-base-pkg
@@ -154,14 +154,14 @@ Common files of XEmacs distribution. This package does not contain
 XEmacs editor binary, you must install xemacs or xemacs-nox package to
 use XEmacs -- Emacs: The Next Generation editor.
 
-%description common -l pl
-WspСlne pliki XEmacsa. Ten pakiet nie zawiera pliku wykonywalnego
-edytora, musisz zainstalowaФ xemacs lub xemacs-nox, aby u©ywaФ XEmacsa
-b╠d╪ Emacsa: edytor NastЙpnej Generacji.
+%description common -l pl.UTF-8
+WspцЁlne pliki XEmacsa. Ten pakiet nie zawiera pliku wykonywalnego
+edytora, musisz zainstalowaд┤ xemacs lub xemacs-nox, aby uе╪ywaд┤ XEmacsa
+bд┘dе╨ Emacsa: edytor Nastд≥pnej Generacji.
 
 %package nox
 Summary:	XEmacs binary compiled without X11 support
-Summary(pl):	XEmacs skompilowany bez wsparcia dla X11
+Summary(pl.UTF-8):   XEmacs skompilowany bez wsparcia dla X11
 Group:		Applications/Editors/Emacs
 Requires:	%{name}-common = %{version}-%{release}
 Provides:	%{name} = %{version}-%{release}
@@ -169,13 +169,13 @@ Provides:	%{name} = %{version}-%{release}
 %description nox
 XEmacs binary compiled with TTY support only, without X11 support.
 
-%description nox -l pl
+%description nox -l pl.UTF-8
 XEmacs skompilowany bez wsparcia dla X11 (pracuje tylko na konsoli lub
 w okienku xterma).
 
 %package extras
 Summary:	Files which conflict with GNU Emacs
-Summary(pl):	WspСlne pliki XEmacsa i GNU Emacsa
+Summary(pl.UTF-8):   WspцЁlne pliki XEmacsa i GNU Emacsa
 Group:		Applications/Editors/Emacs
 Provides:	emacscommon
 Obsoletes:	emacscommon
@@ -185,8 +185,8 @@ These files are common between GNU Emacs and XEmacs. If you do not
 have GNU Emacs installed, be sure to install this package as well when
 you install XEmacs.
 
-%description extras -l pl
-S╠ to wpСlne pliki GNU Emacs i XEmacs. Je╤li nie zainstalowaЁe╤ GNU
+%description extras -l pl.UTF-8
+Sд┘ to wpцЁlne pliki GNU Emacs i XEmacs. Jeе⌡li nie zainstalowaе┌eе⌡ GNU
 Emacsa, to koniecznie zainstaluj ten pakiet.
 
 %prep
