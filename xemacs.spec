@@ -9,12 +9,12 @@
 %define		xver		%{ver}-b%{sver}
 %define		basepkgver	2.08
 Summary:	The XEmacs -- Emacs: The Next Generation
-Summary(es.UTF-8):   El editor XEmacs
-Summary(ja.UTF-8):   XEmacs エディタ
-Summary(pl.UTF-8):   XEmacs -- Emacs następnej generacji
-Summary(pt_BR.UTF-8):   Editor XEmacs
-Summary(ru.UTF-8):   Версия GNU Emacs для X Window System
-Summary(uk.UTF-8):   Версія GNU Emacs для X Window System
+Summary(es.UTF-8):	El editor XEmacs
+Summary(ja.UTF-8):	XEmacs エディタ
+Summary(pl.UTF-8):	XEmacs -- Emacs następnej generacji
+Summary(pt_BR.UTF-8):	Editor XEmacs
+Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
+Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
 Release:	4
@@ -144,7 +144,7 @@ control-h для підказки про можливі опції або про
 
 %package common
 Summary:	Common part of XEmacs distribution
-Summary(pl.UTF-8):   Wspólne części XEmacsa
+Summary(pl.UTF-8):	Wspólne części XEmacsa
 Group:		Applications/Editors/Emacs
 Requires:	emacscommon
 Provides:	xemacs-base-pkg
@@ -161,7 +161,7 @@ bądź Emacsa: edytor Następnej Generacji.
 
 %package nox
 Summary:	XEmacs binary compiled without X11 support
-Summary(pl.UTF-8):   XEmacs skompilowany bez wsparcia dla X11
+Summary(pl.UTF-8):	XEmacs skompilowany bez wsparcia dla X11
 Group:		Applications/Editors/Emacs
 Requires:	%{name}-common = %{version}-%{release}
 Provides:	%{name} = %{version}-%{release}
@@ -175,7 +175,7 @@ w okienku xterma).
 
 %package extras
 Summary:	Files which conflict with GNU Emacs
-Summary(pl.UTF-8):   Wspólne pliki XEmacsa i GNU Emacsa
+Summary(pl.UTF-8):	Wspólne pliki XEmacsa i GNU Emacsa
 Group:		Applications/Editors/Emacs
 Provides:	emacscommon
 Obsoletes:	emacscommon
