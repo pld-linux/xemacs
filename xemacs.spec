@@ -5,9 +5,9 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.5
-%define		sver		27
+%define		sver		28
 %define		xver		%{ver}-b%{sver}
-%define		basepkgver	2.08
+%define		basepkgver	2.10
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es.UTF-8):	El editor XEmacs
 Summary(ja.UTF-8):	XEmacs エディタ
@@ -17,13 +17,13 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	4
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	c415348d58eb18a9f4ed57d97e2acc62
+# Source0-md5:	12e35715c5239c63651a8189973527ab
 Source2:	http://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	0cb5bfa17dab40ab16c4e7aec19ce2d4
+# Source2-md5:	aeb02471310ce01a438a7409435410ad
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -32,7 +32,6 @@ Source7:	%{name}-ogony-nomule.el
 Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
-Patch2:		%{name}-ac260.patch
 Patch3:		%{name}-no-memory-warnings.patch
 Patch5:		%{name}-destdir.patch
 Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
@@ -193,7 +192,6 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %setup -q -a2
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 %ifarch alpha ia64
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
