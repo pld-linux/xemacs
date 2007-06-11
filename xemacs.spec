@@ -63,6 +63,7 @@ BuildConflicts:	xemacs
 BuildConflicts:	xemacs-common
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	ctags
+Requires:	xorg-lib-libXt >= 1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
