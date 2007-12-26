@@ -1,9 +1,8 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=XEmacs
 Comment=The XEmacs editor
 Comment[pl]=Edytor XEmacs
-Icon=xemacs.png
+Icon=xemacs
 Exec=xemacs
 Terminal=false
 Type=Application
