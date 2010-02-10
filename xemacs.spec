@@ -46,7 +46,6 @@ BuildRequires:	gpm-devel
 %{?with_gtk:BuildRequires:	gtk+-devel >= 1.2.10}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0.8
-BuildRequires:	libtiff-devel
 BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel >= 5.0
 %{?with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
@@ -54,6 +53,7 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
 BuildRequires:	xorg-data-xbitmaps
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXpm-devel
 BuildRequires:	zlib-devel
 # If xemacs is already installed build fails:
 # Load file misc: not found
