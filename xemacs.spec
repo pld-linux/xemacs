@@ -5,9 +5,9 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.5
-%define		sver		28
+%define		sver		29
 %define		xver		%{ver}-b%{sver}
-%define		basepkgver	2.10
+%define		basepkgver	2.27
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es.UTF-8):	El editor XEmacs
 Summary(ja.UTF-8):	XEmacs エディタ
@@ -17,13 +17,13 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	5
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	12e35715c5239c63651a8189973527ab
+# Source0-md5:	5364192ae0d3de23d9f4ce197e6493b5
 Source2:	http://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	aeb02471310ce01a438a7409435410ad
+# Source2-md5:	2ec18d0faf31e2d343f558c730474a63
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -38,7 +38,7 @@ Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
 Patch7:		%{name}-level3.patch
 Patch8:		%{name}-ptmx.patch
 Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
-Patch10:	%{name}-vendor.patch
+Patch10:	%{name}-link.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
 BuildRequires:	automake
@@ -53,6 +53,7 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
 BuildRequires:	xorg-data-xbitmaps
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXft-devel
 BuildRequires:	xorg-lib-libXpm-devel
 BuildRequires:	zlib-devel
 # If xemacs is already installed build fails:
@@ -209,6 +210,7 @@ sed -i -e 's#"lib"#"lib64"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.e
 %endif
 
 %build
+%{__autoconf}
 cp /usr/share/automake/config.sub .
 CFLAGS=" %{rpmcflags}"
 CPPFLAGS=" %{rpmcflags}"
@@ -298,6 +300,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--with-png \
 	--with-xpm \
 	--with-gpm \
+	--with-xft \
 	--with-ncurses \
 %if %{with gtk}
 	--with-gtk \
