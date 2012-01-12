@@ -38,7 +38,6 @@ Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
 Patch7:		%{name}-level3.patch
 Patch8:		%{name}-ptmx.patch
 Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
-Patch10:	%{name}-link.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
 BuildRequires:	automake
@@ -203,7 +202,6 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
-%patch10 -p1
 
 %if "%{_lib}" == "lib64"
 sed -i -e 's#"lib"#"lib64"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.el
