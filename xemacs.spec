@@ -5,7 +5,7 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.5
-%define		sver		29
+%define		sver		31
 %define		xver		%{ver}-b%{sver}
 %define		basepkgver	2.27
 Summary:	The XEmacs -- Emacs: The Next Generation
@@ -17,11 +17,11 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	5
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	5364192ae0d3de23d9f4ce197e6493b5
+# Source0-md5:	0185fe905d0b8d8d094d9b60cf262d4a
 Source2:	http://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 # Source2-md5:	2ec18d0faf31e2d343f558c730474a63
 Source3:	%{name}.desktop
