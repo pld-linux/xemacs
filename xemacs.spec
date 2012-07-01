@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
@@ -64,7 +64,6 @@ BuildConflicts:	xemacs-common
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	ctags
 Requires:	xorg-lib-libXt >= 1.0
-Obsoletes:	xemacs-extras
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -143,6 +142,7 @@ Summary:	Common part of XEmacs distribution
 Summary(pl.UTF-8):	Wspólne części XEmacsa
 Group:		Applications/Editors/Emacs
 Provides:	xemacs-base-pkg
+Obsoletes:	xemacs-extras
 
 %description common
 Common files of XEmacs distribution. This package does not contain
