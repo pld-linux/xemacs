@@ -38,7 +38,6 @@ Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
 Patch7:		%{name}-level3.patch
 Patch8:		%{name}-ptmx.patch
 Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
-Patch10:	%{name}-libpng15.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
 BuildRequires:	automake
@@ -65,6 +64,7 @@ BuildConflicts:	xemacs-common
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	ctags
 Requires:	xorg-lib-libXt >= 1.0
+Obsoletes:	xemacs-extras
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -78,10 +78,7 @@ available. This XEmacs distribution has been splitted in some rpm:
 
 xemacs-common - common files needed by xemacs and xemacs-nox packages
 xemacs - XEmacs binary with both X11 and TTY support xemacs-nox -
-XEmacs binary with TTY support only xemacs-extras - files in conflict
-with emacs
-
-Install xemacs-extras if you haven't emacs installed.
+XEmacs binary with TTY support only
 
 %description -l ja.UTF-8
 XEmacs は Free Software Foundation の Richard Stallman によって
@@ -105,11 +102,9 @@ Ta dystrybucja XEmacsa została podzielona na wiele pakietów binarnych:
 xemacs-common - pakiet zawierający pliki współdzielone przez pakiety
 xemacs i xemacs-nox xemacs - XEmacs skompilowany ze wsparciem dla X11
 i konsoli xemacs-nox - XEmacs skompilowany bez wsparcia dla X11
-(pracuje tylko na konsoli tekstowej) xemacs-extras - pliki wchodzące w
-skład dystrybucji GNU Emacs
+(pracuje tylko na konsoli tekstowej)
 
 Do pracy niezbędne są xemacs-common oraz xemacs bądź xemacs-nox.
-Zainstaluj także xemacs-extras jeśli nie posiadasz GNU Emacsa.
 
 %description -l pt_BR.UTF-8
 XEmacs é uma versão do Emacs, compatível com o GNU Emacs, contendo
@@ -147,7 +142,6 @@ control-h для підказки про можливі опції або про
 Summary:	Common part of XEmacs distribution
 Summary(pl.UTF-8):	Wspólne części XEmacsa
 Group:		Applications/Editors/Emacs
-Requires:	emacscommon
 Provides:	xemacs-base-pkg
 
 %description common
@@ -174,22 +168,6 @@ XEmacs binary compiled with TTY support only, without X11 support.
 XEmacs skompilowany bez wsparcia dla X11 (pracuje tylko na konsoli lub
 w okienku xterma).
 
-%package extras
-Summary:	Files which conflict with GNU Emacs
-Summary(pl.UTF-8):	Wspólne pliki XEmacsa i GNU Emacsa
-Group:		Applications/Editors/Emacs
-Provides:	emacscommon
-Obsoletes:	emacscommon
-
-%description extras
-These files are common between GNU Emacs and XEmacs. If you do not
-have GNU Emacs installed, be sure to install this package as well when
-you install XEmacs.
-
-%description extras -l pl.UTF-8
-Są to wpólne pliki GNU Emacs i XEmacs. Jeśli nie zainstalowałeś GNU
-Emacsa, to koniecznie zainstaluj ten pakiet.
-
 %prep
 %setup -q -a2
 %patch0 -p1
@@ -203,7 +181,6 @@ Emacsa, to koniecznie zainstaluj ten pakiet.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
-%patch10 -p1
 
 %if "%{_lib}" == "lib64"
 sed -i -e 's#"lib"#"lib64"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.el
@@ -441,6 +418,7 @@ rm -rf $RPM_BUILD_ROOT
 %files common
 %defattr(644,root,root,755)
 %doc README etc/NEWS
+%attr(755,root,root) %{_bindir}/b2m
 %dir %{_datadir}/%{name}-%{xver}
 %dir %{_datadir}/%{name}-%{xver}/etc
 %{_datadir}/%{name}-%{xver}/etc/package-index.LATEST.gpg
@@ -494,8 +472,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/xemacs-nox.dmp
 %endif
 %attr(755,root,root) %{_bindir}/gnuserv-nox
-
-%files extras
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/b2m
-%attr(755,root,root) %{_bindir}/rcs-checkin

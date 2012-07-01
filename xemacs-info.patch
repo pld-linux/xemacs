@@ -10,18 +10,6 @@ diff -urbB xemacs-21.5.22.org/man/cl.texi xemacs-21.5.22/man/cl.texi
  @direntry
  * Common Lisp: (cl).		XEmacs Common Lisp emulation package.
  @end direntry
-diff -urbB xemacs-21.5.22.org/man/custom.texi xemacs-21.5.22/man/custom.texi
---- xemacs-21.5.22.org/man/custom.texi	2003-10-10 14:39:27.000000000 +0200
-+++ xemacs-21.5.22/man/custom.texi	2005-10-02 23:49:07.730680250 +0200
-@@ -10,7 +10,7 @@
- @c %**end of header
- 
- @ifinfo
--@dircategory XEmacs Editor
-+@dircategory XEmacs Editor:
- @direntry
- * Customizations: (custom).	Customization Library.
- @end direntry
 diff -urbB xemacs-21.5.22.org/man/external-widget.texi xemacs-21.5.22/man/external-widget.texi
 --- xemacs-21.5.22.org/man/external-widget.texi	2002-06-04 08:04:35.000000000 +0200
 +++ xemacs-21.5.22/man/external-widget.texi	2005-10-02 23:49:34.848375000 +0200
@@ -69,18 +57,6 @@ diff -urbB xemacs-21.5.22.org/man/new-users-guide/new-users-guide.texi xemacs-21
 +@dircategory XEmacs Editor:
  @direntry
  * Intro: (new-users-guide).	Introduction to the XEmacs Editor.
- @end direntry
-diff -urbB xemacs-21.5.22.org/man/term.texi xemacs-21.5.22/man/term.texi
---- xemacs-21.5.22.org/man/term.texi	2002-07-29 23:52:15.000000000 +0200
-+++ xemacs-21.5.22/man/term.texi	2005-10-02 23:51:06.194083750 +0200
-@@ -8,7 +8,7 @@
- @end titlepage
- 
- @ifinfo
--@dircategory XEmacs Editor
-+@dircategory XEmacs Editor:
- @direntry
- * Term mode: (term).		XEmacs Terminal Emulator Mode.
  @end direntry
 diff -urbB xemacs-21.5.22.org/man/widget.texi xemacs-21.5.22/man/widget.texi
 --- xemacs-21.5.22.org/man/widget.texi	2004-04-19 10:02:27.000000000 +0200
