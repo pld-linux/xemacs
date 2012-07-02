@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
@@ -317,7 +317,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},/var/lock/xemacs} \
 	$RPM_BUILD_ROOT{%{_mandir}/{ja/man1,man1},%{_datadir}/X11/{pl,}/app-defaults} \
 	$RPM_BUILD_ROOT%{_datadir}/%{name}/lisp \
-	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src,info,pkginfo}
+	$RPM_BUILD_ROOT%{_datadir}/%{name}-packages/{etc,lib-src,info,man,pkginfo}
 
 %{__make} install-arch-dep install-arch-indep \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -453,6 +453,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_datadir}/%{name}-packages
 %dir %{_datadir}/%{name}-packages/info
+%dir %{_datadir}/%{name}-packages/man
 %dir %{_datadir}/%{name}-packages/pkginfo
 %{_datadir}/%{name}-packages/etc
 %{_datadir}/%{name}-packages/lisp
