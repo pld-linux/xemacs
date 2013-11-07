@@ -22,9 +22,9 @@ diff -ru xemacs-21.5.20.orig/src/event-Xt.c xemacs-21.5.20/src/event-Xt.c
    return 0;
  }
 @@ -997,8 +1006,17 @@
-          than passing in 0) to avoid crashes on German IRIX */
        char dummy[256];
        XLookupString (event, dummy, 200, &keysym, 0);
+       *x_keysym_out = keysym;
 -      return (IsModifierKey (keysym) || keysym == XK_Mode_switch )
 -	? Qnil : x_keysym_to_emacs_keysym (keysym, simple_p);
 +      return (IsModifierKey (keysym)
@@ -42,9 +42,9 @@ diff -ru xemacs-21.5.20.orig/src/event-Xt.c xemacs-21.5.20/src/event-Xt.c
  #endif /* ! XIM_MOTIF */
  
 @@ -1048,8 +1066,17 @@
-     {
      case XLookupKeySym:
      case XLookupBoth:
+       *x_keysym_out = keysym;
 -      return (IsModifierKey (keysym) || keysym == XK_Mode_switch )
 -	? Qnil : x_keysym_to_emacs_keysym (keysym, simple_p);
 +      return (IsModifierKey (keysym)
