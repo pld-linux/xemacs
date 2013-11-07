@@ -1,0 +1,12 @@
+--- xemacs-21.5.34/configure.ac~	2013-08-21 19:45:17.000000000 +0200
++++ xemacs-21.5.34/configure.ac	2013-11-07 22:48:28.913971686 +0100
+@@ -2550,8 +2550,8 @@
+   if test "$after_morecore_hook_exists" = "no" ; then
+     GNU_MALLOC_reason="
+     - Using Doug Lea's new malloc from the Linux C Library."
+-    AC_DEFINE(_NO_MALLOC_WARNING_)
+   fi
++  AC_DEFINE(_NO_MALLOC_WARNING_)
+ fi
+ 
+ dnl #### mcheck is broken in all versions of Linux libc and glibc.

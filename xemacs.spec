@@ -5,7 +5,7 @@
 %bcond_with	gtk		# GTK+ enabled version
 #
 %define		ver		21.5
-%define		sver		31
+%define		sver		34
 %define		xver		%{ver}-b%{sver}
 %define		basepkgver	2.27
 Summary:	The XEmacs -- Emacs: The Next Generation
@@ -17,11 +17,11 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	5
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	0185fe905d0b8d8d094d9b60cf262d4a
+# Source0-md5:	e093150724b6e55b14bae21739cfe373
 Source2:	http://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 # Source2-md5:	2ec18d0faf31e2d343f558c730474a63
 Source3:	%{name}.desktop
@@ -33,11 +33,11 @@ Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
 Patch3:		%{name}-no-memory-warnings.patch
-Patch5:		%{name}-destdir.patch
 Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
 Patch7:		%{name}-level3.patch
 Patch8:		%{name}-ptmx.patch
 Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
+Patch10:	disable-malloc-warnings.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
 BuildRequires:	automake
@@ -176,11 +176,11 @@ w okienku xterma).
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
 %endif
-%patch5 -p1
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 %if "%{_lib}" == "lib64"
 sed -i -e 's#"lib"#"lib64"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.el
@@ -189,8 +189,8 @@ sed -i -e 's#"lib"#"lib64"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.e
 %build
 %{__autoconf}
 cp /usr/share/automake/config.sub .
-CFLAGS=" %{rpmcflags}"
-CPPFLAGS=" %{rpmcflags}"
+CFLAGS=" %{rpmcflags} -fno-strict-aliasing"
+CPPFLAGS=" %{rpmcflags} -fno-strict-aliasing"
 LDFLAGS=" %{rpmldflags} -lc"
 export CFLAGS CPPFLAGS LDFLAGS
 
