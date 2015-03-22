@@ -3,7 +3,7 @@
 %bcond_without	pdump		# portable dumper
 %bcond_with	postgresql	# enable PostgreSQL support
 %bcond_with	gtk		# GTK+ enabled version
-#
+
 %define		ver		21.5
 %define		sver		34
 %define		xver		%{ver}-b%{sver}
@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
@@ -382,10 +382,10 @@ find $RPM_BUILD_ROOT -regex '.*~$' -exec rm -f {} \;
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p	/sbin/postshell
+%post	common -p	/sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun	-p	/sbin/postshell
+%postun	common -p	/sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files
