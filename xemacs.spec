@@ -186,6 +186,10 @@ w okienku xterma).
 sed -i -e 's#"lib"#"lib64"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.el
 %endif
 
+%if "%{_lib}" == "libx32"
+sed -i -e 's#"lib"#"libx32"#g' lisp/find-paths.el lisp/info.el lisp/setup-paths.el
+%endif
+
 %build
 %{__autoconf}
 cp /usr/share/automake/config.sub .
