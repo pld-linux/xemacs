@@ -1,0 +1,42 @@
+# HG changeset patch
+# User Jerry James <james@xemacs.org>
+# Date 1429564151 21600
+# Node ID 23178aa71f8b985a32f9b80e5c6da660700a0315
+# Parent  d3d073aceaea16ee1625363380337b3dad916861
+Define ALIGNOF using C11 and C++11 operators.
+See <CAHCOHQmG51R61KwGUNY7T5t9tXxzbyg=aGijUKYstbE+wL2-6Q@mail.gmail.com> in
+xemacs-patches for more information.
+
+diff --git a/src/lisp.h b/src/lisp.h
+--- a/src/lisp.h
++++ b/src/lisp.h
+@@ -1154,6 +1154,8 @@
+ 
+ /* ------------------------ alignment definitions ------------------- */
+ 
++#if (!defined (__STDC_VERSION__) || __STDC_VERSION__ < 201112L) && \
++    (!defined (__cplusplus) || __cplusplus < 201103L)
+ /* No type has a greater alignment requirement than max_align_t.
+    (except perhaps for types we don't use, like long double) */
+ typedef union
+@@ -1163,6 +1165,7 @@
+   struct { void (*f)(void); } f;
+   struct { double d; } d;
+ } max_align_t;
++#endif
+ 
+ /* ALIGNOF returns the required alignment of a type -- i.e. a value such
+    that data of this type must begin at a memory address which is a
+@@ -1170,7 +1173,11 @@
+    as the type itself. */
+ 
+ #ifndef ALIGNOF
+-# if defined (__GNUC__) && (__GNUC__ >= 2)
++# if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
++#  define ALIGNOF(type) _Alignof(type)
++# elif defined (__cplusplus) && __cplusplus >= 201103L
++#  define ALIGNOF(type) alignof(type)
++# elif defined (__GNUC__) && (__GNUC__ >= 2)
+ /* gcc has an extension that gives us exactly what we want. */
+ #  define ALIGNOF(type) __alignof__ (type)
+ # elif ! defined (__cplusplus)

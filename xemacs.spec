@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
@@ -32,6 +32,7 @@ Source7:	%{name}-ogony-nomule.el
 Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
+Patch2:		%{name}-align.patch
 Patch3:		%{name}-no-memory-warnings.patch
 Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
 Patch7:		%{name}-level3.patch
@@ -173,6 +174,7 @@ w okienku xterma).
 %setup -q -a2
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 %ifarch alpha ia64
 # disable memory_warnings() - it doesn't support memory model used on alpha
 %patch3 -p1
@@ -243,7 +245,8 @@ export CFLAGS CPPFLAGS LDFLAGS
 	--without-msw \
 	--disable-kkcc \
 	--with-error-checking=none \
-	--with-debug=no
+	--with-debug=no \
+	--with-system-malloc
 
 
 %{__make} -j1 \
@@ -305,8 +308,9 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--with-error-checking=none \
 	--with-debug=no \
 %if !%{with pdump}
-	--pdump=no
+	--pdump=no \
 %endif
+	--with-system-malloc
 
 
 # if you want to xemacs sings and plays sounds add option
@@ -382,6 +386,9 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/{c,e}tags
 rm -rf	$RPM_BUILD_ROOT%{_libdir}/%{name}-%{xver}/*-linux/include \
 	$RPM_BUILD_ROOT%{_infodir}/dir* \
 	$RPM_BUILD_ROOT%{_infodir}/{info,standards,texinfo}.info*
+
+# clash with emacs
+rm -f $RPM_BUILD_ROOT%{_infodir}/{cl,widget}.info*
 
 find $RPM_BUILD_ROOT -regex '.*~$' -exec rm -f {} \;
 
