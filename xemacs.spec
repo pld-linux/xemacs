@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	pdump		# portable dumper
-%bcond_with	postgresql	# enable PostgreSQL support
+%bcond_with	pgsql		# PostgreSQL support
 %bcond_with	gtk		# GTK+ enabled version
 
 %define		ver		21.5
@@ -49,7 +49,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	motif-devel
 BuildRequires:	ncurses-devel >= 5.0
-%{?with_postgresql:BuildRequires:	postgresql-devel >= 7.1}
+%{?with_pgsql:BuildRequires:	postgresql-devel >= 7.1}
 BuildRequires:	sed >= 4.0
 BuildRequires:	texinfo
 BuildRequires:	xorg-data-xbitmaps
@@ -220,7 +220,7 @@ export CFLAGS CPPFLAGS LDFLAGS
 	--with-package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--enable-mule \
 	--with-site-lisp \
-%if %{with postgreql}
+%if %{with pgsql}
 	--with-postgresql \
 %else
 	--without-postgresql \
@@ -276,7 +276,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 	--with-package_path="~/.xemacs::%{_datadir}/%{name}-packages" \
 	--enable-mule \
 	--with-site-lisp \
-%if %{with postgresql}
+%if %{with pgsql}
 	--with-postgresql \
 %else
 	--without-postgresql \
