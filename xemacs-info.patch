@@ -62,14 +62,14 @@ diff -urbB xemacs-21.5.22.org/man/widget.texi xemacs-21.5.22/man/widget.texi
 --- xemacs-21.5.22.org/man/widget.texi	2004-04-19 10:02:27.000000000 +0200
 +++ xemacs-21.5.22/man/widget.texi	2005-10-02 23:51:20.506978250 +0200
 @@ -10,7 +10,7 @@
- @c %**end of header
+ @end copying
  
  @ifinfo
 -@dircategory XEmacs Editor
 +@dircategory XEmacs Editor:
  @direntry
- * Widgets: (widget).            The Emacs Widget Library.
- @end direntry
+ * Widget: (widget).      The "widget" package used by the Emacs Customization
+                            facility.
 diff -urbB xemacs-21.5.22.org/man/xemacs/xemacs.texi xemacs-21.5.22/man/xemacs/xemacs.texi
 --- xemacs-21.5.22.org/man/xemacs/xemacs.texi	2005-01-31 21:08:50.000000000 +0100
 +++ xemacs-21.5.22/man/xemacs/xemacs.texi	2005-10-02 23:51:40.340217750 +0200

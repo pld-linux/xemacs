@@ -2,8 +2,8 @@ diff -Nru xemacs-21.1.8/lib-src/Makefile.in.in xemacs-21.1.8.new/lib-src/Makefil
 --- xemacs-21.1.8/lib-src/Makefile.in.in	Mon Jun 14 08:32:00 1999
 +++ xemacs-21.1.8.new/lib-src/Makefile.in.in	Thu Dec  9 05:20:16 1999
 @@ -140,7 +140,7 @@
- 
- cppflags = -Demacs -I../src $(CPPFLAGS)
+ ## when #include'ing generated files.
+ cppflags = -I. -I../src -I$(srcdir) -I$(top_srcdir)/src $(CPPFLAGS)
  cflags   = $(CFLAGS) $(cppflags) $(c_switch_general)
 -ldflags  = $(LDFLAGS) $(ld_switch_general) $(ld_libs_general)
 +ldflags  = $(LDFLAGS) $(ld_switch_general)
