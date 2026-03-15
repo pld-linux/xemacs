@@ -7,7 +7,7 @@
 %define		ver		21.5
 %define		sver		36
 %define		xver		%{ver}-b%{sver}
-%define		basepkgver	2.27
+%define		basepkgver	2.46
 Summary:	The XEmacs -- Emacs: The Next Generation
 Summary(es.UTF-8):	El editor XEmacs
 Summary(ja.UTF-8):	XEmacs エディタ
@@ -20,10 +20,10 @@ Version:	%{ver}.%{sver}
 Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
-Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
+Source0:	http://ftp.xemacs.org/pub/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
 # Source0-md5:	b35e684f884192b58f9257bfad187bd3
-Source2:	http://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
-# Source2-md5:	2ec18d0faf31e2d343f558c730474a63
+Source2:	http://ftp.xemacs.org/pub/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
+# Source2-md5:	257cb070983b6448f74d38fb2c06ab41
 Source3:	%{name}.desktop
 Source4:	%{name}.ad-pl
 Source5:	%{name}-default.el
@@ -37,7 +37,7 @@ Patch7:		%{name}-level3.patch
 Patch8:		%{name}-ptmx.patch
 Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
 Patch11:	fix-conflict-with-glibc.patch
-URL:		http://www.xemacs.org/
+URL:		https://www.xemacs.org/
 # for X11/bitmaps/gray
 BuildRequires:	automake
 BuildRequires:	gpm-devel
