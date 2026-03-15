@@ -1,3 +1,6 @@
+Reorder pty allocation to prefer openpty() over getpt() for better
+/dev/ptmx handling on modern Linux. PLD-specific.
+
 diff -ru xemacs-21.5.20.orig/src/process-unix.c xemacs-21.5.20/src/process-unix.c
 --- xemacs-21.5.20.orig/src/process-unix.c	2005-02-04 05:06:34.000000000 +0100
 +++ xemacs-21.5.20/src/process-unix.c	2005-05-11 17:41:30.000000000 +0200

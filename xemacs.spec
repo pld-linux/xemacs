@@ -5,7 +5,7 @@
 %bcond_with	gtk		# GTK+ enabled version
 
 %define		ver		21.5
-%define		sver		34
+%define		sver		36
 %define		xver		%{ver}-b%{sver}
 %define		basepkgver	2.27
 Summary:	The XEmacs -- Emacs: The Next Generation
@@ -17,11 +17,11 @@ Summary(ru.UTF-8):	Версия GNU Emacs для X Window System
 Summary(uk.UTF-8):	Версія GNU Emacs для X Window System
 Name:		xemacs
 Version:	%{ver}.%{sver}
-Release:	6
+Release:	1
 License:	GPL
 Group:		Applications/Editors/Emacs
 Source0:	http://ftp.xemacs.org/xemacs/xemacs-%{ver}/%{name}-%{version}.tar.gz
-# Source0-md5:	e093150724b6e55b14bae21739cfe373
+# Source0-md5:	b35e684f884192b58f9257bfad187bd3
 Source2:	http://ftp.xemacs.org/xemacs/packages/%{name}-base-%{basepkgver}-pkg.tar.gz
 # Source2-md5:	2ec18d0faf31e2d343f558c730474a63
 Source3:	%{name}.desktop
@@ -32,13 +32,10 @@ Source7:	%{name}-ogony-nomule.el
 Source8:	%{name}.png
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-fix_ldflafs.patch
-Patch2:		%{name}-align.patch
-Patch3:		%{name}-no-memory-warnings.patch
 Patch6:		%{name}-do-not-create-backups-in-temp-directories.patch
 Patch7:		%{name}-level3.patch
 Patch8:		%{name}-ptmx.patch
 Patch9:		%{name}-set-locale-to-c-when-not-supported-by-x.patch
-Patch10:	disable-malloc-warnings.patch
 Patch11:	fix-conflict-with-glibc.patch
 URL:		http://www.xemacs.org/
 # for X11/bitmaps/gray
@@ -174,16 +171,10 @@ w okienku xterma).
 %setup -q -a2
 %patch -P0 -p1
 %patch -P1 -p1
-%patch -P2 -p1
-%ifarch alpha ia64
-# disable memory_warnings() - it doesn't support memory model used on alpha
-%patch -P3 -p1
-%endif
 %patch -P6 -p1
 %patch -P7 -p1
 %patch -P8 -p1
 %patch -P9 -p1
-%patch -P10 -p1
 %patch -P11 -p1
 
 %if "%{_lib}" == "lib64"
@@ -249,14 +240,14 @@ export CFLAGS CPPFLAGS LDFLAGS
 	--with-system-malloc
 
 
-%{__make} -j1 \
+%{__make} \
 	CC="%{__cc}"
 cp src/xemacs src/xemacs-nox
 %if %{with pdump}
 cp src/xemacs.dmp src/xemacs-nox.dmp
 %endif
 cp lib-src/gnuserv lib-src/gnuserv-nox
-%{__make} -j1 distclean
+%{__make} distclean
 
 # X
 ./configure %{_target_platform} \
@@ -319,7 +310,7 @@ cp lib-src/gnuserv lib-src/gnuserv-nox
 #	--cflags="$RPM_OPT_FLAGS" \
 #	--with-session=yes \
 
-%{__make} -j1 \
+%{__make} \
 	CC="%{__cc}"
 
 %install
@@ -408,6 +399,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gnudoit
 %attr(755,root,root) %{_bindir}/gnuserv
 %attr(755,root,root) %{_bindir}/xemacs
+%{_bindir}/xemacs-script
 %if %{with pdump}
 %{_bindir}/xemacs.dmp
 %endif
@@ -431,20 +423,25 @@ rm -rf $RPM_BUILD_ROOT
 %files common
 %defattr(644,root,root,755)
 %doc README etc/NEWS
-%attr(755,root,root) %{_bindir}/b2m
 %dir %{_datadir}/%{name}-%{xver}
 %dir %{_datadir}/%{name}-%{xver}/etc
 %{_datadir}/%{name}-%{xver}/etc/package-index.LATEST.gpg
 %doc %{_datadir}/%{name}-%{xver}/etc/TUTORIAL
+%doc %lang(cs) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.cs
 %doc %lang(de) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.de
+%doc %lang(es) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.es
 %doc %lang(fr) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.fr
 %doc %lang(hr) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.hr
 %doc %lang(ja) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ja
 %doc %lang(ko) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ko
+%doc %lang(nl) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.nl
 %doc %lang(nb) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.no
 %doc %lang(pl) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.pl
 %doc %lang(ro) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ro
 %doc %lang(ru) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.ru
+%doc %lang(sv) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.se
+%doc %lang(sk) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.sk
+%doc %lang(sl) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.sl
 %doc %lang(th) %{_datadir}/%{name}-%{xver}/etc/TUTORIAL.th
 %doc %{_datadir}/%{name}-%{xver}/etc/[A-SU-Z]*
 %doc %{_datadir}/%{name}-%{xver}/etc/refcard.ps.gz

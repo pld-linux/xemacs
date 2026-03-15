@@ -1,3 +1,7 @@
+Remove ld_libs_general from ldflags to fix link order with --as-needed.
+Libraries must come after object files on the linker command line.
+PLD-specific.
+
 diff -Nru xemacs-21.1.8/lib-src/Makefile.in.in xemacs-21.1.8.new/lib-src/Makefile.in.in
 --- xemacs-21.1.8/lib-src/Makefile.in.in	Mon Jun 14 08:32:00 1999
 +++ xemacs-21.1.8.new/lib-src/Makefile.in.in	Thu Dec  9 05:20:16 1999

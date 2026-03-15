@@ -1,0 +1,18 @@
+Replace removed sys_siglist[] with strsignal() in process.c.
+The sys_siglist symbol was removed from glibc headers. strsignal() is
+the POSIX replacement. Similar fix applied by Fedora and Debian.
+
+--- xemacs-21.5.34/src/process.c.orig	2013-08-21 19:43:45.000000000 +0200
++++ xemacs-21.5.34/src/process.c	2026-03-15 12:00:00.000000000 +0100
+@@ -1569,7 +1569,10 @@
+ signal_name (int signum)
+ {
+   if (signum >= 0 && signum < NSIG)
+-    return (const char *) sys_siglist[signum];
++    {
++      const char *name = strsignal(signum);
++      return name ? name : (const char *) GETTEXT ("unknown signal");
++    }
+
+   return (const char *) GETTEXT ("unknown signal");
+ }

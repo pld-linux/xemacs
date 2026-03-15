@@ -1,3 +1,6 @@
+Add trailing colon to @dircategory in texi files for proper info
+directory grouping. PLD-specific.
+
 diff -urbB xemacs-21.5.22.org/man/cl.texi xemacs-21.5.22/man/cl.texi
 --- xemacs-21.5.22.org/man/cl.texi	2003-03-12 18:35:06.000000000 +0100
 +++ xemacs-21.5.22/man/cl.texi	2005-10-02 23:48:48.041449750 +0200

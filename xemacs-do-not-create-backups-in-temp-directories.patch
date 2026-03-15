@@ -1,3 +1,6 @@
+Add null-name guard and /tmp/ check to normal-backup-enable-predicate
+to avoid creating backup files in temp directories. PLD-specific.
+
 diff -ru xemacs-21.5.21.orig/lisp/files.el xemacs-21.5.21/lisp/files.el
 --- xemacs-21.5.21.orig/lisp/files.el	2005-04-08 16:07:00.000000000 +0200
 +++ xemacs-21.5.21/lisp/files.el	2005-06-07 21:25:23.000000000 +0200

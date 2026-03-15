@@ -1,6 +1,9 @@
---- xemacs-21.5.34/src/regex.c~	2013-08-21 19:43:45.000000000 +0200
-+++ xemacs-21.5.34/src/regex.c	2015-03-26 21:13:43.395266312 +0100
-@@ -1357,9 +1357,9 @@
+Rename re_max_failures to xemacs_re_max_failures to avoid potential
+symbol conflict with glibc's regex implementation. PLD-specific.
+
+--- xemacs-21.5.36/src/regex.c.orig	2025-06-15 00:52:22.000000000 +0200
++++ xemacs-21.5.36/src/regex.c	2026-03-15 20:32:45.053320039 +0100
+@@ -1408,9 +1408,9 @@
  #if defined (MATCH_MAY_ALLOCATE)
  /* 4400 was enough to cause a crash on Alpha OSF/1,
     whose default stack limit is 2mb.  */
@@ -12,7 +15,7 @@
  #endif
  
  union fail_stack_elt
-@@ -1413,7 +1413,7 @@
+@@ -1466,13 +1466,13 @@
  #endif
  
  
@@ -20,29 +23,27 @@
 +/* Double the size of FAIL_STACK, up to approximately `xemacs_re_max_failures' items.
  
     Return 1 if succeeds, and 0 if either ran out of memory
-    allocating space for it or it was already too large.
-@@ -1421,7 +1421,7 @@
-    REGEX_REALLOCATE_STACK requires `destination' be declared.   */
+    allocating space for it or it was already too large. */
  
  #define DOUBLE_FAIL_STACK(fail_stack)					\
--  ((fail_stack).size > re_max_failures * MAX_FAILURE_ITEMS		\
-+  ((fail_stack).size > xemacs_re_max_failures * MAX_FAILURE_ITEMS		\
+-  ((fail_stack).size > re_max_failures * TYPICAL_FAILURE_SIZE		\
++  ((fail_stack).size > xemacs_re_max_failures * TYPICAL_FAILURE_SIZE		\
     ? 0									\
     : ((fail_stack).stack = (fail_stack_elt_t *)				\
          REGEX_REALLOCATE_STACK ((fail_stack).stack, 			\
-@@ -3636,11 +3636,11 @@
+@@ -3933,11 +3933,11 @@
      int num_regs = bufp->re_ngroups + 1;
  
      /* Since DOUBLE_FAIL_STACK refuses to double only if the current size
 -       is strictly greater than re_max_failures, the largest possible stack
 -       is 2 * re_max_failures failure points.  */
--    if (fail_stack.size < (2 * re_max_failures * MAX_FAILURE_ITEMS))
+-    if (fail_stack.size < (2 * re_max_failures * TYPICAL_FAILURE_SIZE))
 +       is strictly greater than xemacs_re_max_failures, the largest possible stack
 +       is 2 * xemacs_re_max_failures failure points.  */
-+    if (fail_stack.size < (2 * xemacs_re_max_failures * MAX_FAILURE_ITEMS))
++    if (fail_stack.size < (2 * xemacs_re_max_failures * TYPICAL_FAILURE_SIZE))
        {
--	fail_stack.size = (2 * re_max_failures * MAX_FAILURE_ITEMS);
-+	fail_stack.size = (2 * xemacs_re_max_failures * MAX_FAILURE_ITEMS);
+-	fail_stack.size = (2 * re_max_failures * TYPICAL_FAILURE_SIZE);
++	fail_stack.size = (2 * xemacs_re_max_failures * TYPICAL_FAILURE_SIZE);
  
  	if (! fail_stack.stack)
  	  fail_stack.stack

@@ -1,0 +1,31 @@
+Fix C23 bool conflict in ootags.c.
+C23 makes bool a built-in keyword, conflicting with the typedef in ootags.
+Use stdbool.h when available. Also change globals/members from bool to int
+since they are used as struct option flag fields expecting int*.
+PLD-specific fix for modern GCC (15+).
+
+--- xemacs-21.5.34/lib-src/ootags.c.orig	2013-08-21 19:43:45.000000000 +0200
++++ xemacs-21.5.34/lib-src/ootags.c	2026-03-15 12:00:00.000000000 +0100
+@@ -181,7 +181,11 @@
+ # define xrnew(op,n,Type) ((Type *) xrealloc ((op), (n) * sizeof (Type)))
+ #endif
+
++#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L
++#include <stdbool.h>
++#else
+ typedef int bool;
++#endif
+
+ typedef void Lang_function (FILE *);
+
+@@ -367,8 +371,8 @@
+ bool constantypedefs;		/* -d: create tags for C #define, enum */
+ 				/* constants and variables. */
+ 				/* -D: opposite of -d.  Default under ctags. */
+-bool globals;			/* create tags for global variables */
+-bool members;			/* create tags for C member variables */
++int globals;			/* create tags for global variables */
++int members;			/* create tags for C member variables */
+ bool update;			/* -u: update tags */
+ bool vgrind_style;		/* -v: create vgrind style index output */
+ bool no_warnings;		/* -w: suppress warnings */
